@@ -322,59 +322,67 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
   margin-bottom: 24px;
 }
 /* .line-2 removed - replaced by interactive tabs */
-/* Hero interactive problem tabs */
-.hero-tabs {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: 28px;
+/* Hero rotating word - Brain.fm style inline */
+.hero-rotate {
+  display: inline-block;
+  position: relative;
+  vertical-align: bottom;
 }
-.hero-tab {
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(255,255,255,0.1);
-  color: var(--text-dim);
-  font-size: 13px;
-  font-weight: 600;
-  padding: 8px 16px;
-  border-radius: 50px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  white-space: nowrap;
-}
-.hero-tab:hover {
-  background: rgba(0,166,210,0.1);
-  border-color: rgba(0,166,210,0.3);
-  color: var(--text);
-}
-.hero-tab.active {
-  background: rgba(0,166,210,0.15);
-  border-color: var(--teal);
-  color: var(--teal);
-  box-shadow: 0 0 20px rgba(0,166,210,0.15);
-}
-/* Hero headline that changes with tabs */
-.hero-headline-dynamic {
-  min-height: 2.4em;
-}
-.hero-headline-text {
-  display: block;
-  transition: opacity 0.4s ease, transform 0.4s ease;
-}
-.hero-headline-text.fade-out {
-  opacity: 0;
-  transform: translateY(-10px);
-}
-.hero-headline-text.fade-in {
-  opacity: 0;
-  transform: translateY(10px);
-}
-/* Teal glow on active headline */
-.hero h1 .hero-teal {
+.hero-rotate__word {
+  display: inline-block;
   color: var(--teal-warm);
-  text-shadow: 0 0 40px rgba(0,166,210,0.4), 0 0 80px rgba(0,166,210,0.15);
+  position: absolute;
+  left: 0;
+  top: 0;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateY(40%);
+  transition: opacity 0.5s ease, transform 0.5s ease;
 }
-@media (max-width: 600px) {
-  .hero-tab { font-size: 12px; padding: 6px 12px; }
+.hero-rotate__word.active {
+  opacity: 1;
+  transform: translateY(0);
+  position: relative;
+  text-shadow: 0 0 50px rgba(0,166,210,0.5), 0 0 100px rgba(0,166,210,0.15);
+}
+.hero-rotate__word.exit {
+  opacity: 0;
+  transform: translateY(-40%);
+}
+/* Gradient underline bar */
+.hero-rotate::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #00A6D2, #33B8DD, #00A6D2);
+  background-size: 200% 100%;
+  border-radius: 2px;
+  animation: hero-underline-shift 3s ease-in-out infinite;
+}
+@keyframes hero-underline-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+/* Soft glow bloom */
+.hero-rotate::before {
+  content: '';
+  position: absolute;
+  bottom: -20px; left: -20px; right: -20px;
+  height: 50px;
+  background: radial-gradient(ellipse 80% 100% at 50% 0%, rgba(0,166,210,0.25), transparent 70%);
+  pointer-events: none;
+  filter: blur(12px);
+  z-index: -1;
+}
+.hero-subtitle {
+  font-size: clamp(17px, 1.9vw, 21px);
+  color: var(--text-dim);
+  max-width: 520px;
+  margin-bottom: 32px;
+  line-height: 1.5;
 }
 .hero p.lede {
   font-family: 'Inter', sans-serif;
@@ -1981,28 +1989,19 @@ body { padding-bottom: 90px; }
     // ============================================================
     // SECTION 2 - HERO
     // ============================================================
-    // Hero problem tabs data
-    var heroProblems = [
-      { tab: 'The 3pm Crash', headline: 'Decision quality drops off a cliff <span class="hero-teal">after lunch.</span>' },
-      { tab: 'Decision Fatigue', headline: '139 decisions a week. Your brain is <span class="hero-teal">choosing on fumes.</span>' },
-      { tab: 'Sprint-Crash Cycle', headline: '3 days elite output. Then 2 days <span class="hero-teal">running on empty.</span>' },
-      { tab: 'Caffeine Dependency', headline: 'You\u2019re borrowing energy. <span class="hero-teal">Not building it.</span>' },
-      { tab: 'Brain as Bottleneck', headline: 'Your mind is becoming the ceiling <span class="hero-teal">on your own business.</span>' },
-      { tab: 'The 2-Hour Window', headline: 'Your best thinking happens in a 2-hour window. <span class="hero-teal">Then it\u2019s gone.</span>' }
-    ];
+    var heroWords = ['3pm crash', 'decision fatigue', 'sprint-crash cycle', 'caffeine tolerance', '2-hour window', 'cognitive overload'];
 
     html += '<section class="hero" id="hero"><div class="container"><div class="hero-grid">';
     html += '<div class="hero-content">';
 
-    // Problem tabs
-    html += '<div class="hero-tabs" id="heroTabs">';
-    heroProblems.forEach(function(p, i) {
-      html += '<button class="hero-tab' + (i === 0 ? ' active' : '') + '" data-idx="' + i + '">' + esc(p.tab) + '</button>';
+    // Clean headline with inline rotating word
+    html += '<h1>Cognitive infrastructure<br>for the <span class="hero-rotate" id="heroRotate">';
+    heroWords.forEach(function(word, i) {
+      html += '<span class="hero-rotate__word' + (i === 0 ? ' active' : '') + '">' + esc(word) + '</span>';
     });
-    html += '</div>';
+    html += '</span></h1>';
 
-    // Dynamic headline
-    html += '<h1 class="hero-headline-dynamic"><span class="hero-headline-text" id="heroHeadline">' + heroProblems[0].headline + '</span></h1>';
+    html += '<p class="hero-subtitle">The decisions don\u2019t stop. Your brain shouldn\u2019t either. 16 clinically-dosed ingredients. One capsule. No crash.</p>';
 
     html += '<div class="hero-cta-row"><a href="#pricing" class="btn">' + esc(D.hero.cta) + ' <span class="btn-arrow">\u2192</span></a></div>';
     html += '</div>';
@@ -2581,57 +2580,24 @@ body { padding-bottom: 90px; }
   }
 
   // ============================================================
-  // HERO INTERACTIVE TABS
+  // HERO ROTATING WORD (Brain.fm style)
   // ============================================================
   (function() {
-    var tabs = document.querySelectorAll('.hero-tab');
-    var headline = document.getElementById('heroHeadline');
-    if (!tabs.length || !headline) return;
-
-    var problems = [
-      'Decision quality drops off a cliff <span class="hero-teal">after lunch.</span>',
-      '139 decisions a week. Your brain is <span class="hero-teal">choosing on fumes.</span>',
-      '3 days elite output. Then 2 days <span class="hero-teal">running on empty.</span>',
-      'You\u2019re borrowing energy. <span class="hero-teal">Not building it.</span>',
-      'Your mind is becoming the ceiling <span class="hero-teal">on your own business.</span>',
-      'Your best thinking happens in a 2-hour window. <span class="hero-teal">Then it\u2019s gone.</span>'
-    ];
-
-    var currentIdx = 0;
-    var isAnimating = false;
-
-    function switchTo(idx) {
-      if (idx === currentIdx || isAnimating) return;
-      isAnimating = true;
-      tabs[currentIdx].classList.remove('active');
-      tabs[idx].classList.add('active');
-      headline.classList.add('fade-out');
-      setTimeout(function() {
-        headline.innerHTML = problems[idx];
-        headline.classList.remove('fade-out');
-        headline.classList.add('fade-in');
-        requestAnimationFrame(function() {
-          requestAnimationFrame(function() {
-            headline.classList.remove('fade-in');
-            currentIdx = idx;
-            isAnimating = false;
-          });
-        });
-      }, 400);
-    }
-
-    tabs.forEach(function(tab) {
-      tab.addEventListener('click', function() {
-        switchTo(parseInt(this.getAttribute('data-idx')));
-      });
-    });
-
-    // Auto-cycle every 5 seconds
+    var wrapper = document.getElementById('heroRotate');
+    if (!wrapper) return;
+    var words = wrapper.querySelectorAll('.hero-rotate__word');
+    if (words.length < 2) return;
+    var current = 0;
     setInterval(function() {
-      if (!isAnimating) {
-        switchTo((currentIdx + 1) % problems.length);
-      }
-    }, 5000);
+      words[current].classList.remove('active');
+      words[current].classList.add('exit');
+      var prev = current;
+      current = (current + 1) % words.length;
+      words[current].classList.add('active');
+      setTimeout(function() {
+        words[prev].classList.remove('exit');
+      }, 500);
+    }, 3000);
   })();
 
 })();
