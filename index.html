@@ -322,60 +322,36 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
   margin-bottom: 24px;
 }
 /* .line-2 removed - replaced by interactive tabs */
-/* Hero rotating word - Brain.fm style inline */
+/* Hero rotating word - Brain.fm style with highlight block */
 .hero-rotate {
   display: inline-block;
   position: relative;
   vertical-align: bottom;
+  height: 1.1em;
+  overflow: hidden;
 }
 .hero-rotate__word {
   display: inline-block;
-  color: var(--teal-warm);
+  color: #fff;
   position: absolute;
   left: 0;
   top: 0;
   white-space: nowrap;
   opacity: 0;
-  transform: translateY(40%);
-  transition: opacity 0.5s ease, transform 0.5s ease;
+  transform: translateY(100%);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+  padding: 0 0.15em;
+  background: linear-gradient(135deg, #00A6D2, #0088b0);
+  border-radius: 6px;
 }
 .hero-rotate__word.active {
   opacity: 1;
   transform: translateY(0);
   position: relative;
-  text-shadow: 0 0 50px rgba(0,166,210,0.5), 0 0 100px rgba(0,166,210,0.15);
 }
 .hero-rotate__word.exit {
   opacity: 0;
-  transform: translateY(-40%);
-}
-/* Gradient underline bar */
-.hero-rotate::after {
-  content: '';
-  position: absolute;
-  bottom: -4px;
-  left: 0;
-  right: 0;
-  height: 4px;
-  background: linear-gradient(90deg, #00A6D2, #33B8DD, #00A6D2);
-  background-size: 200% 100%;
-  border-radius: 2px;
-  animation: hero-underline-shift 3s ease-in-out infinite;
-}
-@keyframes hero-underline-shift {
-  0%, 100% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-}
-/* Soft glow bloom */
-.hero-rotate::before {
-  content: '';
-  position: absolute;
-  bottom: -20px; left: -20px; right: -20px;
-  height: 50px;
-  background: radial-gradient(ellipse 80% 100% at 50% 0%, rgba(0,166,210,0.25), transparent 70%);
-  pointer-events: none;
-  filter: blur(12px);
-  z-index: -1;
+  transform: translateY(-100%);
 }
 .hero-subtitle {
   font-size: clamp(17px, 1.9vw, 21px);
@@ -2019,17 +1995,7 @@ body { padding-bottom: 90px; }
 
     // trust strip removed for cleaner feel
 
-    // ============================================================
-    // SECTION 3 - MARQUEE
-    // ============================================================
-    html += '<div class="marquee"><div class="marquee-track">';
-    // Duplicate items twice for seamless scroll
-    for (var rep = 0; rep < 2; rep++) {
-      D.marquee.forEach(function(item) {
-        html += '<span>' + esc(item) + '</span>';
-      });
-    }
-    html += '</div></div>';
+    // marquee removed for cleaner Brain.fm feel
 
     // ============================================================
     // SECTION 4 - STAT STRIP
