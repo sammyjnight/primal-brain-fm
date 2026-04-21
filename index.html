@@ -308,7 +308,7 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
   display: grid;
   grid-template-columns: 1.05fr 0.95fr;
   gap: clamp(30px, 5vw, 70px);
-  align-items: center;
+  align-items: start;
   position: relative;
   z-index: 2;
 }
@@ -429,11 +429,6 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  animation: hero-float 6s ease-in-out infinite;
-}
-@keyframes hero-float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
 }
 /* Radial glow behind portrait */
 .hero-portrait::before {
