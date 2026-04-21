@@ -2442,6 +2442,27 @@ body { padding-bottom: 90px; }
     app.innerHTML = html;
 
     // ====================================================================
+    // HERO ROTATING WORD (Brain.fm style)
+    // ====================================================================
+    (function() {
+      var wrapper = document.getElementById('heroRotate');
+      if (!wrapper) return;
+      var words = wrapper.querySelectorAll('.hero-rotate__word');
+      if (words.length < 2) return;
+      var current = 0;
+      setInterval(function() {
+        words[current].classList.remove('active');
+        words[current].classList.add('exit');
+        var prev = current;
+        current = (current + 1) % words.length;
+        words[current].classList.add('active');
+        setTimeout(function() {
+          words[prev].classList.remove('exit');
+        }, 500);
+      }, 3000);
+    })();
+
+    // ====================================================================
     // COUNTDOWN TIMER (synced across all instances - evergreen 3-day reset)
     // ====================================================================
     (function() {
@@ -2544,27 +2565,6 @@ body { padding-bottom: 90px; }
       });
     })();
   }
-
-  // ============================================================
-  // HERO ROTATING WORD (Brain.fm style)
-  // ============================================================
-  (function() {
-    var wrapper = document.getElementById('heroRotate');
-    if (!wrapper) return;
-    var words = wrapper.querySelectorAll('.hero-rotate__word');
-    if (words.length < 2) return;
-    var current = 0;
-    setInterval(function() {
-      words[current].classList.remove('active');
-      words[current].classList.add('exit');
-      var prev = current;
-      current = (current + 1) % words.length;
-      words[current].classList.add('active');
-      setTimeout(function() {
-        words[prev].classList.remove('exit');
-      }, 500);
-    }, 3000);
-  })();
 
 })();
 </script>
