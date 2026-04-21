@@ -226,74 +226,60 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
 .trust-pill .check { color: var(--teal); font-weight: 600; }
 
 /* ============================================================
-   SECTION 1 - STICKY ANNOUNCEMENT BAR (always visible)
+   STICKY HEADER (Brain.fm style)
    ============================================================ */
-.announce-bar {
-  display: none !important;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  background: linear-gradient(90deg, #1a0f00 0%, #2a1500 50%, #1a0f00 100%);
-  border-bottom: 1px solid rgba(0,166,210,0.3);
-  padding: 10px var(--pad);
+.sticky-header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 200;
+  background: rgba(14,17,23,0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  padding: 0 var(--pad);
+  height: 56px;
+  display: flex;
   align-items: center;
-  justify-content: center;
-  gap: clamp(12px, 3vw, 30px);
-  flex-wrap: wrap;
-  font-family: 'Inter', sans-serif;
 }
-.announce-logo {
+.sticky-header__inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.sticky-header__logo {
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  color: #fff;
   display: flex;
   align-items: center;
   gap: 8px;
-  font-weight: 600;
-  font-size: 15px;
-  color: var(--text);
+  text-decoration: none;
 }
-.announce-logo .infinity { color: var(--teal); font-size: 20px; }
-.announce-msg {
-  font-size: 13px;
+.sticky-header__logo .infinity {
+  color: var(--teal);
+  font-size: 22px;
+}
+.sticky-header__cta {
+  background: #fff;
+  color: #0e1117;
   font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--teal-warm);
-}
-.announce-timer {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-.announce-timer .label-sm {
-  font-size: 11px;
-  color: var(--text-mute);
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  margin-right: 6px;
-}
-.timer-unit {
-  background: rgba(0,166,210,0.15);
-  border: 1px solid rgba(0,166,210,0.35);
-  color: var(--text);
-  font-weight: 600;
   font-size: 13px;
-  padding: 4px 8px;
-  border-radius: 6px;
-  min-width: 32px;
-  text-align: center;
-  font-variant-numeric: tabular-nums;
-}
-.timer-unit small {
-  display: block;
-  font-size: 8px;
-  font-weight: 600;
-  color: var(--text-mute);
+  padding: 10px 22px;
+  border-radius: 50px;
+  text-decoration: none;
   text-transform: uppercase;
-  margin-top: 1px;
+  letter-spacing: 0.04em;
+  transition: transform 0.2s ease;
 }
-@media (max-width: 600px) {
-  .announce-msg { display: none; }
-  .announce-bar { padding: 8px 12px; gap: 10px; }
+.sticky-header__cta:hover {
+  transform: scale(1.05);
 }
+/* Old announce bar hidden */
+.announce-bar { display: none !important; }
 
 /* ============================================================
    SECTION 2 - HERO
@@ -1518,7 +1504,7 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
   align-items: center;
   gap: 10px;
   margin-bottom: 30px;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
 }
 .pricing-countdown .label {
   font-size: 13px;
@@ -1527,6 +1513,11 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
   text-transform: uppercase;
   letter-spacing: 0.08em;
   margin-right: 4px;
+  white-space: nowrap;
+}
+@media (max-width: 600px) {
+  .pricing-countdown { flex-wrap: wrap; justify-content: center; gap: 8px; }
+  .pricing-countdown .label { width: 100%; text-align: center; margin-right: 0; margin-bottom: 4px; }
 }
 .pricing-countdown .ct-unit {
   background: #f8f8f8;
@@ -1915,7 +1906,13 @@ body { padding-bottom: 90px; }
 </head>
 <body>
 
-<div id="app"></div>
+<header class="sticky-header">
+  <div class="sticky-header__inner">
+    <a href="#" class="sticky-header__logo"><span class="infinity">&infin;</span> JustFloow</a>
+    <a href="#pricing" class="sticky-header__cta">Get Started</a>
+  </div>
+</header>
+<div id="app" style="padding-top:56px;"></div>
 
 <script>
 (function() {
