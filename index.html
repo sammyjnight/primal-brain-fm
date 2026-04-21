@@ -369,10 +369,21 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
   opacity: 1;
   transform: translateY(0);
   position: relative;
+  text-shadow: 0 0 40px rgba(0,166,210,0.5), 0 0 80px rgba(0,166,210,0.2);
 }
 .hero-rotate-word.exit {
   opacity: 0;
   transform: translateY(-100%);
+}
+/* Teal glow behind the rotating word wrapper */
+.hero-rotate-wrapper::after {
+  content: '';
+  position: absolute;
+  bottom: -10px; left: -20px; right: -20px;
+  height: 40px;
+  background: radial-gradient(ellipse 100% 100% at 50% 100%, rgba(0,166,210,0.35), transparent 70%);
+  pointer-events: none;
+  filter: blur(12px);
 }
 .hero p.lede {
   font-family: 'Inter', sans-serif;
@@ -389,18 +400,47 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
   align-items: center;
   margin-bottom: 18px;
 }
-.stars-row {
+/* Hero trust strip - moved below hero */
+.hero-trust-strip {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 16px 0;
+}
+.hero-trust-strip__inner {
   display: flex;
   align-items: center;
-  gap: 10px;
-  margin-top: 4px;
-  font-size: 14px;
+  justify-content: center;
+  gap: 28px;
+  flex-wrap: wrap;
+}
+.hero-trust-strip .stars-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
   color: var(--text-dim);
 }
-.stars-row .stars { color: var(--gold); letter-spacing: 2px; font-size: 16px; }
-.stars-row strong { color: var(--text); }
+.hero-trust-strip .stars-row .stars { color: var(--gold); letter-spacing: 2px; font-size: 14px; }
+.hero-trust-strip .stars-row strong { color: var(--text); }
+.hero-trust-strip .trust-pill {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-mute);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.hero-trust-strip .trust-pill .check {
+  color: var(--teal);
+  font-size: 13px;
+}
+.hero-trust-strip__sep {
+  width: 1px;
+  height: 16px;
+  background: var(--border);
+}
 
-/* Hero portrait card - oval frame mirroring Primal Queen */
+/* Hero portrait card */
 .hero-portrait {
   position: relative;
   aspect-ratio: 3/4;
@@ -414,6 +454,21 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
   display: flex;
   align-items: flex-end;
   justify-content: center;
+  animation: hero-float 6s ease-in-out infinite;
+}
+@keyframes hero-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+/* Radial glow behind portrait */
+.hero-portrait::before {
+  content: '';
+  position: absolute;
+  top: -60px; left: -60px; right: -60px; bottom: -60px;
+  background: radial-gradient(circle at 50% 50%, rgba(0,166,210,0.25), rgba(0,166,210,0.08) 40%, transparent 70%);
+  filter: blur(30px);
+  z-index: -1;
+  pointer-events: none;
 }
 .hero-portrait .placeholder-label {
   position: absolute;
@@ -2079,12 +2134,6 @@ body { padding-bottom: 90px; }
     html += '<h1>' + esc(D.hero.headline) + rotateHtml + '</h1>';
     html += '<p class="lede">' + esc(D.hero.lede) + '</p>';
     html += '<div class="hero-cta-row"><a href="#pricing" class="btn">' + esc(D.hero.cta) + ' <span class="btn-arrow">\u2192</span></a></div>';
-    html += '<div class="trust-pill-row">';
-    D.hero.trust_pills.forEach(function(pill) {
-      html += '<span class="trust-pill"><span class="check">\u2713</span> ' + esc(pill) + '</span>';
-    });
-    html += '</div>';
-    html += '<div class="stars-row"><span class="stars">\u2605\u2605\u2605\u2605\u2605</span><strong>' + esc(D.hero.rating) + '</strong><span>\u00B7 ' + esc(D.hero.review_count) + '</span></div>';
     html += '</div>';
 
     // Hero portrait
@@ -2098,6 +2147,16 @@ body { padding-bottom: 90px; }
     // badge and tag removed for cleaner look
     html += '</div>';
     html += '</div></div></section>';
+
+    // HERO TRUST STRIP (below hero)
+    html += '<div class="hero-trust-strip"><div class="container"><div class="hero-trust-strip__inner">';
+    html += '<div class="stars-row"><span class="stars">\u2605\u2605\u2605\u2605\u2605</span><strong>' + esc(D.hero.rating) + '</strong><span>\u00B7 ' + esc(D.hero.review_count) + '</span></div>';
+    html += '<div class="hero-trust-strip__sep"></div>';
+    D.hero.trust_pills.forEach(function(pill, i) {
+      html += '<span class="trust-pill"><span class="check">\u2713</span> ' + esc(pill) + '</span>';
+      if (i < D.hero.trust_pills.length - 1) html += '<div class="hero-trust-strip__sep"></div>';
+    });
+    html += '</div></div></div>';
 
     // ============================================================
     // SECTION 3 - MARQUEE
