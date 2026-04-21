@@ -1,11 +1,9 @@
 {
   "_README": "Edit any text or image path below. Save the file and push to GitHub - your site updates automatically.",
-
   "announce": {
     "logo": "JustFloow",
     "message": "Flash Sale · Save up to 43%"
   },
-
   "hero": {
     "eyebrow": "Limited Time · Save 43%",
     "headline": "Your Brain Is The Business.",
@@ -23,11 +21,14 @@
     "image": "hero2.png",
     "badge": "Save<br>43%<br>This Week",
     "tag": "3PM Slump → Solved",
-    "trust_pills": ["90-Day Money Back", "Free UK Shipping", "GMP Certified"],
+    "trust_pills": [
+      "90-Day Money Back",
+      "Free UK Shipping",
+      "GMP Certified"
+    ],
     "rating": "4.6/5",
     "review_count": "2,655+ verified reviews"
   },
-
   "marquee": [
     "Founders who never clock out",
     "The ones running on 4 hours sleep",
@@ -36,7 +37,6 @@
     "The 6am alarm, no snooze crew",
     "People whose brain is the business"
   ],
-
   "founder": {
     "image": "founder.png",
     "caption": "JustFloow · Founder",
@@ -66,7 +66,6 @@
       "Spending half the day fighting the slump"
     ]
   },
-
   "why_built": {
     "headline": "Here's Why I Built A <em>16-Ingredient Stack</em> Instead Of Another Single-Ingredient Pill",
     "bullets": [
@@ -78,15 +77,32 @@
       "Compound effect - gets stronger over weeks"
     ],
     "ingredients": [
-      { "icon": "L", "name": "L-Tyrosine" },
-      { "icon": "\ud83e\udd81", "name": "Lion's Mane" },
-      { "icon": "B", "name": "Bacopa" },
-      { "icon": "G", "name": "Ginkgo 50:1" },
-      { "icon": "PS", "name": "Phosphatidylserine" },
-      { "icon": "B12", "name": "B-Complex" }
+      {
+        "icon": "L",
+        "name": "L-Tyrosine"
+      },
+      {
+        "icon": "🦁",
+        "name": "Lion's Mane"
+      },
+      {
+        "icon": "B",
+        "name": "Bacopa"
+      },
+      {
+        "icon": "G",
+        "name": "Ginkgo 50:1"
+      },
+      {
+        "icon": "PS",
+        "name": "Phosphatidylserine"
+      },
+      {
+        "icon": "B12",
+        "name": "B-Complex"
+      }
     ]
   },
-
   "problem": {
     "eyebrow": "The Performance Ceiling Nobody Talks About",
     "headline": "You're Still The Sharpest Person In The Room. <em>But the gap is closing.</em>",
@@ -96,10 +112,22 @@
       "You don't talk about this. Because you're the one everyone else looks to."
     ],
     "bullets": [
-      { "title": "The 3pm drop", "desc": "decision quality falls off a cliff in the second half of the day" },
-      { "title": "The sprint-crash cycle", "desc": "3 days of elite output, then 2 days running on fumes" },
-      { "title": "Caffeine tolerance creeping up", "desc": "needing more to get the same effect" },
-      { "title": "The private fear", "desc": "wondering if this is just what happens as the business scales" }
+      {
+        "title": "The 3pm drop",
+        "desc": "decision quality falls off a cliff in the second half of the day"
+      },
+      {
+        "title": "The sprint-crash cycle",
+        "desc": "3 days of elite output, then 2 days running on fumes"
+      },
+      {
+        "title": "Caffeine tolerance creeping up",
+        "desc": "needing more to get the same effect"
+      },
+      {
+        "title": "The private fear",
+        "desc": "wondering if this is just what happens as the business scales"
+      }
     ],
     "callout": [
       "The sprint-crash cycle isn't a discipline problem. It isn't fixed by another morning routine or another productivity system. You've tried those. They help - briefly - and then the underlying issue reasserts itself.",
@@ -107,7 +135,6 @@
     ],
     "image": "problem.png"
   },
-
   "ingredients": {
     "eyebrow": "The Stack",
     "headline": "Genius Mind's <em>Cognitive Infrastructure</em> Has Hands Down The Most Studied Ingredients In Any Nootropic",
@@ -127,14 +154,14 @@
       },
       {
         "name": "Lion's Mane",
-        "icon": "\ud83e\udd81",
+        "icon": "🦁",
         "us_amount": "320",
         "us_unit": "mg*",
         "us_label": "4:1 Extract",
         "them_amount": "80",
         "them_unit": "mg",
         "them_label": "Standard Powder",
-        "claim": "4\u00d7 more potent than standard mushroom powder per serving"
+        "claim": "4× more potent than standard mushroom powder per serving"
       },
       {
         "name": "Bacopa Monnieri",
@@ -145,7 +172,7 @@
         "them_amount": "80",
         "them_unit": "mg",
         "them_label": "Raw Powder",
-        "claim": "11\u00d7 concentrated for memory consolidation & retention"
+        "claim": "11× concentrated for memory consolidation & retention"
       },
       {
         "name": "Ginkgo Biloba",
@@ -156,7 +183,7 @@
         "them_amount": "120",
         "them_unit": "mg",
         "them_label": "Standard Leaf",
-        "claim": "50\u00d7 concentrated for cerebral blood flow & oxygen delivery"
+        "claim": "50× concentrated for cerebral blood flow & oxygen delivery"
       },
       {
         "name": "Phosphatidylserine",
@@ -173,34 +200,54 @@
         "name": "B12 Methylcobalamin",
         "icon": "B12",
         "us_amount": "500",
-        "us_unit": "\u03bcg",
+        "us_unit": "μg",
         "us_label": "20,000% RI",
         "them_amount": "2.5",
-        "them_unit": "\u03bcg",
+        "them_unit": "μg",
         "them_label": "100% RI",
-        "claim": "200\u00d7 the standard daily intake - for neurotransmitter synthesis"
+        "claim": "200× the standard daily intake - for neurotransmitter synthesis"
       }
     ]
   },
-
   "promise": {
     "headline": "The <em>Genius Mind</em> Promise",
     "badges": [
-      { "icon": "V", "label": "100% Vegan" },
-      { "icon": "\u2699", "label": "GMP Certified" },
-      { "icon": "\ud83c\uddec\ud83c\udde7", "label": "UK Made" },
-      { "icon": "N", "label": "Non-GMO" },
-      { "icon": "G", "label": "Gluten Free" },
-      { "icon": "16", "label": "Ingredients" }
+      {
+        "icon": "V",
+        "label": "100% Vegan"
+      },
+      {
+        "icon": "⚙",
+        "label": "GMP Certified"
+      },
+      {
+        "icon": "🇬🇧",
+        "label": "UK Made"
+      },
+      {
+        "icon": "N",
+        "label": "Non-GMO"
+      },
+      {
+        "icon": "G",
+        "label": "Gluten Free"
+      },
+      {
+        "icon": "16",
+        "label": "Ingredients"
+      }
     ]
   },
-
   "facility": {
-    "headline": "Genius Mind's <em>State-Of-The-Art Facility</em> In The UK",
+    "headline": "UK-made. GMP-certified. <em>Batch-tested.</em>",
     "image": "factory.png",
-    "trust": ["GMP Certified", "Lab Tested", "UK Facility", "Same-Day Dispatch"]
+    "trust": [
+      "GMP Certified",
+      "Lab Tested",
+      "UK Facility",
+      "Same-Day Dispatch"
+    ]
   },
-
   "timeline": {
     "eyebrow": "Your Journey",
     "headline": "What To Expect - <em>Week By Week</em>",
@@ -208,7 +255,7 @@
     "product_image": "hero.png",
     "items": [
       {
-        "period": "Week 1\u20132",
+        "period": "Week 1–2",
         "title": "Subtle Lift In Clarity",
         "body": "Most people notice a slight extension of the morning window - the period where thinking is cleanest. Guarana and B vitamins are active from day one."
       },
@@ -234,10 +281,9 @@
       }
     ]
   },
-
   "reviews": {
-    "headline": "What Operators Are <em>Actually Saying</em>",
-    "subtitle": "Trusted by 100,000+ customers · 4.6/5 across 2,655+ verified reviews",
+    "headline": "4.6 stars from <em>2,655+ operators</em>",
+    "subtitle": "Real people. Real cognitive shifts. No incentivised reviews.",
     "items": [
       {
         "type": "standard",
@@ -271,9 +317,8 @@
       }
     ]
   },
-
   "howto": {
-    "headline": "We Make <em>Brain Optimisation</em> Easy",
+    "headline": "Two capsules. <em>Once a day.</em> That’s it.",
     "subtitle": "Two capsules. Once a day. That's the entire protocol.",
     "steps": [
       {
@@ -284,7 +329,7 @@
       {
         "image": "howto-2.png",
         "title": "Take 2 With Breakfast",
-        "body": "Or 30\u201360 minutes before your most demanding work block."
+        "body": "Or 30–60 minutes before your most demanding work block."
       },
       {
         "image": "howto-3.png",
@@ -293,26 +338,91 @@
       }
     ]
   },
-
   "comparison": {
-    "headline": "Genius Mind vs <em>What You're Currently Running On</em>",
+    "headline": "Outperforms everything <em>you’re currently running on</em>",
     "subtitle": "Side by side, here's how the cognitive infrastructure compares.",
-    "columns": ["Genius Mind", "Caffeine / Stimulants", "Generic Nootropics"],
+    "columns": [
+      "Genius Mind",
+      "Caffeine / Stimulants",
+      "Generic Nootropics"
+    ],
     "rows": [
-      { "feature": "Supports dopamine production at the source", "values": [true, false, false] },
-      { "feature": "No crash or withdrawal", "values": [true, false, false] },
-      { "feature": "Sustains decision quality across a full day", "values": [true, false, false] },
-      { "feature": "Supports long-term neural architecture", "values": [true, false, false] },
-      { "feature": "Tolerance doesn't build", "values": [true, false, false] },
-      { "feature": "16 clinically studied ingredients", "values": [true, false, false] },
-      { "feature": "No prescription required", "values": [true, false, true] },
-      { "feature": "Builds compound effect over time", "values": [true, false, false] },
-      { "feature": "90-day money-back guarantee", "values": [true, false, false] }
+      {
+        "feature": "Supports dopamine production at the source",
+        "values": [
+          true,
+          false,
+          false
+        ]
+      },
+      {
+        "feature": "No crash or withdrawal",
+        "values": [
+          true,
+          false,
+          false
+        ]
+      },
+      {
+        "feature": "Sustains decision quality across a full day",
+        "values": [
+          true,
+          false,
+          false
+        ]
+      },
+      {
+        "feature": "Supports long-term neural architecture",
+        "values": [
+          true,
+          false,
+          false
+        ]
+      },
+      {
+        "feature": "Tolerance doesn't build",
+        "values": [
+          true,
+          false,
+          false
+        ]
+      },
+      {
+        "feature": "16 clinically studied ingredients",
+        "values": [
+          true,
+          false,
+          false
+        ]
+      },
+      {
+        "feature": "No prescription required",
+        "values": [
+          true,
+          false,
+          true
+        ]
+      },
+      {
+        "feature": "Builds compound effect over time",
+        "values": [
+          true,
+          false,
+          false
+        ]
+      },
+      {
+        "feature": "90-day money-back guarantee",
+        "values": [
+          true,
+          false,
+          false
+        ]
+      }
     ]
   },
-
   "editorial": {
-    "headline": "<strong>We've Stopped Feeding Our Brains.</strong> And we wonder why we can't think.",
+    "headline": "<strong>Your brain is starving.</strong> And willpower won’t feed it.",
     "body": [
       "The modern operator's diet is built around speed, not nutrition. Coffee on an empty stomach. Lunch at the desk. Dinner from a wrapper. The micronutrients your brain uses to manufacture dopamine, build neural pathways, and sustain executive function aren't there in the quantities you actually need.",
       "Then we wonder why willpower runs out by Wednesday.",
@@ -321,28 +431,40 @@
     ],
     "image": "editorial.png"
   },
-
   "scarcity": {
     "headline": "April Has A High Risk Of <em>Selling Out</em>",
     "body": "Due to high demand and Lion's Mane supply constraints, our April production run is moving faster than expected. Lock in your supply now to avoid the wait list.",
     "cta": "Lock In Supply"
   },
-
   "review_summary": {
     "score": "4.6",
     "total": "Based on 2,655+ reviews",
     "bars": [
-      { "stars": 5, "percent": 78 },
-      { "stars": 4, "percent": 14 },
-      { "stars": 3, "percent": 5 },
-      { "stars": 2, "percent": 2 },
-      { "stars": 1, "percent": 1 }
+      {
+        "stars": 5,
+        "percent": 78
+      },
+      {
+        "stars": 4,
+        "percent": 14
+      },
+      {
+        "stars": 3,
+        "percent": 5
+      },
+      {
+        "stars": 2,
+        "percent": 2
+      },
+      {
+        "stars": 1,
+        "percent": 1
+      }
     ]
   },
-
   "pricing": {
     "eyebrow": "Subscribe & Save",
-    "headline": "Build Your <em>Cognitive Infrastructure</em>",
+    "headline": "Lock in your <em>cognitive edge</em>",
     "subtitle": "Join 100,000+ operators who've made Genius Mind part of their daily stack.",
     "cards": [
       {
@@ -353,7 +475,7 @@
         "image": "pricing-3.png",
         "price": "42.99",
         "was": "74.97",
-        "per": "\u00a314.33 per bottle",
+        "per": "£14.33 per bottle",
         "save": "Save 43%",
         "perks": [
           "3 bottles - 180 vegan capsules",
@@ -403,9 +525,8 @@
       }
     ]
   },
-
   "faq": {
-    "headline": "Frequently Asked <em>Questions</em>",
+    "headline": "Questions before <em>you commit</em>",
     "items": [
       {
         "q": "What is Genius Mind?",
@@ -417,11 +538,11 @@
       },
       {
         "q": "How long until I notice a difference?",
-        "a": "Early clarity improvements typically show within 1\u20132 weeks as the Guarana and B-vitamin complex begin supporting energy metabolism from day one. The substantive cognitive shift - sustained decision quality, reduced afternoon drop, more consistent output - typically builds over 4\u20138 weeks as Bacopa Monnieri and Lion's Mane accumulate. We recommend committing to at least 90 days. That's when the compound effect becomes undeniable, and why the 3-month supply is what most serious operators choose."
+        "a": "Early clarity improvements typically show within 1–2 weeks as the Guarana and B-vitamin complex begin supporting energy metabolism from day one. The substantive cognitive shift - sustained decision quality, reduced afternoon drop, more consistent output - typically builds over 4–8 weeks as Bacopa Monnieri and Lion's Mane accumulate. We recommend committing to at least 90 days. That's when the compound effect becomes undeniable, and why the 3-month supply is what most serious operators choose."
       },
       {
         "q": "Do I have to take it every day?",
-        "a": "Yes. Genius Mind is infrastructure, not a pre-workout. It works cumulatively - the ingredients build in your system over time. Take 2 capsules every morning, ideally 30\u201360 minutes before your most demanding work. Think of it as part of the stack, not something you reach for only when you're struggling."
+        "a": "Yes. Genius Mind is infrastructure, not a pre-workout. It works cumulatively - the ingredients build in your system over time. Take 2 capsules every morning, ideally 30–60 minutes before your most demanding work. Think of it as part of the stack, not something you reach for only when you're struggling."
       },
       {
         "q": "Can I take it with other medication?",
@@ -433,20 +554,18 @@
       }
     ]
   },
-
   "disclaimer": {
     "paragraphs": [
       "<strong>Disclaimer:</strong> This product is a food supplement and is not intended to diagnose, treat, cure, or prevent any disease. Food supplements should not be used as a substitute for a varied and balanced diet and a healthy lifestyle. Do not exceed the recommended daily intake. Keep out of reach of children. If you are pregnant, breastfeeding, taking any medications, or under medical supervision, please consult a doctor or healthcare professional before use.",
       "Results may vary between individuals. The testimonials on this page reflect the personal experiences of individual customers and are not intended to represent or guarantee that any user will achieve the same or similar results."
     ],
-    "copyright": "\u00a9 2026 JustFloow Ltd. All rights reserved. · Registered in England & Wales"
+    "copyright": "© 2026 JustFloow Ltd. All rights reserved. · Registered in England & Wales"
   },
-
   "sticky_cta": {
     "label": "Flash Sale Ending",
-    "price": "\u00a342.99",
-    "was": "\u00a374.97",
+    "price": "£42.99",
+    "was": "£74.97",
     "description": "3-Month Supply",
-    "cta": "Get Yours \u2192"
+    "cta": "Get Yours →"
   }
 }
