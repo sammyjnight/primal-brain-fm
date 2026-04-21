@@ -532,34 +532,43 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
    SECTION 4 - STAT STRIP (by the numbers)
    ============================================================ */
 .stat-strip {
-  padding: clamp(40px, 6vw, 70px) 0;
-  background: var(--cream);
+  padding: clamp(28px, 4vw, 44px) 0;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
 }
 .stat-strip__grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
+  display: flex;
+  justify-content: center;
+  gap: 0;
   text-align: center;
 }
-.stat-strip__item {}
+.stat-strip__item {
+  flex: 1;
+  max-width: 200px;
+  padding: 0 20px;
+  border-right: 1px solid var(--border);
+}
+.stat-strip__item:last-child { border-right: none; }
 .stat-strip__number {
   font-family: 'Inter', sans-serif;
-  font-size: clamp(48px, 7vw, 88px);
+  font-size: clamp(28px, 4vw, 40px);
   font-weight: 800;
   color: var(--teal);
   line-height: 1;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.02em;
 }
 .stat-strip__label {
-  font-size: 14px;
+  font-size: 11px;
   font-weight: 600;
-  color: var(--text-dark-mute);
+  color: var(--text-mute);
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  margin-top: 8px;
+  margin-top: 6px;
 }
 @media (max-width: 800px) {
-  .stat-strip__grid { grid-template-columns: repeat(2, 1fr); gap: 32px; }
+  .stat-strip__grid { flex-wrap: wrap; }
+  .stat-strip__item { flex: 0 0 50%; max-width: none; padding: 12px 20px; border-right: none; }
+  .stat-strip__item:nth-child(1), .stat-strip__item:nth-child(2) { border-bottom: 1px solid var(--border); }
 }
 
 /* ============================================================
@@ -2108,7 +2117,7 @@ body { padding-bottom: 90px; }
     html += '<section class="stat-strip"><div class="container"><div class="stat-strip__grid">';
     html += '<div class="stat-strip__item"><div class="stat-strip__number">16</div><div class="stat-strip__label">Dosed Ingredients</div></div>';
     html += '<div class="stat-strip__item"><div class="stat-strip__number">92%</div><div class="stat-strip__label">Sharper by Week 2</div></div>';
-    html += '<div class="stat-strip__item"><div class="stat-strip__number">4.6\u2605</div><div class="stat-strip__label">Verified Reviews</div></div>';
+    html += '<div class="stat-strip__item"><div class="stat-strip__number">4.6/5</div><div class="stat-strip__label">Verified Reviews</div></div>';
     html += '<div class="stat-strip__item"><div class="stat-strip__number">2,000+</div><div class="stat-strip__label">Operators Daily</div></div>';
     html += '</div></div></section>';
 
@@ -2148,12 +2157,20 @@ body { padding-bottom: 90px; }
     html += '</ul></div>';
     html += '<div class="feature-block__visual"><div class="mini-chart">';
     html += '<div class="mini-chart__title">Cognitive Performance Across The Day</div>';
-    html += '<svg viewBox="0 0 400 160" fill="none"><defs><linearGradient id="tealGrad" x1="0" y1="0" x2="400" y2="0"><stop offset="0%" stop-color="#00A6D2" stop-opacity="0.3"/><stop offset="100%" stop-color="#00A6D2" stop-opacity="0.05"/></linearGradient></defs>';
-    html += '<path d="M0 140 L60 130 L120 80 L180 40 L220 35 L260 60 L320 110 L380 135 L400 140" stroke="#5a5a6e" stroke-width="2" fill="none" stroke-dasharray="6 4" opacity="0.5"/>';
-    html += '<text x="200" y="30" fill="#5a5a6e" font-size="10" text-anchor="middle">Without Genius Mind</text>';
-    html += '<path d="M0 140 L60 120 L120 60 L180 30 L220 25 L260 28 L320 35 L380 40 L400 42" stroke="#00A6D2" stroke-width="3" fill="none"/>';
-    html += '<path d="M0 140 L60 120 L120 60 L180 30 L220 25 L260 28 L320 35 L380 40 L400 42 L400 160 L0 160Z" fill="url(#tealGrad)"/>';
-    html += '<text x="350" y="55" fill="#00A6D2" font-size="10" font-weight="600">With GM</text>';
+    html += '<svg viewBox="0 0 400 180" fill="none">';
+    html += '<defs><linearGradient id="tealGrad" x1="0" y1="0" x2="400" y2="0"><stop offset="0%" stop-color="#00A6D2" stop-opacity="0.25"/><stop offset="100%" stop-color="#00A6D2" stop-opacity="0.05"/></linearGradient>';
+    html += '<linearGradient id="redGrad" x1="0" y1="0" x2="400" y2="0"><stop offset="0%" stop-color="#E8283B" stop-opacity="0.1"/><stop offset="100%" stop-color="#E8283B" stop-opacity="0.03"/></linearGradient></defs>';
+    // Without GM - clear declining dashed line with red-ish fill
+    html += '<path d="M0 150 L60 140 L120 80 L180 45 L220 42 L260 70 L320 120 L380 148 L400 155" stroke="#E8283B" stroke-width="2.5" fill="none" stroke-dasharray="8 5" opacity="0.7"/>';
+    html += '<path d="M0 150 L60 140 L120 80 L180 45 L220 42 L260 70 L320 120 L380 148 L400 155 L400 170 L0 170Z" fill="url(#redGrad)"/>';
+    html += '<text x="365" y="145" fill="#E8283B" font-size="10" font-weight="600" opacity="0.8">Without</text>';
+    // With GM - solid teal line staying high
+    html += '<path d="M0 150 L60 125 L120 65 L180 35 L220 28 L260 25 L320 28 L380 30 L400 30" stroke="#00A6D2" stroke-width="3" fill="none"/>';
+    html += '<path d="M0 150 L60 125 L120 65 L180 35 L220 28 L260 25 L320 28 L380 30 L400 30 L400 170 L0 170Z" fill="url(#tealGrad)"/>';
+    html += '<text x="365" y="22" fill="#00A6D2" font-size="10" font-weight="700">With GM</text>';
+    // Annotation for the gap
+    html += '<line x1="300" y1="28" x2="300" y2="115" stroke="rgba(255,255,255,0.15)" stroke-width="1" stroke-dasharray="3 3"/>';
+    html += '<text x="308" y="75" fill="rgba(255,255,255,0.4)" font-size="9" font-weight="600">The gap</text>';
     html += '</svg>';
     html += '<div class="mini-chart__labels"><span>6am</span><span>9am</span><span>12pm</span><span>3pm</span><span>6pm</span><span>9pm</span></div>';
     html += '</div></div></div>';
