@@ -573,7 +573,7 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
    SOCIAL PROOF SECTION (Brain.fm layout: left text + right cards)
    ============================================================ */
 .social-proof-section {
-  padding: clamp(40px, 6vw, 70px) 0;
+  padding: clamp(50px, 7vw, 90px) 0;
   background: var(--bg);
   overflow: hidden;
 }
@@ -2481,13 +2481,7 @@ body { padding-bottom: 90px; }
     html += '</div>';
     html += '</div></div></section>';
 
-    // STAT STRIP (after social proof)
-    html += '<section class="stat-strip"><div class="container"><div class="stat-strip__grid">';
-    html += '<div class="stat-strip__item"><div class="stat-strip__number">16</div><div class="stat-strip__label">Science-Backed Ingredients</div></div>';
-    html += '<div class="stat-strip__item"><div class="stat-strip__number">92%</div><div class="stat-strip__label">Feel Sharper*</div></div>';
-    html += '<div class="stat-strip__item"><div class="stat-strip__number">1,230</div><div class="stat-strip__label">Verified Reviews</div></div>';
-    html += '<div class="stat-strip__item"><div class="stat-strip__number">3M+</div><div class="stat-strip__label">Servings Delivered</div></div>';
-    html += '</div></div></section>';
+    // stat strip moved to above trustpilot reviews
 
     // ============================================================
     // SECTION 4b - FOUNDER (condensed)
@@ -2598,8 +2592,8 @@ body { padding-bottom: 90px; }
     // ============================================================
     // ANIMATED STATS (IM8 style countup)
     // ============================================================
-    html += '<section style="padding:clamp(40px,6vw,70px) 0;background:var(--bg);"><div class="container">';
-    html += '<div style="text-align:center;margin-bottom:48px;">';
+    html += '<section style="padding:clamp(20px,3vw,40px) 0 clamp(40px,6vw,70px);background:var(--bg);"><div class="container">';
+    html += '<div style="text-align:center;margin-bottom:36px;">';
     html += '<span style="display:inline-block;color:var(--teal);font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:16px;">Backed By Results</span>';
     html += '<h2 style="font-size:clamp(28px,4vw,46px);font-weight:700;color:#fff;">Clinically Researched. <span style="color:var(--teal);">Customer Proven.</span></h2>';
     html += '</div>';
@@ -2772,6 +2766,14 @@ body { padding-bottom: 90px; }
     html += '</div>';
     html += '<p class="brain-systems__footer">16 clinically-dosed ingredients across 6 cognitive systems in one daily serving.</p>';
     html += '</div></section>';
+
+    // STAT STRIP (above trustpilot reviews)
+    html += '<section class="stat-strip"><div class="container"><div class="stat-strip__grid">';
+    html += '<div class="stat-strip__item"><div class="stat-strip__number">16</div><div class="stat-strip__label">Science-Backed Ingredients</div></div>';
+    html += '<div class="stat-strip__item"><div class="stat-strip__number">92%</div><div class="stat-strip__label">Feel Sharper*</div></div>';
+    html += '<div class="stat-strip__item"><div class="stat-strip__number">1,230</div><div class="stat-strip__label">Verified Reviews</div></div>';
+    html += '<div class="stat-strip__item"><div class="stat-strip__number">3M+</div><div class="stat-strip__label">Servings Delivered</div></div>';
+    html += '</div></div></section>';
 
     // ============================================================
     // SECTION 11 - REVIEWS (Trustpilot)
