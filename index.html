@@ -615,14 +615,15 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
 .social-proof__logos {
   display: flex;
   align-items: center;
-  gap: clamp(20px, 3vw, 40px);
+  justify-content: center;
+  gap: clamp(24px, 4vw, 48px);
   flex-wrap: wrap;
-  opacity: 0.35;
+  opacity: 0.4;
 }
 .social-proof__logos span {
   font-family: 'Inter', sans-serif;
-  font-weight: 600;
-  font-size: clamp(16px, 2vw, 22px);
+  font-weight: 800;
+  font-size: clamp(22px, 3vw, 32px);
   color: #fff;
 }
 /* Right side - stacked/offset cards */
@@ -981,16 +982,16 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
   text-transform: uppercase; letter-spacing: 0.08em;
 }
 .founder-content h2 {
-  font-family: 'Inter', sans-serif; font-weight: 600;
-  font-size: clamp(32px, 4.5vw, 52px); line-height: 1.05;
-  letter-spacing: -0.02em; margin-bottom: 8px; color: var(--text-dark);
+  font-family: 'Inter', sans-serif; font-weight: 700;
+  font-size: clamp(28px, 4vw, 44px); line-height: 1.1;
+  letter-spacing: -0.02em; margin-bottom: 16px; color: var(--text-dark);
 }
 .founder-content h2 em { font-style: normal; font-weight: 500; color: var(--teal); }
 .founder-content p.intro {
-  font-size: 19px; color: var(--text-dark-mute); margin-bottom: 24px;
+  font-size: 17px; color: var(--text-dark-mute); margin-bottom: 20px; line-height: 1.6;
 }
 .founder-content .body p {
-  font-size: 17px; line-height: 1.65; color: var(--text-dark-mute); margin-bottom: 14px;
+  font-size: 16px; line-height: 1.7; color: var(--text-dark-mute); margin-bottom: 16px;
 }
 .founder-content .body p strong { color: var(--text-dark); font-weight: 700; }
 @media (max-width: 800px) {
@@ -1134,6 +1135,15 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
 .comp-bar__fill {
   height: 100%; border-radius: 6px;
   transition: width 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+/* Shimmer on countup numbers */
+.countup-num {
+  background: linear-gradient(90deg, #fff 0%, #fff 35%, #8be0f5 50%, #fff 65%, #fff 100%) !important;
+  background-size: 200% auto !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+  animation: shimmer 4s linear infinite !important;
 }
 .comp-bar__fill--gm { background: linear-gradient(90deg, var(--teal), var(--teal-warm)); }
 .comp-bar__fill--coffee { background: #8B6F47; }
@@ -2342,6 +2352,14 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
   .sticky-cta .mini-timer { font-size: 10px; }
   .sticky-cta-inner { gap: 8px; }
 
+  /* Featured In logos: 2 per line mobile */
+  .social-proof__logos {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px 24px;
+    justify-items: center;
+  }
+
   /* Hero mobile: text above image, no overlap */
   .hero-grid { min-height: auto; }
   .hero-content { max-width: 100%; }
@@ -2897,20 +2915,7 @@ body { padding-bottom: 90px; }
     html += '<a href="#pricing" class="btn">' + esc(D.scarcity.cta) + ' <span class="btn-arrow">\u2192</span></a>';
     html += '</div></div></section>';
 
-    // ============================================================
-    // SECTION 16 - REVIEW SUMMARY
-    // ============================================================
-    html += '<section class="review-summary"><div class="container"><div class="review-summary-card">';
-    html += '<div class="summary-score">';
-    html += '<div class="big">' + esc(D.review_summary.score) + '</div>';
-    html += '<div class="stars">\u2605\u2605\u2605\u2605\u2605</div>';
-    html += '<div class="total">' + esc(D.review_summary.total) + '</div>';
-    html += '</div>';
-    html += '<div class="summary-bars">';
-    D.review_summary.bars.forEach(function(bar) {
-      html += '<div class="bar-row"><span>' + bar.stars + '\u2605</span><div class="bar"><div class="fill" style="width:' + bar.percent + '%"></div></div><span>' + bar.percent + '%</span></div>';
-    });
-    html += '</div></div></div></section>';
+    // SECTION 16 - REVIEW SUMMARY (removed per feedback)
 
     // ============================================================
     // SECTION 17 - PRICING
