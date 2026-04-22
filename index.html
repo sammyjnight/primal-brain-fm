@@ -951,18 +951,18 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
 }
 
 /* ============================================================
-   SECTION 7 - DOSAGE COMPARISON CHART (horizontal bars)
+   SECTION 7 - COMPARISON TABLE (IM8 style)
    ============================================================ */
-.dosage-chart {
+.comp-table-section {
   padding: clamp(60px, 8vw, 110px) 0;
   background: var(--cream);
   color: var(--text-dark);
 }
-.dosage-chart__head {
+.comp-table-section__head {
   text-align: center;
   margin-bottom: 50px;
 }
-.dosage-chart__head h2 {
+.comp-table-section__head h2 {
   font-family: 'Inter', sans-serif;
   font-weight: 700;
   font-size: clamp(26px, 3.5vw, 42px);
@@ -971,46 +971,79 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
   color: var(--text-dark);
   margin-bottom: 14px;
 }
-.dosage-chart__head h2 em { font-style: normal; font-weight: 500; color: var(--teal); }
-.dosage-chart__head p {
-  font-size: 17px; color: var(--text-dark-mute); max-width: 560px; margin: 0 auto;
+.comp-table-section__head h2 em { font-style: normal; font-weight: 500; color: var(--teal); }
+.comp-table-section__head p {
+  font-size: 17px; color: var(--text-dark-mute); max-width: 600px; margin: 0 auto;
 }
-.dosage-chart__legend {
-  display: flex; justify-content: center; gap: 28px; margin-bottom: 32px; font-size: 13px; font-weight: 600;
+.comp-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(0,0,0,0.06);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.04);
 }
-.dosage-chart__legend span { display: flex; align-items: center; gap: 8px; color: var(--text-dark-mute); }
-.dosage-chart__legend-dot { width: 12px; height: 12px; border-radius: 3px; }
-.dosage-chart__legend-dot--gm { background: var(--teal); }
-.dosage-chart__legend-dot--avg { background: #c7c7d4; }
-.dosage-chart__legend-dot--threshold { background: none; border: 2px dashed #e8283b; width: 20px; height: 0; }
-.dosage-row {
-  display: grid;
-  grid-template-columns: 140px 1fr 60px;
-  gap: 16px;
-  align-items: center;
-  padding: 14px 0;
+.comp-table th, .comp-table td {
+  padding: 16px 20px;
+  text-align: left;
+  font-size: 14px;
   border-bottom: 1px solid rgba(0,0,0,0.06);
 }
-.dosage-row:last-child { border-bottom: none; }
-.dosage-row__name {
-  font-weight: 600; font-size: 14px; color: var(--text-dark); text-align: right;
+.comp-table thead th {
+  background: #f8f9fa;
+  font-weight: 700;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-dark-mute);
 }
-.dosage-row__name small { display: block; font-size: 11px; color: var(--text-dark-mute); font-weight: 500; }
-.dosage-row__bars { position: relative; height: 36px; background: rgba(0,0,0,0.03); border-radius: 6px; overflow: visible; }
-.dosage-row__bar {
-  position: absolute; left: 0; height: 18px; border-radius: 4px;
-  transition: width 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+.comp-table thead th:nth-child(2) {
+  color: var(--teal);
+  font-weight: 800;
 }
-.dosage-row__bar--gm { top: 0; background: linear-gradient(90deg, var(--teal), var(--teal-warm)); }
-.dosage-row__bar--avg { top: 20px; background: #c7c7d4; opacity: 0.6; }
-.dosage-row__threshold {
-  position: absolute; top: -4px; bottom: -4px; width: 2px;
-  border-left: 2px dashed rgba(232,40,59,0.4);
+.comp-table tbody tr:last-child td { border-bottom: none; }
+.comp-table tbody tr:nth-child(even) { background: #fafbfc; }
+.comp-table .ct-ingredient {
+  font-weight: 600;
+  color: var(--text-dark);
 }
-.dosage-row__dose { font-size: 13px; font-weight: 700; color: var(--teal); }
-@media (max-width: 600px) {
-  .dosage-row { grid-template-columns: 100px 1fr 50px; }
-  .dosage-row__name { font-size: 12px; }
+.comp-table .ct-check {
+  color: var(--teal);
+  font-weight: 700;
+  font-size: 16px;
+}
+.comp-table .ct-cross {
+  color: #ccc;
+  font-weight: 700;
+  font-size: 16px;
+}
+.comp-table .ct-dose {
+  font-weight: 700;
+  color: var(--text-dark);
+}
+.comp-table .ct-note {
+  font-size: 12px;
+  color: var(--text-dark-mute);
+  display: block;
+}
+.comp-table .ct-diff {
+  display: inline-block;
+  background: rgba(0,166,210,0.1);
+  color: var(--teal);
+  font-weight: 700;
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 50px;
+  margin-left: 6px;
+}
+.comp-table .ct-other-dose {
+  color: var(--text-dark-mute);
+}
+@media (max-width: 700px) {
+  .comp-table th, .comp-table td { padding: 12px 10px; font-size: 12px; }
+  .comp-table .ct-diff { display: none; }
 }
 
 /* ============================================================
@@ -2345,35 +2378,37 @@ body { padding-bottom: 90px; }
     html += '</div></section>';
 
     // ============================================================
-    // SECTION 7 - DOSAGE COMPARISON CHART
+    // SECTION 7 - COMPARISON TABLE (IM8 style)
     // ============================================================
-    html += '<section class="dosage-chart" id="ingredients"><div class="container">';
-    html += '<div class="dosage-chart__head">';
+    html += '<section class="comp-table-section" id="ingredients"><div class="container">';
+    html += '<div class="comp-table-section__head">';
     html += '<h2>Dosed for operators, <em>not shelves</em></h2>';
-    html += '<p>Every ingredient at or above clinical threshold. No proprietary blends. No filler.</p>';
+    html += '<p>High-ratio extracts and clinical dosages where others use standard powders. Here\u2019s the difference.</p>';
     html += '</div>';
-    html += '<div class="dosage-chart__legend">';
-    html += '<span><span class="dosage-chart__legend-dot dosage-chart__legend-dot--gm"></span> Genius Mind</span>';
-    html += '<span><span class="dosage-chart__legend-dot dosage-chart__legend-dot--avg"></span> Competitor Avg</span>';
-    html += '</div>';
-    var dosageRows = [
-      {name: 'Ginkgo Biloba', sub: '50:1 Extract', gm: 95, avg: 25, dose: '120mg'},
-      {name: 'Bacopa Monnieri', sub: '11:1 Extract', gm: 85, avg: 20, dose: '80mg'},
-      {name: 'Panax Ginseng', sub: '20:1 Extract', gm: 80, avg: 30, dose: '100mg'},
-      {name: "Lion\u2019s Mane", sub: '4:1 Extract', gm: 75, avg: 35, dose: '80mg'},
-      {name: 'L-Tyrosine', sub: 'Clinical dose', gm: 80, avg: 0, dose: '100mg'},
-      {name: 'Vitamin B12', sub: 'Methylcobalamin', gm: 90, avg: 10, dose: '500\u00B5g'}
+    html += '<table class="comp-table">';
+    html += '<thead><tr><th>Ingredient</th><th>Genius Mind</th><th>Other Nootropics</th></tr></thead>';
+    html += '<tbody>';
+    var compRows = [
+      {name:'Ginkgo Biloba', gm:'120mg', gmNote:'50:1 Extract', diff:'+50%', other:'60\u201380mg', otherNote:'Standard powder', has:true},
+      {name:'Bacopa Monnieri', gm:'80mg', gmNote:'11:1 Extract', diff:'11x stronger', other:'150mg', otherNote:'Standard 1:1 powder', has:true},
+      {name:'Panax Ginseng', gm:'100mg', gmNote:'20:1 Extract', diff:'5x stronger', other:'50\u2013100mg', otherNote:'Standard 4:1 extract', has:true},
+      {name:'Lion\u2019s Mane', gm:'80mg', gmNote:'4:1 Extract', diff:'4x stronger', other:'250mg', otherNote:'Standard powder', has:true},
+      {name:'L-Tyrosine', gm:'100mg', gmNote:'Clinical dose', diff:'+33%', other:'50\u201375mg', otherNote:'Sub-clinical', has:true},
+      {name:'Vitamin B12', gm:'500\u00B5g', gmNote:'Methylcobalamin', diff:'+900%', other:'10\u201350\u00B5g', otherNote:'Cyanocobalamin', has:true},
+      {name:'Phosphatidylserine', gm:'35mg', gmNote:'Included', diff:'Exclusive', other:'\u2013', otherNote:'Not included', has:false},
+      {name:'Sage Leaf Extract', gm:'75mg', gmNote:'4:1 Extract', diff:'Exclusive', other:'\u2013', otherNote:'Not included', has:false},
+      {name:'Rosemary Extract', gm:'20mg', gmNote:'5:1 Extract', diff:'Exclusive', other:'\u2013', otherNote:'Not included', has:false},
+      {name:'Full Dose Disclosure', gm:'Yes', gmNote:'Every ingredient listed', diff:'', other:'Rarely', otherNote:'Proprietary blends', has:false}
     ];
-    dosageRows.forEach(function(row) {
-      html += '<div class="dosage-row">';
-      html += '<div class="dosage-row__name">' + row.name + '<small>' + row.sub + '</small></div>';
-      html += '<div class="dosage-row__bars">';
-      html += '<div class="dosage-row__bar dosage-row__bar--gm" style="width:' + row.gm + '%"></div>';
-      html += '<div class="dosage-row__bar dosage-row__bar--avg" style="width:' + row.avg + '%"></div>';
-      html += '</div>';
-      html += '<div class="dosage-row__dose">' + row.dose + '</div>';
-      html += '</div>';
+    compRows.forEach(function(row) {
+      html += '<tr>';
+      html += '<td class="ct-ingredient">' + row.name + '</td>';
+      html += '<td><span class="ct-check">\u2713</span> <span class="ct-dose">' + row.gm + '</span><span class="ct-note">' + row.gmNote + '</span>' + (row.diff ? '<span class="ct-diff">' + row.diff + '</span>' : '') + '</td>';
+      html += '<td><span class="' + (row.has ? 'ct-check' : 'ct-cross') + '">' + (row.has ? '\u2713' : '\u2717') + '</span> <span class="ct-other-dose">' + row.other + '</span><span class="ct-note">' + row.otherNote + '</span></td>';
+      html += '</tr>';
     });
+    html += '</tbody></table>';
+    html += '<div style="text-align:center;margin-top:24px;"><p style="font-size:12px;color:var(--text-dark-mute);">Comparison based on publicly available label data from leading UK nootropic supplements.</p></div>';
     html += '</div></section>';
 
     // ============================================================
