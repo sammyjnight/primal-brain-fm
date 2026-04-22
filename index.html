@@ -2183,18 +2183,20 @@ body { padding-bottom: 90px; }
 
     // HERO BENEFITS SCROLLER (Brain.fm style)
     var benefits = [
-      {icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8"/></svg>', label: 'Deep Focus'},
-      {icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2a7 7 0 0 0-4.6 12.3A3 3 0 0 0 6 17v1a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-1a3 3 0 0 0-1.4-2.7A7 7 0 0 0 12 2"/></svg>', label: 'Clear Thinking'},
-      {icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M12 1v2m0 18v2M4.22 4.22l1.42 1.42m12.72 12.72l1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>', label: 'Sharp Afternoons'},
-      {icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>', label: 'Big Decisions'},
-      {icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>', label: 'Long Sessions'},
-      {icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>', label: 'Mental Stamina'}
+      {icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8"/></svg>', label: 'Deep Work', hero: 'Deep Focus'},
+      {icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2a7 7 0 0 0-4.6 12.3A3 3 0 0 0 6 17v1a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-1a3 3 0 0 0-1.4-2.7A7 7 0 0 0 12 2"/></svg>', label: 'Creativity', hero: 'Clear Thinking'},
+      {icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>', label: 'Motivation', hero: 'Mental Stamina'},
+      {icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>', label: 'Sustained Focus', hero: 'Deep Focus'},
+      {icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>', label: 'Mental Energy', hero: 'Mental Stamina'},
+      {icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M12 1v2m0 18v2M4.22 4.22l1.42 1.42m12.72 12.72l1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>', label: 'Clarity', hero: 'Clear Thinking'},
+      {icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 19V5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v14l-8-4-8 4"/></svg>', label: 'Memory & Recall', hero: 'Long Sessions'},
+      {icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/></svg>', label: 'Long-Term Brain Health', hero: 'Sharp Afternoons'}
     ];
     html += '<div class="hero-scroller"><div class="hero-scroller__inner">';
     html += '<button class="hero-scroller__arrow" id="scrollLeft">\u2039</button>';
     html += '<div class="hero-scroller__track" id="scrollTrack">';
     benefits.forEach(function(b, i) {
-      html += '<div class="hero-scroller__item' + (i === 0 ? ' active' : '') + '" data-hero-word="' + esc(b.label) + '">' + b.icon + ' ' + esc(b.label) + '</div>';
+      html += '<div class="hero-scroller__item' + (i === 0 ? ' active' : '') + '" data-hero-word="' + esc(b.hero) + '">' + b.icon + ' ' + esc(b.label) + '</div>';
     });
     html += '</div>';
     html += '<button class="hero-scroller__arrow" id="scrollRight">\u203A</button>';
