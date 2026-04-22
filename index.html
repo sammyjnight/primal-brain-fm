@@ -1058,18 +1058,18 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
 .feature-block__visual {
   background: var(--surface);
   border-radius: var(--radius-lg);
-  border: 1px solid var(--border);
-  padding: clamp(24px, 3vw, 40px);
+  border: none;
+  padding: clamp(28px, 4vw, 52px);
   position: relative;
   overflow: hidden;
 }
 /* Mini line chart (cognitive decline) */
-.mini-chart { position: relative; height: 200px; }
+.mini-chart { position: relative; height: 280px; }
 .mini-chart__title {
   font-size: 12px; font-weight: 600; color: var(--text-mute);
   text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 16px;
 }
-.mini-chart svg { width: 100%; height: 160px; }
+.mini-chart svg { width: 100%; height: 240px; }
 /* SVG draw animation */
 .chart-draw path[stroke], .chart-draw line[stroke] {
   stroke-dasharray: 2000;
@@ -1152,6 +1152,39 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
 .comp-bar__value {
   font-size: 12px; font-weight: 700; color: var(--text);
   width: 36px; flex-shrink: 0;
+}
+/* Ingredient highlight grid */
+.ingredient-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+.ingredient-grid__item {
+  background: rgba(0,166,210,0.06);
+  border: 1px solid var(--border-teal);
+  border-radius: 12px;
+  padding: 16px;
+  text-align: center;
+}
+.ingredient-grid__name {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+.ingredient-grid__dose {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--teal);
+  line-height: 1.2;
+}
+.ingredient-grid__ratio {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-mute);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-top: 4px;
 }
 /* Tabs visual */
 .tabs-visual {
@@ -1370,10 +1403,10 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
   text-transform: none;
 }
 .facility-frame {
-  max-width: 460px;
-  aspect-ratio: 4/5;
+  max-width: 640px;
+  aspect-ratio: 16/9;
   margin: 0 auto;
-  border-radius: 50% / 42%;
+  border-radius: 16px;
   background: linear-gradient(135deg, #2a2a3a, #0a0a0f);
   border: 3px solid var(--teal);
   box-shadow: 0 24px 60px rgba(0,166,210,0.2);
@@ -1443,11 +1476,15 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
-  padding: clamp(24px, 4vw, 48px);
-  max-width: 800px;
+  padding: clamp(32px, 5vw, 56px);
+  max-width: 900px;
   margin: 0 auto;
 }
-.results-graph__chart svg { width: 100%; height: auto; }
+.results-graph__chart svg { width: 100%; height: auto; min-height: 220px; }
+@media (max-width: 600px) {
+  .results-graph__chart { padding: 24px 16px 28px; }
+  .results-graph__chart svg { min-height: 180px; }
+}
 .results-graph__annotations {
   display: flex; justify-content: space-between; flex-wrap: wrap;
   gap: 12px; margin-top: 24px;
@@ -1767,6 +1804,12 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
 .comparison-table .check { color: var(--teal); font-size: 18px; font-weight: 600; }
 .comparison-table .x { color: var(--text-faint); font-size: 16px; }
 .comparison-table tr:last-child td { border-bottom: none; }
+@media (max-width: 600px) {
+  .comparison-table-wrap { -webkit-overflow-scrolling: touch; }
+  .comparison-table { min-width: 0; }
+  .comparison-table th:nth-child(4),
+  .comparison-table td:nth-child(4) { display: none; }
+}
 
 /* ============================================================
    SECTION 14 - EDITORIAL (mirror PQ "own bodies" section)
@@ -2397,11 +2440,13 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
   }
   .brain-pill { justify-content: center; font-size: 13px; padding: 10px 12px; }
 
-  /* Comparison table: prevent overflow */
+  /* Comparison table: hide Generic Nootropics column on mobile */
   .comp-table-section { overflow-x: auto; }
   .comp-table { min-width: 0; font-size: 12px; }
   .comp-table th, .comp-table td { padding: 10px 8px; }
   .comp-table thead th img { width: 50px !important; height: 60px !important; }
+  .comp-table th:nth-child(4),
+  .comp-table td:nth-child(4) { display: none; }
 
   /* Stat strip: 2x2 grid */
   .stat-strip__grid { flex-wrap: wrap; }
@@ -2616,17 +2661,17 @@ body { padding-bottom: 90px; }
     html += '<line x1="50" y1="55" x2="480" y2="55" stroke="rgba(255,255,255,0.04)"/>';
     html += '<line x1="50" y1="100" x2="480" y2="100" stroke="rgba(255,255,255,0.04)"/>';
     html += '<line x1="50" y1="140" x2="480" y2="140" stroke="rgba(255,255,255,0.04)"/>';
-    // Both lines start together, then gradually diverge
-    // Without GM - very gentle decline, gets steeper after year 5
-    html += '<path d="M50 85 C100 87, 140 90, 180 95 C220 100, 280 110, 340 125 C380 135, 430 152, 480 165" stroke="#E8283B" stroke-width="2" fill="none" stroke-dasharray="6 4" opacity="0.5"/>';
-    html += '<path d="M50 85 C100 87, 140 90, 180 95 C220 100, 280 110, 340 125 C380 135, 430 152, 480 165 L480 185 L50 185Z" fill="url(#redGrad2)"/>';
-    // With GM - stays high, slight plateau
-    html += '<path d="M50 85 C100 82, 140 78, 180 72 C220 68, 280 62, 340 58 C380 56, 430 55, 480 55" stroke="#00A6D2" stroke-width="3" fill="none"/>';
-    html += '<path d="M50 85 C100 82, 140 78, 180 72 C220 68, 280 62, 340 58 C380 56, 430 55, 480 55 L480 185 L50 185Z" fill="url(#tealGrad2)"/>';
-    // Edge gap annotation at year 10
-    html += '<line x1="380" y1="56" x2="380" y2="140" stroke="rgba(255,255,255,0.2)" stroke-width="1" stroke-dasharray="3 3"/>';
-    html += '<rect x="345" y="90" width="70" height="18" rx="6" fill="var(--surface)"/><rect x="345" y="90" width="70" height="18" rx="6" fill="rgba(0,166,210,0.12)"/>';
-    html += '<text x="380" y="103" fill="var(--teal)" font-size="10" font-weight="700" text-anchor="middle">The edge gap</text>';
+    // Both lines start together, diverge subtly - even a 3% edge compounds
+    // Without GM - stays mostly flat then gently declines after Year 5
+    html += '<path d="M50 85 C100 85, 140 86, 180 87 C220 88, 280 90, 340 96 C380 102, 430 110, 480 118" stroke="#E8283B" stroke-width="2" fill="none" stroke-dasharray="6 4" opacity="0.5"/>';
+    html += '<path d="M50 85 C100 85, 140 86, 180 87 C220 88, 280 90, 340 96 C380 102, 430 110, 480 118 L480 185 L50 185Z" fill="url(#redGrad2)"/>';
+    // With GM - rises gently then flattens/plateaus
+    html += '<path d="M50 85 C100 82, 140 78, 180 74 C220 71, 280 67, 340 65 C380 64, 430 63, 480 63" stroke="#00A6D2" stroke-width="3" fill="none"/>';
+    html += '<path d="M50 85 C100 82, 140 78, 180 74 C220 71, 280 67, 340 65 C380 64, 430 63, 480 63 L480 185 L50 185Z" fill="url(#tealGrad2)"/>';
+    // Edge gap annotation at year 20
+    html += '<line x1="470" y1="63" x2="470" y2="116" stroke="rgba(255,255,255,0.2)" stroke-width="1" stroke-dasharray="3 3"/>';
+    html += '<rect x="410" y="82" width="70" height="18" rx="6" fill="var(--surface)"/><rect x="410" y="82" width="70" height="18" rx="6" fill="rgba(0,166,210,0.12)"/>';
+    html += '<text x="445" y="95" fill="var(--teal)" font-size="10" font-weight="700" text-anchor="middle">The edge gap</text>';
     // X-axis labels
     html += '<text x="50" y="198" fill="var(--text-mute)" font-size="10" text-anchor="middle">Year 1</text>';
     html += '<text x="140" y="198" fill="var(--text-mute)" font-size="10" text-anchor="middle">Year 2</text>';
@@ -2646,20 +2691,24 @@ body { padding-bottom: 90px; }
     html += '<a href="#" style="color:var(--teal);font-weight:600;font-size:14px;text-decoration:underline;text-underline-offset:3px;">See latest test results \u2192</a>';
     html += '</div></div>';
     html += '<div class="feature-block__visual">';
-    html += '<div class="comp-bars__title">Sustained Cognitive Output (hours)</div>';
-    var compItems = [
-      {label: 'Genius Mind', pct: 95, cls: '--gm', val: '8+'},
-      {label: 'Coffee', pct: 30, cls: '--coffee', val: '2-3'},
-      {label: 'Adderall', pct: 50, cls: '--adderall', val: '4-5'},
-      {label: 'Generic Stack', pct: 40, cls: '--generic', val: '3-4'}
+    html += '<div class="comp-bars__title">Key Ingredients &amp; Dosages</div>';
+    html += '<div class="ingredient-grid">';
+    var ingredientItems = [
+      {name: 'Ginkgo Biloba', dose: '120mg', ratio: '50:1 extract'},
+      {name: 'Bacopa Monnieri', dose: '80mg', ratio: '11:1 extract'},
+      {name: 'Panax Ginseng', dose: '100mg', ratio: '20:1 extract'},
+      {name: "Lion\u2019s Mane", dose: '80mg', ratio: '4:1 extract'},
+      {name: 'L-Tyrosine', dose: '100mg', ratio: ''},
+      {name: 'Vitamin B12', dose: '500\u03BCg', ratio: ''}
     ];
-    compItems.forEach(function(item) {
-      html += '<div class="comp-bar">';
-      html += '<div class="comp-bar__label">' + item.label + '</div>';
-      html += '<div class="comp-bar__track"><div class="comp-bar__fill comp-bar__fill' + item.cls + '" style="--target-width:' + item.pct + '%;width:' + item.pct + '%"></div></div>';
-      html += '<div class="comp-bar__value">' + item.val + '</div>';
+    ingredientItems.forEach(function(item) {
+      html += '<div class="ingredient-grid__item">';
+      html += '<div class="ingredient-grid__name">' + item.name + '</div>';
+      html += '<div class="ingredient-grid__dose">' + item.dose + '</div>';
+      if (item.ratio) html += '<div class="ingredient-grid__ratio">' + item.ratio + '</div>';
       html += '</div>';
     });
+    html += '</div>';
     html += '</div></div>';
 
     html += '</div></section>';
