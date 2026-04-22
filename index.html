@@ -579,7 +579,7 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
 }
 .social-proof__grid {
   display: grid;
-  grid-template-columns: 0.45fr 0.55fr;
+  grid-template-columns: 0.35fr 0.65fr;
   gap: clamp(40px, 5vw, 80px);
   align-items: center;
 }
@@ -613,21 +613,17 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
   margin-bottom: 18px;
 }
 .social-proof__logos {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px 32px;
   align-items: center;
-  justify-content: center;
-  gap: clamp(28px, 5vw, 56px);
-  flex-wrap: nowrap;
+  justify-items: start;
 }
-.social-proof__logos span {
-  font-size: clamp(20px, 3vw, 28px);
-  color: rgba(255,255,255,0.5);
-  white-space: nowrap;
+.social-proof__logos svg {
+  height: 20px;
+  width: auto;
+  opacity: 0.5;
 }
-.logo-forbes { font-family: 'Georgia', serif; font-style: italic; font-weight: 400; letter-spacing: 0.02em; }
-.logo-bbc { font-family: 'Arial', sans-serif; font-weight: 900; letter-spacing: 0.12em; }
-.logo-wired { font-family: 'Georgia', serif; font-style: italic; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
-.logo-fc { font-family: 'Arial', sans-serif; font-weight: 700; text-transform: uppercase; font-size: clamp(14px, 2vw, 18px) !important; letter-spacing: 0.06em; }
 /* Right side - stacked/offset cards */
 .social-proof__cards {
   display: grid;
@@ -2420,7 +2416,6 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
 
   /* Featured In logos: 2 per line mobile */
   .social-proof__logos {
-    display: grid !important;
     grid-template-columns: 1fr 1fr;
     gap: 16px 24px;
     justify-items: center;
@@ -2585,10 +2580,10 @@ body { padding-bottom: 90px; }
     html += '<p>Genius Mind operators perform every day \u2014 see what they have to say.</p>';
     html += '<div class="social-proof__featured-label">Featured In</div>';
     html += '<div class="social-proof__logos">';
-    html += '<span class="logo-forbes">Forbes</span>';
-    html += '<span class="logo-bbc">BBC</span>';
-    html += '<span class="logo-wired">WIRED</span>';
-    html += '<span class="logo-fc">Fast Company</span>';
+    html += '<svg viewBox="0 0 200 50" xmlns="http://www.w3.org/2000/svg"><text x="0" y="40" fill="white" font-family="Georgia,serif" font-style="italic" font-size="46" font-weight="400">Forbes</text></svg>';
+    html += '<svg viewBox="0 0 130 50" xmlns="http://www.w3.org/2000/svg"><text x="0" y="40" fill="white" font-family="Arial,Helvetica,sans-serif" font-size="46" font-weight="900" letter-spacing="4">BBC</text></svg>';
+    html += '<svg viewBox="0 0 200 50" xmlns="http://www.w3.org/2000/svg"><text x="0" y="40" fill="white" font-family="Georgia,serif" font-style="italic" font-size="46" font-weight="700" letter-spacing="3">WIRED</text></svg>';
+    html += '<svg viewBox="0 0 310 50" xmlns="http://www.w3.org/2000/svg"><text x="0" y="38" fill="white" font-family="Arial,Helvetica,sans-serif" font-size="36" font-weight="700" letter-spacing="2">FAST COMPANY</text></svg>';
     html += '</div></div>';
 
     // Right side - stacked cards
