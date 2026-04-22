@@ -504,7 +504,7 @@
           "Free mystery gift"
         ],
         "cta": "Start My 90-Day Program",
-        "url": "#",
+        "url": "https://justfloow.com/products/genius-mind",
         "stock": "Low stock - only this week's allocation remaining"
       },
       {
@@ -522,7 +522,7 @@
           "Same-day dispatch before 2pm"
         ],
         "cta": "Try For 30 Days",
-        "url": "#"
+        "url": "https://justfloow.com/products/genius-mind"
       },
       {
         "featured": false,
@@ -539,7 +539,7 @@
           "Same-day dispatch before 2pm"
         ],
         "cta": "Buy Once",
-        "url": "#"
+        "url": "https://justfloow.com/products/genius-mind"
       }
     ]
   },
@@ -551,8 +551,8 @@
         "a": "Genius Mind is a cognitive performance supplement containing 16 clinically studied ingredients - including L-Tyrosine (dopamine precursor), Lion's Mane (NGF support), Bacopa Monnieri (synaptic communication), Ginkgo Biloba (cerebral blood flow), Phosphatidylserine, and a full B-vitamin complex. It's designed for sustained cognitive performance across a full working day, not just the first few hours. Each bottle contains 60 vegan capsules (30 servings). Manufactured in a GMP-certified facility in the UK. Vegan, gluten-free, non-GMO."
       },
       {
-        "q": "Is this for people with ADHD?",
-        "a": "Genius Mind is a food supplement, not a medicine, and is not designed to treat any medical condition. It was formulated for high-performing individuals who need their brain to operate consistently across demanding days - founders, operators, anyone carrying significant cognitive load. If you have a diagnosed medical condition, consult your healthcare provider before starting any new supplement."
+        "q": "Is this designed to treat a medical condition?",
+        "a": "Genius Mind is a food supplement, not a medicine, and is not designed to diagnose, treat, cure or prevent any medical condition. It was formulated for high-performing individuals who need their brain to operate consistently across demanding days \u2014 founders, operators, anyone carrying significant cognitive load. If you have a diagnosed medical condition or take prescription medication, consult your healthcare provider before starting any new supplement."
       },
       {
         "q": "How long until I notice a difference?",
