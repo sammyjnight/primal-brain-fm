@@ -616,15 +616,12 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: clamp(24px, 4vw, 48px);
+  gap: clamp(28px, 5vw, 56px);
   flex-wrap: wrap;
-  opacity: 0.4;
 }
-.social-proof__logos span {
-  font-family: 'Inter', sans-serif;
-  font-weight: 800;
-  font-size: clamp(22px, 3vw, 32px);
-  color: #fff;
+.social-proof__logos img {
+  height: 22px;
+  object-fit: contain;
 }
 /* Right side - stacked/offset cards */
 .social-proof__cards {
@@ -1157,26 +1154,32 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
 .ingredient-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 14px;
+  gap: 16px;
 }
 .ingredient-grid__item {
-  background: rgba(0,166,210,0.06);
-  border: 1px solid var(--border-teal);
-  border-radius: 12px;
-  padding: 16px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px 16px;
   text-align: center;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+.ingredient-grid__item:hover {
+  border-color: rgba(0,166,210,0.4);
+  box-shadow: 0 0 20px rgba(0,166,210,0.1);
 }
 .ingredient-grid__name {
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 700;
-  color: var(--text);
-  margin-bottom: 4px;
+  color: #fff;
+  margin-bottom: 8px;
 }
 .ingredient-grid__dose {
-  font-size: 22px;
+  font-size: 28px;
   font-weight: 800;
   color: var(--teal);
   line-height: 1.2;
+  margin-bottom: 4px;
 }
 .ingredient-grid__ratio {
   font-size: 11px;
@@ -1403,8 +1406,8 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
   text-transform: none;
 }
 .facility-frame {
-  max-width: 480px;
-  aspect-ratio: 3/4;
+  max-width: 520px;
+  aspect-ratio: 4/3;
   margin: 0 auto;
   border-radius: var(--radius-lg);
   background: linear-gradient(135deg, #2a2a3a 0%, #1a1a24 100%);
@@ -2577,7 +2580,10 @@ body { padding-bottom: 90px; }
     html += '<p>Genius Mind operators perform every day \u2014 see what they have to say.</p>';
     html += '<div class="social-proof__featured-label">Featured In</div>';
     html += '<div class="social-proof__logos">';
-    html += '<span style="font-family:Georgia,serif;font-style:italic;">Forbes</span><span>\u00B7</span><span style="font-weight:900;">BBC</span><span>\u00B7</span><span style="font-style:italic;letter-spacing:0.05em;">WIRED</span><span>\u00B7</span><span style="font-size:0.85em;">Fast Company</span>';
+    html += '<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/Forbes_logo.svg/200px-Forbes_logo.svg.png" alt="Forbes" style="height:22px;filter:brightness(0) invert(1);opacity:0.6;">';
+    html += '<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/BBC.svg/200px-BBC.svg.png" alt="BBC" style="height:28px;filter:brightness(0) invert(1);opacity:0.6;">';
+    html += '<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Wired_logo.svg/200px-Wired_logo.svg.png" alt="WIRED" style="height:20px;filter:brightness(0) invert(1);opacity:0.6;">';
+    html += '<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Fast_Company_logo.svg/200px-Fast_Company_logo.svg.png" alt="Fast Company" style="height:20px;filter:brightness(0) invert(1);opacity:0.6;">';
     html += '</div></div>';
 
     // Right side - stacked cards
@@ -2647,35 +2653,33 @@ body { padding-bottom: 90px; }
     html += '<span style="display:flex;align-items:center;gap:6px;color:#00A6D2;"><span style="width:20px;height:3px;background:#00A6D2;border-radius:2px;display:inline-block;"></span> With Genius Mind</span>';
     html += '<span style="display:flex;align-items:center;gap:6px;color:#E8283B;opacity:0.7;"><span style="width:20px;height:3px;background:#E8283B;border-radius:2px;display:inline-block;border:none;opacity:0.6;"></span> Without</span>';
     html += '</div>';
-    // Title
-    html += '<div style="font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:#fff;margin-bottom:12px;">Cognitive Performance Across The Day</div>';
     html += '<svg class="chart-draw" viewBox="0 0 500 200" fill="none">';
-    html += '<defs><linearGradient id="tealGrad2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#00A6D2" stop-opacity="0.25"/><stop offset="100%" stop-color="#00A6D2" stop-opacity="0.03"/></linearGradient>';
-    html += '<linearGradient id="redGrad2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#E8283B" stop-opacity="0.08"/><stop offset="100%" stop-color="#E8283B" stop-opacity="0.01"/></linearGradient></defs>';
+    html += '<defs><linearGradient id="tealGrad2" x1="0" y1="0" x2="500" y2="0"><stop offset="0%" stop-color="#00A6D2" stop-opacity="0.12"/><stop offset="100%" stop-color="#00A6D2" stop-opacity="0.03"/></linearGradient>';
+    html += '<linearGradient id="redGrad2" x1="0" y1="0" x2="500" y2="0"><stop offset="0%" stop-color="#E8283B" stop-opacity="0.05"/><stop offset="100%" stop-color="#E8283B" stop-opacity="0.01"/></linearGradient></defs>';
+    // Y-axis labels
+    html += '<text x="25" y="50" fill="var(--text-mute)" font-size="10" font-weight="600" text-anchor="middle">Sharp</text>';
+    html += '<text x="25" y="175" fill="var(--text-mute)" font-size="10" font-weight="600" text-anchor="middle">Dulled</text>';
     // Grid lines
     html += '<line x1="50" y1="55" x2="480" y2="55" stroke="rgba(255,255,255,0.04)"/>';
     html += '<line x1="50" y1="100" x2="480" y2="100" stroke="rgba(255,255,255,0.04)"/>';
     html += '<line x1="50" y1="140" x2="480" y2="140" stroke="rgba(255,255,255,0.04)"/>';
-    // Both lines start low, rise to peak around mid-morning, then diverge
-    // With GM - rises to peak then levels out, staying high
-    html += '<path d="M50 160 C80 150, 110 120, 160 75 C200 50, 230 45, 270 45 C320 45, 370 47, 420 48 C450 49, 470 50, 480 50" stroke="#00A6D2" stroke-width="3" fill="none"/>';
-    html += '<path d="M50 160 C80 150, 110 120, 160 75 C200 50, 230 45, 270 45 C320 45, 370 47, 420 48 C450 49, 470 50, 480 50 L480 185 L50 185Z" fill="url(#tealGrad2)"/>';
-    // Without - rises to same peak but then slowly declines ~3-4% lower
-    html += '<path d="M50 160 C80 150, 110 120, 160 75 C200 52, 230 48, 270 50 C320 58, 370 68, 420 78 C450 84, 470 88, 480 90" stroke="#E8283B" stroke-width="2" fill="none" stroke-dasharray="6 4" opacity="0.5"/>';
-    html += '<path d="M50 160 C80 150, 110 120, 160 75 C200 52, 230 48, 270 50 C320 58, 370 68, 420 78 C450 84, 470 88, 480 90 L480 185 L50 185Z" fill="url(#redGrad2)"/>';
-    // Gap annotation
-    html += '<line x1="460" y1="50" x2="460" y2="88" stroke="rgba(255,255,255,0.2)" stroke-width="1" stroke-dasharray="3 3"/>';
-    html += '<rect x="400" y="62" width="70" height="18" rx="6" fill="var(--surface)"/><rect x="400" y="62" width="70" height="18" rx="6" fill="rgba(0,166,210,0.12)"/>';
-    html += '<text x="435" y="75" fill="var(--teal)" font-size="10" font-weight="700" text-anchor="middle">The gap</text>';
-    // Right-side labels
-    html += '<text x="490" y="48" fill="#00A6D2" font-size="9" font-weight="700" text-anchor="start">With GM</text>';
-    html += '<text x="490" y="93" fill="#E8283B" font-size="9" font-weight="600" opacity="0.6" text-anchor="start">Without</text>';
+    // Both lines start together, diverge subtly - even a 3% edge compounds
+    // Without GM - stays mostly flat then gently declines after Year 5
+    html += '<path d="M50 85 C100 85, 140 86, 180 87 C220 88, 280 90, 340 96 C380 102, 430 110, 480 118" stroke="#E8283B" stroke-width="2" fill="none" stroke-dasharray="6 4" opacity="0.5"/>';
+    html += '<path d="M50 85 C100 85, 140 86, 180 87 C220 88, 280 90, 340 96 C380 102, 430 110, 480 118 L480 185 L50 185Z" fill="url(#redGrad2)"/>';
+    // With GM - rises gently then flattens/plateaus
+    html += '<path d="M50 85 C100 82, 140 78, 180 74 C220 71, 280 67, 340 65 C380 64, 430 63, 480 63" stroke="#00A6D2" stroke-width="3" fill="none"/>';
+    html += '<path d="M50 85 C100 82, 140 78, 180 74 C220 71, 280 67, 340 65 C380 64, 430 63, 480 63 L480 185 L50 185Z" fill="url(#tealGrad2)"/>';
+    // Edge gap annotation at year 20
+    html += '<line x1="470" y1="63" x2="470" y2="116" stroke="rgba(255,255,255,0.2)" stroke-width="1" stroke-dasharray="3 3"/>';
+    html += '<rect x="410" y="82" width="70" height="18" rx="6" fill="var(--surface)"/><rect x="410" y="82" width="70" height="18" rx="6" fill="rgba(0,166,210,0.12)"/>';
+    html += '<text x="445" y="95" fill="var(--teal)" font-size="10" font-weight="700" text-anchor="middle">The edge gap</text>';
     // X-axis labels
-    html += '<text x="50" y="198" fill="var(--text-mute)" font-size="10" text-anchor="middle">6am</text>';
-    html += '<text x="160" y="198" fill="var(--text-mute)" font-size="10" text-anchor="middle">9am</text>';
-    html += '<text x="270" y="198" fill="var(--text-mute)" font-size="10" text-anchor="middle">12pm</text>';
-    html += '<text x="380" y="198" fill="var(--text-mute)" font-size="10" text-anchor="middle">3pm</text>';
-    html += '<text x="470" y="198" fill="var(--text-mute)" font-size="10" text-anchor="middle">9pm</text>';
+    html += '<text x="50" y="198" fill="var(--text-mute)" font-size="10" text-anchor="middle">Year 1</text>';
+    html += '<text x="140" y="198" fill="var(--text-mute)" font-size="10" text-anchor="middle">Year 2</text>';
+    html += '<text x="260" y="198" fill="var(--text-mute)" font-size="10" text-anchor="middle">Year 5</text>';
+    html += '<text x="380" y="198" fill="var(--text-mute)" font-size="10" text-anchor="middle">Year 10</text>';
+    html += '<text x="470" y="198" fill="var(--text-mute)" font-size="10" text-anchor="middle">Year 20</text>';
     html += '</svg>';
     html += '</div></div></div>';
 
@@ -2728,7 +2732,7 @@ body { padding-bottom: 90px; }
     ];
     countStats.forEach(function(s) {
       html += '<div style="padding:32px 16px;background:var(--surface);border:1px solid var(--border);border-radius:16px;">';
-      html += '<div style="font-size:13px;color:var(--teal);font-weight:600;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:12px;">' + esc(s.label) + '</div>';
+      html += '<div style="font-size:13px;color:#fff;font-weight:600;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:12px;">' + esc(s.label) + '</div>';
       html += '<div class="countup-num" data-target="' + s.value + '" data-suffix="' + s.suffix + '" style="font-size:clamp(40px,6vw,60px);font-weight:800;color:#fff;line-height:1;">0' + s.suffix + '</div>';
       html += '<p style="font-size:13px;color:#fff;margin-top:12px;line-height:1.4;">' + esc(s.desc) + '</p>';
       html += '</div>';
@@ -2846,7 +2850,7 @@ body { padding-bottom: 90px; }
     // X-axis labels
     html += '<text x="80" y="258" fill="#8a8aa0" font-size="10" text-anchor="middle">Day 1</text>';
     html += '<text x="180" y="258" fill="#8a8aa0" font-size="10" text-anchor="middle">Week 1</text>';
-    html += '<text x="300" y="258" fill="#8a8aa0" font-size="10" text-anchor="middle">Wk 4</text>';
+    html += '<text x="300" y="258" fill="#8a8aa0" font-size="10" text-anchor="middle">Week 4</text>';
     html += '<text x="440" y="258" fill="#8a8aa0" font-size="10" text-anchor="middle">Month 2</text>';
     html += '<text x="580" y="258" fill="#8a8aa0" font-size="10" text-anchor="middle">Month 3+</text>';
     html += '</svg>';
