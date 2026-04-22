@@ -289,16 +289,15 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
   overflow: hidden;
 }
 .hero-grid {
-  display: grid;
-  grid-template-columns: 1.05fr 0.95fr;
-  gap: clamp(30px, 5vw, 70px);
-  align-items: start;
-  grid-template-rows: 1fr;
+  position: relative;
+  min-height: 520px;
   position: relative;
   z-index: 2;
 }
 .hero-content {
-  min-height: 460px;
+  max-width: 55%;
+  position: relative;
+  z-index: 2;
 }
 .hero h1 {
   font-family: 'Inter', sans-serif;
@@ -403,13 +402,13 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
   background: var(--border);
 }
 
-/* Hero portrait card */
+/* Hero portrait card - absolutely positioned so text changes can't move it */
 .hero-portrait {
-  position: relative;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 42%;
   aspect-ratio: 3/4;
-  max-width: 480px;
-  min-height: 460px;
-  margin-left: auto;
   border-radius: 24px;
   background: var(--surface-2);
   border: 1px solid rgba(255,255,255,0.06);
@@ -497,9 +496,10 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
   pointer-events: none;
 }
 @media (max-width: 900px) {
-  .hero-grid { grid-template-columns: 1fr; gap: 36px; }
-  .hero-portrait { max-width: 360px; margin: 0 auto; }
-  .hero h1 { font-size: clamp(34px, 8vw, 48px); }
+  .hero-grid { min-height: auto; }
+  .hero-content { max-width: 100%; }
+  .hero-portrait { position: relative; width: 100%; max-width: 360px; margin: 30px auto 0; right: auto; top: auto; }
+  .hero h1 { font-size: clamp(34px, 8vw, 48px); min-height: auto; }
 }
 
 /* ============================================================
@@ -511,20 +511,21 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
   border-bottom: 1px solid var(--border);
   padding: 0;
   position: relative;
+  max-width: 900px;
+  margin: 0 auto;
+  border-radius: 0;
 }
 .hero-scroller__inner {
   display: flex;
   align-items: center;
-  max-width: 1200px;
-  margin: 0 auto;
 }
 .hero-scroller__arrow {
   background: none;
   border: none;
   color: var(--text-mute);
   cursor: pointer;
-  padding: 16px 12px;
-  font-size: 18px;
+  padding: 14px 14px;
+  font-size: 20px;
   flex-shrink: 0;
   transition: color 0.2s;
   display: flex;
@@ -534,40 +535,38 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
 .hero-scroller__track {
   display: flex;
   gap: 0;
-  overflow-x: auto;
-  scroll-behavior: smooth;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
+  overflow: hidden;
   flex: 1;
+  position: relative;
 }
-.hero-scroller__track::-webkit-scrollbar { display: none; }
 .hero-scroller__item {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 16px 24px;
+  gap: 8px;
+  padding: 12px 20px;
   color: var(--text-mute);
   font-weight: 600;
-  font-size: 13px;
+  font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 0.06em;
   white-space: nowrap;
-  cursor: pointer;
-  transition: color 0.3s;
   flex-shrink: 0;
+  transition: color 0.3s;
 }
-.hero-scroller__item:hover { color: #fff; }
 .hero-scroller__item svg {
-  width: 18px; height: 18px;
+  width: 16px; height: 16px;
   opacity: 0.5;
   flex-shrink: 0;
+}
+@media (max-width: 900px) {
+  .hero-scroller { max-width: 100%; border-radius: 0; }
 }
 
 /* ============================================================
    FEATURED IN
    ============================================================ */
 .featured-in {
-  padding: 40px 0;
+  padding: 40px 0 20px;
   background: var(--bg);
   text-align: center;
 }
@@ -599,7 +598,7 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
    TWITTER-STYLE DARK REVIEW CARDS
    ============================================================ */
 .dark-reviews {
-  padding: clamp(60px, 8vw, 110px) 0;
+  padding: 20px 0 clamp(60px, 8vw, 80px);
   background: var(--bg);
 }
 .dark-reviews__head {
@@ -2660,16 +2659,27 @@ body { padding-bottom: 90px; }
     })();
 
     // ====================================================================
-    // SCROLLER ARROWS
+    // SCROLLER ARROWS (continuous loop)
     // ====================================================================
     (function() {
       var track = document.getElementById('scrollTrack');
       var left = document.getElementById('scrollLeft');
       var right = document.getElementById('scrollRight');
       if (!track || !left || !right) return;
-      var step = 200;
-      left.addEventListener('click', function() { track.scrollLeft -= step; });
-      right.addEventListener('click', function() { track.scrollLeft += step; });
+
+      // Move first item to end or last item to start for continuous loop
+      right.addEventListener('click', function() {
+        var first = track.firstElementChild;
+        if (!first) return;
+        track.appendChild(first.cloneNode(true));
+        track.removeChild(first);
+      });
+      left.addEventListener('click', function() {
+        var last = track.lastElementChild;
+        if (!last) return;
+        track.insertBefore(last.cloneNode(true), track.firstElementChild);
+        track.removeChild(track.lastElementChild);
+      });
     })();
 
     // ====================================================================
