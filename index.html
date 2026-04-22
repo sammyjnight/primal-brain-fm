@@ -573,7 +573,7 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
    SOCIAL PROOF SECTION (Brain.fm layout: left text + right cards)
    ============================================================ */
 .social-proof-section {
-  padding: clamp(60px, 8vw, 100px) 0;
+  padding: clamp(40px, 6vw, 70px) 0;
   background: var(--bg);
   overflow: hidden;
 }
@@ -719,7 +719,7 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
    6 BRAIN SYSTEMS (tabbed, IM8 style)
    ============================================================ */
 .brain-systems {
-  padding: clamp(60px, 8vw, 100px) 0;
+  padding: clamp(40px, 6vw, 70px) 0;
   background: var(--bg);
 }
 .brain-systems__head {
@@ -803,7 +803,7 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
    VIDEO REVIEWS SECTION (kept but hidden)
    ============================================================ */
 .video-reviews {
-  padding: clamp(60px, 8vw, 100px) 0;
+  padding: clamp(40px, 6vw, 70px) 0;
   background: var(--bg);
 }
 .video-reviews__head {
@@ -896,8 +896,8 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
    ============================================================ */
 .stat-strip {
   padding: clamp(28px, 4vw, 44px) 0;
-  background: var(--bg);
-  border-bottom: 1px solid var(--border);
+  background: #fff;
+  border-bottom: none;
 }
 /* Shimmer effect on stat numbers */
 @keyframes shimmer {
@@ -922,7 +922,7 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
   flex: 1;
   max-width: 200px;
   padding: 0 20px;
-  border-right: 1px solid var(--border);
+  border-right: 1px solid rgba(0,0,0,0.1);
 }
 .stat-strip__item:last-child { border-right: none; }
 .stat-strip__number {
@@ -936,7 +936,7 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
 .stat-strip__label {
   font-size: 11px;
   font-weight: 600;
-  color: var(--text-mute);
+  color: #666;
   text-transform: uppercase;
   letter-spacing: 0.06em;
   margin-top: 6px;
@@ -944,14 +944,14 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
 @media (max-width: 800px) {
   .stat-strip__grid { flex-wrap: wrap; }
   .stat-strip__item { flex: 0 0 50%; max-width: none; padding: 12px 20px; border-right: none; }
-  .stat-strip__item:nth-child(1), .stat-strip__item:nth-child(2) { border-bottom: 1px solid var(--border); }
+  .stat-strip__item:nth-child(1), .stat-strip__item:nth-child(2) { border-bottom: 1px solid rgba(0,0,0,0.1); }
 }
 
 /* ============================================================
    SECTION 4b - FOUNDER (condensed pull-quote)
    ============================================================ */
 .founder {
-  padding: clamp(60px, 8vw, 110px) 0;
+  padding: clamp(40px, 6vw, 70px) 0;
   background: var(--cream);
   color: var(--text-dark);
   position: relative;
@@ -1002,7 +1002,7 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
    SECTION 5 - DATA-LED FEATURE BLOCKS (replaces why-built + problem)
    ============================================================ */
 .feature-blocks {
-  padding: clamp(60px, 8vw, 110px) 0;
+  padding: clamp(40px, 6vw, 70px) 0;
   background: var(--bg);
 }
 .feature-block {
@@ -1121,7 +1121,7 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
    SECTION 7 - COMPARISON TABLE (IM8 style)
    ============================================================ */
 .comp-table-section {
-  padding: clamp(60px, 8vw, 110px) 0;
+  padding: clamp(40px, 6vw, 70px) 0;
   background: var(--cream);
   color: var(--text-dark);
 }
@@ -1296,7 +1296,7 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
    SECTION 9 - FACILITY (oval framed)
    ============================================================ */
 .facility {
-  padding: clamp(60px, 8vw, 110px) 0;
+  padding: clamp(40px, 6vw, 70px) 0;
   background: var(--cream);
   color: var(--text-dark);
   text-align: center;
@@ -1363,7 +1363,7 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
    SECTION 10 - RESULTS LINE GRAPH
    ============================================================ */
 .results-graph {
-  padding: clamp(60px, 8vw, 110px) 0;
+  padding: clamp(40px, 6vw, 70px) 0;
   background: var(--bg);
   position: relative;
   overflow: hidden;
@@ -1424,7 +1424,7 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
    SECTION 11 - REVIEWS
    ============================================================ */
 .reviews {
-  padding: clamp(60px, 8vw, 110px) 0;
+  padding: clamp(40px, 6vw, 70px) 0;
   background: var(--cream);
   color: var(--text-dark);
 }
@@ -1548,7 +1548,7 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
    SECTION 12 - HOW TO USE (3 steps)
    ============================================================ */
 .howto {
-  padding: clamp(60px, 8vw, 110px) 0;
+  padding: clamp(40px, 6vw, 70px) 0;
   background: var(--cream);
   color: var(--text-dark);
   border-top: 1px solid rgba(0,0,0,0.06);
@@ -1635,7 +1635,7 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
    SECTION 13 - COMPARISON TABLE
    ============================================================ */
 .comparison {
-  padding: clamp(60px, 8vw, 110px) 0;
+  padding: clamp(40px, 6vw, 70px) 0;
   background: var(--bg);
 }
 .comparison-head { text-align: center; margin-bottom: 40px; }
@@ -1705,7 +1705,7 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
    SECTION 14 - EDITORIAL (mirror PQ "own bodies" section)
    ============================================================ */
 .editorial {
-  padding: clamp(60px, 8vw, 110px) 0;
+  padding: clamp(40px, 6vw, 70px) 0;
   background: var(--cream);
   color: var(--text-dark);
 }
@@ -1878,7 +1878,7 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
    SECTION 17 - PRICING CARDS
    ============================================================ */
 .pricing {
-  padding: clamp(60px, 8vw, 110px) 0;
+  padding: clamp(40px, 6vw, 70px) 0;
   background: linear-gradient(180deg, var(--cream) 0%, #fff 100%);
   color: var(--text-dark);
 }
@@ -2103,7 +2103,7 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
    SECTION 18 - FAQ
    ============================================================ */
 .faq {
-  padding: clamp(60px, 8vw, 110px) 0;
+  padding: clamp(40px, 6vw, 70px) 0;
   background: var(--cream);
   color: var(--text-dark);
 }
@@ -2300,6 +2300,43 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
   .sticky-cta .info .bot .price { font-size: 14px; }
   .sticky-cta .mini-timer { font-size: 10px; }
   .sticky-cta-inner { gap: 8px; }
+
+  /* Hero mobile: text above image, no overlap */
+  .hero-grid { min-height: auto; }
+  .hero-content { max-width: 100%; }
+  .hero-portrait {
+    position: relative !important;
+    width: 100% !important;
+    max-width: 320px;
+    margin: 24px auto 0;
+    right: auto !important;
+    top: auto !important;
+    transform: none !important;
+  }
+
+  /* Brain system pills: 2 per row */
+  .brain-systems__pills {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  .brain-pill { justify-content: center; font-size: 13px; padding: 10px 12px; }
+
+  /* Comparison table: prevent overflow */
+  .comp-table-section { overflow-x: auto; }
+  .comp-table { min-width: 0; font-size: 12px; }
+  .comp-table th, .comp-table td { padding: 10px 8px; }
+  .comp-table thead th img { width: 50px !important; height: 60px !important; }
+
+  /* Stat strip: 2x2 grid */
+  .stat-strip__grid { flex-wrap: wrap; }
+  .stat-strip__item { flex: 0 0 50%; max-width: none; padding: 12px 16px; border-right: none; }
+  .stat-strip__item:nth-child(odd) { border-right: 1px solid rgba(0,0,0,0.1); }
+  .stat-strip__item:nth-child(1), .stat-strip__item:nth-child(2) { border-bottom: 1px solid rgba(0,0,0,0.1); }
+
+  /* Countup stats: 2x2 grid */
+  .countup-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 12px !important; }
+  .brain-systems__head h2 { font-size: 24px; }
 }
 
 /* Hide sticky CTA on very tall pages briefly so users see hero first */
@@ -2563,12 +2600,12 @@ body { padding-bottom: 90px; }
     // ============================================================
     // ANIMATED STATS (IM8 style countup)
     // ============================================================
-    html += '<section style="padding:clamp(60px,8vw,100px) 0;background:var(--bg);"><div class="container">';
+    html += '<section style="padding:clamp(40px,6vw,70px) 0;background:var(--bg);"><div class="container">';
     html += '<div style="text-align:center;margin-bottom:48px;">';
     html += '<span style="display:inline-block;color:var(--teal);font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:16px;">Backed By Results</span>';
     html += '<h2 style="font-size:clamp(28px,4vw,46px);font-weight:700;color:#fff;">Clinically Researched. <span style="color:var(--teal);">Customer Proven.</span></h2>';
     html += '</div>';
-    html += '<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:24px;text-align:center;">';
+    html += '<div class="countup-grid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:24px;text-align:center;">';
     var countStats = [
       {label: 'More Focus', value: 89, suffix: '%', desc: 'Of users reported improved concentration within 2 weeks'},
       {label: 'Better Memory', value: 76, suffix: '%', desc: 'Of users noticed sharper recall after 30 days'},
