@@ -617,12 +617,17 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
   align-items: center;
   justify-content: center;
   gap: clamp(28px, 5vw, 56px);
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
 }
-.social-proof__logos img {
-  height: 22px;
-  object-fit: contain;
+.social-proof__logos span {
+  font-size: clamp(20px, 3vw, 28px);
+  color: rgba(255,255,255,0.5);
+  white-space: nowrap;
 }
+.logo-forbes { font-family: 'Georgia', serif; font-style: italic; font-weight: 400; letter-spacing: 0.02em; }
+.logo-bbc { font-family: 'Arial', sans-serif; font-weight: 900; letter-spacing: 0.12em; }
+.logo-wired { font-family: 'Georgia', serif; font-style: italic; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
+.logo-fc { font-family: 'Arial', sans-serif; font-weight: 700; text-transform: uppercase; font-size: clamp(14px, 2vw, 18px) !important; letter-spacing: 0.06em; }
 /* Right side - stacked/offset cards */
 .social-proof__cards {
   display: grid;
@@ -2580,10 +2585,10 @@ body { padding-bottom: 90px; }
     html += '<p>Genius Mind operators perform every day \u2014 see what they have to say.</p>';
     html += '<div class="social-proof__featured-label">Featured In</div>';
     html += '<div class="social-proof__logos">';
-    html += '<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/Forbes_logo.svg/200px-Forbes_logo.svg.png" alt="Forbes" style="height:22px;filter:brightness(0) invert(1);opacity:0.6;">';
-    html += '<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/BBC.svg/200px-BBC.svg.png" alt="BBC" style="height:28px;filter:brightness(0) invert(1);opacity:0.6;">';
-    html += '<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Wired_logo.svg/200px-Wired_logo.svg.png" alt="WIRED" style="height:20px;filter:brightness(0) invert(1);opacity:0.6;">';
-    html += '<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Fast_Company_logo.svg/200px-Fast_Company_logo.svg.png" alt="Fast Company" style="height:20px;filter:brightness(0) invert(1);opacity:0.6;">';
+    html += '<span class="logo-forbes">Forbes</span>';
+    html += '<span class="logo-bbc">BBC</span>';
+    html += '<span class="logo-wired">WIRED</span>';
+    html += '<span class="logo-fc">Fast Company</span>';
     html += '</div></div>';
 
     // Right side - stacked cards
