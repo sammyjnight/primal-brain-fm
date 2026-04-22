@@ -499,26 +499,172 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
 }
 
 /* ============================================================
-   SECTION 3 - MARQUEE STRIP
+   HERO BENEFITS SCROLLER (Brain.fm style)
    ============================================================ */
-.marquee {
+.hero-scroller {
   background: var(--surface);
-  padding: 18px 0;
-  overflow: hidden;
-  position: relative;
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
+  padding: 14px 0;
+  overflow: hidden;
+  position: relative;
 }
-.marquee-track {
+.hero-scroller__track {
   display: flex;
-  gap: 50px;
-  animation: scroll-marquee 35s linear infinite;
+  gap: 0;
+  animation: scroll-benefits 40s linear infinite;
   white-space: nowrap;
 }
-@keyframes scroll-marquee {
+@keyframes scroll-benefits {
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }
 }
+.hero-scroller__item {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 28px;
+  color: var(--text-dim);
+  font-weight: 600;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+  transition: color 0.3s;
+}
+.hero-scroller__item:hover { color: var(--teal); }
+.hero-scroller__item svg {
+  width: 18px; height: 18px;
+  opacity: 0.6;
+  flex-shrink: 0;
+}
+/* Left/right fade edges */
+.hero-scroller::before, .hero-scroller::after {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0;
+  width: 60px;
+  z-index: 2;
+  pointer-events: none;
+}
+.hero-scroller::before { left: 0; background: linear-gradient(90deg, var(--surface), transparent); }
+.hero-scroller::after { right: 0; background: linear-gradient(-90deg, var(--surface), transparent); }
+
+/* ============================================================
+   FEATURED IN
+   ============================================================ */
+.featured-in {
+  padding: 40px 0;
+  background: var(--bg);
+  text-align: center;
+}
+.featured-in__label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--text-mute);
+  margin-bottom: 24px;
+}
+.featured-in__logos {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(30px, 5vw, 60px);
+  flex-wrap: wrap;
+  opacity: 0.4;
+}
+.featured-in__logos span {
+  font-family: 'Inter', sans-serif;
+  font-weight: 800;
+  font-size: clamp(18px, 2.5vw, 26px);
+  color: #fff;
+  letter-spacing: -0.02em;
+}
+
+/* ============================================================
+   TWITTER-STYLE DARK REVIEW CARDS
+   ============================================================ */
+.dark-reviews {
+  padding: clamp(60px, 8vw, 110px) 0;
+  background: var(--bg);
+}
+.dark-reviews__head {
+  text-align: center;
+  margin-bottom: 40px;
+}
+.dark-reviews__head h2 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: clamp(28px, 4vw, 46px);
+  color: #fff;
+  margin-bottom: 12px;
+}
+.dark-reviews__head h2 em { font-style: normal; color: var(--teal); }
+.dark-reviews__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.dark-review {
+  background: linear-gradient(145deg, #1c2129, #161b22);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 16px;
+  padding: 24px;
+}
+.dark-review__header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.dark-review__avatar {
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  background: var(--surface-3);
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.dark-review__avatar img {
+  width: 100%; height: 100%; object-fit: cover;
+}
+.dark-review__user { flex-grow: 1; }
+.dark-review__name {
+  font-weight: 700;
+  font-size: 15px;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.dark-review__verified {
+  display: inline-flex;
+  width: 18px; height: 18px;
+  background: #1d9bf0;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+}
+.dark-review__verified svg { width: 12px; height: 12px; fill: #fff; }
+.dark-review__handle {
+  font-size: 13px;
+  color: var(--text-mute);
+}
+.dark-review__body {
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--text-dim);
+}
+.dark-review__highlight {
+  color: var(--teal);
+  font-weight: 600;
+}
+@media (max-width: 800px) {
+  .dark-reviews__grid { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; }
+}
+
+/* Old marquee styles kept for compat */
+.marquee { display: none; }
 .marquee span {
   display: inline-flex;
   align-items: center;
@@ -1906,7 +2052,7 @@ body { padding-bottom: 90px; }
 
 <header class="sticky-header">
   <div class="sticky-header__inner">
-    <a href="#" class="sticky-header__logo"><span class="infinity">&infin;</span> JustFloow</a>
+    <a href="#" class="sticky-header__logo"><img src="https://cdn.shopify.com/s/files/1/0594/8892/7953/files/Branding.png" alt="JustFloow" style="height:28px;width:auto;filter:brightness(0) invert(1);"></a>
     <a href="#pricing" class="sticky-header__cta">Get Started</a>
   </div>
 </header>
@@ -1985,7 +2131,24 @@ body { padding-bottom: 90px; }
 
     // trust strip removed for cleaner feel
 
-    // marquee removed for cleaner Brain.fm feel
+    // HERO BENEFITS SCROLLER (Brain.fm style)
+    var benefits = [
+      {icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8"/></svg>', label: 'Deep Work'},
+      {icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2a7 7 0 0 0-4.6 12.3A3 3 0 0 0 6 17v1a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-1a3 3 0 0 0-1.4-2.7A7 7 0 0 0 12 2"/></svg>', label: 'Creativity'},
+      {icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>', label: 'Motivation'},
+      {icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>', label: 'Sustained Focus'},
+      {icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>', label: 'Mental Energy'},
+      {icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M12 1v2m0 18v2M4.22 4.22l1.42 1.42m12.72 12.72l1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>', label: 'Clarity'},
+      {icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 19V5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v14l-8-4-8 4"/></svg>', label: 'Memory & Recall'},
+      {icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/></svg>', label: 'Long-Term Brain Health'}
+    ];
+    html += '<div class="hero-scroller"><div class="hero-scroller__track">';
+    for (var rep = 0; rep < 2; rep++) {
+      benefits.forEach(function(b) {
+        html += '<div class="hero-scroller__item">' + b.icon + ' ' + esc(b.label) + '</div>';
+      });
+    }
+    html += '</div></div>';
 
     // ============================================================
     // SECTION 4 - STAT STRIP
@@ -2007,13 +2170,13 @@ body { padding-bottom: 90px; }
     } else {
       html += '<span class="placeholder-label">[ FOUNDER PHOTO ]</span>';
     }
-    html += '<div class="photo-caption">' + esc(D.founder.caption) + '</div>';
+    html += '<div class="photo-caption">Shanil Beekarry</div>';
     html += '</div>';
     html += '<div class="founder-content">';
     html += '<h2>I was the customer first.</h2>';
     html += '<div class="body">';
-    html += '<p>' + esc(D.founder.intro) + '</p>';
-    html += '<p>' + D.founder.body[1] + '</p>';
+    html += '<p>I didn\u2019t create Genius Mind for profit but the goal to give my brain the support it needed to fuel my goals and ambition. Being the customer allowed me to create something unique and effective and I don\u2019t go a day without it.</p>';
+    html += '<p>I feel like this is something small that produces an outsize return \u2014 because our brain is our biggest asset.</p>';
     html += '</div>';
     html += '</div></div></div></section>';
 
@@ -2087,10 +2250,10 @@ body { padding-bottom: 90px; }
     html += '<li>Compound effect \u2013 gets stronger over weeks, not weaker</li>';
     html += '</ul></div>';
     html += '<div class="feature-block__visual"><div class="tabs-visual">';
-    html += '<div class="tabs-visual__img">\uD83E\uDDE0</div>';
-    html += '<div style="font-size:42px;font-weight:800;color:var(--teal);margin-bottom:8px;">47</div>';
-    html += '<div style="font-size:16px;color:var(--text-dim);font-weight:600;">open tabs. 12 Slack threads.<br>3 calls before lunch.</div>';
-    html += '<div class="tabs-visual__caption" style="margin-top:16px;">This is your Tuesday. Genius Mind was built for it.</div>';
+    html += '<div style="font-size:18px;color:var(--text-dim);font-weight:500;line-height:1.6;text-align:center;">';
+    html += '47 open tabs. 12 Slack threads.<br>3 calls before lunch.<br><br>';
+    html += '<span style="font-style:italic;opacity:0.7;">This is your Tuesday.<br>Genius Mind was built for it.</span>';
+    html += '</div>';
     html += '</div></div></div>';
 
     html += '</div></section>';
@@ -2187,14 +2350,14 @@ body { padding-bottom: 90px; }
     // X-axis labels
     html += '<text x="80" y="258" fill="#8a8aa0" font-size="10" text-anchor="middle">Day 1</text>';
     html += '<text x="180" y="258" fill="#8a8aa0" font-size="10" text-anchor="middle">Week 1</text>';
-    html += '<text x="300" y="258" fill="#8a8aa0" font-size="10" text-anchor="middle">Week 4</text>';
+    html += '<text x="300" y="258" fill="#8a8aa0" font-size="10" text-anchor="middle">Wk 4</text>';
     html += '<text x="440" y="258" fill="#8a8aa0" font-size="10" text-anchor="middle">Month 2</text>';
     html += '<text x="580" y="258" fill="#8a8aa0" font-size="10" text-anchor="middle">Month 3+</text>';
     html += '</svg>';
     html += '</div>';
     html += '<div class="results-graph__annotations">';
     html += '<div class="results-graph__note"><div class="results-graph__note-period">Week 1-2</div><div class="results-graph__note-text">Cleaner energy, longer mornings</div></div>';
-    html += '<div class="results-graph__note"><div class="results-graph__note-period">Month 1</div><div class="results-graph__note-text">Afternoon holds, decisions stay sharp</div></div>';
+    html += '<div class="results-graph__note"><div class="results-graph__note-period">Week 4</div><div class="results-graph__note-text">Afternoon holds, decisions stay sharp</div></div>';
     html += '<div class="results-graph__note"><div class="results-graph__note-period">Month 2</div><div class="results-graph__note-text">Sprint-crash cycle breaks</div></div>';
     html += '<div class="results-graph__note"><div class="results-graph__note-period">Month 3+</div><div class="results-graph__note-text">New cognitive baseline</div></div>';
     html += '</div>';
@@ -2202,7 +2365,43 @@ body { padding-bottom: 90px; }
     html += '</div></section>';
 
     // ============================================================
-    // SECTION 11 - REVIEWS
+    // FEATURED IN + DARK TWITTER REVIEWS
+    // ============================================================
+    html += '<section class="featured-in"><div class="container">';
+    html += '<div class="featured-in__label">Featured In</div>';
+    html += '<div class="featured-in__logos">';
+    html += '<span>Forbes</span><span>BBC</span><span>WIRED</span><span>Fast Company</span>';
+    html += '</div></div></section>';
+
+    // Dark Twitter-style reviews
+    html += '<section class="dark-reviews"><div class="container">';
+    html += '<div class="dark-reviews__head">';
+    html += '<h2>What operators are <em>saying</em></h2>';
+    html += '</div>';
+    html += '<div class="dark-reviews__grid">';
+
+    var twitterReviews = [
+      {name: 'Alex R.', handle: '@alexrbuilds', body: 'Pomodoro + <span class="dark-review__highlight">@geniusmind</span> = the afternoon is no longer a write-off. Not a stimulant buzz. Just\u2026 sustained clarity. I\u2019m making better calls at 4pm than I used to at 10am.'},
+      {name: 'Priya M.', handle: '@priyamfocus', body: 'I\u2019ve tried every nootropic stack going. <span class="dark-review__highlight">@geniusmind</span> is the ONLY one that actually compounds over weeks. Month 2 was noticeably better than month 1. Not placebo. The 11:1 Bacopa is doing something real.'},
+      {name: 'Tom H.', handle: '@tomhoperates', body: 'Running two businesses and my brain was fried by Wednesday. Started <span class="dark-review__highlight">@geniusmind</span> 6 weeks ago. The sprint-crash cycle has broken. I\u2019m not borrowing energy anymore. Genuinely the missing piece in my stack.'}
+    ];
+
+    twitterReviews.forEach(function(r) {
+      html += '<div class="dark-review">';
+      html += '<div class="dark-review__header">';
+      html += '<div class="dark-review__avatar"><div style="width:100%;height:100%;background:linear-gradient(135deg,var(--teal),var(--teal-warm));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:18px;">' + r.name.charAt(0) + '</div></div>';
+      html += '<div class="dark-review__user">';
+      html += '<div class="dark-review__name">' + esc(r.name) + ' <span class="dark-review__verified"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></span></div>';
+      html += '<div class="dark-review__handle">' + esc(r.handle) + '</div>';
+      html += '</div></div>';
+      html += '<div class="dark-review__body">' + r.body + '</div>';
+      html += '</div>';
+    });
+
+    html += '</div></div></section>';
+
+    // ============================================================
+    // SECTION 11 - REVIEWS (Trustpilot)
     // ============================================================
     html += '<section class="reviews" id="reviews"><div class="container">';
     html += '<div class="reviews-head">';
