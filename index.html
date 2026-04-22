@@ -717,6 +717,78 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
   .dark-reviews__grid { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; }
 }
 
+/* ============================================================
+   VIDEO REVIEWS SECTION
+   ============================================================ */
+.video-reviews {
+  padding: clamp(60px, 8vw, 100px) 0;
+  background: var(--bg);
+}
+.video-reviews__head {
+  text-align: center;
+  margin-bottom: 40px;
+}
+.video-reviews__head h2 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: clamp(28px, 4vw, 46px);
+  color: #fff;
+  margin-bottom: 12px;
+}
+.video-reviews__head h2 em { font-style: normal; color: var(--teal); }
+.video-reviews__head p {
+  font-size: 17px; color: var(--text-dim); max-width: 500px; margin: 0 auto;
+}
+.video-reviews__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.video-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.video-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+}
+.video-card__thumb {
+  position: relative;
+  aspect-ratio: 16/10;
+  background: var(--surface-2);
+  overflow: hidden;
+}
+.video-card__thumb img {
+  width: 100%; height: 100%; object-fit: cover;
+}
+.video-card__play {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  transition: transform 0.3s;
+}
+.video-card:hover .video-card__play { transform: translate(-50%, -50%) scale(1.1); }
+.video-card__info {
+  padding: 16px 18px;
+}
+.video-card__name {
+  font-weight: 700;
+  font-size: 15px;
+  color: #fff;
+  margin-bottom: 4px;
+}
+.video-card__title {
+  font-size: 13px;
+  color: var(--text-dim);
+}
+@media (max-width: 700px) {
+  .video-reviews__grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
+}
+
 /* Old marquee styles kept for compat */
 .marquee { display: none; }
 .marquee span {
@@ -987,10 +1059,12 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
 }
 .comp-table th, .comp-table td {
   padding: 16px 20px;
-  text-align: left;
+  text-align: center;
   font-size: 14px;
   border-bottom: 1px solid rgba(0,0,0,0.06);
+  vertical-align: middle;
 }
+.comp-table td:first-child { text-align: left; }
 .comp-table thead th {
   background: #f8f9fa;
   font-weight: 700;
@@ -998,6 +1072,9 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
   text-transform: uppercase;
   letter-spacing: 0.05em;
   color: var(--text-dark-mute);
+  text-align: center;
+  vertical-align: bottom;
+  padding: 20px 16px;
 }
 .comp-table thead th:nth-child(2) {
   color: var(--teal);
@@ -1027,6 +1104,7 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
   font-size: 12px;
   color: var(--text-dark-mute);
   display: block;
+  text-align: center;
 }
 .comp-table .ct-diff {
   display: inline-block;
@@ -2314,24 +2392,21 @@ body { padding-bottom: 90px; }
     html += '</ul></div>';
     html += '<div class="feature-block__visual"><div class="mini-chart">';
     html += '<div class="mini-chart__title">Cognitive Performance Across The Day</div>';
-    html += '<svg viewBox="0 0 400 200" fill="none">';
-    html += '<defs><linearGradient id="tealGrad" x1="0" y1="0" x2="400" y2="0"><stop offset="0%" stop-color="#00A6D2" stop-opacity="0.2"/><stop offset="100%" stop-color="#00A6D2" stop-opacity="0.05"/></linearGradient>';
-    html += '<linearGradient id="redGrad" x1="0" y1="0" x2="400" y2="0"><stop offset="0%" stop-color="#E8283B" stop-opacity="0.08"/><stop offset="100%" stop-color="#E8283B" stop-opacity="0.02"/></linearGradient></defs>';
+    html += '<svg viewBox="0 0 400 220" fill="none">';
+    html += '<defs><linearGradient id="tealGrad" x1="0" y1="0" x2="400" y2="0"><stop offset="0%" stop-color="#00A6D2" stop-opacity="0.15"/><stop offset="100%" stop-color="#00A6D2" stop-opacity="0.03"/></linearGradient>';
+    html += '<linearGradient id="redGrad" x1="0" y1="0" x2="400" y2="0"><stop offset="0%" stop-color="#E8283B" stop-opacity="0.06"/><stop offset="100%" stop-color="#E8283B" stop-opacity="0.01"/></linearGradient></defs>';
+    // Labels FIRST (above graph area)
+    html += '<rect x="15" y="8" width="80" height="20" rx="4" fill="rgba(0,166,210,0.15)"/>';
+    html += '<text x="55" y="22" fill="#00A6D2" font-size="11" font-weight="700" text-anchor="middle">With GM</text>';
+    html += '<rect x="110" y="8" width="80" height="20" rx="4" fill="rgba(232,40,59,0.1)"/>';
+    html += '<text x="150" y="22" fill="#E8283B" font-size="11" font-weight="700" text-anchor="middle">Without</text>';
+    // Graph area starts at y=40
     // Without GM - declining dashed line
-    html += '<path d="M20 160 L80 148 L140 90 L200 55 L240 52 L280 80 L340 130 L380 155 L395 162" stroke="#E8283B" stroke-width="2" fill="none" stroke-dasharray="8 5" opacity="0.6"/>';
-    html += '<path d="M20 160 L80 148 L140 90 L200 55 L240 52 L280 80 L340 130 L380 155 L395 162 L395 185 L20 185Z" fill="url(#redGrad)"/>';
+    html += '<path d="M20 180 L80 168 L140 110 L200 75 L240 72 L280 100 L340 150 L380 175 L395 182" stroke="#E8283B" stroke-width="2" fill="none" stroke-dasharray="8 5" opacity="0.5"/>';
+    html += '<path d="M20 180 L80 168 L140 110 L200 75 L240 72 L280 100 L340 150 L380 175 L395 182 L395 205 L20 205Z" fill="url(#redGrad)"/>';
     // With GM - solid teal line staying high
-    html += '<path d="M20 160 L80 135 L140 75 L200 45 L240 38 L280 35 L340 38 L380 40 L395 40" stroke="#00A6D2" stroke-width="3" fill="none"/>';
-    html += '<path d="M20 160 L80 135 L140 75 L200 45 L240 38 L280 35 L340 38 L380 40 L395 40 L395 185 L20 185Z" fill="url(#tealGrad)"/>';
-    // Labels with background rects for readability
-    html += '<rect x="300" y="24" width="90" height="18" rx="4" fill="rgba(0,166,210,0.2)"/>';
-    html += '<text x="345" y="37" fill="#00A6D2" font-size="11" font-weight="700" text-anchor="middle">With GM</text>';
-    html += '<rect x="300" y="148" width="90" height="18" rx="4" fill="rgba(232,40,59,0.15)"/>';
-    html += '<text x="345" y="161" fill="#E8283B" font-size="11" font-weight="700" text-anchor="middle">Without</text>';
-    // Gap annotation
-    html += '<line x1="280" y1="38" x2="280" y2="78" stroke="rgba(255,255,255,0.25)" stroke-width="1" stroke-dasharray="3 3"/>';
-    html += '<rect x="262" y="52" width="36" height="16" rx="4" fill="var(--surface)"/>';
-    html += '<text x="280" y="63" fill="rgba(255,255,255,0.6)" font-size="10" font-weight="700" text-anchor="middle">Gap</text>';
+    html += '<path d="M20 180 L80 155 L140 95 L200 65 L240 55 L280 50 L340 50 L380 52 L395 52" stroke="#00A6D2" stroke-width="3" fill="none"/>';
+    html += '<path d="M20 180 L80 155 L140 95 L200 65 L240 55 L280 50 L340 50 L380 52 L395 52 L395 205 L20 205Z" fill="url(#tealGrad)"/>';
     html += '</svg>';
     html += '<div class="mini-chart__labels"><span>6am</span><span>9am</span><span>12pm</span><span>3pm</span><span>6pm</span><span>9pm</span></div>';
     html += '</div></div></div>';
@@ -2484,6 +2559,36 @@ body { padding-bottom: 90px; }
     html += '</div>';
     html += '<div class="results-graph__disclaimer">*Typical user-reported experience. Individual results may vary.</div>';
     html += '</div></section>';
+
+    // ============================================================
+    // VIDEO REVIEWS
+    // ============================================================
+    var playSvg = '<svg width="48" height="48" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="24" fill="rgba(0,0,0,0.5)"/><path d="M19 14.5v19l15-9.5-15-9.5z" fill="white"/></svg>';
+    html += '<section class="video-reviews"><div class="container">';
+    html += '<div class="video-reviews__head">';
+    html += '<h2>Real people. <em>Real results.</em></h2>';
+    html += '<p>Hear directly from Genius Mind operators.</p>';
+    html += '</div>';
+    html += '<div class="video-reviews__grid">';
+
+    var videoCards = [
+      {name: 'James T.', title: 'Genius Mind Changed My Life', img: 'https://i.pravatar.cc/400?img=12'},
+      {name: 'Sarah M.', title: 'Finally Found Focus', img: 'https://i.pravatar.cc/400?img=23'},
+      {name: 'Dr. Emily R.', title: 'Why I Recommend Genius Mind', img: 'https://i.pravatar.cc/400?img=35'}
+    ];
+    videoCards.forEach(function(v) {
+      html += '<div class="video-card">';
+      html += '<div class="video-card__thumb">';
+      html += '<img src="' + v.img + '" alt="' + esc(v.name) + '">';
+      html += '<div class="video-card__play">' + playSvg + '</div>';
+      html += '</div>';
+      html += '<div class="video-card__info">';
+      html += '<div class="video-card__name">' + esc(v.name) + '</div>';
+      html += '<div class="video-card__title">' + esc(v.title) + '</div>';
+      html += '</div></div>';
+    });
+
+    html += '</div></div></section>';
 
     // ============================================================
     // SECTION 11 - REVIEWS (Trustpilot)
