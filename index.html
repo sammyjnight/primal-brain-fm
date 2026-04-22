@@ -1137,12 +1137,14 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
 }
 /* Shimmer on countup numbers */
 .countup-num {
-  background: linear-gradient(90deg, #00A6D2 0%, #00A6D2 35%, #8be0f5 50%, #00A6D2 65%, #00A6D2 100%) !important;
+  color: transparent !important;
+  background-image: linear-gradient(90deg, #00A6D2 0%, #00A6D2 35%, #8be0f5 50%, #00A6D2 65%, #00A6D2 100%) !important;
   background-size: 200% auto !important;
   -webkit-background-clip: text !important;
-  -webkit-text-fill-color: transparent !important;
   background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
   animation: shimmer 4s linear infinite !important;
+  display: inline-block !important;
 }
 .comp-bar__fill--gm { background: linear-gradient(90deg, var(--teal), var(--teal-warm)); }
 .comp-bar__fill--coffee { background: #8B6F47; }
@@ -1153,58 +1155,90 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
   width: 36px; flex-shrink: 0;
 }
 /* Ingredient highlight grid */
-.ingredient-grid-wrap {
+.ingredient-carousel {
   position: relative;
 }
-.ingredient-grid {
+.ingredient-carousel__track {
+  overflow: hidden;
+}
+.ingredient-carousel__page {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 12px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  display: none;
 }
-.ingredient-grid__item {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  padding: 20px 12px 16px;
+.ingredient-carousel__page.active { display: grid; }
+.ingredient-carousel__item {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 16px;
+  padding: 28px 16px 22px;
   text-align: center;
-  aspect-ratio: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
 }
-.ingredient-grid__icon {
-  width: 48px;
-  height: 48px;
+.ingredient-carousel__icon {
+  width: 64px;
+  height: 64px;
   border-radius: 50%;
   background: rgba(255,255,255,0.06);
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 10px;
+  margin: 0 auto 14px;
+  font-size: 24px;
   color: var(--teal);
 }
-.ingredient-grid__name {
-  font-size: 11px;
+.ingredient-carousel__name {
+  font-size: 13px;
   font-weight: 700;
   color: #fff;
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  line-height: 1.3;
+  margin-bottom: 4px;
 }
-.ingredient-grid__dose {
-  font-size: 10px;
+.ingredient-carousel__dose {
+  font-size: 12px;
   font-weight: 600;
   color: var(--teal);
-  margin-top: 4px;
 }
-.ingredient-grid__ratio {
-  font-size: 11px;
-  font-weight: 600;
-  color: var(--text-mute);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  margin-top: 4px;
+.ingredient-carousel__nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 20px;
+}
+.ingredient-carousel__arrow {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.15);
+  background: rgba(255,255,255,0.05);
+  color: #fff;
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.2s, background 0.2s;
+}
+.ingredient-carousel__arrow:hover {
+  border-color: var(--teal);
+  background: rgba(0,166,210,0.1);
+}
+.ingredient-carousel__dots {
+  display: flex;
+  gap: 8px;
+}
+.ingredient-carousel__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.2);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.ingredient-carousel__dot.active {
+  background: var(--teal);
 }
 /* Tabs visual */
 .tabs-visual {
@@ -1673,7 +1707,9 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
   border-radius: 0 8px 8px 0;
   font-size: 12px;
   color: var(--text-dark-mute);
+  display: none;
 }
+.review-card .rc-reply.open { display: block; }
 .review-card .rc-reply__header {
   display: flex;
   justify-content: space-between;
@@ -2496,10 +2532,8 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
   }
   .brain-pill { justify-content: center; font-size: 13px; padding: 10px 12px; }
 
-  /* Ingredient grid: horizontal scroll on mobile */
-  .ingredient-grid-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; scroll-snap-type: x mandatory; }
-  .ingredient-grid { display: flex; gap: 12px; min-width: max-content; }
-  .ingredient-grid__item { min-width: 120px; aspect-ratio: 1; scroll-snap-align: start; flex-shrink: 0; }
+  /* Ingredient carousel mobile */
+  .ingredient-carousel__item { padding: 20px 12px 16px; }
 
   /* Comparison table mobile */
   .comp-table-section { overflow-x: auto; -webkit-overflow-scrolling: touch; }
@@ -2754,33 +2788,47 @@ body { padding-bottom: 90px; }
     html += '<a href="#" style="color:var(--teal);font-weight:600;font-size:14px;text-decoration:underline;text-underline-offset:3px;">See latest test results \u2192</a>';
     html += '</div></div>';
     html += '<div class="feature-block__visual">';
-    html += '<div class="ingredient-grid-wrap">';
-    html += '<div class="ingredient-grid">';
     var allIngredients = [
-      {name: 'L-Tyrosine', dose: '100mg', icon: '\u2600\uFE0F'},
-      {name: "Lion\u2019s Mane", dose: '80mg \u00B7 4:1', icon: '\uD83E\uDDB8'},
-      {name: 'Bacopa', dose: '80mg \u00B7 11:1', icon: '\uD83C\uDF3F'},
-      {name: 'Ginkgo Biloba', dose: '120mg \u00B7 50:1', icon: '\uD83C\uDF42'},
-      {name: 'Panax Ginseng', dose: '100mg \u00B7 20:1', icon: '\uD83C\uDF31'},
-      {name: 'Guarana Seed', dose: '200mg', icon: '\u2615'},
-      {name: 'Choline', dose: '100mg', icon: '\uD83E\uDDE0'},
-      {name: 'Phosphatidyl-serine', dose: '35mg', icon: '\uD83D\uDEE1\uFE0F'},
-      {name: 'Vitamin B6', dose: '10mg \u00B7 714% RI', icon: '\u26A1'},
-      {name: 'Vitamin B12', dose: '500\u03BCg \u00B7 20000%', icon: '\uD83D\uDD0B'},
-      {name: 'Niacin B3', dose: '32mg', icon: '\uD83D\uDD25'},
-      {name: 'Sage Leaf', dose: '4:1 Extract', icon: '\uD83C\uDF3F'},
-      {name: 'Rosemary', dose: '5:1 Extract', icon: '\uD83C\uDF3F'},
-      {name: 'Zinc', dose: '10mg \u00B7 100% RI', icon: '\uD83D\uDEE1\uFE0F'},
-      {name: 'Iron', dose: '14mg \u00B7 100% RI', icon: '\u2B50'},
-      {name: 'Vitamin B1', dose: '12mg \u00B7 1091% RI', icon: '\u26A1'}
+      {name: 'L-Tyrosine', dose: '100mg', svg: '<svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#00A6D2" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><line x1="12" y1="5" x2="12" y2="1"/><line x1="12" y1="23" x2="12" y2="19"/><line x1="5" y1="12" x2="1" y2="12"/><line x1="23" y1="12" x2="19" y2="12"/></svg>'},
+      {name: "Lion\u2019s Mane", dose: '80mg \u00B7 4:1', svg: '<svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#00A6D2" stroke-width="1.5"><circle cx="12" cy="8" r="6"/><path d="M8 14c-2 2-2 6 0 8"/><path d="M16 14c2 2 2 6 0 8"/><path d="M12 14v8"/></svg>'},
+      {name: 'Bacopa Monnieri', dose: '80mg \u00B7 11:1', svg: '<svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#00A6D2" stroke-width="1.5"><path d="M12 3c-3 4-7 6-7 11a7 7 0 1014 0c0-5-4-7-7-11z"/></svg>'},
+      {name: 'Ginkgo Biloba', dose: '120mg \u00B7 50:1', svg: '<svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#00A6D2" stroke-width="1.5"><path d="M12 22V12"/><path d="M8 12c-4-2-6-7-3-11 2 4 5 5 7 5s5-1 7-5c3 4 1 9-3 11"/></svg>'},
+      {name: 'Panax Ginseng', dose: '100mg \u00B7 20:1', svg: '<svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#00A6D2" stroke-width="1.5"><path d="M12 2v8"/><path d="M5 10c2 3 4 5 7 10 3-5 5-7 7-10"/><path d="M8 6c1 2 2 3 4 4 2-1 3-2 4-4"/></svg>'},
+      {name: 'Guarana Seed', dose: '200mg', svg: '<svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#00A6D2" stroke-width="1.5"><circle cx="12" cy="14" r="7"/><circle cx="12" cy="14" r="3"/><path d="M12 2v5"/><path d="M8 4l4 3 4-3"/></svg>'},
+      {name: 'Choline', dose: '100mg', svg: '<svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#00A6D2" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M8 12a4 4 0 018 0"/><circle cx="10" cy="10" r="1"/><circle cx="14" cy="10" r="1"/></svg>'},
+      {name: 'Phosphatidylserine', dose: '35mg', svg: '<svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#00A6D2" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="1.5"/></svg>'},
+      {name: 'Vitamin B6', dose: '10mg \u00B7 714% RI', svg: '<svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#00A6D2" stroke-width="1.5"><path d="M13 2L5 14h6l-1 8 8-12h-6z"/></svg>'},
+      {name: 'Vitamin B12', dose: '500\u03BCg \u00B7 20,000%', svg: '<svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#00A6D2" stroke-width="1.5"><rect x="6" y="8" rx="2" width="12" height="10"/><line x1="6" y1="12" x2="18" y2="12"/><path d="M10 4v4"/><path d="M14 4v4"/></svg>'},
+      {name: 'Niacin (B3)', dose: '32mg', svg: '<svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#00A6D2" stroke-width="1.5"><path d="M12 2a5 5 0 00-5 5c0 4 5 7 5 11 0-4 5-7 5-11a5 5 0 00-5-5z"/><path d="M12 18v4"/></svg>'},
+      {name: 'Sage Leaf', dose: '4:1 Extract', svg: '<svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#00A6D2" stroke-width="1.5"><path d="M6 20c0-8 4-12 12-14-2 8-6 12-12 14z"/><path d="M12 14l-3 3"/></svg>'},
+      {name: 'Rosemary', dose: '5:1 Extract', svg: '<svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#00A6D2" stroke-width="1.5"><path d="M12 22V8"/><path d="M8 10c0-3 4-6 4-6s4 3 4 6"/><path d="M6 14c0-3 6-4 6-4s6 1 6 4"/></svg>'},
+      {name: 'Zinc', dose: '10mg \u00B7 100% RI', svg: '<svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#00A6D2" stroke-width="1.5"><path d="M20 4H4l16 16H4"/></svg>'},
+      {name: 'Iron', dose: '14mg \u00B7 100% RI', svg: '<svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#00A6D2" stroke-width="1.5"><circle cx="12" cy="8" r="5"/><path d="M12 13v9"/><path d="M8 18h8"/></svg>'},
+      {name: 'Vitamin B1', dose: '12mg \u00B7 1,091% RI', svg: '<svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#00A6D2" stroke-width="1.5"><path d="M13 2L5 14h6l-1 8 8-12h-6z"/></svg>'}
     ];
-    allIngredients.forEach(function(item) {
-      html += '<div class="ingredient-grid__item">';
-      html += '<div class="ingredient-grid__icon" style="font-size:22px;">' + item.icon + '</div>';
-      html += '<div class="ingredient-grid__name">' + item.name + '</div>';
-      html += '<div class="ingredient-grid__dose">' + item.dose + '</div>';
+    html += '<div class="ingredient-carousel" id="ingredientCarousel">';
+    html += '<div class="ingredient-carousel__track">';
+    for (var p = 0; p < 4; p++) {
+      html += '<div class="ingredient-carousel__page' + (p === 0 ? ' active' : '') + '" data-page="' + p + '">';
+      for (var i = p * 4; i < p * 4 + 4 && i < allIngredients.length; i++) {
+        var ing = allIngredients[i];
+        html += '<div class="ingredient-carousel__item">';
+        html += '<div class="ingredient-carousel__icon">' + ing.svg + '</div>';
+        html += '<div class="ingredient-carousel__name">' + ing.name + '</div>';
+        html += '<div class="ingredient-carousel__dose">' + ing.dose + '</div>';
+        html += '</div>';
+      }
       html += '</div>';
-    });
+    }
+    html += '</div>';
+    html += '<div class="ingredient-carousel__nav">';
+    html += '<button class="ingredient-carousel__arrow" id="ingPrev">\u2190</button>';
+    html += '<div class="ingredient-carousel__dots">';
+    for (var d = 0; d < 4; d++) {
+      html += '<span class="ingredient-carousel__dot' + (d === 0 ? ' active' : '') + '" data-page="' + d + '"></span>';
+    }
+    html += '</div>';
+    html += '<button class="ingredient-carousel__arrow" id="ingNext">\u2192</button>';
     html += '</div></div>';
     html += '</div></div>';
 
@@ -2998,11 +3046,11 @@ body { padding-bottom: 90px; }
       html += '<p class="body">' + esc(r.body) + '</p>';
       if (r.reply) {
         html += '<div class="rc-reply">';
-        html += '<div class="rc-reply__header"><span>\u21A9 <strong>Reply from Genius Mind</strong></span><span>' + esc(r.reply_time || r.time) + '</span></div>';
+        html += '<div class="rc-reply__header"><span>\u21A9 <strong>Reply from JustFloow</strong></span><span>' + esc(r.reply_time || r.time) + '</span></div>';
         html += '<p class="rc-reply__text">' + esc(r.reply) + '</p>';
         html += '</div>';
+        html += '<a class="rc-readmore" href="#" onclick="event.preventDefault();this.previousElementSibling.classList.toggle(\'open\');this.textContent=this.previousElementSibling.classList.contains(\'open\')?\'Show less\':\'Read more\';return false;">Read more</a>';
       }
-      html += '<a class="rc-readmore" href="#">Read more</a>';
       html += '</div>';
     });
     html += '</div></div></section>';
@@ -3250,6 +3298,38 @@ body { padding-bottom: 90px; }
         });
       }, {threshold: 0.5});
       nums.forEach(function(el) { observer.observe(el); });
+    })();
+
+    // ====================================================================
+    // INGREDIENT CAROUSEL
+    // ====================================================================
+    (function() {
+      var carousel = document.getElementById('ingredientCarousel');
+      if (!carousel) return;
+      var pages = carousel.querySelectorAll('.ingredient-carousel__page');
+      var dots = carousel.querySelectorAll('.ingredient-carousel__dot');
+      var prev = document.getElementById('ingPrev');
+      var next = document.getElementById('ingNext');
+      var current = 0;
+      function goTo(idx) {
+        pages[current].classList.remove('active');
+        dots[current].classList.remove('active');
+        current = (idx + pages.length) % pages.length;
+        pages[current].classList.add('active');
+        dots[current].classList.add('active');
+      }
+      prev.addEventListener('click', function() { goTo(current - 1); });
+      next.addEventListener('click', function() { goTo(current + 1); });
+      dots.forEach(function(dot) {
+        dot.addEventListener('click', function() { goTo(parseInt(dot.getAttribute('data-page'))); });
+      });
+      // Swipe support
+      var startX = 0;
+      carousel.addEventListener('touchstart', function(e) { startX = e.touches[0].clientX; });
+      carousel.addEventListener('touchend', function(e) {
+        var diff = startX - e.changedTouches[0].clientX;
+        if (Math.abs(diff) > 50) { diff > 0 ? goTo(current + 1) : goTo(current - 1); }
+      });
     })();
 
     // ====================================================================
