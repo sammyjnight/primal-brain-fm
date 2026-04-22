@@ -232,8 +232,10 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
   position: fixed;
   top: 0; left: 0; right: 0;
   z-index: 200;
-  background: transparent;
-  border-bottom: none;
+  background: rgba(14,17,23,0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
   padding: 0 var(--pad);
   height: 56px;
   display: flex;
@@ -2220,13 +2222,13 @@ body { padding-bottom: 90px; }
     // Right side - stacked cards
     html += '<div class="social-proof__cards">';
     var twitterReviews = [
-      {name: 'Alex R.', handle: '@alexrbuilds', body: 'Pomodoro + <span class="dark-review__highlight">@geniusmind</span> = the afternoon is no longer a write-off. Not a stimulant buzz. Just\u2026 sustained clarity. I\u2019m making better calls at 4pm than I used to at 10am.'},
-      {name: 'Priya M.', handle: '@priyamfocus', body: 'I\u2019ve tried every nootropic stack going. <span class="dark-review__highlight">@geniusmind</span> is the ONLY one that actually compounds over weeks. Month 2 was noticeably better than month 1. Not placebo.'},
-      {name: 'Tom H.', handle: '@tomhoperates', body: 'Running two businesses and my brain was fried by Wednesday. Started <span class="dark-review__highlight">@geniusmind</span> 6 weeks ago. The sprint-crash cycle has broken. Genuinely the missing piece in my stack.'}
+      {name: 'Alex R.', handle: '@alexrbuilds', img: 'https://i.pravatar.cc/150?img=11', body: 'Pomodoro + <span class="dark-review__highlight">@geniusmind</span> = the afternoon is no longer a write-off. Not a stimulant buzz. Just\u2026 sustained clarity. I\u2019m making better calls at 4pm than I used to at 10am.'},
+      {name: 'Priya M.', handle: '@priyamfocus', img: 'https://i.pravatar.cc/150?img=32', body: 'I\u2019ve tried every nootropic stack going. <span class="dark-review__highlight">@geniusmind</span> is the ONLY one that actually compounds over weeks. Month 2 was noticeably better than month 1. Not placebo.'},
+      {name: 'Tom H.', handle: '@tomhoperates', img: 'https://i.pravatar.cc/150?img=53', body: 'Running two businesses and my brain was fried by Wednesday. Started <span class="dark-review__highlight">@geniusmind</span> 6 weeks ago. The sprint-crash cycle has broken. Genuinely the missing piece in my stack.'}
     ];
     twitterReviews.forEach(function(r) {
       html += '<div class="dark-review"><div class="dark-review__header">';
-      html += '<div class="dark-review__avatar"><div style="width:100%;height:100%;background:linear-gradient(135deg,var(--teal),var(--teal-warm));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:18px;">' + r.name.charAt(0) + '</div></div>';
+      html += '<div class="dark-review__avatar"><img src="' + r.img + '" alt="' + esc(r.name) + '"></div>';
       html += '<div class="dark-review__user"><div class="dark-review__name">' + esc(r.name) + ' <span class="dark-review__verified"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></span></div>';
       html += '<div class="dark-review__handle">' + esc(r.handle) + '</div></div></div>';
       html += '<div class="dark-review__body">' + r.body + '</div></div>';
