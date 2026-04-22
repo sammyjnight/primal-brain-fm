@@ -169,8 +169,8 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
   align-items: center;
   justify-content: center;
   gap: 10px;
-  background: #fff;
-  color: #0e1117;
+  background: linear-gradient(135deg, #1bb88a 0%, #22d3a0 100%);
+  color: #fff;
   font-weight: 700;
   font-size: 16px;
   padding: 16px 32px;
@@ -178,7 +178,7 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
   text-transform: none;
   letter-spacing: 0.01em;
   transition: all 0.25s ease;
-  box-shadow: 0 4px 20px rgba(255,255,255,0.1);
+  box-shadow: 0 6px 24px rgba(34,211,160,0.3);
   min-height: 52px;
   position: relative;
   overflow: hidden;
@@ -187,12 +187,12 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
   content: '';
   position: absolute;
   inset: 0;
-  background: transparent;
+  background: linear-gradient(135deg, rgba(255,255,255,0.2), transparent 60%);
   opacity: 0;
   transition: opacity 0.25s;
 }
-.btn:hover { transform: scale(1.05); box-shadow: 0 8px 30px rgba(255,255,255,0.15); }
-.btn:hover::after { opacity: 0; }
+.btn:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(34,211,160,0.4); }
+.btn:hover::after { opacity: 1; }
 .btn-arrow { font-size: 20px; transition: transform 0.25s; }
 .btn:hover .btn-arrow { transform: translateX(4px); }
 
@@ -264,8 +264,8 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
   font-size: 22px;
 }
 .sticky-header__cta {
-  background: #fff;
-  color: #0e1117;
+  background: linear-gradient(135deg, #1bb88a 0%, #22d3a0 100%);
+  color: #fff;
   font-weight: 700;
   font-size: 13px;
   padding: 10px 22px;
@@ -273,10 +273,12 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
   text-decoration: none;
   text-transform: uppercase;
   letter-spacing: 0.04em;
-  transition: transform 0.2s ease;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 16px rgba(34,211,160,0.3);
 }
 .sticky-header__cta:hover {
   transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(34,211,160,0.4);
 }
 /* Old announce bar hidden */
 .announce-bar { display: none !important; }
@@ -509,12 +511,15 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
    HERO BENEFITS SCROLLER (Brain.fm style)
    ============================================================ */
 .hero-scroller {
-  background: var(--surface);
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
+  background: var(--surface-2);
+  border-top: 1px solid rgba(255,255,255,0.08);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
   padding: 0;
   position: relative;
   overflow: hidden;
+  max-width: 860px;
+  margin: 0 auto;
+  border-radius: 60px;
 }
 .hero-scroller__inner {
   display: flex;
@@ -540,21 +545,20 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
   z-index: 2;
   pointer-events: none;
 }
-.hero-scroller::before { left: 0; background: linear-gradient(90deg, var(--surface), transparent); }
-.hero-scroller::after { right: 0; background: linear-gradient(-90deg, var(--surface), transparent); }
+.hero-scroller::before { left: 0; background: linear-gradient(90deg, var(--surface-2), transparent); }
+.hero-scroller::after { right: 0; background: linear-gradient(-90deg, var(--surface-2), transparent); }
 .hero-scroller__item {
   display: flex;
   align-items: center;
   gap: 8px;
   padding: 12px 20px;
-  color: var(--text-mute);
-  font-weight: 600;
-  font-size: 12px;
+  color: rgba(255,255,255,0.85);
+  font-weight: 700;
+  font-size: 13px;
   text-transform: uppercase;
   letter-spacing: 0.06em;
   white-space: nowrap;
   flex-shrink: 0;
-  transition: color 0.3s;
 }
 .hero-scroller__item svg {
   width: 16px; height: 16px;
@@ -1985,8 +1989,7 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
   font-size: 11px;
   flex-shrink: 0;
 }
-.price-card .btn { width: 100%; background: linear-gradient(135deg, #1bb88a 0%, #22d3a0 100%); color: #fff; }
-.price-card .btn:hover { box-shadow: 0 12px 30px rgba(34,211,160,0.4); }
+.price-card .btn { width: 100%; }
 .price-card .stock-row {
   margin-top: 14px;
   font-size: 12px;
@@ -2212,7 +2215,7 @@ body { padding-bottom: 90px; }
 <header class="sticky-header">
   <div class="sticky-header__inner">
     <a href="#" class="sticky-header__logo"><img src="https://cdn.shopify.com/s/files/1/0594/8892/7953/files/Branding.png" alt="JustFloow" style="height:28px;width:auto;filter:brightness(0) invert(1);"></a>
-    <a href="#pricing" class="sticky-header__cta">Get Started</a>
+    <a href="#pricing" class="sticky-header__cta">Try Genius Mind</a>
   </div>
 </header>
 <div id="app" style="padding-top:56px;"></div>
@@ -2271,6 +2274,8 @@ body { padding-bottom: 90px; }
       html += '<span class="hero-rotate__word' + (i === 0 ? ' active' : '') + '">' + esc(word) + '</span>';
     });
     html += '</span></h1>';
+
+    html += '<p style="font-size:clamp(16px,1.8vw,20px);color:rgba(255,255,255,0.7);max-width:480px;margin-bottom:28px;line-height:1.5;"><strong style="color:#fff;">16 clinically-dosed ingredients in one capsule.</strong> Cognitive infrastructure for operators who can\u2019t afford to slow down.</p>';
 
     html += '<div class="hero-cta-row"><a href="#pricing" class="btn">Try Genius Mind <span class="btn-arrow">\u2192</span></a></div>';
     html += '</div>';
