@@ -615,14 +615,15 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
 .social-proof__logos {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 20px 32px;
+  gap: 14px 28px;
   align-items: center;
   justify-items: start;
 }
-.social-proof__logos svg {
-  height: 20px;
-  width: auto;
-  opacity: 0.5;
+.social-proof__logos span {
+  font-size: clamp(18px, 2.5vw, 24px);
+  color: rgba(255,255,255,0.45);
+  white-space: nowrap;
+  line-height: 1;
 }
 /* Right side - stacked/offset cards */
 .social-proof__cards {
@@ -1155,45 +1156,37 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
 .ingredient-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
+  gap: 14px;
 }
 .ingredient-grid__item {
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 16px;
-  padding: 28px 16px 24px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 14px;
+  padding: 30px 16px 22px;
   text-align: center;
-  transition: border-color 0.3s, box-shadow 0.3s;
-}
-.ingredient-grid__item:hover {
-  border-color: rgba(0,166,210,0.3);
-  box-shadow: 0 0 20px rgba(0,166,210,0.08);
 }
 .ingredient-grid__icon {
-  width: 56px;
-  height: 56px;
+  width: 64px;
+  height: 64px;
   border-radius: 50%;
   background: rgba(255,255,255,0.06);
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto 14px;
-  font-size: 22px;
+  margin: 0 auto 16px;
+  font-size: 24px;
   color: var(--teal);
 }
 .ingredient-grid__name {
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 700;
-  color: #fff;
+  color: rgba(255,255,255,0.7);
   text-transform: uppercase;
-  letter-spacing: 0.04em;
-  margin-bottom: 6px;
+  letter-spacing: 0.08em;
+  margin-top: 12px;
 }
 .ingredient-grid__dose {
-  font-size: 15px;
-  font-weight: 600;
-  color: var(--teal);
-  line-height: 1.2;
+  display: none;
 }
 .ingredient-grid__ratio {
   font-size: 11px;
@@ -1608,6 +1601,11 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
 }
 .review-card .rc-verified svg { width: 14px; height: 14px; fill: #00b67a; }
 /* Review grid */
+.reviews-filter {
+  font-size: 14px;
+  color: var(--text-dark-mute);
+  margin-bottom: 20px;
+}
 .reviews-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -1617,8 +1615,8 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
   background: #fff;
   border-radius: 12px;
   padding: 22px 20px 18px;
-  border: 1px solid rgba(0,0,0,0.06);
-  box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+  border: 1px solid rgba(0,0,0,0.08);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
   display: flex;
   flex-direction: column;
 }
@@ -1652,10 +1650,32 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
   line-height: 1.3;
 }
 .review-card .body {
-  font-size: 14px;
-  line-height: 1.5;
+  font-size: 13px;
+  line-height: 1.55;
   color: var(--text-dark-mute);
   flex-grow: 1;
+}
+.review-card .rc-reply {
+  background: rgba(0,0,0,0.02);
+  border-left: 3px solid rgba(0,0,0,0.08);
+  padding: 10px 12px;
+  margin-top: 12px;
+  border-radius: 0 8px 8px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  color: var(--text-dark-mute);
+}
+.review-card .rc-reply strong { color: var(--text-dark); font-weight: 600; }
+.review-card .rc-readmore {
+  display: block;
+  text-align: center;
+  color: #00A6D2;
+  font-size: 13px;
+  font-weight: 600;
+  margin-top: 12px;
+  text-decoration: none;
 }
 @media (max-width: 1000px) {
   .reviews-grid { grid-template-columns: repeat(2, 1fr); }
@@ -2596,10 +2616,10 @@ body { padding-bottom: 90px; }
     html += '<p>Genius Mind operators perform every day \u2014 see what they have to say.</p>';
     html += '<div class="social-proof__featured-label">Featured In</div>';
     html += '<div class="social-proof__logos">';
-    html += '<svg viewBox="0 0 200 50" xmlns="http://www.w3.org/2000/svg"><text x="0" y="40" fill="white" font-family="Georgia,serif" font-style="italic" font-size="46" font-weight="400">Forbes</text></svg>';
-    html += '<svg viewBox="0 0 130 50" xmlns="http://www.w3.org/2000/svg"><text x="0" y="40" fill="white" font-family="Arial,Helvetica,sans-serif" font-size="46" font-weight="900" letter-spacing="4">BBC</text></svg>';
-    html += '<svg viewBox="0 0 200 50" xmlns="http://www.w3.org/2000/svg"><text x="0" y="40" fill="white" font-family="Georgia,serif" font-style="italic" font-size="46" font-weight="700" letter-spacing="3">WIRED</text></svg>';
-    html += '<svg viewBox="0 0 310 50" xmlns="http://www.w3.org/2000/svg"><text x="0" y="38" fill="white" font-family="Arial,Helvetica,sans-serif" font-size="36" font-weight="700" letter-spacing="2">FAST COMPANY</text></svg>';
+    html += '<span style="font-family:Georgia,Times,serif;font-style:italic;font-weight:400;font-size:clamp(22px,3vw,30px);">Forbes</span>';
+    html += '<span style="font-family:Arial,Helvetica,sans-serif;font-weight:900;letter-spacing:0.15em;font-size:clamp(20px,2.5vw,26px);">BBC</span>';
+    html += '<span style="font-family:Georgia,Times,serif;font-style:italic;font-weight:700;letter-spacing:0.08em;font-size:clamp(20px,2.5vw,28px);">WIRED</span>';
+    html += '<span style="font-family:Arial,Helvetica,sans-serif;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;font-size:clamp(13px,1.8vw,16px);">Fast Company</span>';
     html += '</div></div>';
 
     // Right side - stacked cards
@@ -2683,13 +2703,13 @@ body { padding-bottom: 90px; }
     // With GM - rises steeply then levels out near top
     html += '<path d="M50 155 C90 140, 120 100, 170 70 C210 52, 250 48, 290 47 C340 46, 390 46, 440 45 C460 45, 475 45, 480 45" stroke="#00A6D2" stroke-width="3" fill="none"/>';
     html += '<path d="M50 155 C90 140, 120 100, 170 70 C210 52, 250 48, 290 47 C340 46, 390 46, 440 45 C460 45, 475 45, 480 45 L480 185 L50 185Z" fill="url(#tealGrad2)"/>';
-    // Without - rises to same area then gradually declines
-    html += '<path d="M50 155 C90 140, 120 102, 170 75 C210 60, 250 58, 290 62 C340 72, 390 88, 440 105 C460 112, 475 118, 480 120" stroke="#E8283B" stroke-width="2" fill="none" stroke-dasharray="6 4" opacity="0.5"/>';
-    html += '<path d="M50 155 C90 140, 120 102, 170 75 C210 60, 250 58, 290 62 C340 72, 390 88, 440 105 C460 112, 475 118, 480 120 L480 185 L50 185Z" fill="url(#redGrad2)"/>';
+    // Without - rises similarly then very gently declines, staying close to GM line
+    html += '<path d="M50 155 C90 140, 120 102, 170 72 C210 55, 250 52, 290 54 C340 57, 390 60, 440 63 C460 64, 475 65, 480 66" stroke="#E8283B" stroke-width="2" fill="none" stroke-dasharray="6 4" opacity="0.5"/>';
+    html += '<path d="M50 155 C90 140, 120 102, 170 72 C210 55, 250 52, 290 54 C340 57, 390 60, 440 63 C460 64, 475 65, 480 66 L480 185 L50 185Z" fill="url(#redGrad2)"/>';
     // Edge gap annotation
-    html += '<line x1="460" y1="45" x2="460" y2="115" stroke="rgba(255,255,255,0.2)" stroke-width="1" stroke-dasharray="3 3"/>';
-    html += '<rect x="400" y="72" width="80" height="18" rx="6" fill="var(--surface)"/><rect x="400" y="72" width="80" height="18" rx="6" fill="rgba(0,166,210,0.12)"/>';
-    html += '<text x="440" y="85" fill="var(--teal)" font-size="10" font-weight="700" text-anchor="middle">The edge gap</text>';
+    html += '<line x1="460" y1="45" x2="460" y2="65" stroke="rgba(255,255,255,0.2)" stroke-width="1" stroke-dasharray="3 3"/>';
+    html += '<rect x="400" y="48" width="80" height="18" rx="6" fill="var(--surface)"/><rect x="400" y="48" width="80" height="18" rx="6" fill="rgba(0,166,210,0.12)"/>';
+    html += '<text x="440" y="61" fill="var(--teal)" font-size="10" font-weight="700" text-anchor="middle">The edge gap</text>';
     // X-axis labels
     html += '<text x="50" y="198" fill="var(--text-mute)" font-size="10" text-anchor="middle">Year 1</text>';
     html += '<text x="140" y="198" fill="var(--text-mute)" font-size="10" text-anchor="middle">Year 2</text>';
@@ -2714,19 +2734,18 @@ body { padding-bottom: 90px; }
     html += '</div></div>';
     html += '<div class="feature-block__visual">';
     html += '<div class="ingredient-grid">';
-    var ingredientItems = [
-      {name: 'L-Tyrosine', dose: '100mg', icon: '\u2600'},
-      {name: "Lion\u2019s Mane", dose: '80mg \u00B7 4:1', icon: '\uD83C\uDF3F'},
-      {name: 'Bacopa', dose: '80mg \u00B7 11:1', icon: '\uD83C\uDF3F'},
-      {name: 'Ginkgo', dose: '120mg \u00B7 50:1', icon: '\uD83D\uDCA7'},
-      {name: 'Phosphatidylserine', dose: '35mg', icon: '\u25CE'},
-      {name: 'B-Complex', dose: 'B6 + B12', icon: '\u26A1'}
+    var ingredientIcons = [
+      {name: 'L-Tyrosine', svg: '<svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#00A6D2" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><line x1="12" y1="5" x2="12" y2="1"/><line x1="12" y1="23" x2="12" y2="19"/><line x1="5" y1="12" x2="1" y2="12"/><line x1="23" y1="12" x2="19" y2="12"/><line x1="7.8" y1="7.8" x2="5" y2="5"/><line x1="19" y1="19" x2="16.2" y2="16.2"/><line x1="7.8" y1="16.2" x2="5" y2="19"/><line x1="19" y1="5" x2="16.2" y2="7.8"/></svg>'},
+      {name: "Lion\u2019s Mane", svg: '<svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#00A6D2" stroke-width="1.5"><circle cx="12" cy="8" r="6"/><path d="M8 14c-2 2-2 6 0 8"/><path d="M16 14c2 2 2 6 0 8"/><path d="M12 14v8"/></svg>'},
+      {name: 'Bacopa', svg: '<svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#00A6D2" stroke-width="1.5"><path d="M12 3c-3 4-7 6-7 11a7 7 0 1014 0c0-5-4-7-7-11z"/><path d="M12 14v6"/><path d="M9 17l3-3 3 3"/></svg>'},
+      {name: 'Ginkgo 50:1', svg: '<svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#00A6D2" stroke-width="1.5"><path d="M12 22V12"/><path d="M8 12c-4-2-6-7-3-11 2 4 5 5 7 5s5-1 7-5c3 4 1 9-3 11"/></svg>'},
+      {name: 'Phosphatidylserine', svg: '<svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#00A6D2" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="1.5"/></svg>'},
+      {name: 'B-Complex', svg: '<svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#00A6D2" stroke-width="1.5"><path d="M13 2L5 14h6l-1 8 8-12h-6z"/></svg>'}
     ];
-    ingredientItems.forEach(function(item) {
+    ingredientIcons.forEach(function(item) {
       html += '<div class="ingredient-grid__item">';
-      html += '<div class="ingredient-grid__icon">' + item.icon + '</div>';
+      html += '<div class="ingredient-grid__icon">' + item.svg + '</div>';
       html += '<div class="ingredient-grid__name">' + item.name + '</div>';
-      html += '<div class="ingredient-grid__dose">' + item.dose + '</div>';
       html += '</div>';
     });
     html += '</div>';
@@ -2737,7 +2756,7 @@ body { padding-bottom: 90px; }
     // ============================================================
     // ANIMATED STATS (IM8 style countup)
     // ============================================================
-    html += '<section style="padding:clamp(40px,5vw,60px) 0 clamp(40px,5vw,60px);background:var(--bg);"><div class="container">';
+    html += '<section style="padding:clamp(20px,3vw,40px) 0 clamp(40px,5vw,60px);background:var(--bg);"><div class="container">';
     html += '<div style="text-align:center;margin-bottom:36px;">';
     html += '<span style="color:var(--teal);font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:16px;background:none;border:none;padding:0;">Backed By Results</span>';
     html += '<h2 style="font-size:clamp(28px,4vw,46px);font-weight:600;color:#fff;">Clinically Researched. <span style="color:var(--teal);">Customer Proven.</span></h2>';
@@ -2752,7 +2771,7 @@ body { padding-bottom: 90px; }
     countStats.forEach(function(s) {
       html += '<div style="padding:32px 16px;background:var(--surface);border:1px solid var(--border);border-radius:16px;">';
       html += '<div style="font-size:13px;color:#fff;font-weight:600;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:12px;">' + esc(s.label) + '</div>';
-      html += '<div class="countup-num" data-target="' + s.value + '" data-suffix="' + s.suffix + '" style="font-size:clamp(40px,6vw,60px);font-weight:800;color:#fff;line-height:1;">0' + s.suffix + '</div>';
+      html += '<div class="countup-num" data-target="' + s.value + '" data-suffix="' + s.suffix + '" style="font-size:clamp(40px,6vw,60px);font-weight:800;line-height:1;">0' + s.suffix + '</div>';
       html += '<p style="font-size:13px;color:#fff;margin-top:12px;line-height:1.4;">' + esc(s.desc) + '</p>';
       html += '</div>';
     });
@@ -2936,6 +2955,7 @@ body { padding-bottom: 90px; }
     html += '<div class="tp-badge__meta">Rated <strong>4.7</strong> / 5 based on <strong>1,252 reviews</strong> on <span class="tp-badge__tp-logo"><svg viewBox="0 0 24 24" fill="#00b67a"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg> Trustpilot</span></div>';
     html += '</div>';
     // Review cards
+    html += '<div class="reviews-filter">Showing our 5 star reviews</div>';
     html += '<div class="reviews-grid">';
     D.reviews.items.forEach(function(r) {
       html += '<div class="review-card">';
@@ -2943,7 +2963,8 @@ body { padding-bottom: 90px; }
       html += '<div class="rc-meta"><strong>' + esc(r.name) + '</strong>, ' + esc(r.time) + '</div>';
       html += '<div class="title">' + esc(r.title) + '</div>';
       html += '<p class="body">' + esc(r.body) + '</p>';
-      html += '<div class="rc-verified"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Verified</div>';
+      html += '<div class="rc-reply"><span>\u21A9 <strong>Reply from Genius Mind</strong></span><span>' + esc(r.time) + '</span></div>';
+      html += '<a class="rc-readmore" href="#">Read more</a>';
       html += '</div>';
     });
     html += '</div></div></section>';
