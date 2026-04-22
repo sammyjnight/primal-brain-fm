@@ -514,37 +514,34 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
   border-bottom: 1px solid var(--border);
   padding: 0;
   position: relative;
-  max-width: 900px;
-  margin: 0 auto;
-  border-radius: 0;
+  overflow: hidden;
 }
 .hero-scroller__inner {
   display: flex;
   align-items: center;
 }
-.hero-scroller__arrow {
-  background: none;
-  border: none;
-  color: var(--text-mute);
-  cursor: pointer;
-  padding: 14px 14px;
-  font-size: 20px;
-  flex-shrink: 0;
-  transition: color 0.2s;
-  display: flex;
-  align-items: center;
-}
-.hero-scroller__arrow:hover { color: var(--teal); }
+.hero-scroller__arrow { display: none; }
 .hero-scroller__track {
   display: flex;
   gap: 0;
-  overflow-x: auto;
-  scroll-behavior: smooth;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-  flex: 1;
+  animation: scroll-scroller 30s linear infinite;
+  white-space: nowrap;
 }
-.hero-scroller__track::-webkit-scrollbar { display: none; }
+@keyframes scroll-scroller {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+/* Fade edges */
+.hero-scroller::before, .hero-scroller::after {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0;
+  width: 60px;
+  z-index: 2;
+  pointer-events: none;
+}
+.hero-scroller::before { left: 0; background: linear-gradient(90deg, var(--surface), transparent); }
+.hero-scroller::after { right: 0; background: linear-gradient(-90deg, var(--surface), transparent); }
 .hero-scroller__item {
   display: flex;
   align-items: center;
@@ -558,10 +555,7 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
   white-space: nowrap;
   flex-shrink: 0;
   transition: color 0.3s;
-  cursor: pointer;
 }
-.hero-scroller__item:hover { color: #fff; }
-.hero-scroller__item.active { color: var(--teal); }
 .hero-scroller__item svg {
   width: 16px; height: 16px;
   opacity: 0.5;
@@ -2306,13 +2300,14 @@ body { padding-bottom: 90px; }
       {icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/></svg>', label: 'Long-Term Brain Health', hero: 'Sharp Afternoons'}
     ];
     html += '<div class="hero-scroller"><div class="hero-scroller__inner">';
-    html += '<button class="hero-scroller__arrow" id="scrollLeft">\u2039</button>';
-    html += '<div class="hero-scroller__track" id="scrollTrack">';
-    benefits.forEach(function(b, i) {
-      html += '<div class="hero-scroller__item' + (i === 0 ? ' active' : '') + '" data-hero-word="' + esc(b.hero) + '">' + b.icon + ' ' + esc(b.label) + '</div>';
-    });
+    html += '<div class="hero-scroller__track">';
+    // Duplicate twice for seamless loop
+    for (var rep = 0; rep < 2; rep++) {
+      benefits.forEach(function(b) {
+        html += '<div class="hero-scroller__item">' + b.icon + ' ' + esc(b.label) + '</div>';
+      });
+    }
     html += '</div>';
-    html += '<button class="hero-scroller__arrow" id="scrollRight">\u203A</button>';
     html += '</div></div>';
 
     // SOCIAL PROOF (Brain.fm layout: left headline + logos, right twitter cards)
@@ -2859,53 +2854,8 @@ body { padding-bottom: 90px; }
     })();
 
     // ====================================================================
-    // SCROLLER ARROWS + CLICK TO CHANGE HERO WORD
+    // SCROLLER - auto-scrolling continuous loop (independent of hero)
     // ====================================================================
-    (function() {
-      var track = document.getElementById('scrollTrack');
-      var left = document.getElementById('scrollLeft');
-      var right = document.getElementById('scrollRight');
-      if (!track || !left || !right) return;
-      var step = 180;
-      right.addEventListener('click', function() {
-        if (track.scrollLeft + track.clientWidth >= track.scrollWidth - 10) {
-          track.scrollLeft = 0;
-        } else {
-          track.scrollLeft += step;
-        }
-      });
-      left.addEventListener('click', function() {
-        if (track.scrollLeft <= 10) {
-          track.scrollLeft = track.scrollWidth;
-        } else {
-          track.scrollLeft -= step;
-        }
-      });
-
-      // Click scroller item to change hero word
-      var wrapper = document.getElementById('heroRotate');
-      var words = wrapper ? wrapper.querySelectorAll('.hero-rotate__word') : [];
-      var heroWordTexts = [];
-      words.forEach(function(w) { heroWordTexts.push(w.textContent); });
-
-      var scrollerItems = track.querySelectorAll('.hero-scroller__item');
-      scrollerItems.forEach(function(item) {
-        item.addEventListener('click', function() {
-          var targetWord = this.getAttribute('data-hero-word');
-          if (!targetWord) return;
-          // Find matching hero word index
-          var idx = -1;
-          heroWordTexts.forEach(function(t, i) { if (t === targetWord) idx = i; });
-          if (idx < 0) return;
-          // Switch hero word
-          words.forEach(function(w) { w.classList.remove('active', 'exit'); });
-          words[idx].classList.add('active');
-          // Update active scroller item
-          scrollerItems.forEach(function(s) { s.classList.remove('active'); });
-          this.classList.add('active');
-        });
-      });
-    })();
 
     // ====================================================================
     // COUNTDOWN TIMER (synced across all instances - evergreen 3-day reset)
