@@ -716,7 +716,91 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
 }
 
 /* ============================================================
-   VIDEO REVIEWS SECTION
+   6 BRAIN SYSTEMS (tabbed, IM8 style)
+   ============================================================ */
+.brain-systems {
+  padding: clamp(60px, 8vw, 100px) 0;
+  background: var(--bg);
+}
+.brain-systems__head {
+  text-align: center;
+  margin-bottom: 36px;
+}
+.brain-systems__head h2 {
+  font-weight: 700;
+  font-size: clamp(28px, 4vw, 46px);
+  color: #fff;
+  margin-bottom: 12px;
+}
+.brain-systems__head p {
+  font-size: 17px;
+  color: var(--text-dim);
+  max-width: 560px;
+  margin: 0 auto;
+}
+.brain-systems__pills {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 28px;
+}
+.brain-pill {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+  font-size: 14px;
+  font-weight: 600;
+  padding: 10px 20px;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.brain-pill:hover { border-color: var(--teal); color: #fff; }
+.brain-pill.active {
+  background: var(--teal);
+  border-color: var(--teal);
+  color: #fff;
+}
+.brain-pill__icon { font-size: 16px; }
+.brain-systems__panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 32px;
+  max-width: 700px;
+  margin: 0 auto;
+  transition: opacity 0.3s;
+}
+.brain-panel__header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.brain-panel__icon { font-size: 28px; }
+.brain-panel__name {
+  font-size: 20px;
+  font-weight: 700;
+  color: #fff;
+}
+.brain-panel__desc {
+  font-size: 16px;
+  color: var(--text-dim);
+  line-height: 1.6;
+}
+.brain-systems__footer {
+  text-align: center;
+  margin-top: 24px;
+  font-size: 14px;
+  color: var(--text-mute);
+}
+
+/* ============================================================
+   VIDEO REVIEWS SECTION (kept but hidden)
    ============================================================ */
 .video-reviews {
   padding: clamp(60px, 8vw, 100px) 0;
@@ -812,8 +896,21 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
    ============================================================ */
 .stat-strip {
   padding: clamp(28px, 4vw, 44px) 0;
-  background: var(--cream);
-  border-bottom: 1px solid rgba(0,0,0,0.06);
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+}
+/* Shimmer effect on stat numbers */
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+.stat-strip__number {
+  background: linear-gradient(90deg, #00A6D2 0%, #33B8DD 25%, #8be0f5 50%, #33B8DD 75%, #00A6D2 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 4s linear infinite;
 }
 .stat-strip__grid {
   display: flex;
@@ -825,7 +922,7 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
   flex: 1;
   max-width: 200px;
   padding: 0 20px;
-  border-right: 1px solid rgba(0,0,0,0.08);
+  border-right: 1px solid var(--border);
 }
 .stat-strip__item:last-child { border-right: none; }
 .stat-strip__number {
@@ -839,7 +936,7 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
 .stat-strip__label {
   font-size: 11px;
   font-weight: 600;
-  color: var(--text-dark-mute);
+  color: var(--text-mute);
   text-transform: uppercase;
   letter-spacing: 0.06em;
   margin-top: 6px;
@@ -847,7 +944,7 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
 @media (max-width: 800px) {
   .stat-strip__grid { flex-wrap: wrap; }
   .stat-strip__item { flex: 0 0 50%; max-width: none; padding: 12px 20px; border-right: none; }
-  .stat-strip__item:nth-child(1), .stat-strip__item:nth-child(2) { border-bottom: 1px solid rgba(0,0,0,0.08); }
+  .stat-strip__item:nth-child(1), .stat-strip__item:nth-child(2) { border-bottom: 1px solid var(--border); }
 }
 
 /* ============================================================
@@ -2315,6 +2412,14 @@ body { padding-bottom: 90px; }
     html += '</div>';
     html += '</div></div>';
 
+    // STAT STRIP (between scroller and social proof)
+    html += '<section class="stat-strip"><div class="container"><div class="stat-strip__grid">';
+    html += '<div class="stat-strip__item"><div class="stat-strip__number">16</div><div class="stat-strip__label">Science-Backed Ingredients</div></div>';
+    html += '<div class="stat-strip__item"><div class="stat-strip__number">92%</div><div class="stat-strip__label">Feel Sharper*</div></div>';
+    html += '<div class="stat-strip__item"><div class="stat-strip__number">1,230</div><div class="stat-strip__label">Verified Reviews</div></div>';
+    html += '<div class="stat-strip__item"><div class="stat-strip__number">3M+</div><div class="stat-strip__label">Servings Delivered</div></div>';
+    html += '</div></div></section>';
+
     // SOCIAL PROOF (Brain.fm layout: left headline + logos, right twitter cards)
     html += '<section class="social-proof-section"><div class="container"><div class="social-proof__grid">';
 
@@ -2347,15 +2452,7 @@ body { padding-bottom: 90px; }
     html += '</div>';
     html += '</div></div></section>';
 
-    // ============================================================
-    // SECTION 4 - STAT STRIP
-    // ============================================================
-    html += '<section class="stat-strip"><div class="container"><div class="stat-strip__grid">';
-    html += '<div class="stat-strip__item"><div class="stat-strip__number">16</div><div class="stat-strip__label">Science-Backed Ingredients</div></div>';
-    html += '<div class="stat-strip__item"><div class="stat-strip__number">92%</div><div class="stat-strip__label">Feel Sharper*</div></div>';
-    html += '<div class="stat-strip__item"><div class="stat-strip__number">1,230</div><div class="stat-strip__label">Verified Reviews</div></div>';
-    html += '<div class="stat-strip__item"><div class="stat-strip__number">3M+</div><div class="stat-strip__label">Servings Delivered</div></div>';
-    html += '</div></div></section>';
+    // stat strip moved to between scroller and social proof
 
     // ============================================================
     // SECTION 4b - FOUNDER (condensed)
@@ -2382,26 +2479,20 @@ body { padding-bottom: 90px; }
     // ============================================================
     html += '<section class="feature-blocks"><div class="container">';
 
-    // Block 1: You can't hack your way out of this
-    html += '<div class="feature-block" style="grid-template-columns:1fr;text-align:center;max-width:800px;margin:0 auto;border-bottom:none;padding-bottom:0;">';
-    html += '<div class="feature-block__content" style="max-width:700px;margin:0 auto;">';
-    html += '<div class="feature-block__title" style="font-size:clamp(26px,4vw,40px);margin-bottom:16px;">You can\u2019t hack your way out of this</div>';
-    html += '<p style="font-size:17px;color:var(--teal);font-weight:500;margin-bottom:28px;">Cold plunges. Fasting. Better sleep. None of them fix what\u2019s actually breaking.</p>';
-    html += '<div style="text-align:left;font-size:16px;color:var(--text-dim);line-height:1.7;">';
-    html += '<p style="margin-bottom:16px;">When you run a business, lead a team, or operate under pressure every day, your brain is working harder than a normal brain.</p>';
-    html += '<p style="margin-bottom:16px;font-weight:600;color:var(--text);">Three things start to slip.</p>';
-    html += '<p style="margin-bottom:12px;"><strong style="color:var(--teal);">Dopamine runs out.</strong> Every decision burns it. Willpower doesn\u2019t refill it.</p>';
-    html += '<p style="margin-bottom:12px;"><strong style="color:var(--teal);">Blood flow slows.</strong> Stress narrows the vessels that carry oxygen to your brain. Less oxygen. Slower thinking.</p>';
-    html += '<p style="margin-bottom:12px;"><strong style="color:var(--teal);">Neuron connections weaken.</strong> The wiring that let you think fast gets worn down by constant stress and context-switching.</p>';
-    html += '<p style="margin-bottom:16px;">Productivity tools work around it. Recovery tools help you survive it. Nothing fixes it.</p>';
-    html += '<p style="margin-bottom:16px;">Every quarter you lose a little more sharpness. The 4pm decisions you used to nail start slipping. The edge you built your career on starts running slower.</p>';
-    html += '<p style="margin-bottom:4px;font-weight:700;color:var(--text);font-size:18px;">Genius Mind is built for all three.</p>';
-    html += '<p style="color:var(--text-mute);font-size:15px;">16 ingredients. Clinical doses. One capsule, taken daily.</p>';
-    html += '</div></div></div>';
-
-    // The Edge Gap chart
-    html += '<div class="feature-block" style="grid-template-columns:1fr;border-bottom:none;padding-top:20px;">';
-    html += '<div class="feature-block__visual" style="max-width:700px;margin:0 auto;width:100%;">';
+    // Block 1: You can't hack your way out of this (2-column: text left, chart right)
+    html += '<div class="feature-block">';
+    html += '<div class="feature-block__content">';
+    html += '<div class="feature-block__title" style="font-size:clamp(24px,3.5vw,36px);margin-bottom:12px;">You can\u2019t hack your way out of this</div>';
+    html += '<p style="font-size:15px;color:var(--teal);font-weight:500;margin-bottom:20px;">Cold plunges. Fasting. Better sleep. None of them fix what\u2019s actually breaking.</p>';
+    html += '<div style="font-size:15px;color:var(--text-dim);line-height:1.65;">';
+    html += '<p style="margin-bottom:12px;">When you operate under pressure every day, your brain works harder than a normal brain. Three things start to slip.</p>';
+    html += '<p style="margin-bottom:10px;"><strong style="color:var(--teal);">Dopamine runs out.</strong> Every decision burns it. Willpower doesn\u2019t refill it.</p>';
+    html += '<p style="margin-bottom:10px;"><strong style="color:var(--teal);">Blood flow slows.</strong> Stress narrows the vessels carrying oxygen to your brain.</p>';
+    html += '<p style="margin-bottom:10px;"><strong style="color:var(--teal);">Neuron connections weaken.</strong> Constant stress and context-switching wears down the wiring.</p>';
+    html += '<p style="margin-bottom:4px;font-weight:700;color:var(--text);font-size:16px;margin-top:16px;">Genius Mind is built for all three.</p>';
+    html += '<p style="color:var(--text-mute);font-size:14px;">16 ingredients. Clinical doses. One capsule, taken daily.</p>';
+    html += '</div></div>';
+    html += '<div class="feature-block__visual">';
     html += '<div style="text-align:center;margin-bottom:20px;">';
     html += '<p style="font-size:17px;color:var(--text-dim);line-height:1.5;">Your edge is an asset. Most people let it depreciate. <span style="color:var(--teal);font-weight:600;">A few protect it.</span></p>';
     html += '</div>';
@@ -2467,19 +2558,31 @@ body { padding-bottom: 90px; }
     });
     html += '</div></div>';
 
-    // Block 3: 3M+ servings
-    html += '<div class="feature-block">';
-    html += '<div class="feature-block__content">';
-    html += '<div class="feature-block__title" style="font-size:clamp(24px,3.5vw,36px);">With over <span style="color:var(--teal);">3,000,000 servings</span> sold and thousands of five-star reviews, we\u2019ve only just started.</div>';
-    html += '<p style="font-size:18px;color:var(--text-dim);line-height:1.6;margin-top:16px;">Your brain is your edge, so make sure to fuel it with everything it needs.</p>';
-    html += '</div>';
-    html += '<div class="feature-block__visual"><div class="tabs-visual" style="text-align:center;">';
-    html += '<div style="font-size:48px;margin-bottom:16px;">\uD83E\uDDE0</div>';
-    html += '<div style="font-size:clamp(40px,6vw,64px);font-weight:800;color:var(--teal);line-height:1;">3M+</div>';
-    html += '<div style="font-size:14px;color:var(--text-mute);font-weight:600;text-transform:uppercase;letter-spacing:0.08em;margin-top:8px;">Servings Delivered</div>';
-    html += '</div></div></div>';
-
     html += '</div></section>';
+
+    // ============================================================
+    // ANIMATED STATS (IM8 style countup)
+    // ============================================================
+    html += '<section style="padding:clamp(60px,8vw,100px) 0;background:var(--bg);"><div class="container">';
+    html += '<div style="text-align:center;margin-bottom:48px;">';
+    html += '<span style="display:inline-block;color:var(--teal);font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:16px;">Backed By Results</span>';
+    html += '<h2 style="font-size:clamp(28px,4vw,46px);font-weight:700;color:#fff;">Clinically Researched. <span style="color:var(--teal);">Customer Proven.</span></h2>';
+    html += '</div>';
+    html += '<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:24px;text-align:center;">';
+    var countStats = [
+      {label: 'More Focus', value: 89, suffix: '%', desc: 'Of users reported improved concentration within 2 weeks'},
+      {label: 'Better Memory', value: 76, suffix: '%', desc: 'Of users noticed sharper recall after 30 days'},
+      {label: 'Cleaner Energy', value: 82, suffix: '%', desc: 'Of users reduced caffeine intake after switching'},
+      {label: 'Less Brain Fog', value: 91, suffix: '%', desc: 'Of users experienced clearer thinking daily'}
+    ];
+    countStats.forEach(function(s) {
+      html += '<div style="padding:32px 16px;background:var(--surface);border:1px solid var(--border);border-radius:16px;">';
+      html += '<div style="font-size:13px;color:var(--teal);font-weight:600;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:12px;">' + esc(s.label) + '</div>';
+      html += '<div class="countup-num" data-target="' + s.value + '" data-suffix="' + s.suffix + '" style="font-size:clamp(40px,6vw,60px);font-weight:800;color:#fff;line-height:1;">0' + s.suffix + '</div>';
+      html += '<p style="font-size:13px;color:var(--text-dim);margin-top:12px;line-height:1.4;">' + esc(s.desc) + '</p>';
+      html += '</div>';
+    });
+    html += '</div></div></section>';
 
     // ============================================================
     // SECTION 7 - COMPARISON TABLE (IM8 style)
@@ -2607,34 +2710,33 @@ body { padding-bottom: 90px; }
     html += '</div></section>';
 
     // ============================================================
-    // VIDEO REVIEWS
+    // 6 BRAIN SYSTEMS (IM8 style tabbed section)
     // ============================================================
-    var playSvg = '<svg width="48" height="48" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="24" fill="rgba(0,0,0,0.5)"/><path d="M19 14.5v19l15-9.5-15-9.5z" fill="white"/></svg>';
-    html += '<section class="video-reviews"><div class="container">';
-    html += '<div class="video-reviews__head">';
-    html += '<h2>Real people. <em>Real results.</em></h2>';
-    html += '<p>Hear directly from Genius Mind operators.</p>';
-    html += '</div>';
-    html += '<div class="video-reviews__grid">';
-
-    var videoCards = [
-      {name: 'James T.', title: 'Genius Mind Changed My Life', img: 'https://i.pravatar.cc/400?img=12'},
-      {name: 'Sarah M.', title: 'Finally Found Focus', img: 'https://i.pravatar.cc/400?img=23'},
-      {name: 'Dr. Emily R.', title: 'Why I Recommend Genius Mind', img: 'https://i.pravatar.cc/400?img=35'}
+    var brainSystems = [
+      {icon: '\uD83E\uDDE0', name: 'Cognitive Function', desc: 'Ginkgo Biloba (50:1), Bacopa Monnieri (11:1), and Lion\u2019s Mane (4:1) work together to enhance cerebral blood flow, stimulate neural growth factor, and consolidate memory pathways.'},
+      {icon: '\u26A1', name: 'Energy & Alertness', desc: 'Guarana Seed provides sustained natural caffeine release, while B-Vitamins (B6 at 714% RI, B12 at 20,000% RI) fuel cellular energy production without crashes or jitters.'},
+      {icon: '\uD83C\uDFAF', name: 'Focus & Attention', desc: 'L-Tyrosine (100mg) is a direct dopamine precursor that enhances focus under stress. Paired with Choline (100mg) for acetylcholine production \u2013 your brain\u2019s focus neurotransmitter.'},
+      {icon: '\uD83D\uDEE1\uFE0F', name: 'Stress Resilience', desc: 'Panax Ginseng (20:1 extract) is a clinically-studied adaptogen that helps your brain perform under pressure. Phosphatidylserine (35mg) reduces cortisol and supports stress recovery.'},
+      {icon: '\uD83D\uDCDA', name: 'Memory & Recall', desc: 'Bacopa Monnieri (11:1 extract, 80mg) is one of the most researched memory herbs. Combined with Sage Leaf (4:1 extract) and Zinc (100% RI) for enhanced retention and recall speed.'},
+      {icon: '\uD83C\uDF3F', name: 'Neuroprotection', desc: 'Rosemary (5:1 extract) provides carnosic acid for long-term brain cell protection. Niacin (B3, 32mg) drives NAD+ production for cellular repair and cognitive longevity.'}
     ];
-    videoCards.forEach(function(v) {
-      html += '<div class="video-card">';
-      html += '<div class="video-card__thumb">';
-      html += '<img src="' + v.img + '" alt="' + esc(v.name) + '">';
-      html += '<div class="video-card__play">' + playSvg + '</div>';
-      html += '</div>';
-      html += '<div class="video-card__info">';
-      html += '<div class="video-card__name">' + esc(v.name) + '</div>';
-      html += '<div class="video-card__title">' + esc(v.title) + '</div>';
-      html += '</div></div>';
+    html += '<section class="brain-systems"><div class="container">';
+    html += '<div class="brain-systems__head">';
+    html += '<span style="display:inline-block;color:var(--teal);font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:16px;">Comprehensive Cognitive Support</span>';
+    html += '<h2>One capsule. Six brain systems. <span style="color:var(--teal);">Every base covered.</span></h2>';
+    html += '<p>Most people patch their brain health together with guesswork. Genius Mind gives your brain everything it needs in one daily serving.</p>';
+    html += '</div>';
+    html += '<div class="brain-systems__pills" id="brainPills">';
+    brainSystems.forEach(function(s, i) {
+      html += '<button class="brain-pill' + (i === 0 ? ' active' : '') + '" data-idx="' + i + '"><span class="brain-pill__icon">' + s.icon + '</span> ' + esc(s.name) + '</button>';
     });
-
-    html += '</div></div></section>';
+    html += '</div>';
+    html += '<div class="brain-systems__panel" id="brainPanel">';
+    html += '<div class="brain-panel__header"><span class="brain-panel__icon">' + brainSystems[0].icon + '</span><span class="brain-panel__name">' + esc(brainSystems[0].name) + '</span></div>';
+    html += '<p class="brain-panel__desc">' + esc(brainSystems[0].desc) + '</p>';
+    html += '</div>';
+    html += '<p class="brain-systems__footer">16 clinically-dosed ingredients across 6 cognitive systems in one daily serving.</p>';
+    html += '</div></section>';
 
     // ============================================================
     // SECTION 11 - REVIEWS (Trustpilot)
@@ -2886,6 +2988,61 @@ body { padding-bottom: 90px; }
           words[prev].classList.remove('exit');
         }, 500);
       }, 3000);
+    })();
+
+    // ====================================================================
+    // COUNTUP ANIMATION
+    // ====================================================================
+    (function() {
+      var nums = document.querySelectorAll('.countup-num');
+      if (!nums.length) return;
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            var el = entry.target;
+            observer.unobserve(el);
+            var target = parseInt(el.getAttribute('data-target'));
+            var suffix = el.getAttribute('data-suffix') || '';
+            var duration = 2000;
+            var start = performance.now();
+            function animate(now) {
+              var elapsed = now - start;
+              var progress = Math.min(elapsed / duration, 1);
+              var eased = 1 - Math.pow(1 - progress, 3);
+              el.textContent = Math.round(eased * target) + suffix;
+              if (progress < 1) requestAnimationFrame(animate);
+            }
+            requestAnimationFrame(animate);
+          }
+        });
+      }, {threshold: 0.5});
+      nums.forEach(function(el) { observer.observe(el); });
+    })();
+
+    // ====================================================================
+    // BRAIN SYSTEMS TABS
+    // ====================================================================
+    (function() {
+      var pills = document.querySelectorAll('.brain-pill');
+      var panel = document.getElementById('brainPanel');
+      if (!pills.length || !panel) return;
+      var systems = [
+        {icon: '\uD83E\uDDE0', name: 'Cognitive Function', desc: 'Ginkgo Biloba (50:1), Bacopa Monnieri (11:1), and Lion\u2019s Mane (4:1) work together to enhance cerebral blood flow, stimulate neural growth factor, and consolidate memory pathways.'},
+        {icon: '\u26A1', name: 'Energy & Alertness', desc: 'Guarana Seed provides sustained natural caffeine release, while B-Vitamins (B6 at 714% RI, B12 at 20,000% RI) fuel cellular energy production without crashes or jitters.'},
+        {icon: '\uD83C\uDFAF', name: 'Focus & Attention', desc: 'L-Tyrosine (100mg) is a direct dopamine precursor that enhances focus under stress. Paired with Choline (100mg) for acetylcholine production.'},
+        {icon: '\uD83D\uDEE1\uFE0F', name: 'Stress Resilience', desc: 'Panax Ginseng (20:1 extract) is a clinically-studied adaptogen that helps your brain perform under pressure. Phosphatidylserine (35mg) reduces cortisol and supports stress recovery.'},
+        {icon: '\uD83D\uDCDA', name: 'Memory & Recall', desc: 'Bacopa Monnieri (11:1 extract, 80mg) is one of the most researched memory herbs. Combined with Sage Leaf (4:1 extract) and Zinc (100% RI) for enhanced retention and recall speed.'},
+        {icon: '\uD83C\uDF3F', name: 'Neuroprotection', desc: 'Rosemary (5:1 extract) provides carnosic acid for long-term brain cell protection. Niacin (B3, 32mg) drives NAD+ production for cellular repair and cognitive longevity.'}
+      ];
+      pills.forEach(function(pill) {
+        pill.addEventListener('click', function() {
+          var idx = parseInt(this.getAttribute('data-idx'));
+          pills.forEach(function(p) { p.classList.remove('active'); });
+          this.classList.add('active');
+          var s = systems[idx];
+          panel.innerHTML = '<div class="brain-panel__header"><span class="brain-panel__icon">' + s.icon + '</span><span class="brain-panel__name">' + s.name + '</span></div><p class="brain-panel__desc">' + s.desc + '</p>';
+        });
+      });
     })();
 
     // ====================================================================
