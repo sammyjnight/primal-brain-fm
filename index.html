@@ -555,7 +555,10 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
   white-space: nowrap;
   flex-shrink: 0;
   transition: color 0.3s;
+  cursor: pointer;
 }
+.hero-scroller__item:hover { color: #fff; }
+.hero-scroller__item.active { color: var(--teal); }
 .hero-scroller__item svg {
   width: 16px; height: 16px;
   opacity: 0.5;
@@ -590,11 +593,9 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
   margin-bottom: 20px;
 }
 .social-proof__left h2 em {
-  font-style: normal;
-  color: var(--teal);
-  background: linear-gradient(135deg, #00A6D2, #0088b0);
-  padding: 0 0.1em;
-  border-radius: 4px;
+  font-style: italic;
+  color: var(--teal-warm);
+  background: none;
 }
 .social-proof__left p {
   font-size: 17px;
@@ -625,21 +626,36 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
 }
 /* Right side - stacked/offset cards */
 .social-proof__cards {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto;
   gap: 16px;
   position: relative;
 }
+.social-proof__cards .dark-review:nth-child(1) {
+  grid-column: 1;
+  grid-row: 1;
+}
 .social-proof__cards .dark-review:nth-child(2) {
-  margin-left: 60px;
+  grid-column: 2;
+  grid-row: 1 / 3;
+  align-self: center;
 }
 .social-proof__cards .dark-review:nth-child(3) {
-  margin-left: 20px;
+  grid-column: 1;
+  grid-row: 2;
 }
 @media (max-width: 800px) {
   .social-proof__grid { grid-template-columns: 1fr; }
-  .social-proof__cards .dark-review:nth-child(2),
-  .social-proof__cards .dark-review:nth-child(3) { margin-left: 0; }
+  .social-proof__cards {
+    grid-template-columns: 1fr;
+    max-width: 480px;
+    margin: 0 auto;
+  }
+  .social-proof__cards .dark-review:nth-child(2) {
+    grid-column: 1;
+    grid-row: auto;
+  }
 }
 .dark-review {
   background: linear-gradient(145deg, #1c2129, #161b22);
@@ -2180,8 +2196,18 @@ body { padding-bottom: 90px; }
     html += '<div class="hero-scroller"><div class="hero-scroller__inner">';
     html += '<button class="hero-scroller__arrow" id="scrollLeft">\u2039</button>';
     html += '<div class="hero-scroller__track" id="scrollTrack">';
-    benefits.forEach(function(b) {
-      html += '<div class="hero-scroller__item">' + b.icon + ' ' + esc(b.label) + '</div>';
+    var heroWordMap = {
+      'Deep Work': '2-hour window',
+      'Creativity': 'cognitive overload',
+      'Motivation': 'sprint-crash cycle',
+      'Sustained Focus': '3pm crash',
+      'Mental Energy': 'caffeine tolerance',
+      'Clarity': 'decision fatigue',
+      'Memory & Recall': 'decision fatigue',
+      'Long-Term Brain Health': 'cognitive overload'
+    };
+    benefits.forEach(function(b, i) {
+      html += '<div class="hero-scroller__item' + (i === 0 ? ' active' : '') + '" data-hero-word="' + esc(heroWordMap[b.label] || '') + '">' + b.icon + ' ' + esc(b.label) + '</div>';
     });
     html += '</div>';
     html += '<button class="hero-scroller__arrow" id="scrollRight">\u203A</button>';
@@ -2686,7 +2712,7 @@ body { padding-bottom: 90px; }
     })();
 
     // ====================================================================
-    // SCROLLER ARROWS (scroll + loop back)
+    // SCROLLER ARROWS + CLICK TO CHANGE HERO WORD
     // ====================================================================
     (function() {
       var track = document.getElementById('scrollTrack');
@@ -2707,6 +2733,30 @@ body { padding-bottom: 90px; }
         } else {
           track.scrollLeft -= step;
         }
+      });
+
+      // Click scroller item to change hero word
+      var wrapper = document.getElementById('heroRotate');
+      var words = wrapper ? wrapper.querySelectorAll('.hero-rotate__word') : [];
+      var heroWordTexts = [];
+      words.forEach(function(w) { heroWordTexts.push(w.textContent); });
+
+      var scrollerItems = track.querySelectorAll('.hero-scroller__item');
+      scrollerItems.forEach(function(item) {
+        item.addEventListener('click', function() {
+          var targetWord = this.getAttribute('data-hero-word');
+          if (!targetWord) return;
+          // Find matching hero word index
+          var idx = -1;
+          heroWordTexts.forEach(function(t, i) { if (t === targetWord) idx = i; });
+          if (idx < 0) return;
+          // Switch hero word
+          words.forEach(function(w) { w.classList.remove('active', 'exit'); });
+          words[idx].classList.add('active');
+          // Update active scroller item
+          scrollerItems.forEach(function(s) { s.classList.remove('active'); });
+          this.classList.add('active');
+        });
       });
     })();
 
