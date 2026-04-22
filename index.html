@@ -1548,57 +1548,57 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
 }
 .reviews-head h2 em { font-style: normal; font-weight: 500; color: var(--teal); }
 .reviews-head p { font-size: 17px; color: var(--text-dark-mute); }
-/* Trustpilot badge bar */
+/* Trustpilot badge - inline heading style like IM8 */
 .tp-badge {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
-  padding: 24px 32px;
-  background: #fff;
-  border: 1px solid rgba(0,0,0,0.06);
-  border-radius: 16px;
-  max-width: 380px;
-  margin: 0 auto 36px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+  gap: 6px;
+  padding: 0;
+  background: none;
+  border: none;
+  max-width: 600px;
+  margin: 0 auto 28px;
+  box-shadow: none;
 }
 .tp-badge__row {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
 }
 .tp-badge__label {
-  font-size: 20px;
+  font-size: clamp(24px, 3.5vw, 36px);
   font-weight: 700;
   color: var(--text-dark);
 }
 .tp-badge__stars {
   display: flex;
-  gap: 2px;
+  gap: 3px;
 }
 .tp-badge__star {
-  width: 30px; height: 30px;
+  width: 36px; height: 36px;
   background: #00b67a;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 3px;
 }
-.tp-badge__star svg { width: 16px; height: 16px; fill: #fff; }
+.tp-badge__star svg { width: 18px; height: 18px; fill: #fff; }
 .tp-badge__meta {
-  font-size: 13px;
+  font-size: 15px;
   color: var(--text-dark-mute);
   text-align: center;
 }
+.tp-badge__meta strong { color: var(--text-dark); }
 .tp-badge__tp-logo {
   display: inline-flex;
   align-items: center;
   gap: 4px;
   font-weight: 700;
-  font-size: 14px;
+  font-size: 16px;
   color: #191919;
 }
-.tp-badge__tp-logo svg { width: 18px; height: 18px; }
+.tp-badge__tp-logo svg { width: 20px; height: 20px; }
 /* Verified badge on review cards */
 .review-card .rc-verified {
   display: inline-flex;
@@ -1668,16 +1668,25 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
 .review-card .rc-reply {
   background: rgba(0,0,0,0.02);
   border-left: 3px solid rgba(0,0,0,0.08);
-  padding: 10px 12px;
+  padding: 12px 14px;
   margin-top: 12px;
   border-radius: 0 8px 8px 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   font-size: 12px;
   color: var(--text-dark-mute);
 }
+.review-card .rc-reply__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
 .review-card .rc-reply strong { color: var(--text-dark); font-weight: 600; }
+.review-card .rc-reply__text {
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--text-dark-mute);
+  margin: 0;
+}
 .review-card .rc-readmore {
   display: block;
   text-align: center;
@@ -2987,7 +2996,12 @@ body { padding-bottom: 90px; }
       html += '<div class="rc-meta"><strong>' + esc(r.name) + '</strong>, ' + esc(r.time) + '</div>';
       html += '<div class="title">' + esc(r.title) + '</div>';
       html += '<p class="body">' + esc(r.body) + '</p>';
-      html += '<div class="rc-reply"><span>\u21A9 <strong>Reply from Genius Mind</strong></span><span>' + esc(r.time) + '</span></div>';
+      if (r.reply) {
+        html += '<div class="rc-reply">';
+        html += '<div class="rc-reply__header"><span>\u21A9 <strong>Reply from Genius Mind</strong></span><span>' + esc(r.reply_time || r.time) + '</span></div>';
+        html += '<p class="rc-reply__text">' + esc(r.reply) + '</p>';
+        html += '</div>';
+      }
       html += '<a class="rc-readmore" href="#">Read more</a>';
       html += '</div>';
     });
