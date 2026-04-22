@@ -2823,33 +2823,7 @@ body { padding-bottom: 90px; }
     });
     html += '</div></div></section>';
 
-    // ============================================================
-    // SECTION 13 - COMPARISON TABLE
-    // ============================================================
-    html += '<section class="comparison"><div class="container">';
-    html += '<div class="comparison-head">';
-    html += '<h2>' + D.comparison.headline + '</h2>';
-    html += '<p>' + esc(D.comparison.subtitle) + '</p>';
-    html += '</div>';
-    html += '<div class="comparison-table-wrap"><table class="comparison-table"><thead><tr>';
-    html += '<th></th>';
-    D.comparison.columns.forEach(function(col, i) {
-      html += '<th' + (i === 0 ? ' class="us"' : '') + '>' + esc(col) + '</th>';
-    });
-    html += '</tr></thead><tbody>';
-    D.comparison.rows.forEach(function(row) {
-      html += '<tr><td>' + esc(row.feature) + '</td>';
-      row.values.forEach(function(val, i) {
-        var cls = i === 0 ? ' class="us"' : '';
-        if (val) {
-          html += '<td' + cls + '><span class="check">\u2713</span></td>';
-        } else {
-          html += '<td' + cls + '><span class="x">\u2715</span></td>';
-        }
-      });
-      html += '</tr>';
-    });
-    html += '</tbody></table></div></div></section>';
+    // SECTION 13 - COMPARISON TABLE (removed - duplicate of new comp table above)
 
     // ============================================================
     // SECTION 14 - EDITORIAL
