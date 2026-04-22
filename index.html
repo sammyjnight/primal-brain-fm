@@ -2558,10 +2558,14 @@ h2 em[style*="teal"], h2 span[style*="teal"],
   .ingredient-carousel__item { padding: 20px 12px 16px; }
 
   /* Comparison table mobile */
-  .comp-table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 0 -16px; padding: 0 16px; }
-  .comp-table { min-width: 560px; font-size: 13px; }
-  .comp-table th, .comp-table td { padding: 12px 10px; }
-  .comp-table td:first-child, .comp-table th:first-child { min-width: 160px; position: sticky; left: 0; background: #fff; z-index: 1; }
+  /* Comparison table mobile: hide Caffeine column, show 3 cols that fit */
+  .comp-table-scroll { overflow: visible; margin: 0; padding: 0; }
+  .comp-table { min-width: 0; font-size: 13px; table-layout: fixed; width: 100%; }
+  .comp-table th:nth-child(3), .comp-table td:nth-child(3) { display: none; }
+  .comp-table th, .comp-table td { padding: 12px 8px; }
+  .comp-table td:first-child, .comp-table th:first-child { width: 50%; }
+  .comp-table td:nth-child(2), .comp-table th:nth-child(2),
+  .comp-table td:nth-child(4), .comp-table th:nth-child(4) { width: 25%; }
 
   /* Stat strip: 2x2 grid */
   .stat-strip__grid { flex-wrap: wrap; }
@@ -3048,13 +3052,15 @@ body { padding-bottom: 90px; }
     // ============================================================
     html += '<section class="reviews" id="reviews"><div class="container">';
     html += '<div class="reviews-head">';
-    // Trustpilot badge - clean IM8 style
+    // Verified Reviews pill
+    html += '<div style="text-align:center;margin-bottom:20px;"><span style="display:inline-block;background:rgba(0,0,0,0.05);color:var(--text-dark);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;padding:8px 20px;border-radius:50px;">Verified Reviews</span></div>';
+    // Trustpilot badge
     var tpStar = '<div class="tp-badge__star"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>';
     var tpStarHalf = '<div class="tp-badge__star tp-badge__star--half"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>';
     html += '<div class="tp-badge">';
     html += '<div class="tp-badge__row"><span class="tp-badge__label">Excellent</span>';
     html += '<div class="tp-badge__stars">' + tpStar + tpStar + tpStar + tpStar + tpStarHalf + '</div></div>';
-    html += '<div class="tp-badge__meta">Rated <strong>4.7</strong> / 5 based on <a href="https://uk.trustpilot.com/review/geniusmind.co.uk" target="_blank"><strong>1,255 reviews</strong></a> on <span class="tp-badge__tp-logo"><svg viewBox="0 0 24 24" fill="#00b67a"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>Trustpilot</span></div>';
+    html += '<div class="tp-badge__meta">Rated <strong>4.7</strong> / 5 based on <a href="https://uk.trustpilot.com/review/justfloow.com" target="_blank"><strong>134 reviews</strong></a> on <span class="tp-badge__tp-logo"><svg viewBox="0 0 24 24" fill="#00b67a"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>Trustpilot</span></div>';
     html += '</div>';
     html += '</div>';
     // Review cards
