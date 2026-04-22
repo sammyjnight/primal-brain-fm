@@ -613,17 +613,16 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
   margin-bottom: 18px;
 }
 .social-proof__logos {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 14px 28px;
+  display: flex;
   align-items: center;
-  justify-items: start;
+  gap: clamp(20px, 4vw, 40px);
+  flex-wrap: wrap;
 }
-.social-proof__logos span {
-  font-size: clamp(18px, 2.5vw, 24px);
-  color: rgba(255,255,255,0.45);
-  white-space: nowrap;
-  line-height: 1;
+.social-proof__logos img {
+  height: clamp(18px, 2.5vw, 26px);
+  width: auto;
+  filter: brightness(0) invert(1);
+  opacity: 0.45;
 }
 /* Right side - stacked/offset cards */
 .social-proof__cards {
@@ -2672,10 +2671,10 @@ body { padding-bottom: 90px; }
     html += '<p>Genius Mind operators perform every day \u2013 see what they have to say.</p>';
     html += '<div class="social-proof__featured-label">Featured In</div>';
     html += '<div class="social-proof__logos">';
-    html += '<span style="font-family:Georgia,Times,serif;font-style:italic;font-weight:400;font-size:clamp(22px,3vw,30px);">Forbes</span>';
-    html += '<span style="font-family:Arial,Helvetica,sans-serif;font-weight:900;letter-spacing:0.15em;font-size:clamp(20px,2.5vw,26px);">BBC</span>';
-    html += '<span style="font-family:Georgia,Times,serif;font-style:italic;font-weight:700;letter-spacing:0.08em;font-size:clamp(20px,2.5vw,28px);">WIRED</span>';
-    html += '<span style="font-family:Arial,Helvetica,sans-serif;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;font-size:clamp(13px,1.8vw,16px);">Fast Company</span>';
+    html += '<img src="https://justfloow.com/cdn/shop/files/Forbes_logo_1_medium.svg?v=1729155439" alt="Forbes">';
+    html += '<img src="https://justfloow.com/cdn/shop/files/BBC_Logo_2021_1_medium.svg?v=1729155438" alt="BBC">';
+    html += '<img src="https://justfloow.com/cdn/shop/files/Wired_logo_1_medium.svg?v=1729155439" alt="WIRED">';
+    html += '<img src="https://justfloow.com/cdn/shop/files/Fast_Company_logo_1_medium.svg?v=1729155439" alt="Fast Company">';
     html += '</div></div>';
 
     // Right side - stacked cards
