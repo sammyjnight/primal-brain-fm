@@ -288,7 +288,7 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
    ============================================================ */
 .hero {
   position: relative;
-  padding: clamp(60px, 10vw, 120px) 0 clamp(70px, 10vw, 130px);
+  padding: clamp(60px, 10vw, 120px) 0 clamp(30px, 4vw, 50px);
   background: var(--bg);
   overflow: hidden;
 }
@@ -1002,15 +1002,15 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
    SECTION 5 - DATA-LED FEATURE BLOCKS (replaces why-built + problem)
    ============================================================ */
 .feature-blocks {
-  padding: clamp(40px, 6vw, 70px) 0;
+  padding: clamp(30px, 4vw, 50px) 0;
   background: var(--bg);
 }
 .feature-block {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: clamp(40px, 6vw, 80px);
+  gap: clamp(30px, 4vw, 60px);
   align-items: center;
-  padding: clamp(40px, 5vw, 70px) 0;
+  padding: clamp(30px, 4vw, 50px) 0;
   border-bottom: 1px solid var(--border);
 }
 .feature-block:last-child { border-bottom: none; }
@@ -2449,14 +2449,6 @@ body { padding-bottom: 90px; }
     html += '</div>';
     html += '</div></div>';
 
-    // STAT STRIP (between scroller and social proof)
-    html += '<section class="stat-strip"><div class="container"><div class="stat-strip__grid">';
-    html += '<div class="stat-strip__item"><div class="stat-strip__number">16</div><div class="stat-strip__label">Science-Backed Ingredients</div></div>';
-    html += '<div class="stat-strip__item"><div class="stat-strip__number">92%</div><div class="stat-strip__label">Feel Sharper*</div></div>';
-    html += '<div class="stat-strip__item"><div class="stat-strip__number">1,230</div><div class="stat-strip__label">Verified Reviews</div></div>';
-    html += '<div class="stat-strip__item"><div class="stat-strip__number">3M+</div><div class="stat-strip__label">Servings Delivered</div></div>';
-    html += '</div></div></section>';
-
     // SOCIAL PROOF (Brain.fm layout: left headline + logos, right twitter cards)
     html += '<section class="social-proof-section"><div class="container"><div class="social-proof__grid">';
 
@@ -2489,7 +2481,13 @@ body { padding-bottom: 90px; }
     html += '</div>';
     html += '</div></div></section>';
 
-    // stat strip moved to between scroller and social proof
+    // STAT STRIP (after social proof)
+    html += '<section class="stat-strip"><div class="container"><div class="stat-strip__grid">';
+    html += '<div class="stat-strip__item"><div class="stat-strip__number">16</div><div class="stat-strip__label">Science-Backed Ingredients</div></div>';
+    html += '<div class="stat-strip__item"><div class="stat-strip__number">92%</div><div class="stat-strip__label">Feel Sharper*</div></div>';
+    html += '<div class="stat-strip__item"><div class="stat-strip__number">1,230</div><div class="stat-strip__label">Verified Reviews</div></div>';
+    html += '<div class="stat-strip__item"><div class="stat-strip__number">3M+</div><div class="stat-strip__label">Servings Delivered</div></div>';
+    html += '</div></div></section>';
 
     // ============================================================
     // SECTION 4b - FOUNDER (condensed)
@@ -2626,33 +2624,33 @@ body { padding-bottom: 90px; }
     // ============================================================
     html += '<section class="comp-table-section" id="ingredients"><div class="container">';
     html += '<div class="comp-table-section__head">';
-    html += '<h2>Dosed for operators, <em>not shelves</em></h2>';
-    html += '<p>High-ratio extracts and clinical dosages where others use standard powders. Here\u2019s the difference.</p>';
+    html += '<h2>How Genius Mind <em>compares</em></h2>';
+    html += '<p>Built for operators. Not shelves.</p>';
     html += '</div>';
     html += '<table class="comp-table">';
-    html += '<thead><tr><th>Ingredient</th><th><img src="https://cdn.shopify.com/s/files/1/0594/8892/7953/files/gm-logo-edited.png" alt="Genius Mind" style="width:80px;height:96px;object-fit:contain;display:block;margin:0 auto 8px;border-radius:8px;">Genius Mind</th><th><img src="https://cdn.shopify.com/s/files/1/0594/8892/7953/files/other-nootropics.png" alt="Other Nootropics" style="width:80px;height:96px;object-fit:contain;display:block;margin:0 auto 8px;border-radius:8px;opacity:0.6;">Other Nootropics</th></tr></thead>';
+    html += '<thead><tr><th></th><th style="color:var(--teal);font-weight:800;">Genius Mind</th><th>Caffeine</th><th>Generic Nootropics</th></tr></thead>';
     html += '<tbody>';
     var compRows = [
-      {name:'Ginkgo Biloba', gm:'120mg', gmNote:'50:1 Extract', diff:'+50%', other:'60\u201380mg', otherNote:'Standard powder', has:true},
-      {name:'Bacopa Monnieri', gm:'80mg', gmNote:'11:1 Extract', diff:'11x stronger', other:'150mg', otherNote:'Standard 1:1 powder', has:true},
-      {name:'Panax Ginseng', gm:'100mg', gmNote:'20:1 Extract', diff:'5x stronger', other:'50\u2013100mg', otherNote:'Standard 4:1 extract', has:true},
-      {name:'Lion\u2019s Mane', gm:'80mg', gmNote:'4:1 Extract', diff:'4x stronger', other:'250mg', otherNote:'Standard powder', has:true},
-      {name:'L-Tyrosine', gm:'100mg', gmNote:'Clinical dose', diff:'+33%', other:'50\u201375mg', otherNote:'Sub-clinical', has:true},
-      {name:'Vitamin B12', gm:'500\u00B5g', gmNote:'Methylcobalamin', diff:'+900%', other:'10\u201350\u00B5g', otherNote:'Cyanocobalamin', has:true},
-      {name:'Phosphatidylserine', gm:'35mg', gmNote:'Included', diff:'Exclusive', other:'\u2013', otherNote:'Not included', has:false},
-      {name:'Sage Leaf Extract', gm:'75mg', gmNote:'4:1 Extract', diff:'Exclusive', other:'\u2013', otherNote:'Not included', has:false},
-      {name:'Rosemary Extract', gm:'20mg', gmNote:'5:1 Extract', diff:'Exclusive', other:'\u2013', otherNote:'Not included', has:false},
-      {name:'Full Dose Disclosure', gm:'Yes', gmNote:'Every ingredient listed', diff:'', other:'Rarely', otherNote:'Proprietary blends', has:false}
+      {feature:'Sustained decision quality all day', gm:true, c2:false, c3:false},
+      {feature:'No crash or withdrawal', gm:true, c2:false, c3:false},
+      {feature:'Supports dopamine production', gm:true, c2:false, c3:false},
+      {feature:'Extends peak cognitive window', gm:true, c2:false, c3:false},
+      {feature:'Compound effect over weeks', gm:true, c2:false, c3:false},
+      {feature:'16 clinically-dosed ingredients', gm:true, c2:false, c3:false},
+      {feature:'No tolerance build-up', gm:true, c2:false, c3:true},
+      {feature:'No prescription required', gm:true, c2:true, c3:true},
+      {feature:'Full dose transparency', gm:true, c2:true, c3:false},
+      {feature:'90-day money-back guarantee', gm:true, c2:false, c3:false}
     ];
     compRows.forEach(function(row) {
       html += '<tr>';
-      html += '<td class="ct-ingredient">' + row.name + '</td>';
-      html += '<td><span class="ct-check">\u2713</span> <span class="ct-dose">' + row.gm + '</span><span class="ct-note">' + row.gmNote + '</span>' + (row.diff ? '<span class="ct-diff">' + row.diff + '</span>' : '') + '</td>';
-      html += '<td><span class="' + (row.has ? 'ct-check' : 'ct-cross') + '">' + (row.has ? '\u2713' : '\u2717') + '</span> <span class="ct-other-dose">' + row.other + '</span><span class="ct-note">' + row.otherNote + '</span></td>';
+      html += '<td class="ct-ingredient">' + row.feature + '</td>';
+      html += '<td><span class="ct-check">\u2713</span></td>';
+      html += '<td><span class="' + (row.c2 ? 'ct-check' : 'ct-cross') + '">' + (row.c2 ? '\u2713' : '\u2717') + '</span></td>';
+      html += '<td><span class="' + (row.c3 ? 'ct-check' : 'ct-cross') + '">' + (row.c3 ? '\u2713' : '\u2717') + '</span></td>';
       html += '</tr>';
     });
     html += '</tbody></table>';
-    html += '<div style="text-align:center;margin-top:24px;"><p style="font-size:12px;color:var(--text-dark-mute);">Comparison based on publicly available label data from leading UK nootropic supplements.</p></div>';
     html += '</div></section>';
 
     // ============================================================
