@@ -1153,40 +1153,50 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
   width: 36px; flex-shrink: 0;
 }
 /* Ingredient highlight grid */
+.ingredient-grid-wrap {
+  position: relative;
+}
 .ingredient-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 14px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
 }
 .ingredient-grid__item {
-  background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(255,255,255,0.06);
+  background: var(--surface);
+  border: 1px solid var(--border);
   border-radius: 14px;
-  padding: 30px 16px 22px;
+  padding: 20px 12px 16px;
   text-align: center;
+  aspect-ratio: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 .ingredient-grid__icon {
-  width: 64px;
-  height: 64px;
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
   background: rgba(255,255,255,0.06);
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto 16px;
-  font-size: 24px;
+  margin-bottom: 10px;
   color: var(--teal);
 }
 .ingredient-grid__name {
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 700;
-  color: rgba(255,255,255,0.7);
+  color: #fff;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
-  margin-top: 12px;
+  letter-spacing: 0.06em;
+  line-height: 1.3;
 }
 .ingredient-grid__dose {
-  display: none;
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--teal);
+  margin-top: 4px;
 }
 .ingredient-grid__ratio {
   font-size: 11px;
@@ -2477,8 +2487,10 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
   }
   .brain-pill { justify-content: center; font-size: 13px; padding: 10px 12px; }
 
-  /* Ingredient grid: 2 cols on mobile */
-  .ingredient-grid { grid-template-columns: 1fr 1fr; }
+  /* Ingredient grid: horizontal scroll on mobile */
+  .ingredient-grid-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; scroll-snap-type: x mandatory; }
+  .ingredient-grid { display: flex; gap: 12px; min-width: max-content; }
+  .ingredient-grid__item { min-width: 120px; aspect-ratio: 1; scroll-snap-align: start; flex-shrink: 0; }
 
   /* Comparison table mobile */
   .comp-table-section { overflow-x: auto; -webkit-overflow-scrolling: touch; }
@@ -2733,22 +2745,34 @@ body { padding-bottom: 90px; }
     html += '<a href="#" style="color:var(--teal);font-weight:600;font-size:14px;text-decoration:underline;text-underline-offset:3px;">See latest test results \u2192</a>';
     html += '</div></div>';
     html += '<div class="feature-block__visual">';
+    html += '<div class="ingredient-grid-wrap">';
     html += '<div class="ingredient-grid">';
-    var ingredientIcons = [
-      {name: 'L-Tyrosine', svg: '<svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#00A6D2" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><line x1="12" y1="5" x2="12" y2="1"/><line x1="12" y1="23" x2="12" y2="19"/><line x1="5" y1="12" x2="1" y2="12"/><line x1="23" y1="12" x2="19" y2="12"/><line x1="7.8" y1="7.8" x2="5" y2="5"/><line x1="19" y1="19" x2="16.2" y2="16.2"/><line x1="7.8" y1="16.2" x2="5" y2="19"/><line x1="19" y1="5" x2="16.2" y2="7.8"/></svg>'},
-      {name: "Lion\u2019s Mane", svg: '<svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#00A6D2" stroke-width="1.5"><circle cx="12" cy="8" r="6"/><path d="M8 14c-2 2-2 6 0 8"/><path d="M16 14c2 2 2 6 0 8"/><path d="M12 14v8"/></svg>'},
-      {name: 'Bacopa', svg: '<svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#00A6D2" stroke-width="1.5"><path d="M12 3c-3 4-7 6-7 11a7 7 0 1014 0c0-5-4-7-7-11z"/><path d="M12 14v6"/><path d="M9 17l3-3 3 3"/></svg>'},
-      {name: 'Ginkgo 50:1', svg: '<svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#00A6D2" stroke-width="1.5"><path d="M12 22V12"/><path d="M8 12c-4-2-6-7-3-11 2 4 5 5 7 5s5-1 7-5c3 4 1 9-3 11"/></svg>'},
-      {name: 'Phosphatidylserine', svg: '<svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#00A6D2" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="1.5"/></svg>'},
-      {name: 'B-Complex', svg: '<svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#00A6D2" stroke-width="1.5"><path d="M13 2L5 14h6l-1 8 8-12h-6z"/></svg>'}
+    var allIngredients = [
+      {name: 'L-Tyrosine', dose: '100mg', icon: '\u2600\uFE0F'},
+      {name: "Lion\u2019s Mane", dose: '80mg \u00B7 4:1', icon: '\uD83E\uDDB8'},
+      {name: 'Bacopa', dose: '80mg \u00B7 11:1', icon: '\uD83C\uDF3F'},
+      {name: 'Ginkgo Biloba', dose: '120mg \u00B7 50:1', icon: '\uD83C\uDF42'},
+      {name: 'Panax Ginseng', dose: '100mg \u00B7 20:1', icon: '\uD83C\uDF31'},
+      {name: 'Guarana Seed', dose: '200mg', icon: '\u2615'},
+      {name: 'Choline', dose: '100mg', icon: '\uD83E\uDDE0'},
+      {name: 'Phosphatidyl-serine', dose: '35mg', icon: '\uD83D\uDEE1\uFE0F'},
+      {name: 'Vitamin B6', dose: '10mg \u00B7 714% RI', icon: '\u26A1'},
+      {name: 'Vitamin B12', dose: '500\u03BCg \u00B7 20000%', icon: '\uD83D\uDD0B'},
+      {name: 'Niacin B3', dose: '32mg', icon: '\uD83D\uDD25'},
+      {name: 'Sage Leaf', dose: '4:1 Extract', icon: '\uD83C\uDF3F'},
+      {name: 'Rosemary', dose: '5:1 Extract', icon: '\uD83C\uDF3F'},
+      {name: 'Zinc', dose: '10mg \u00B7 100% RI', icon: '\uD83D\uDEE1\uFE0F'},
+      {name: 'Iron', dose: '14mg \u00B7 100% RI', icon: '\u2B50'},
+      {name: 'Vitamin B1', dose: '12mg \u00B7 1091% RI', icon: '\u26A1'}
     ];
-    ingredientIcons.forEach(function(item) {
+    allIngredients.forEach(function(item) {
       html += '<div class="ingredient-grid__item">';
-      html += '<div class="ingredient-grid__icon">' + item.svg + '</div>';
+      html += '<div class="ingredient-grid__icon" style="font-size:22px;">' + item.icon + '</div>';
       html += '<div class="ingredient-grid__name">' + item.name + '</div>';
+      html += '<div class="ingredient-grid__dose">' + item.dose + '</div>';
       html += '</div>';
     });
-    html += '</div>';
+    html += '</div></div>';
     html += '</div></div>';
 
     html += '</div></section>';
@@ -3080,8 +3104,7 @@ body { padding-bottom: 90px; }
       });
       html += '</ul>';
       // CTA
-      var btnClass = isFeatured ? 'btn' : 'btn btn-ghost';
-      html += '<a href="' + (card.url || '#') + '" class="' + btnClass + '">' + esc(card.cta) + ' <span class="btn-arrow">\u2192</span></a>';
+      html += '<a href="' + (card.url || '#') + '" class="btn">' + esc(card.cta) + ' <span class="btn-arrow">\u2192</span></a>';
       // Stock
       if (card.stock) {
         html += '<div class="stock-row"><strong>\u26A0 Low stock</strong> - ' + esc(card.stock.replace(/^Low stock - /, '')) + '</div>';
