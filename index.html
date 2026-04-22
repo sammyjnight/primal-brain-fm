@@ -742,8 +742,8 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
    ============================================================ */
 .stat-strip {
   padding: clamp(28px, 4vw, 44px) 0;
-  background: var(--surface);
-  border-bottom: 1px solid var(--border);
+  background: var(--cream);
+  border-bottom: 1px solid rgba(0,0,0,0.06);
 }
 .stat-strip__grid {
   display: flex;
@@ -755,7 +755,7 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
   flex: 1;
   max-width: 200px;
   padding: 0 20px;
-  border-right: 1px solid var(--border);
+  border-right: 1px solid rgba(0,0,0,0.08);
 }
 .stat-strip__item:last-child { border-right: none; }
 .stat-strip__number {
@@ -769,7 +769,7 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
 .stat-strip__label {
   font-size: 11px;
   font-weight: 600;
-  color: var(--text-mute);
+  color: var(--text-dark-mute);
   text-transform: uppercase;
   letter-spacing: 0.06em;
   margin-top: 6px;
@@ -777,7 +777,7 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
 @media (max-width: 800px) {
   .stat-strip__grid { flex-wrap: wrap; }
   .stat-strip__item { flex: 0 0 50%; max-width: none; padding: 12px 20px; border-right: none; }
-  .stat-strip__item:nth-child(1), .stat-strip__item:nth-child(2) { border-bottom: 1px solid var(--border); }
+  .stat-strip__item:nth-child(1), .stat-strip__item:nth-child(2) { border-bottom: 1px solid rgba(0,0,0,0.08); }
 }
 
 /* ============================================================
@@ -2314,20 +2314,24 @@ body { padding-bottom: 90px; }
     html += '</ul></div>';
     html += '<div class="feature-block__visual"><div class="mini-chart">';
     html += '<div class="mini-chart__title">Cognitive Performance Across The Day</div>';
-    html += '<svg viewBox="0 0 400 180" fill="none">';
-    html += '<defs><linearGradient id="tealGrad" x1="0" y1="0" x2="400" y2="0"><stop offset="0%" stop-color="#00A6D2" stop-opacity="0.25"/><stop offset="100%" stop-color="#00A6D2" stop-opacity="0.05"/></linearGradient>';
-    html += '<linearGradient id="redGrad" x1="0" y1="0" x2="400" y2="0"><stop offset="0%" stop-color="#E8283B" stop-opacity="0.1"/><stop offset="100%" stop-color="#E8283B" stop-opacity="0.03"/></linearGradient></defs>';
-    // Without GM - clear declining dashed line with red-ish fill
-    html += '<path d="M0 150 L60 140 L120 80 L180 45 L220 42 L260 70 L320 120 L380 148 L400 155" stroke="#E8283B" stroke-width="2.5" fill="none" stroke-dasharray="8 5" opacity="0.7"/>';
-    html += '<path d="M0 150 L60 140 L120 80 L180 45 L220 42 L260 70 L320 120 L380 148 L400 155 L400 170 L0 170Z" fill="url(#redGrad)"/>';
-    html += '<text x="365" y="145" fill="#E8283B" font-size="10" font-weight="600" opacity="0.8">Without</text>';
+    html += '<svg viewBox="0 0 400 200" fill="none">';
+    html += '<defs><linearGradient id="tealGrad" x1="0" y1="0" x2="400" y2="0"><stop offset="0%" stop-color="#00A6D2" stop-opacity="0.2"/><stop offset="100%" stop-color="#00A6D2" stop-opacity="0.05"/></linearGradient>';
+    html += '<linearGradient id="redGrad" x1="0" y1="0" x2="400" y2="0"><stop offset="0%" stop-color="#E8283B" stop-opacity="0.08"/><stop offset="100%" stop-color="#E8283B" stop-opacity="0.02"/></linearGradient></defs>';
+    // Without GM - declining dashed line
+    html += '<path d="M20 160 L80 148 L140 90 L200 55 L240 52 L280 80 L340 130 L380 155 L395 162" stroke="#E8283B" stroke-width="2" fill="none" stroke-dasharray="8 5" opacity="0.6"/>';
+    html += '<path d="M20 160 L80 148 L140 90 L200 55 L240 52 L280 80 L340 130 L380 155 L395 162 L395 185 L20 185Z" fill="url(#redGrad)"/>';
     // With GM - solid teal line staying high
-    html += '<path d="M0 150 L60 125 L120 65 L180 35 L220 28 L260 25 L320 28 L380 30 L400 30" stroke="#00A6D2" stroke-width="3" fill="none"/>';
-    html += '<path d="M0 150 L60 125 L120 65 L180 35 L220 28 L260 25 L320 28 L380 30 L400 30 L400 170 L0 170Z" fill="url(#tealGrad)"/>';
-    html += '<text x="365" y="22" fill="#00A6D2" font-size="10" font-weight="700">With GM</text>';
-    // Annotation for the gap
-    html += '<line x1="300" y1="28" x2="300" y2="115" stroke="rgba(255,255,255,0.15)" stroke-width="1" stroke-dasharray="3 3"/>';
-    html += '<text x="308" y="75" fill="rgba(255,255,255,0.4)" font-size="9" font-weight="600">The gap</text>';
+    html += '<path d="M20 160 L80 135 L140 75 L200 45 L240 38 L280 35 L340 38 L380 40 L395 40" stroke="#00A6D2" stroke-width="3" fill="none"/>';
+    html += '<path d="M20 160 L80 135 L140 75 L200 45 L240 38 L280 35 L340 38 L380 40 L395 40 L395 185 L20 185Z" fill="url(#tealGrad)"/>';
+    // Labels with background rects for readability
+    html += '<rect x="300" y="24" width="90" height="18" rx="4" fill="rgba(0,166,210,0.2)"/>';
+    html += '<text x="345" y="37" fill="#00A6D2" font-size="11" font-weight="700" text-anchor="middle">With GM</text>';
+    html += '<rect x="300" y="148" width="90" height="18" rx="4" fill="rgba(232,40,59,0.15)"/>';
+    html += '<text x="345" y="161" fill="#E8283B" font-size="11" font-weight="700" text-anchor="middle">Without</text>';
+    // Gap annotation
+    html += '<line x1="280" y1="38" x2="280" y2="78" stroke="rgba(255,255,255,0.25)" stroke-width="1" stroke-dasharray="3 3"/>';
+    html += '<rect x="262" y="52" width="36" height="16" rx="4" fill="var(--surface)"/>';
+    html += '<text x="280" y="63" fill="rgba(255,255,255,0.6)" font-size="10" font-weight="700" text-anchor="middle">Gap</text>';
     html += '</svg>';
     html += '<div class="mini-chart__labels"><span>6am</span><span>9am</span><span>12pm</span><span>3pm</span><span>6pm</span><span>9pm</span></div>';
     html += '</div></div></div>';
@@ -2358,21 +2362,16 @@ body { padding-bottom: 90px; }
     });
     html += '</div></div>';
 
-    // Block 3: Built for 47-tab days
+    // Block 3: 3M+ servings
     html += '<div class="feature-block">';
     html += '<div class="feature-block__content">';
-    html += '<div class="feature-block__stat">Built for 47-tab days</div>';
-    html += '<div class="feature-block__title">When your brain is your entire business</div>';
-    html += '<ul class="feature-block__bullets">';
-    html += '<li>Dopamine regulation at the source, not stimulant dumping</li>';
-    html += '<li>Compound effect \u2013 gets stronger over weeks, not weaker</li>';
-    html += '</ul></div>';
-    html += '<div class="feature-block__visual"><div class="tabs-visual">';
-    html += '<div style="font-size:48px;margin-bottom:16px;text-align:center;">\uD83E\uDDE0</div>';
-    html += '<div style="font-size:18px;color:var(--text-dim);font-weight:500;line-height:1.6;text-align:center;">';
-    html += '47 open tabs. 12 Slack threads.<br>3 calls before lunch.<br><br>';
-    html += '<span style="font-style:italic;opacity:0.7;">This is your Tuesday.<br>Genius Mind was built for it.</span>';
+    html += '<div class="feature-block__title" style="font-size:clamp(24px,3.5vw,36px);">With over <span style="color:var(--teal);">3,000,000 servings</span> sold and thousands of five-star reviews, we\u2019ve only just started.</div>';
+    html += '<p style="font-size:18px;color:var(--text-dim);line-height:1.6;margin-top:16px;">Your brain is your edge, so make sure to fuel it with everything it needs.</p>';
     html += '</div>';
+    html += '<div class="feature-block__visual"><div class="tabs-visual" style="text-align:center;">';
+    html += '<div style="font-size:48px;margin-bottom:16px;">\uD83E\uDDE0</div>';
+    html += '<div style="font-size:clamp(40px,6vw,64px);font-weight:800;color:var(--teal);line-height:1;">3M+</div>';
+    html += '<div style="font-size:14px;color:var(--text-mute);font-weight:600;text-transform:uppercase;letter-spacing:0.08em;margin-top:8px;">Servings Delivered</div>';
     html += '</div></div></div>';
 
     html += '</div></section>';
@@ -2386,7 +2385,7 @@ body { padding-bottom: 90px; }
     html += '<p>High-ratio extracts and clinical dosages where others use standard powders. Here\u2019s the difference.</p>';
     html += '</div>';
     html += '<table class="comp-table">';
-    html += '<thead><tr><th>Ingredient</th><th>Genius Mind</th><th>Other Nootropics</th></tr></thead>';
+    html += '<thead><tr><th>Ingredient</th><th><img src="https://cdn.shopify.com/s/files/1/0594/8892/7953/files/gm-logo-edited.png" alt="Genius Mind" style="width:80px;height:96px;object-fit:contain;display:block;margin:0 auto 8px;border-radius:8px;">Genius Mind</th><th><img src="https://cdn.shopify.com/s/files/1/0594/8892/7953/files/other-nootropics.png" alt="Other Nootropics" style="width:80px;height:96px;object-fit:contain;display:block;margin:0 auto 8px;border-radius:8px;opacity:0.6;">Other Nootropics</th></tr></thead>';
     html += '<tbody>';
     var compRows = [
       {name:'Ginkgo Biloba', gm:'120mg', gmNote:'50:1 Extract', diff:'+50%', other:'60\u201380mg', otherNote:'Standard powder', has:true},
@@ -2464,10 +2463,11 @@ body { padding-bottom: 90px; }
     html += '<path d="M60 210 C120 200, 180 180, 220 150 C260 120, 340 85, 420 65 C500 50, 580 42, 660 38" stroke="#00A6D2" stroke-width="3" fill="none"/>';
     html += '<path d="M60 210 C120 200, 180 180, 220 150 C260 120, 340 85, 420 65 C500 50, 580 42, 660 38 L660 240 L60 240Z" fill="url(#graphGrad)"/>';
     // Annotation dots
-    html += '<circle cx="140" cy="195" r="6" fill="#00A6D2"/><text x="140" y="185" fill="#00A6D2" font-size="9" font-weight="600" text-anchor="middle">Sharper focus</text>';
-    html += '<circle cx="280" cy="130" r="6" fill="#00A6D2"/><text x="280" y="120" fill="#00A6D2" font-size="9" font-weight="600" text-anchor="middle">3pm wall gone</text>';
-    html += '<circle cx="420" cy="65" r="6" fill="#00A6D2"/><text x="420" y="55" fill="#00A6D2" font-size="9" font-weight="600" text-anchor="middle">Sprint-crash breaks</text>';
-    html += '<circle cx="580" cy="40" r="6" fill="#00A6D2"/><text x="580" y="30" fill="#00A6D2" font-size="9" font-weight="600" text-anchor="middle">New baseline</text>';
+    // Annotation dots with background labels
+    html += '<circle cx="140" cy="195" r="5" fill="#00A6D2"/><rect x="90" y="173" width="100" height="16" rx="4" fill="rgba(0,166,210,0.2)"/><text x="140" y="184" fill="#00A6D2" font-size="10" font-weight="700" text-anchor="middle">Sharper focus</text>';
+    html += '<circle cx="280" cy="130" r="5" fill="#00A6D2"/><rect x="225" y="108" width="110" height="16" rx="4" fill="rgba(0,166,210,0.2)"/><text x="280" y="119" fill="#00A6D2" font-size="10" font-weight="700" text-anchor="middle">3pm wall gone</text>';
+    html += '<circle cx="420" cy="65" r="5" fill="#00A6D2"/><rect x="350" y="43" width="140" height="16" rx="4" fill="rgba(0,166,210,0.2)"/><text x="420" y="54" fill="#00A6D2" font-size="10" font-weight="700" text-anchor="middle">Sprint-crash breaks</text>';
+    html += '<circle cx="580" cy="40" r="5" fill="#00A6D2"/><rect x="530" y="18" width="100" height="16" rx="4" fill="rgba(0,166,210,0.2)"/><text x="580" y="29" fill="#00A6D2" font-size="10" font-weight="700" text-anchor="middle">New baseline</text>';
     // X-axis labels
     html += '<text x="80" y="258" fill="#8a8aa0" font-size="10" text-anchor="middle">Day 1</text>';
     html += '<text x="180" y="258" fill="#8a8aa0" font-size="10" text-anchor="middle">Week 1</text>';
