@@ -535,10 +535,13 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
 .hero-scroller__track {
   display: flex;
   gap: 0;
-  overflow: hidden;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
   flex: 1;
-  position: relative;
 }
+.hero-scroller__track::-webkit-scrollbar { display: none; }
 .hero-scroller__item {
   display: flex;
   align-items: center;
@@ -563,60 +566,80 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
 }
 
 /* ============================================================
-   FEATURED IN
+   SOCIAL PROOF SECTION (Brain.fm layout: left text + right cards)
    ============================================================ */
-.featured-in {
-  padding: 40px 0 20px;
+.social-proof-section {
+  padding: clamp(60px, 8vw, 100px) 0;
   background: var(--bg);
-  text-align: center;
+  overflow: hidden;
 }
-.featured-in__label {
+.social-proof__grid {
+  display: grid;
+  grid-template-columns: 0.45fr 0.55fr;
+  gap: clamp(40px, 5vw, 80px);
+  align-items: center;
+}
+.social-proof__left {}
+.social-proof__left h2 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 800;
+  font-size: clamp(36px, 5vw, 64px);
+  color: #fff;
+  line-height: 1.0;
+  letter-spacing: -0.03em;
+  margin-bottom: 20px;
+}
+.social-proof__left h2 em {
+  font-style: normal;
+  color: var(--teal);
+  background: linear-gradient(135deg, #00A6D2, #0088b0);
+  padding: 0 0.1em;
+  border-radius: 4px;
+}
+.social-proof__left p {
+  font-size: 17px;
+  color: var(--text-dim);
+  line-height: 1.5;
+  margin-bottom: 32px;
+}
+.social-proof__featured-label {
   font-size: 11px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.12em;
   color: var(--text-mute);
-  margin-bottom: 24px;
+  margin-bottom: 18px;
 }
-.featured-in__logos {
+.social-proof__logos {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: clamp(30px, 5vw, 60px);
+  gap: clamp(20px, 3vw, 40px);
   flex-wrap: wrap;
-  opacity: 0.4;
+  opacity: 0.35;
 }
-.featured-in__logos span {
+.social-proof__logos span {
   font-family: 'Inter', sans-serif;
   font-weight: 800;
-  font-size: clamp(18px, 2.5vw, 26px);
+  font-size: clamp(16px, 2vw, 22px);
   color: #fff;
-  letter-spacing: -0.02em;
 }
-
-/* ============================================================
-   TWITTER-STYLE DARK REVIEW CARDS
-   ============================================================ */
-.dark-reviews {
-  padding: 20px 0 clamp(60px, 8vw, 80px);
-  background: var(--bg);
+/* Right side - stacked/offset cards */
+.social-proof__cards {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  position: relative;
 }
-.dark-reviews__head {
-  text-align: center;
-  margin-bottom: 40px;
+.social-proof__cards .dark-review:nth-child(2) {
+  margin-left: 60px;
 }
-.dark-reviews__head h2 {
-  font-family: 'Inter', sans-serif;
-  font-weight: 700;
-  font-size: clamp(28px, 4vw, 46px);
-  color: #fff;
-  margin-bottom: 12px;
+.social-proof__cards .dark-review:nth-child(3) {
+  margin-left: 20px;
 }
-.dark-reviews__head h2 em { font-style: normal; color: var(--teal); }
-.dark-reviews__grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
+@media (max-width: 800px) {
+  .social-proof__grid { grid-template-columns: 1fr; }
+  .social-proof__cards .dark-review:nth-child(2),
+  .social-proof__cards .dark-review:nth-child(3) { margin-left: 0; }
 }
 .dark-review {
   background: linear-gradient(145deg, #1c2129, #161b22);
@@ -2164,24 +2187,27 @@ body { padding-bottom: 90px; }
     html += '<button class="hero-scroller__arrow" id="scrollRight">\u203A</button>';
     html += '</div></div>';
 
-    // FEATURED IN
-    html += '<section class="featured-in"><div class="container">';
-    html += '<div class="featured-in__label">Featured In</div>';
-    html += '<div class="featured-in__logos">';
-    html += '<span style="font-family:Georgia,serif;font-style:italic;">Forbes</span>';
-    html += '<span style="font-weight:900;letter-spacing:0.02em;">BBC</span>';
-    html += '<span style="font-style:italic;letter-spacing:0.05em;">WIRED</span>';
-    html += '<span style="font-weight:700;font-size:0.85em;">FAST COMPANY</span>';
-    html += '</div></div></section>';
+    // SOCIAL PROOF (Brain.fm layout: left headline + logos, right twitter cards)
+    html += '<section class="social-proof-section"><div class="container"><div class="social-proof__grid">';
 
-    // DARK TWITTER REVIEWS
-    html += '<section class="dark-reviews"><div class="container">';
-    html += '<div class="dark-reviews__head"><h2>What operators are <em>saying</em></h2></div>';
-    html += '<div class="dark-reviews__grid">';
+    // Left side
+    html += '<div class="social-proof__left">';
+    html += '<h2>See what operators are <em>saying</em></h2>';
+    html += '<p>Genius Mind operators perform every day \u2014 see what they have to say.</p>';
+    html += '<div class="social-proof__featured-label">Featured In</div>';
+    html += '<div class="social-proof__logos">';
+    html += '<span style="font-family:Georgia,serif;font-style:italic;">Forbes</span>';
+    html += '<span style="font-weight:900;">BBC</span>';
+    html += '<span style="font-style:italic;letter-spacing:0.05em;">WIRED</span>';
+    html += '<span style="font-size:0.85em;">Fast Company</span>';
+    html += '</div></div>';
+
+    // Right side - stacked cards
+    html += '<div class="social-proof__cards">';
     var twitterReviews = [
       {name: 'Alex R.', handle: '@alexrbuilds', body: 'Pomodoro + <span class="dark-review__highlight">@geniusmind</span> = the afternoon is no longer a write-off. Not a stimulant buzz. Just\u2026 sustained clarity. I\u2019m making better calls at 4pm than I used to at 10am.'},
-      {name: 'Priya M.', handle: '@priyamfocus', body: 'I\u2019ve tried every nootropic stack going. <span class="dark-review__highlight">@geniusmind</span> is the ONLY one that actually compounds over weeks. Month 2 was noticeably better than month 1. Not placebo. The 11:1 Bacopa is doing something real.'},
-      {name: 'Tom H.', handle: '@tomhoperates', body: 'Running two businesses and my brain was fried by Wednesday. Started <span class="dark-review__highlight">@geniusmind</span> 6 weeks ago. The sprint-crash cycle has broken. I\u2019m not borrowing energy anymore. Genuinely the missing piece in my stack.'}
+      {name: 'Priya M.', handle: '@priyamfocus', body: 'I\u2019ve tried every nootropic stack going. <span class="dark-review__highlight">@geniusmind</span> is the ONLY one that actually compounds over weeks. Month 2 was noticeably better than month 1. Not placebo.'},
+      {name: 'Tom H.', handle: '@tomhoperates', body: 'Running two businesses and my brain was fried by Wednesday. Started <span class="dark-review__highlight">@geniusmind</span> 6 weeks ago. The sprint-crash cycle has broken. Genuinely the missing piece in my stack.'}
     ];
     twitterReviews.forEach(function(r) {
       html += '<div class="dark-review"><div class="dark-review__header">';
@@ -2190,6 +2216,7 @@ body { padding-bottom: 90px; }
       html += '<div class="dark-review__handle">' + esc(r.handle) + '</div></div></div>';
       html += '<div class="dark-review__body">' + r.body + '</div></div>';
     });
+    html += '</div>';
     html += '</div></div></section>';
 
     // ============================================================
@@ -2659,26 +2686,27 @@ body { padding-bottom: 90px; }
     })();
 
     // ====================================================================
-    // SCROLLER ARROWS (continuous loop)
+    // SCROLLER ARROWS (scroll + loop back)
     // ====================================================================
     (function() {
       var track = document.getElementById('scrollTrack');
       var left = document.getElementById('scrollLeft');
       var right = document.getElementById('scrollRight');
       if (!track || !left || !right) return;
-
-      // Move first item to end or last item to start for continuous loop
+      var step = 180;
       right.addEventListener('click', function() {
-        var first = track.firstElementChild;
-        if (!first) return;
-        track.appendChild(first.cloneNode(true));
-        track.removeChild(first);
+        if (track.scrollLeft + track.clientWidth >= track.scrollWidth - 10) {
+          track.scrollLeft = 0;
+        } else {
+          track.scrollLeft += step;
+        }
       });
       left.addEventListener('click', function() {
-        var last = track.lastElementChild;
-        if (!last) return;
-        track.insertBefore(last.cloneNode(true), track.firstElementChild);
-        track.removeChild(track.lastElementChild);
+        if (track.scrollLeft <= 10) {
+          track.scrollLeft = track.scrollWidth;
+        } else {
+          track.scrollLeft -= step;
+        }
       });
     })();
 
