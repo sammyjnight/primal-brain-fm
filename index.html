@@ -1069,6 +1069,47 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
   text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 16px;
 }
 .mini-chart svg { width: 100%; height: 160px; }
+/* SVG draw animation */
+.chart-draw path[stroke], .chart-draw line[stroke] {
+  stroke-dasharray: 2000;
+  stroke-dashoffset: 2000;
+}
+.chart-draw.drawn path[stroke], .chart-draw.drawn line[stroke] {
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset 2s ease-out;
+}
+.chart-draw path[fill]:not([fill="none"]), .chart-draw rect[fill] {
+  opacity: 0;
+}
+.chart-draw.drawn path[fill]:not([fill="none"]), .chart-draw.drawn rect[fill] {
+  opacity: 1;
+  transition: opacity 1.5s ease-out 0.8s;
+}
+.chart-draw circle {
+  opacity: 0;
+  transform: scale(0);
+  transform-origin: center;
+}
+.chart-draw.drawn circle {
+  opacity: 1;
+  transform: scale(1);
+  transition: opacity 0.4s ease-out 1.2s, transform 0.4s ease-out 1.2s;
+}
+.chart-draw text {
+  opacity: 0;
+}
+.chart-draw.drawn text {
+  opacity: 1;
+  transition: opacity 0.6s ease-out 1.5s;
+}
+/* Comp bar fill animation */
+.comp-bar__fill {
+  width: 0 !important;
+  transition: width 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.3s;
+}
+.comp-bars-drawn .comp-bar__fill {
+  width: var(--target-width) !important;
+}
 .mini-chart__labels {
   display: flex; justify-content: space-between;
   font-size: 11px; color: var(--text-mute); margin-top: 8px;
@@ -2531,7 +2572,7 @@ body { padding-bottom: 90px; }
     html += '<span style="display:flex;align-items:center;gap:6px;color:#00A6D2;"><span style="width:20px;height:3px;background:#00A6D2;border-radius:2px;display:inline-block;"></span> With Genius Mind</span>';
     html += '<span style="display:flex;align-items:center;gap:6px;color:#E8283B;opacity:0.7;"><span style="width:20px;height:3px;background:#E8283B;border-radius:2px;display:inline-block;border:none;opacity:0.6;"></span> Without</span>';
     html += '</div>';
-    html += '<svg viewBox="0 0 500 200" fill="none">';
+    html += '<svg class="chart-draw" viewBox="0 0 500 200" fill="none">';
     html += '<defs><linearGradient id="tealGrad2" x1="0" y1="0" x2="500" y2="0"><stop offset="0%" stop-color="#00A6D2" stop-opacity="0.12"/><stop offset="100%" stop-color="#00A6D2" stop-opacity="0.03"/></linearGradient>';
     html += '<linearGradient id="redGrad2" x1="0" y1="0" x2="500" y2="0"><stop offset="0%" stop-color="#E8283B" stop-opacity="0.05"/><stop offset="100%" stop-color="#E8283B" stop-opacity="0.01"/></linearGradient></defs>';
     // Y-axis labels
@@ -2581,7 +2622,7 @@ body { padding-bottom: 90px; }
     compItems.forEach(function(item) {
       html += '<div class="comp-bar">';
       html += '<div class="comp-bar__label">' + item.label + '</div>';
-      html += '<div class="comp-bar__track"><div class="comp-bar__fill comp-bar__fill' + item.cls + '" style="width:' + item.pct + '%"></div></div>';
+      html += '<div class="comp-bar__track"><div class="comp-bar__fill comp-bar__fill' + item.cls + '" style="--target-width:' + item.pct + '%;width:' + item.pct + '%"></div></div>';
       html += '<div class="comp-bar__value">' + item.val + '</div>';
       html += '</div>';
     });
@@ -2685,7 +2726,7 @@ body { padding-bottom: 90px; }
     html += '<p>Cognitive performance builds over time. Here\u2019s what consistent daily use typically looks like.</p>';
     html += '</div>';
     html += '<div class="results-graph__chart">';
-    html += '<svg viewBox="0 0 700 280" fill="none">';
+    html += '<svg class="chart-draw" viewBox="0 0 700 280" fill="none">';
     // Grid lines
     html += '<line x1="60" y1="40" x2="660" y2="40" stroke="rgba(255,255,255,0.05)" />';
     html += '<line x1="60" y1="100" x2="660" y2="100" stroke="rgba(255,255,255,0.05)" />';
@@ -2999,6 +3040,37 @@ body { padding-bottom: 90px; }
           words[prev].classList.remove('exit');
         }, 500);
       }, 3000);
+    })();
+
+    // ====================================================================
+    // CHART DRAW ANIMATION (scroll-triggered)
+    // ====================================================================
+    (function() {
+      var charts = document.querySelectorAll('.chart-draw');
+      if (!charts.length) return;
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('drawn');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, {threshold: 0.3});
+      charts.forEach(function(el) { observer.observe(el); });
+
+      // Also animate comp-bar fills
+      var compSection = document.querySelector('.comp-bars__title');
+      if (compSection) {
+        var compObs = new IntersectionObserver(function(entries) {
+          entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+              entry.target.parentElement.classList.add('comp-bars-drawn');
+              compObs.unobserve(entry.target);
+            }
+          });
+        }, {threshold: 0.3});
+        compObs.observe(compSection);
+      }
     })();
 
     // ====================================================================
