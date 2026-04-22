@@ -1592,45 +1592,45 @@ h2 em[style*="teal"], h2 span[style*="teal"],
   background: var(--cream);
   color: var(--text-dark);
 }
-.reviews-head { text-align: center; margin-bottom: 10px; }
+.reviews-head { text-align: center; margin-bottom: 24px; }
 /* Trustpilot badge - clean IM8 style */
 .tp-badge {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   padding: 0;
   background: none;
   border: none;
-  margin: 0 auto 30px;
+  margin: 0 auto;
   box-shadow: none;
 }
 .tp-badge__row {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
 }
 .tp-badge__label {
-  font-size: clamp(28px, 4vw, 40px);
-  font-weight: 800;
-  color: var(--text-dark);
+  font-size: clamp(26px, 3.5vw, 34px);
+  font-weight: 700;
+  color: #191919;
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 .tp-badge__stars {
-  display: flex;
-  gap: 3px;
+  display: inline-flex;
+  gap: 0;
 }
 .tp-badge__star {
-  width: clamp(30px, 4vw, 38px);
-  height: clamp(30px, 4vw, 38px);
+  width: clamp(28px, 3.5vw, 34px);
+  height: clamp(28px, 3.5vw, 34px);
   background: #00b67a;
   position: relative;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  border-radius: 0;
+  margin-right: 2px;
 }
-.tp-badge__star svg { width: 52%; height: 52%; fill: #fff; position: relative; z-index: 1; }
+.tp-badge__star svg { width: 50%; height: 50%; fill: #fff; position: relative; z-index: 1; }
 .tp-badge__star--half {
   background: #dcdce6;
   overflow: hidden;
@@ -1639,33 +1639,29 @@ h2 em[style*="teal"], h2 span[style*="teal"],
   content: '';
   position: absolute;
   left: 0; top: 0; bottom: 0;
-  width: 50%;
+  width: 60%;
   background: #00b67a;
 }
 .tp-badge__meta {
-  font-size: clamp(14px, 2vw, 16px);
-  color: #6b6b76;
+  font-size: 15px;
+  color: #191919;
   text-align: center;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  flex-wrap: wrap;
-  justify-content: center;
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
-.tp-badge__meta strong { color: #191919; font-weight: 700; }
-.tp-badge__meta a { color: #191919; font-weight: 700; text-decoration: underline; }
+.tp-badge__meta strong { font-weight: 700; }
+.tp-badge__meta a { color: #191919; font-weight: 700; text-decoration: underline; text-underline-offset: 2px; }
 .tp-badge__tp-logo {
   display: inline-flex;
   align-items: center;
   gap: 4px;
   font-weight: 900;
-  font-size: clamp(16px, 2vw, 20px);
+  font-size: 16px;
   color: #191919;
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   letter-spacing: -0.02em;
+  vertical-align: middle;
 }
-.tp-badge__tp-logo svg { width: 20px; height: 20px; }
+.tp-badge__tp-logo svg { width: 20px; height: 20px; vertical-align: middle; }
 /* Verified badge on review cards */
 .review-card .rc-verified {
   display: inline-flex;
@@ -1690,10 +1686,10 @@ h2 em[style*="teal"], h2 span[style*="teal"],
 }
 .review-card {
   background: #fff;
-  border-radius: 12px;
-  padding: 22px 20px 18px;
-  border: 1px solid rgba(0,0,0,0.08);
-  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  border-radius: 8px;
+  padding: 24px 22px 16px;
+  border: 1px solid #e3e3e3;
+  box-shadow: none;
   display: flex;
   flex-direction: column;
 }
@@ -1733,23 +1729,26 @@ h2 em[style*="teal"], h2 span[style*="teal"],
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 .review-card .rc-reply {
-  background: rgba(0,0,0,0.02);
-  border-left: 3px solid rgba(0,0,0,0.08);
+  background: #f5f5f5;
+  border-left: 3px solid #dcdce6;
   padding: 12px 14px;
-  margin-top: 12px;
-  border-radius: 0 8px 8px 0;
+  margin-top: 14px;
+  border-radius: 0 4px 4px 0;
   font-size: 12px;
-  color: var(--text-dark-mute);
+  color: #6b6b76;
   display: none;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 .review-card .rc-reply.open { display: block; }
 .review-card .rc-reply__header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 6px;
+  margin-bottom: 8px;
+  font-size: 13px;
 }
-.review-card .rc-reply strong { color: var(--text-dark); font-weight: 600; }
+.review-card .rc-reply__header span:first-child { color: #00b67a; }
+.review-card .rc-reply strong { color: #191919; font-weight: 600; font-size: 13px; }
 .review-card .rc-reply__text {
   font-size: 12px;
   line-height: 1.5;
@@ -1759,12 +1758,16 @@ h2 em[style*="teal"], h2 span[style*="teal"],
 .review-card .rc-readmore {
   display: block;
   text-align: center;
-  color: #00A6D2;
-  font-size: 13px;
-  font-weight: 600;
-  margin-top: 12px;
+  color: #0070cc;
+  font-size: 14px;
+  font-weight: 400;
+  margin-top: 14px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(0,0,0,0.06);
   text-decoration: none;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
+.review-card .rc-readmore:hover { text-decoration: underline; }
 @media (max-width: 1000px) {
   .reviews-grid { grid-template-columns: repeat(2, 1fr); }
 }
@@ -3063,8 +3066,6 @@ body { padding-bottom: 90px; }
     // ============================================================
     html += '<section class="reviews" id="reviews"><div class="container">';
     html += '<div class="reviews-head">';
-    // Verified Reviews pill
-    html += '<div style="text-align:center;margin-bottom:20px;"><span style="display:inline-block;background:rgba(0,0,0,0.05);color:var(--text-dark);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;padding:8px 20px;border-radius:50px;">Verified Reviews</span></div>';
     // Trustpilot badge
     var tpStar = '<div class="tp-badge__star"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>';
     var tpStarHalf = '<div class="tp-badge__star tp-badge__star--half"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>';
