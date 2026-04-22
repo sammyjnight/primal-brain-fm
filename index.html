@@ -293,8 +293,12 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
   grid-template-columns: 1.05fr 0.95fr;
   gap: clamp(30px, 5vw, 70px);
   align-items: start;
+  grid-template-rows: 1fr;
   position: relative;
   z-index: 2;
+}
+.hero-content {
+  min-height: 460px;
 }
 .hero h1 {
   font-family: 'Inter', sans-serif;
@@ -505,50 +509,59 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
   background: var(--surface);
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
-  padding: 14px 0;
-  overflow: hidden;
+  padding: 0;
   position: relative;
 }
+.hero-scroller__inner {
+  display: flex;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.hero-scroller__arrow {
+  background: none;
+  border: none;
+  color: var(--text-mute);
+  cursor: pointer;
+  padding: 16px 12px;
+  font-size: 18px;
+  flex-shrink: 0;
+  transition: color 0.2s;
+  display: flex;
+  align-items: center;
+}
+.hero-scroller__arrow:hover { color: var(--teal); }
 .hero-scroller__track {
   display: flex;
   gap: 0;
-  animation: scroll-benefits 40s linear infinite;
-  white-space: nowrap;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  flex: 1;
 }
-@keyframes scroll-benefits {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
-}
+.hero-scroller__track::-webkit-scrollbar { display: none; }
 .hero-scroller__item {
-  display: inline-flex;
+  display: flex;
   align-items: center;
   gap: 10px;
-  padding: 0 28px;
-  color: var(--text-dim);
+  padding: 16px 24px;
+  color: var(--text-mute);
   font-weight: 600;
   font-size: 13px;
   text-transform: uppercase;
   letter-spacing: 0.06em;
   white-space: nowrap;
+  cursor: pointer;
   transition: color 0.3s;
-}
-.hero-scroller__item:hover { color: var(--teal); }
-.hero-scroller__item svg {
-  width: 18px; height: 18px;
-  opacity: 0.6;
   flex-shrink: 0;
 }
-/* Left/right fade edges */
-.hero-scroller::before, .hero-scroller::after {
-  content: '';
-  position: absolute;
-  top: 0; bottom: 0;
-  width: 60px;
-  z-index: 2;
-  pointer-events: none;
+.hero-scroller__item:hover { color: #fff; }
+.hero-scroller__item svg {
+  width: 18px; height: 18px;
+  opacity: 0.5;
+  flex-shrink: 0;
 }
-.hero-scroller::before { left: 0; background: linear-gradient(90deg, var(--surface), transparent); }
-.hero-scroller::after { right: 0; background: linear-gradient(-90deg, var(--surface), transparent); }
 
 /* ============================================================
    FEATURED IN
@@ -2142,13 +2155,43 @@ body { padding-bottom: 90px; }
       {icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 19V5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v14l-8-4-8 4"/></svg>', label: 'Memory & Recall'},
       {icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/></svg>', label: 'Long-Term Brain Health'}
     ];
-    html += '<div class="hero-scroller"><div class="hero-scroller__track">';
-    for (var rep = 0; rep < 2; rep++) {
-      benefits.forEach(function(b) {
-        html += '<div class="hero-scroller__item">' + b.icon + ' ' + esc(b.label) + '</div>';
-      });
-    }
+    html += '<div class="hero-scroller"><div class="hero-scroller__inner">';
+    html += '<button class="hero-scroller__arrow" id="scrollLeft">\u2039</button>';
+    html += '<div class="hero-scroller__track" id="scrollTrack">';
+    benefits.forEach(function(b) {
+      html += '<div class="hero-scroller__item">' + b.icon + ' ' + esc(b.label) + '</div>';
+    });
+    html += '</div>';
+    html += '<button class="hero-scroller__arrow" id="scrollRight">\u203A</button>';
     html += '</div></div>';
+
+    // FEATURED IN
+    html += '<section class="featured-in"><div class="container">';
+    html += '<div class="featured-in__label">Featured In</div>';
+    html += '<div class="featured-in__logos">';
+    html += '<span style="font-family:Georgia,serif;font-style:italic;">Forbes</span>';
+    html += '<span style="font-weight:900;letter-spacing:0.02em;">BBC</span>';
+    html += '<span style="font-style:italic;letter-spacing:0.05em;">WIRED</span>';
+    html += '<span style="font-weight:700;font-size:0.85em;">FAST COMPANY</span>';
+    html += '</div></div></section>';
+
+    // DARK TWITTER REVIEWS
+    html += '<section class="dark-reviews"><div class="container">';
+    html += '<div class="dark-reviews__head"><h2>What operators are <em>saying</em></h2></div>';
+    html += '<div class="dark-reviews__grid">';
+    var twitterReviews = [
+      {name: 'Alex R.', handle: '@alexrbuilds', body: 'Pomodoro + <span class="dark-review__highlight">@geniusmind</span> = the afternoon is no longer a write-off. Not a stimulant buzz. Just\u2026 sustained clarity. I\u2019m making better calls at 4pm than I used to at 10am.'},
+      {name: 'Priya M.', handle: '@priyamfocus', body: 'I\u2019ve tried every nootropic stack going. <span class="dark-review__highlight">@geniusmind</span> is the ONLY one that actually compounds over weeks. Month 2 was noticeably better than month 1. Not placebo. The 11:1 Bacopa is doing something real.'},
+      {name: 'Tom H.', handle: '@tomhoperates', body: 'Running two businesses and my brain was fried by Wednesday. Started <span class="dark-review__highlight">@geniusmind</span> 6 weeks ago. The sprint-crash cycle has broken. I\u2019m not borrowing energy anymore. Genuinely the missing piece in my stack.'}
+    ];
+    twitterReviews.forEach(function(r) {
+      html += '<div class="dark-review"><div class="dark-review__header">';
+      html += '<div class="dark-review__avatar"><div style="width:100%;height:100%;background:linear-gradient(135deg,var(--teal),var(--teal-warm));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:18px;">' + r.name.charAt(0) + '</div></div>';
+      html += '<div class="dark-review__user"><div class="dark-review__name">' + esc(r.name) + ' <span class="dark-review__verified"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></span></div>';
+      html += '<div class="dark-review__handle">' + esc(r.handle) + '</div></div></div>';
+      html += '<div class="dark-review__body">' + r.body + '</div></div>';
+    });
+    html += '</div></div></section>';
 
     // ============================================================
     // SECTION 4 - STAT STRIP
@@ -2170,7 +2213,7 @@ body { padding-bottom: 90px; }
     } else {
       html += '<span class="placeholder-label">[ FOUNDER PHOTO ]</span>';
     }
-    html += '<div class="photo-caption">Shanil Beekarry</div>';
+    html += '<div class="photo-caption">Shanil Beekarry \u00B7 Founder</div>';
     html += '</div>';
     html += '<div class="founder-content">';
     html += '<h2>I was the customer first.</h2>';
@@ -2250,6 +2293,7 @@ body { padding-bottom: 90px; }
     html += '<li>Compound effect \u2013 gets stronger over weeks, not weaker</li>';
     html += '</ul></div>';
     html += '<div class="feature-block__visual"><div class="tabs-visual">';
+    html += '<div style="font-size:48px;margin-bottom:16px;text-align:center;">\uD83E\uDDE0</div>';
     html += '<div style="font-size:18px;color:var(--text-dim);font-weight:500;line-height:1.6;text-align:center;">';
     html += '47 open tabs. 12 Slack threads.<br>3 calls before lunch.<br><br>';
     html += '<span style="font-style:italic;opacity:0.7;">This is your Tuesday.<br>Genius Mind was built for it.</span>';
@@ -2363,42 +2407,6 @@ body { padding-bottom: 90px; }
     html += '</div>';
     html += '<div class="results-graph__disclaimer">*Typical user-reported experience. Individual results may vary.</div>';
     html += '</div></section>';
-
-    // ============================================================
-    // FEATURED IN + DARK TWITTER REVIEWS
-    // ============================================================
-    html += '<section class="featured-in"><div class="container">';
-    html += '<div class="featured-in__label">Featured In</div>';
-    html += '<div class="featured-in__logos">';
-    html += '<span>Forbes</span><span>BBC</span><span>WIRED</span><span>Fast Company</span>';
-    html += '</div></div></section>';
-
-    // Dark Twitter-style reviews
-    html += '<section class="dark-reviews"><div class="container">';
-    html += '<div class="dark-reviews__head">';
-    html += '<h2>What operators are <em>saying</em></h2>';
-    html += '</div>';
-    html += '<div class="dark-reviews__grid">';
-
-    var twitterReviews = [
-      {name: 'Alex R.', handle: '@alexrbuilds', body: 'Pomodoro + <span class="dark-review__highlight">@geniusmind</span> = the afternoon is no longer a write-off. Not a stimulant buzz. Just\u2026 sustained clarity. I\u2019m making better calls at 4pm than I used to at 10am.'},
-      {name: 'Priya M.', handle: '@priyamfocus', body: 'I\u2019ve tried every nootropic stack going. <span class="dark-review__highlight">@geniusmind</span> is the ONLY one that actually compounds over weeks. Month 2 was noticeably better than month 1. Not placebo. The 11:1 Bacopa is doing something real.'},
-      {name: 'Tom H.', handle: '@tomhoperates', body: 'Running two businesses and my brain was fried by Wednesday. Started <span class="dark-review__highlight">@geniusmind</span> 6 weeks ago. The sprint-crash cycle has broken. I\u2019m not borrowing energy anymore. Genuinely the missing piece in my stack.'}
-    ];
-
-    twitterReviews.forEach(function(r) {
-      html += '<div class="dark-review">';
-      html += '<div class="dark-review__header">';
-      html += '<div class="dark-review__avatar"><div style="width:100%;height:100%;background:linear-gradient(135deg,var(--teal),var(--teal-warm));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:18px;">' + r.name.charAt(0) + '</div></div>';
-      html += '<div class="dark-review__user">';
-      html += '<div class="dark-review__name">' + esc(r.name) + ' <span class="dark-review__verified"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></span></div>';
-      html += '<div class="dark-review__handle">' + esc(r.handle) + '</div>';
-      html += '</div></div>';
-      html += '<div class="dark-review__body">' + r.body + '</div>';
-      html += '</div>';
-    });
-
-    html += '</div></div></section>';
 
     // ============================================================
     // SECTION 11 - REVIEWS (Trustpilot)
@@ -2649,6 +2657,19 @@ body { padding-bottom: 90px; }
           words[prev].classList.remove('exit');
         }, 500);
       }, 3000);
+    })();
+
+    // ====================================================================
+    // SCROLLER ARROWS
+    // ====================================================================
+    (function() {
+      var track = document.getElementById('scrollTrack');
+      var left = document.getElementById('scrollLeft');
+      var right = document.getElementById('scrollRight');
+      if (!track || !left || !right) return;
+      var step = 200;
+      left.addEventListener('click', function() { track.scrollLeft -= step; });
+      right.addEventListener('click', function() { track.scrollLeft += step; });
     })();
 
     // ====================================================================
