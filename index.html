@@ -2377,33 +2377,63 @@ body { padding-bottom: 90px; }
     // ============================================================
     html += '<section class="feature-blocks"><div class="container">';
 
-    // Block 1: 3pm crash with line chart
-    html += '<div class="feature-block">';
-    html += '<div class="feature-block__content">';
-    html += '<div class="feature-block__title"><span style="color:var(--teal);">87% of operators</span> hit a 3pm cognitive crash</div>';
-    html += '<ul class="feature-block__bullets">';
-    html += '<li>Decision quality drops 40% in the second half of the day</li>';
-    html += '<li>Genius Mind extends your peak window from 3 hours to 8+</li>';
-    html += '</ul></div>';
-    html += '<div class="feature-block__visual"><div class="mini-chart">';
-    html += '<div class="mini-chart__title">Cognitive Performance Across The Day</div>';
-    html += '<svg viewBox="0 0 400 220" fill="none">';
-    html += '<defs><linearGradient id="tealGrad" x1="0" y1="0" x2="400" y2="0"><stop offset="0%" stop-color="#00A6D2" stop-opacity="0.15"/><stop offset="100%" stop-color="#00A6D2" stop-opacity="0.03"/></linearGradient>';
-    html += '<linearGradient id="redGrad" x1="0" y1="0" x2="400" y2="0"><stop offset="0%" stop-color="#E8283B" stop-opacity="0.06"/><stop offset="100%" stop-color="#E8283B" stop-opacity="0.01"/></linearGradient></defs>';
-    // Labels FIRST (above graph area)
-    html += '<rect x="15" y="8" width="80" height="20" rx="4" fill="rgba(0,166,210,0.15)"/>';
-    html += '<text x="55" y="22" fill="#00A6D2" font-size="11" font-weight="700" text-anchor="middle">With GM</text>';
-    html += '<rect x="110" y="8" width="80" height="20" rx="4" fill="rgba(232,40,59,0.1)"/>';
-    html += '<text x="150" y="22" fill="#E8283B" font-size="11" font-weight="700" text-anchor="middle">Without</text>';
-    // Graph area starts at y=40
-    // Without GM - declining dashed line
-    html += '<path d="M20 180 L80 168 L140 110 L200 75 L240 72 L280 100 L340 150 L380 175 L395 182" stroke="#E8283B" stroke-width="2" fill="none" stroke-dasharray="8 5" opacity="0.5"/>';
-    html += '<path d="M20 180 L80 168 L140 110 L200 75 L240 72 L280 100 L340 150 L380 175 L395 182 L395 205 L20 205Z" fill="url(#redGrad)"/>';
-    // With GM - solid teal line staying high
-    html += '<path d="M20 180 L80 155 L140 95 L200 65 L240 55 L280 50 L340 50 L380 52 L395 52" stroke="#00A6D2" stroke-width="3" fill="none"/>';
-    html += '<path d="M20 180 L80 155 L140 95 L200 65 L240 55 L280 50 L340 50 L380 52 L395 52 L395 205 L20 205Z" fill="url(#tealGrad)"/>';
+    // Block 1: You can't hack your way out of this
+    html += '<div class="feature-block" style="grid-template-columns:1fr;text-align:center;max-width:800px;margin:0 auto;border-bottom:none;padding-bottom:0;">';
+    html += '<div class="feature-block__content" style="max-width:700px;margin:0 auto;">';
+    html += '<div class="feature-block__title" style="font-size:clamp(26px,4vw,40px);margin-bottom:16px;">You can\u2019t hack your way out of this</div>';
+    html += '<p style="font-size:17px;color:var(--teal);font-weight:500;margin-bottom:28px;">Cold plunges. Fasting. Better sleep. None of them fix what\u2019s actually breaking.</p>';
+    html += '<div style="text-align:left;font-size:16px;color:var(--text-dim);line-height:1.7;">';
+    html += '<p style="margin-bottom:16px;">When you run a business, lead a team, or operate under pressure every day, your brain is working harder than a normal brain.</p>';
+    html += '<p style="margin-bottom:16px;font-weight:600;color:var(--text);">Three things start to slip.</p>';
+    html += '<p style="margin-bottom:12px;"><strong style="color:var(--teal);">Dopamine runs out.</strong> Every decision burns it. Willpower doesn\u2019t refill it.</p>';
+    html += '<p style="margin-bottom:12px;"><strong style="color:var(--teal);">Blood flow slows.</strong> Stress narrows the vessels that carry oxygen to your brain. Less oxygen. Slower thinking.</p>';
+    html += '<p style="margin-bottom:12px;"><strong style="color:var(--teal);">Neuron connections weaken.</strong> The wiring that let you think fast gets worn down by constant stress and context-switching.</p>';
+    html += '<p style="margin-bottom:16px;">Productivity tools work around it. Recovery tools help you survive it. Nothing fixes it.</p>';
+    html += '<p style="margin-bottom:16px;">Every quarter you lose a little more sharpness. The 4pm decisions you used to nail start slipping. The edge you built your career on starts running slower.</p>';
+    html += '<p style="margin-bottom:4px;font-weight:700;color:var(--text);font-size:18px;">Genius Mind is built for all three.</p>';
+    html += '<p style="color:var(--text-mute);font-size:15px;">16 ingredients. Clinical doses. One capsule, taken daily.</p>';
+    html += '</div></div></div>';
+
+    // The Edge Gap chart
+    html += '<div class="feature-block" style="grid-template-columns:1fr;border-bottom:none;padding-top:20px;">';
+    html += '<div class="feature-block__visual" style="max-width:700px;margin:0 auto;width:100%;">';
+    html += '<div style="text-align:center;margin-bottom:20px;">';
+    html += '<p style="font-size:17px;color:var(--text-dim);line-height:1.5;">Your edge is an asset. Most people let it depreciate. <span style="color:var(--teal);font-weight:600;">A few protect it.</span></p>';
+    html += '</div>';
+    html += '<div class="mini-chart">';
+    // Legend
+    html += '<div style="display:flex;gap:20px;justify-content:center;margin-bottom:16px;font-size:12px;font-weight:600;">';
+    html += '<span style="display:flex;align-items:center;gap:6px;color:#00A6D2;"><span style="width:20px;height:3px;background:#00A6D2;border-radius:2px;display:inline-block;"></span> With Genius Mind</span>';
+    html += '<span style="display:flex;align-items:center;gap:6px;color:#E8283B;opacity:0.7;"><span style="width:20px;height:3px;background:#E8283B;border-radius:2px;display:inline-block;border:none;opacity:0.6;"></span> Without</span>';
+    html += '</div>';
+    html += '<svg viewBox="0 0 500 200" fill="none">';
+    html += '<defs><linearGradient id="tealGrad2" x1="0" y1="0" x2="500" y2="0"><stop offset="0%" stop-color="#00A6D2" stop-opacity="0.12"/><stop offset="100%" stop-color="#00A6D2" stop-opacity="0.03"/></linearGradient>';
+    html += '<linearGradient id="redGrad2" x1="0" y1="0" x2="500" y2="0"><stop offset="0%" stop-color="#E8283B" stop-opacity="0.05"/><stop offset="100%" stop-color="#E8283B" stop-opacity="0.01"/></linearGradient></defs>';
+    // Y-axis labels
+    html += '<text x="25" y="50" fill="var(--text-mute)" font-size="10" font-weight="600" text-anchor="middle">Sharp</text>';
+    html += '<text x="25" y="175" fill="var(--text-mute)" font-size="10" font-weight="600" text-anchor="middle">Dulled</text>';
+    // Grid lines
+    html += '<line x1="50" y1="55" x2="480" y2="55" stroke="rgba(255,255,255,0.04)"/>';
+    html += '<line x1="50" y1="100" x2="480" y2="100" stroke="rgba(255,255,255,0.04)"/>';
+    html += '<line x1="50" y1="140" x2="480" y2="140" stroke="rgba(255,255,255,0.04)"/>';
+    // Both lines start together, then gradually diverge
+    // Without GM - very gentle decline, gets steeper after year 5
+    html += '<path d="M50 85 C100 87, 140 90, 180 95 C220 100, 280 110, 340 125 C380 135, 430 152, 480 165" stroke="#E8283B" stroke-width="2" fill="none" stroke-dasharray="6 4" opacity="0.5"/>';
+    html += '<path d="M50 85 C100 87, 140 90, 180 95 C220 100, 280 110, 340 125 C380 135, 430 152, 480 165 L480 185 L50 185Z" fill="url(#redGrad2)"/>';
+    // With GM - stays high, slight plateau
+    html += '<path d="M50 85 C100 82, 140 78, 180 72 C220 68, 280 62, 340 58 C380 56, 430 55, 480 55" stroke="#00A6D2" stroke-width="3" fill="none"/>';
+    html += '<path d="M50 85 C100 82, 140 78, 180 72 C220 68, 280 62, 340 58 C380 56, 430 55, 480 55 L480 185 L50 185Z" fill="url(#tealGrad2)"/>';
+    // Edge gap annotation at year 10
+    html += '<line x1="380" y1="56" x2="380" y2="140" stroke="rgba(255,255,255,0.2)" stroke-width="1" stroke-dasharray="3 3"/>';
+    html += '<rect x="345" y="90" width="70" height="18" rx="6" fill="var(--surface)"/><rect x="345" y="90" width="70" height="18" rx="6" fill="rgba(0,166,210,0.12)"/>';
+    html += '<text x="380" y="103" fill="var(--teal)" font-size="10" font-weight="700" text-anchor="middle">The edge gap</text>';
+    // X-axis labels
+    html += '<text x="50" y="198" fill="var(--text-mute)" font-size="10" text-anchor="middle">Year 1</text>';
+    html += '<text x="140" y="198" fill="var(--text-mute)" font-size="10" text-anchor="middle">Year 2</text>';
+    html += '<text x="260" y="198" fill="var(--text-mute)" font-size="10" text-anchor="middle">Year 5</text>';
+    html += '<text x="380" y="198" fill="var(--text-mute)" font-size="10" text-anchor="middle">Year 10</text>';
+    html += '<text x="470" y="198" fill="var(--text-mute)" font-size="10" text-anchor="middle">Year 20</text>';
     html += '</svg>';
-    html += '<div class="mini-chart__labels"><span>6am</span><span>9am</span><span>12pm</span><span>3pm</span><span>6pm</span><span>9pm</span></div>';
     html += '</div></div></div>';
 
     // Block 2: 16 ingredients comparison bars
