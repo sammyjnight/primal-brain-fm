@@ -268,13 +268,14 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
   color: #fff;
   font-weight: 700;
   font-size: 13px;
-  padding: 10px 22px;
+  padding: 12px 28px;
   border-radius: 50px;
   text-decoration: none;
   text-transform: uppercase;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.06em;
   transition: all 0.2s ease;
   box-shadow: 0 4px 16px rgba(34,211,160,0.3);
+  white-space: nowrap;
 }
 .sticky-header__cta:hover {
   transform: scale(1.05);
@@ -884,73 +885,59 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
   .video-reviews__grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
 }
 
-/* ============================================================
-   PROMO STRIP (IM8 style)
-   ============================================================ */
-.promo-strip {
-  background: linear-gradient(135deg, #0a1628 0%, #0d1f3c 50%, #0a1628 100%);
-  padding: 14px 0;
-  border-top: 1px solid rgba(0,166,210,0.2);
-  border-bottom: 1px solid rgba(0,166,210,0.2);
-  overflow: hidden;
-}
-.promo-strip__inner {
+/* Sticky header promo center */
+.sticky-header__promo {
   display: flex;
   align-items: center;
-  justify-content: center;
   gap: 0;
-  max-width: var(--max);
-  margin: 0 auto;
-  padding: 0 var(--pad);
 }
-.promo-strip__left {
+.sticky-header__promo-left {
   display: flex;
   align-items: center;
   gap: 10px;
   font-weight: 800;
-  font-size: 14px;
+  font-size: 13px;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  background: linear-gradient(90deg, #00A6D2, #33d4ff, #00A6D2, #33d4ff);
+  background: linear-gradient(90deg, #00A6D2, #66e0ff, #00A6D2, #66e0ff);
   background-size: 200% 100%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  animation: shimmer-text 3s ease-in-out infinite;
+  animation: shimmer-text 3s linear infinite;
+  white-space: nowrap;
 }
-.promo-strip__left::before {
-  content: '';
+.promo-dot {
+  display: inline-block;
   width: 8px;
   height: 8px;
   border-radius: 50%;
   background: var(--teal);
-  box-shadow: 0 0 12px var(--teal), 0 0 24px rgba(0,166,210,0.4);
+  box-shadow: 0 0 10px var(--teal), 0 0 20px rgba(0,166,210,0.4);
   animation: pulse 2s ease-in-out infinite;
   flex-shrink: 0;
-  /* Reset text fill for the dot */
   -webkit-text-fill-color: initial;
 }
 @keyframes shimmer-text {
   0% { background-position: 100% 0; }
   100% { background-position: -100% 0; }
 }
-.promo-strip__divider {
+.sticky-header__promo-divider {
   width: 1px;
-  height: 18px;
+  height: 16px;
   background: rgba(255,255,255,0.25);
-  margin: 0 24px;
+  margin: 0 20px;
   flex-shrink: 0;
 }
-.promo-strip__right {
-  font-size: 14px;
-  font-weight: 500;
-  color: #fff;
-  letter-spacing: 0.02em;
+.sticky-header__promo-right {
+  font-size: 13px;
+  font-weight: 400;
+  color: rgba(255,255,255,0.8);
+  letter-spacing: 0.01em;
+  white-space: nowrap;
 }
-@media (max-width: 600px) {
-  .promo-strip__inner { flex-direction: column; gap: 6px; text-align: center; }
-  .promo-strip__divider { display: none; }
-  .promo-strip__left, .promo-strip__right { font-size: 12px; }
+@media (max-width: 860px) {
+  .sticky-header__promo { display: none; }
 }
 
 /* Old marquee styles kept for compat */
@@ -2880,7 +2867,12 @@ body { padding-bottom: 90px; }
 <header class="sticky-header">
   <div class="sticky-header__inner">
     <a href="#" class="sticky-header__logo"><img src="https://cdn.shopify.com/s/files/1/0594/8892/7953/files/Branding.png" alt="JustFloow" style="height:28px;width:auto;filter:brightness(0) invert(1);"></a>
-    <a href="#pricing" class="sticky-header__cta">Try Genius Mind</a>
+    <div class="sticky-header__promo">
+      <span class="sticky-header__promo-left"><span class="promo-dot"></span>SAVE 30% + GET FREE WELCOME GIFTS</span>
+      <span class="sticky-header__promo-divider"></span>
+      <span class="sticky-header__promo-right">Free Shipping on All Subscriptions</span>
+    </div>
+    <a href="#pricing" class="sticky-header__cta">Get Started</a>
   </div>
 </header>
 <div id="app" style="padding-top:56px;"></div>
@@ -3110,15 +3102,6 @@ body { padding-bottom: 90px; }
     html += '</div></div>';
 
     html += '</div></section>';
-
-    // ============================================================
-    // PROMO STRIP (IM8 style)
-    // ============================================================
-    html += '<div class="promo-strip"><div class="promo-strip__inner">';
-    html += '<div class="promo-strip__left">SAVE 30% + GET FREE WELCOME GIFTS</div>';
-    html += '<div class="promo-strip__divider"></div>';
-    html += '<div class="promo-strip__right">Free Shipping on All Subscriptions</div>';
-    html += '</div></div>';
 
     // ============================================================
     // ANIMATED STATS (IM8 style countup)
