@@ -2219,100 +2219,97 @@ h2 em[style*="teal"], h2 span[style*="teal"],
   display: block;
 }
 
-/* Pricing: IM8-style compact accordion */
+/* Pricing: IM8-style accordion — clean & compact */
 .pricing-selector {
-  max-width: 560px;
+  max-width: 800px;
   margin: 0 auto;
 }
-.pricing-accordion {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
+.pricing-label {
+  font-size: 11px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.1em; color: var(--text-dark-mute); margin-bottom: 12px;
 }
 .plan-card {
-  border: 1px solid rgba(0,0,0,0.1);
+  border: 1.5px solid rgba(0,0,0,0.1);
+  border-radius: 10px;
   background: #fff;
   cursor: pointer;
-  transition: all 0.3s;
+  transition: border-color 0.2s;
   position: relative;
+  margin-bottom: 8px;
 }
-.plan-card:first-child { border-radius: 12px 12px 0 0; }
-.plan-card:last-child { border-radius: 0 0 12px 12px; border-top: none; }
-.plan-card.active { border-color: var(--teal); z-index: 1; border-radius: 12px; cursor: default; }
-.plan-card:not(.active) + .plan-card { border-top: none; }
+.plan-card.active {
+  border-color: var(--text-dark);
+  cursor: default;
+}
 .plan-card__badge {
-  position: absolute;
-  top: -1px; right: 14px;
-  background: var(--teal);
-  color: #fff;
-  font-size: 9px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  padding: 3px 10px;
-  border-radius: 0 0 6px 6px;
+  position: absolute; top: -10px; right: 16px;
+  background: var(--teal); color: #fff;
+  font-size: 9px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.06em; padding: 3px 10px; border-radius: 4px;
 }
 .plan-card__header {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 12px 16px;
+  display: flex; align-items: center; gap: 10px; padding: 14px 18px;
 }
 .plan-card__radio {
-  width: 18px; height: 18px;
-  border-radius: 50%;
-  border: 2px solid #ccc;
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  width: 18px; height: 18px; border-radius: 50%;
+  border: 2px solid #d0d0d0; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
 }
-.plan-card.active .plan-card__radio { border-color: var(--teal); }
+.plan-card.active .plan-card__radio { border-color: var(--text-dark); }
 .plan-card.active .plan-card__radio::after {
-  content: ''; width: 10px; height: 10px; border-radius: 50%; background: var(--teal);
+  content: ''; width: 10px; height: 10px; border-radius: 50%; background: var(--text-dark);
 }
 .plan-card__title {
-  font-weight: 700; font-size: 14px; color: var(--text-dark);
-  display: flex; align-items: center; gap: 6px; flex: 1;
+  font-weight: 700; font-size: 15px; color: var(--text-dark);
+  display: flex; align-items: center; gap: 8px; flex: 1;
 }
 .plan-card__price-col { text-align: right; flex-shrink: 0; }
-.plan-card__amount { font-size: 20px; font-weight: 700; color: var(--text-dark); line-height: 1; }
-.plan-card__amount small { font-size: 12px; font-weight: 400; color: var(--text-dark-mute); }
-.plan-card__was { font-size: 12px; color: var(--text-dark-mute); text-decoration: line-through; }
-.plan-card__billing { font-size: 11px; color: var(--text-dark-mute); }
-.plan-card__serving { font-size: 10px; color: var(--text-dark-mute); font-weight: 600; }
-/* Body - smooth expand */
+.plan-card__amount {
+  font-size: 28px; font-weight: 700; color: var(--text-dark); line-height: 1;
+}
+.plan-card__amount small { font-size: 14px; font-weight: 400; color: var(--text-dark-mute); }
+.plan-card__was {
+  font-size: 14px; color: var(--text-dark-mute); text-decoration: line-through; display: inline; margin-left: 6px;
+}
+.plan-card__billing { font-size: 11px; color: var(--text-dark-mute); margin-top: 2px; }
+.plan-card__serving { font-size: 11px; color: var(--text-dark-mute); font-weight: 600; }
+/* Body - smooth CSS transition */
 .plan-card__body {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.4s ease, padding 0.3s ease;
-  padding: 0 16px;
+  max-height: 0; overflow: hidden;
+  transition: max-height 0.4s ease;
 }
 .plan-card.active .plan-card__body {
-  max-height: 800px;
-  padding: 12px 16px 16px;
+  max-height: 600px;
+}
+.plan-card__body-inner {
+  padding: 14px 18px 18px;
   border-top: 1px solid rgba(0,0,0,0.06);
 }
 .plan-card__perks {
-  list-style: none; padding: 0; margin: 0 0 12px;
+  list-style: none; padding: 0; margin: 0 0 14px;
+  columns: 2; column-gap: 16px;
 }
 .plan-card__perks li {
   padding: 3px 0; font-size: 13px; color: var(--text-dark);
-  display: flex; align-items: center; gap: 6px;
+  display: flex; align-items: center; gap: 6px; break-inside: avoid;
 }
 .plan-card__perks li::before {
   content: '\2713'; color: var(--teal); font-weight: 700; font-size: 13px; flex-shrink: 0;
 }
-.plan-card__cta { margin-top: 12px; }
-.plan-card__cta .btn { width: 100%; padding: 14px 24px; font-size: 14px; }
+.plan-card__cta { margin-top: 14px; }
+.plan-card__cta .btn { width: 100%; }
 .pricing-onetime {
   text-align: center; margin-top: 14px; font-size: 13px;
 }
-.pricing-onetime a { color: var(--text-dark); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
+.pricing-onetime a { color: var(--text-dark); font-weight: 600; text-decoration: underline; }
 .pricing-save-banner {
-  text-align: center; margin-top: 14px; padding: 10px 16px;
+  text-align: center; margin-top: 14px; padding: 12px 20px;
   border: 1px solid rgba(0,0,0,0.08); border-radius: 50px;
   font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-dark);
+}
+@media (max-width: 600px) {
+  .plan-card__perks { columns: 1; }
+  .plan-card__amount { font-size: 22px; }
 }
 .pricing-grid { display: none; }
 .price-card { display: none; }
@@ -3338,6 +3335,7 @@ body { padding-bottom: 90px; }
     html += '</div>';
     // IM8-style accordion pricing
     html += '<div class="pricing-selector">';
+    html += '<div class="pricing-label">Subscribe &amp; Save:</div>';
     html += '<div class="pricing-accordion" id="pricingAccordion">';
 
     D.pricing.cards.forEach(function(card, ci) {
@@ -3365,8 +3363,8 @@ body { padding-bottom: 90px; }
       html += '<div class="plan-card__serving">' + esc(card.per) + '</div>';
       html += '</div></div>';
 
-      // Body (expanded when active) - single column, compact
-      html += '<div class="plan-card__body">';
+      // Body (expanded when active)
+      html += '<div class="plan-card__body"><div class="plan-card__body-inner">';
 
       html += '<ul class="plan-card__perks">';
       card.perks.forEach(function(perk) {
@@ -3401,7 +3399,7 @@ body { padding-bottom: 90px; }
       html += '<a href="' + (card.url || '#') + '" class="btn">' + esc(card.cta) + ' <span class="btn-arrow">\u2192</span></a>';
       html += '</div>';
 
-      html += '</div>'; // end body
+      html += '</div></div>'; // end body-inner + body
       html += '</div>'; // end plan-card
     });
 
