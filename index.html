@@ -3083,6 +3083,7 @@ body { padding-bottom: 90px; }
       html += '<div class="rc-meta"><strong>' + esc(r.name) + '</strong>, ' + esc(r.time) + '</div>';
       html += '<div class="title">' + esc(r.title) + '</div>';
       html += '<p class="body">' + esc(r.body) + '</p>';
+      html += '<div class="rc-verified"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Verified</div>';
       if (r.reply) {
         html += '<div class="rc-reply">';
         html += '<div class="rc-reply__header"><span>\u21A9 <strong>Reply from JustFloow</strong></span><span>' + esc(r.reply_time || r.time) + '</span></div>';
