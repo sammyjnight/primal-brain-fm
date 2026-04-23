@@ -3474,7 +3474,8 @@ body { padding-bottom: 90px; }
       }
 
       html += '<div class="plan-card__cta">';
-      html += '<a href="' + (card.url || '#') + '" class="btn">' + esc(card.cta) + ' <span class="btn-arrow">\u2192</span></a>';
+      var ctaText = card.save ? card.save.toUpperCase() + ' + FREE GIFTS' : esc(card.cta);
+      html += '<a href="' + (card.url || '#') + '" class="btn">' + ctaText + ' <span class="btn-arrow">\u2192</span></a>';
       html += '</div>';
 
       html += '</div></div>'; // end body-inner + body
