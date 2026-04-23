@@ -772,8 +772,9 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
   background: rgba(255,255,255,0.03);
   border: 1px solid rgba(0,166,210,0.15);
   border-radius: 20px;
-  padding: 28px 32px;
+  padding: 24px 28px;
   max-width: 680px;
+  min-height: 100px;
   margin: 0 auto;
   transition: opacity 0.3s;
   box-shadow: 0 0 40px rgba(0,166,210,0.06), 0 0 80px rgba(0,166,210,0.03);
@@ -3043,12 +3044,12 @@ body { padding-bottom: 90px; }
     // 6 BRAIN SYSTEMS (IM8 style tabbed section)
     // ============================================================
     var brainSystems = [
-      {icon: '\uD83E\uDDE0', name: 'Cognitive Function', desc: 'Ginkgo Biloba (50:1), Bacopa Monnieri (11:1), and Lion\u2019s Mane (4:1) enhance cerebral blood flow, neural growth, and memory consolidation.'},
-      {icon: '\u26A1', name: 'Energy & Alertness', desc: 'Guarana Seed and B-Vitamins (B6, B12 at 20,000% RI) fuel sustained energy production without crashes or jitters.'},
-      {icon: '\uD83C\uDFAF', name: 'Focus & Attention', desc: 'L-Tyrosine and Choline support dopamine and acetylcholine production \u2013 the neurotransmitters behind deep focus under pressure.'},
-      {icon: '\uD83D\uDEE1\uFE0F', name: 'Stress Resilience', desc: 'Panax Ginseng (20:1) and Phosphatidylserine reduce cortisol and support cognitive performance under stress.'},
-      {icon: '\uD83D\uDCDA', name: 'Memory & Recall', desc: 'Bacopa Monnieri (11:1), Sage Leaf (4:1), and Zinc work together for enhanced retention and recall speed.'},
-      {icon: '\uD83C\uDF3F', name: 'Neuroprotection', desc: 'Rosemary (5:1) and Niacin (B3) provide long-term brain cell protection through carnosic acid and NAD+ production.'}
+      {icon: '\uD83E\uDDE0', name: 'Cognitive Function', desc: 'Ginkgo, Bacopa, and Lion\u2019s Mane enhance blood flow, neural growth, and memory.'},
+      {icon: '\u26A1', name: 'Energy & Alertness', desc: 'Guarana and B-Vitamins fuel sustained energy without crashes.'},
+      {icon: '\uD83C\uDFAF', name: 'Focus & Attention', desc: 'L-Tyrosine and Choline support dopamine and acetylcholine for deep focus.'},
+      {icon: '\uD83D\uDEE1\uFE0F', name: 'Stress Resilience', desc: 'Panax Ginseng and Phosphatidylserine reduce cortisol under pressure.'},
+      {icon: '\uD83D\uDCDA', name: 'Memory & Recall', desc: 'Bacopa, Sage Leaf, and Zinc enhance retention and recall speed.'},
+      {icon: '\uD83C\uDF3F', name: 'Neuroprotection', desc: 'Rosemary and Niacin protect brain cells and drive cellular repair.'}
     ];
     html += '<section class="brain-systems"><div class="container">';
     html += '<div class="brain-systems__head">';
