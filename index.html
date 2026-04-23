@@ -1191,13 +1191,14 @@ h2 em[style*="teal"], h2 span[style*="teal"],
   width: 36px; flex-shrink: 0;
 }
 /* Ingredient highlight grid */
+.feature-block__visual:has(.nutrition-table-img) {
+  background: none;
+  padding: 0;
+  border: none;
+}
 .nutrition-table-img {
   border-radius: 12px;
   overflow: hidden;
-  margin: -28px;
-}
-@media (min-width: 600px) {
-  .nutrition-table-img { margin: -52px; }
 }
 .nutrition-table-img img {
   width: 100%;
@@ -1892,6 +1893,7 @@ h2 em[style*="teal"], h2 span[style*="teal"],
 }
 @media (max-width: 800px) {
   .howto-steps { grid-template-columns: 1fr; }
+  .howto-step { max-width: 400px; margin: 0 auto; }
   .howto-img { aspect-ratio: 4/3; max-height: 220px; }
 }
 
@@ -2219,9 +2221,9 @@ h2 em[style*="teal"], h2 span[style*="teal"],
   display: block;
 }
 
-/* Pricing: IM8-style accordion — clean & compact */
+/* Pricing: IM8-style accordion */
 .pricing-selector {
-  max-width: 800px;
+  max-width: 100%;
   margin: 0 auto;
 }
 .pricing-label {
@@ -2248,7 +2250,7 @@ h2 em[style*="teal"], h2 span[style*="teal"],
   letter-spacing: 0.06em; padding: 3px 10px; border-radius: 4px;
 }
 .plan-card__header {
-  display: flex; align-items: center; gap: 10px; padding: 14px 18px;
+  padding: 16px 20px;
 }
 .plan-card__radio {
   width: 18px; height: 18px; border-radius: 50%;
@@ -2454,13 +2456,13 @@ h2 em[style*="teal"], h2 span[style*="teal"],
 }
 .welcome-kit__grid {
   display: flex;
-  gap: 8px;
+  gap: 10px;
 }
-.welcome-kit__item { text-align: center; flex: 1; }
+.welcome-kit__item { text-align: center; width: 80px; flex-shrink: 0; }
 .welcome-kit__img {
-  aspect-ratio: 1;
+  width: 80px; height: 80px;
   background: rgba(0,166,210,0.06);
-  border-radius: 8px;
+  border-radius: 10px;
   overflow: hidden;
   margin-bottom: 6px;
   display: flex;
@@ -2511,9 +2513,8 @@ h2 em[style*="teal"], h2 span[style*="teal"],
 }
 .future-gifts.open .future-gifts__content { display: block; }
 .future-gifts__grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
+  display: flex;
+  gap: 12px;
 }
 .future-gifts__period { text-align: center; }
 .future-gifts__label {
@@ -2524,9 +2525,9 @@ h2 em[style*="teal"], h2 span[style*="teal"],
   margin-bottom: 8px;
 }
 .future-gifts__img {
-  aspect-ratio: 1;
+  width: 80px; height: 80px;
   background: rgba(0,166,210,0.06);
-  border-radius: 8px;
+  border-radius: 10px;
   overflow: hidden;
   margin-bottom: 6px;
   display: flex;
@@ -2993,7 +2994,7 @@ body { padding-bottom: 90px; }
     html += '<linearGradient id="redGrad2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#E8283B" stop-opacity="0.08"/><stop offset="100%" stop-color="#E8283B" stop-opacity="0.01"/></linearGradient></defs>';
     // Y-axis labels
     html += '<text x="25" y="40" fill="var(--text-mute)" font-size="10" font-weight="600" text-anchor="middle">Your Edge</text>';
-    html += '<text x="25" y="175" fill="var(--text-mute)" font-size="10" font-weight="600" text-anchor="middle">Sharp</text>';
+    html += '<text x="25" y="175" fill="var(--text-mute)" font-size="10" font-weight="600" text-anchor="middle"></text>';
     // Grid lines
     html += '<line x1="50" y1="45" x2="480" y2="45" stroke="rgba(255,255,255,0.04)"/>';
     html += '<line x1="50" y1="95" x2="480" y2="95" stroke="rgba(255,255,255,0.04)"/>';
@@ -3345,23 +3346,30 @@ body { padding-bottom: 90px; }
       html += '<div class="plan-card' + isActive + '" data-plan="' + ci + '">';
       if (card.featured) html += '<span class="plan-card__badge">\u2B50 Best Value</span>';
 
-      // Header (always visible, clickable)
+      // Header (always visible, clickable) - IM8 layout
       html += '<div class="plan-card__header" onclick="(function(el){var cards=document.querySelectorAll(\'.plan-card\');cards.forEach(function(c){c.classList.remove(\'active\')});el.closest(\'.plan-card\').classList.add(\'active\');})(this)">';
+      // Row 1: radio + title + save pill
+      html += '<div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">';
       html += '<div class="plan-card__radio"></div>';
-      html += '<div class="plan-card__title">' + esc(card.title);
-      if (card.save) html += ' <span class="save-pill">' + esc(card.save) + '</span>';
+      html += '<span class="plan-card__title">' + esc(card.title) + '</span>';
+      if (card.save) html += '<span class="save-pill">' + esc(card.save) + '</span>';
       html += '</div>';
-      html += '<div class="plan-card__price-col">';
+      // Row 2: big price
+      html += '<div style="display:flex;align-items:baseline;gap:8px;">';
       if (card.price_monthly) {
-        html += '<div class="plan-card__amount">\u00A3' + esc(card.price_monthly) + '<small>/mo</small></div>';
-        html += '<div class="plan-card__was">\u00A3' + esc(card.was) + '</div>';
+        html += '<span class="plan-card__amount">\u00A3' + esc(card.price_monthly) + '</span><span style="font-size:16px;color:var(--text-dark-mute);">/mo</span>';
+        html += '<span class="plan-card__was">\u00A3' + esc(card.was) + '</span>';
       } else {
-        html += '<div class="plan-card__amount">\u00A3' + esc(card.price) + '</div>';
-        if (card.was) html += '<div class="plan-card__was">\u00A3' + esc(card.was) + '</div>';
+        html += '<span class="plan-card__amount">\u00A3' + esc(card.price) + '</span>';
+        if (card.was) html += '<span class="plan-card__was">\u00A3' + esc(card.was) + '</span>';
       }
-      html += '<div class="plan-card__billing">Billed \u00A3' + esc(card.price) + (card.price_monthly ? ' every 12 weeks' : ' every 4 weeks') + '</div>';
-      html += '<div class="plan-card__serving">' + esc(card.per) + '</div>';
-      html += '</div></div>';
+      html += '</div>';
+      // Row 3: billing + serving
+      html += '<div style="display:flex;justify-content:space-between;align-items:center;margin-top:4px;">';
+      html += '<span class="plan-card__billing">Billed \u00A3' + esc(card.price) + (card.price_monthly ? ' every 12 weeks' : ' every 4 weeks') + '</span>';
+      html += '<span class="plan-card__serving">' + esc(card.per) + '</span>';
+      html += '</div>';
+      html += '</div>';
 
       // Body (expanded when active)
       html += '<div class="plan-card__body"><div class="plan-card__body-inner">';
