@@ -3036,8 +3036,8 @@ body { padding-bottom: 90px; }
     html += '<p style="font-size:16px;color:#fff;line-height:1.6;margin-bottom:14px;">To ensure we monitor quality control, we decided that Genius Mind will be manufactured in a GMP UK manufacturing facility, and also on top of the quality checks at our manufacturer, we run independent third-party tests.</p>';
     html += '<a href="#" style="color:var(--teal);font-weight:600;font-size:14px;text-decoration:underline;text-underline-offset:3px;">See latest test results \u2192</a>';
     html += '</div></div>';
-    html += '<div style="background:none;padding:0;border:none;box-shadow:none;">';
-    html += '<img src="nutrition table.png" alt="Genius Mind Nutritional Information" style="width:100%;height:auto;display:block;border-radius:12px;">';
+    html += '<div class="feature-block__visual" style="background:transparent !important;padding:0 !important;border:none !important;box-shadow:none !important;border-radius:0 !important;">';
+    html += '<img src="nutrition table.png" alt="Genius Mind Nutritional Information" style="width:100%;height:auto;display:block;">';
     html += '</div></div>';
 
     html += '</div></section>';
@@ -3367,7 +3367,7 @@ body { padding-bottom: 90px; }
         if (card.was) html += '<span class="plan-card__was">\u00A3' + esc(card.was) + '</span>';
       }
       html += '</div>';
-      if (card.image) html += '<img src="' + esc(card.image) + '" alt="" style="width:60px;height:60px;object-fit:contain;border-radius:8px;flex-shrink:0;">';
+      if (card.image) html += '<img src="' + esc(card.image) + '" alt="" style="width:90px;height:90px;object-fit:contain;border-radius:10px;flex-shrink:0;">';
       html += '</div>';
       // Row 3: billing + serving
       html += '<div style="display:flex;justify-content:space-between;align-items:center;margin-top:4px;">';
