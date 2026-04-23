@@ -2219,53 +2219,144 @@ h2 em[style*="teal"], h2 span[style*="teal"],
   display: block;
 }
 
-.pricing-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-  max-width: 1000px;
+/* Pricing: IM8-style single column with radio selector */
+.pricing-selector {
+  max-width: 640px;
   margin: 0 auto;
 }
-.price-card {
-  background: #fff;
-  border: 1px solid rgba(0,0,0,0.08);
-  border-radius: var(--radius-xl);
-  padding: clamp(26px, 3.5vw, 42px);
-  position: relative;
+.pricing-options {
   display: flex;
   flex-direction: column;
+  gap: 12px;
+  margin-bottom: 24px;
 }
-.price-card.featured {
-  border: 2px solid var(--teal);
-  background: linear-gradient(180deg, rgba(0,166,210,0.04), #fff);
-  box-shadow: 0 24px 60px rgba(0,166,210,0.12);
-  transform: translateY(-8px);
+.pricing-option {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 18px 22px;
+  background: #fff;
+  border: 2px solid rgba(0,0,0,0.08);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  position: relative;
 }
-.price-card .ribbon {
-  position: absolute;
-  top: -14px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: linear-gradient(135deg, var(--teal), var(--teal-warm));
-  color: #fff;
-  font-weight: 600;
-  font-size: 12px;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  padding: 8px 18px;
-  border-radius: 50px;
-  white-space: nowrap;
-  box-shadow: 0 8px 20px rgba(0,166,210,0.4);
+.pricing-option:hover { border-color: rgba(0,166,210,0.3); }
+.pricing-option.active {
+  border-color: var(--teal);
+  box-shadow: 0 4px 20px rgba(0,166,210,0.1);
 }
-.price-card h3 {
-  font-family: 'Inter', sans-serif;
-  font-weight: 600;
+.pricing-option__radio {
+  width: 20px; height: 20px;
+  border-radius: 50%;
+  border: 2px solid #ccc;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.pricing-option.active .pricing-option__radio {
+  border-color: var(--teal);
+}
+.pricing-option.active .pricing-option__radio::after {
+  content: '';
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: var(--teal);
+}
+.pricing-option__info { flex: 1; }
+.pricing-option__title {
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--text-dark);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.pricing-option__billing {
+  font-size: 13px;
+  color: var(--text-dark-mute);
+  margin-top: 2px;
+}
+.pricing-option__price {
+  text-align: right;
+  flex-shrink: 0;
+}
+.pricing-option__amount {
   font-size: 24px;
-  text-transform: none;
-  margin-bottom: 4px;
-  letter-spacing: -0.01em;
+  font-weight: 700;
   color: var(--text-dark);
 }
+.pricing-option__was {
+  font-size: 14px;
+  color: var(--text-dark-mute);
+  text-decoration: line-through;
+  margin-left: 6px;
+}
+.pricing-option__serving {
+  font-size: 12px;
+  color: var(--text-dark-mute);
+  text-align: right;
+}
+.pricing-option__badge {
+  position: absolute;
+  top: -10px;
+  right: 16px;
+  background: var(--teal);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 4px 12px;
+  border-radius: 50px;
+}
+/* Pricing detail panel */
+.pricing-detail {
+  background: #fff;
+  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: 16px;
+  padding: 28px;
+}
+.pricing-detail__perks {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 22px;
+}
+.pricing-detail__perks li {
+  padding: 6px 0;
+  font-size: 14px;
+  color: var(--text-dark);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.pricing-detail__perks li::before {
+  content: '\2713';
+  color: var(--teal);
+  font-weight: 700;
+  font-size: 14px;
+}
+.pricing-detail__cta {
+  margin-top: 20px;
+}
+.pricing-detail__cta .btn { width: 100%; }
+/* One-time link */
+.pricing-onetime {
+  text-align: center;
+  margin-top: 16px;
+  font-size: 14px;
+  color: var(--text-dark-mute);
+}
+.pricing-onetime a {
+  color: var(--text-dark);
+  font-weight: 600;
+  text-decoration: underline;
+}
+/* Keep old classes for compatibility */
+.pricing-grid { display: none; }
+.price-card { display: none; }
 .price-card .tagline {
   font-family: 'Inter', sans-serif;
   font-style: normal;
@@ -3276,44 +3367,48 @@ body { padding-bottom: 90px; }
     html += '<div class="ct-unit"><span class="num" id="pc-m">00</span><small>Mins</small></div>';
     html += '<div class="ct-unit"><span class="num" id="pc-s">00</span><small>Secs</small></div>';
     html += '</div>';
-    html += '<div class="pricing-grid">';
+    // IM8-style radio selector pricing
+    html += '<div class="pricing-selector">';
+    html += '<div class="pricing-options">';
     D.pricing.cards.forEach(function(card, ci) {
-      var isFeatured = card.featured;
-      html += '<div class="price-card' + (isFeatured ? ' featured' : '') + '">';
-      if (card.ribbon) {
-        html += '<div class="ribbon">' + esc(card.ribbon) + '</div>';
+      if (!card.featured && !card.price_monthly && card.price === '34.99') return; // skip one-time from radio
+      var isActive = card.featured ? ' active' : '';
+      html += '<div class="pricing-option' + isActive + '" data-plan="' + ci + '" onclick="(function(el){var opts=document.querySelectorAll(\'.pricing-option\');opts.forEach(function(o){o.classList.remove(\'active\')});el.classList.add(\'active\');var panels=document.querySelectorAll(\'.pricing-panel\');panels.forEach(function(p){p.style.display=\'none\'});var t=document.querySelector(\'.pricing-panel[data-plan=\\\'' + ci + '\\\']\');if(t)t.style.display=\'block\';})(this)">';
+      if (card.featured) {
+        html += '<span class="pricing-option__badge">Best Value</span>';
       }
-      html += '<h3>' + esc(card.title) + '</h3>';
-      html += '<p class="tagline">' + esc(card.tagline) + '</p>';
-      var isBottle = card.image && card.image.indexOf('gm-bottle') !== -1;
-      html += '<div class="product-mock' + (isBottle ? ' product-mock--bottle' : '') + '">';
-      if (card.image && card.image !== '') {
-        html += '<img src="' + esc(card.image) + '" alt="">';
-      } else {
-        var bottleCount = isFeatured ? '3' : '1';
-        var bottleLabel = isFeatured ? '[ 3 BOTTLES IMAGE ]' : '[ 1 BOTTLE IMAGE ]';
-        html += '<span class="placeholder-label">' + bottleLabel + '</span>';
-      }
+      html += '<div class="pricing-option__radio"></div>';
+      html += '<div class="pricing-option__info">';
+      html += '<div class="pricing-option__title">' + esc(card.title);
+      if (card.save) html += ' <span class="save-pill">' + esc(card.save) + '</span>';
       html += '</div>';
-      // Price
-      var priceParts = card.price.split('.');
-      html += '<div class="price-row">';
-      html += '<span class="now">\u00A3' + priceParts[0] + '<small style="font-size:24px;">.' + (priceParts[1] || '00') + '</small></span>';
-      if (card.was) {
-        html += '<span class="was">\u00A3' + esc(card.was) + '</span>';
-      }
-      if (card.save) {
-        html += '<span class="save-pill">' + esc(card.save) + '</span>';
-      }
-      html += '</div>';
-      // Per month + per serving
       if (card.price_monthly) {
-        html += '<div class="per">\u00A3' + esc(card.price_monthly) + '/mo \u00B7 ' + esc(card.per) + '</div>';
+        html += '<div class="pricing-option__billing">Billed \u00A3' + esc(card.price) + ' every 12 weeks</div>';
       } else {
-        html += '<div class="per">' + esc(card.per) + '</div>';
+        html += '<div class="pricing-option__billing">Billed \u00A3' + esc(card.price) + ' every 4 weeks</div>';
       }
+      html += '</div>';
+      html += '<div class="pricing-option__price">';
+      if (card.price_monthly) {
+        html += '<div class="pricing-option__amount">\u00A3' + esc(card.price_monthly) + '<small style="font-size:14px;font-weight:400;color:var(--text-dark-mute);">/mo</small></div>';
+      } else {
+        html += '<div class="pricing-option__amount">\u00A3' + esc(card.price) + '</div>';
+      }
+      if (card.was) html += '<div class="pricing-option__was" style="text-decoration:line-through;font-size:13px;color:var(--text-dark-mute);">\u00A3' + esc(card.was) + '</div>';
+      html += '<div class="pricing-option__serving">' + esc(card.per) + '</div>';
+      html += '</div>';
+      html += '</div>';
+    });
+    html += '</div>';
+
+    // Detail panels (one per option, only active shown)
+    D.pricing.cards.forEach(function(card, ci) {
+      if (!card.featured && !card.price_monthly && card.price === '34.99') return;
+      var showStyle = card.featured ? 'display:block' : 'display:none';
+      html += '<div class="pricing-panel" data-plan="' + ci + '" style="' + showStyle + '">';
+      html += '<div class="pricing-detail">';
       // Perks
-      html += '<ul class="price-perks">';
+      html += '<ul class="pricing-detail__perks">';
       card.perks.forEach(function(perk) {
         html += '<li>' + esc(perk) + '</li>';
       });
@@ -3337,26 +3432,26 @@ body { padding-bottom: 90px; }
         html += '<button class="future-gifts__toggle" onclick="this.parentElement.classList.toggle(\'open\')">Future Monthly Gifts <span class="future-gifts__arrow">\u25BC</span></button>';
         html += '<div class="future-gifts__content">';
         html += '<div class="future-gifts__grid">';
-        html += '<div class="future-gifts__period">';
-        html += '<div class="future-gifts__label">Month 3</div>';
-        html += '<div class="future-gifts__img"><img src="' + esc(card.future_gifts.month3.image) + '" alt="" onerror="this.parentElement.innerHTML=\'[ Month 3 Gift ]\'"></div>';
-        html += '<div class="future-gifts__name">' + esc(card.future_gifts.month3.name) + '</div>';
-        html += '</div>';
-        html += '<div class="future-gifts__period">';
-        html += '<div class="future-gifts__label">Month 6</div>';
-        html += '<div class="future-gifts__img"><img src="' + esc(card.future_gifts.month6.image) + '" alt="" onerror="this.parentElement.innerHTML=\'[ Month 6 Gift ]\'"></div>';
-        html += '<div class="future-gifts__name">' + esc(card.future_gifts.month6.name) + '</div>';
-        html += '</div>';
+        html += '<div class="future-gifts__period"><div class="future-gifts__label">Month 3</div><div class="future-gifts__img"><img src="' + esc(card.future_gifts.month3.image) + '" alt="" onerror="this.parentElement.innerHTML=\'[ Month 3 Gift ]\'"></div><div class="future-gifts__name">' + esc(card.future_gifts.month3.name) + '</div></div>';
+        html += '<div class="future-gifts__period"><div class="future-gifts__label">Month 6</div><div class="future-gifts__img"><img src="' + esc(card.future_gifts.month6.image) + '" alt="" onerror="this.parentElement.innerHTML=\'[ Month 6 Gift ]\'"></div><div class="future-gifts__name">' + esc(card.future_gifts.month6.name) + '</div></div>';
         html += '</div></div></div>';
       }
-      // CTA
-      html += '<a href="' + (card.url || '#') + '" class="btn">' + esc(card.cta) + ' <span class="btn-arrow">\u2192</span></a>';
       // Stock
       if (card.stock) {
-        html += '<div class="stock-row"><strong>\u26A0 Low stock</strong> \u2013 ' + esc(card.stock.replace(/^Low stock \u2013 /, '')) + '</div>';
+        html += '<div style="text-align:center;font-size:12px;color:var(--text-dark-mute);margin-top:14px;"><strong style="color:var(--teal);">\u26A0 Low stock</strong> \u2013 ' + esc(card.stock.replace(/^Low stock \u2013 /, '')) + '</div>';
       }
+      // CTA
+      html += '<div class="pricing-detail__cta">';
+      html += '<a href="' + (card.url || '#') + '" class="btn">' + esc(card.cta) + ' <span class="btn-arrow">\u2192</span></a>';
       html += '</div>';
+      html += '</div></div>';
     });
+
+    // One-time purchase link
+    var otCard = D.pricing.cards[2];
+    if (otCard) {
+      html += '<div class="pricing-onetime"><a href="' + (otCard.url || '#') + '">One Time Purchase \u00A3' + esc(otCard.price) + '</a></div>';
+    }
     html += '</div></div></section>';
 
     // ============================================================
