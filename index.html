@@ -1893,9 +1893,9 @@ h2 em[style*="teal"], h2 span[style*="teal"],
   color: var(--text-dark-mute);
 }
 @media (max-width: 800px) {
-  .howto-steps { grid-template-columns: 1fr; }
-  .howto-step { max-width: 400px; margin: 0 auto; }
-  .howto-img { aspect-ratio: 4/3; max-height: 220px; }
+  .howto-steps { grid-template-columns: 1fr; justify-items: center; }
+  .howto-step { max-width: 340px; width: 100%; }
+  .howto-img { aspect-ratio: 4/3; max-height: 200px; margin-left: auto; margin-right: auto; }
 }
 
 /* ============================================================
@@ -3036,10 +3036,8 @@ body { padding-bottom: 90px; }
     html += '<p style="font-size:16px;color:#fff;line-height:1.6;margin-bottom:14px;">To ensure we monitor quality control, we decided that Genius Mind will be manufactured in a GMP UK manufacturing facility, and also on top of the quality checks at our manufacturer, we run independent third-party tests.</p>';
     html += '<a href="#" style="color:var(--teal);font-weight:600;font-size:14px;text-decoration:underline;text-underline-offset:3px;">See latest test results \u2192</a>';
     html += '</div></div>';
-    html += '<div class="feature-block__visual feature-block__visual--nutrition">';
-    html += '<div class="nutrition-table-img">';
-    html += '<img src="nutrition table.png" alt="Genius Mind Nutritional Information">';
-    html += '</div>';
+    html += '<div style="background:none;padding:0;border:none;box-shadow:none;">';
+    html += '<img src="nutrition table.png" alt="Genius Mind Nutritional Information" style="width:100%;height:auto;display:block;border-radius:12px;">';
     html += '</div></div>';
 
     html += '</div></section>';
