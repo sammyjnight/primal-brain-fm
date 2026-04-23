@@ -2278,6 +2278,17 @@ h2 em[style*="teal"], h2 span[style*="teal"],
   position: absolute;
   inset: 0;
 }
+.price-card .product-mock--bottle {
+  background: #fff;
+  border: 1px solid rgba(0,0,0,0.06);
+}
+.price-card .product-mock--bottle img {
+  object-fit: contain;
+  width: 70%;
+  height: 85%;
+  margin: auto;
+  inset: 0;
+}
 .price-card .product-mock .placeholder-label {
   text-align: center;
   font-size: 12px;
@@ -3191,7 +3202,8 @@ body { padding-bottom: 90px; }
       }
       html += '<h3>' + esc(card.title) + '</h3>';
       html += '<p class="tagline">' + esc(card.tagline) + '</p>';
-      html += '<div class="product-mock">';
+      var isBottle = card.image && card.image.indexOf('gm-bottle') !== -1;
+      html += '<div class="product-mock' + (isBottle ? ' product-mock--bottle' : '') + '">';
       if (card.image && card.image !== '') {
         html += '<img src="' + esc(card.image) + '" alt="">';
       } else {
