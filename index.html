@@ -2221,7 +2221,7 @@ h2 em[style*="teal"], h2 span[style*="teal"],
 
 /* Pricing: IM8-style accordion */
 .pricing-selector {
-  max-width: 520px;
+  max-width: 100%;
   margin: 0 auto;
 }
 .pricing-accordion {
@@ -2318,10 +2318,16 @@ h2 em[style*="teal"], h2 span[style*="teal"],
 /* Expandable body (only visible when active) */
 .plan-card__body {
   display: none;
-  padding: 0 18px 18px;
+  padding: 0 22px 20px;
   border-top: 1px solid rgba(0,0,0,0.06);
 }
-.plan-card.active .plan-card__body { display: block; }
+.plan-card.active .plan-card__body { display: grid; grid-template-columns: 1fr 1fr; gap: 0 24px; }
+.plan-card__perks-col { }
+.plan-card__gifts-col { }
+.plan-card__cta-row { grid-column: 1 / -1; }
+@media (max-width: 600px) {
+  .plan-card.active .plan-card__body { grid-template-columns: 1fr; }
+}
 .plan-card__perks {
   list-style: none;
   padding: 12px 0 0;
@@ -3422,17 +3428,23 @@ body { padding-bottom: 90px; }
       html += '<div class="plan-card__serving">' + esc(card.per) + '</div>';
       html += '</div></div>';
 
-      // Body (expanded when active)
+      // Body (expanded when active) - 2 column layout
       html += '<div class="plan-card__body">';
 
-      // Perks
+      // Left column: perks
+      html += '<div class="plan-card__perks-col">';
       html += '<ul class="plan-card__perks">';
       card.perks.forEach(function(perk) {
         html += '<li>' + esc(perk) + '</li>';
       });
       html += '</ul>';
+      if (card.stock) {
+        html += '<div style="font-size:12px;color:var(--text-dark-mute);margin-top:10px;">\u26A0\uFE0F <strong style="color:var(--teal);">Low stock</strong> \u2013 ' + esc(card.stock.replace(/^Low stock \u2013 /, '')) + '</div>';
+      }
+      html += '</div>';
 
-      // Welcome Kit
+      // Right column: welcome kit + future gifts
+      html += '<div class="plan-card__gifts-col">';
       if (card.welcome_kit) {
         html += '<div class="welcome-kit">';
         html += '<div class="welcome-kit__title">\uD83C\uDF81 Welcome Kit \u2013 Arrives With First Order</div>';
@@ -3446,27 +3458,21 @@ body { padding-bottom: 90px; }
         });
         html += '</div></div>';
       }
-
-      // Future Monthly Gifts
       if (card.future_gifts) {
         html += '<div class="future-gifts">';
         html += '<button class="future-gifts__toggle" onclick="event.stopPropagation();this.parentElement.classList.toggle(\'open\')">\uD83C\uDF89 Future Monthly Gifts <span class="future-gifts__arrow">\u25BC</span></button>';
-        html += '<div class="future-gifts__content">';
-        html += '<div class="future-gifts__grid">';
+        html += '<div class="future-gifts__content"><div class="future-gifts__grid">';
         html += '<div class="future-gifts__period"><div class="future-gifts__label">\uD83D\uDCC5 Month 3</div><div class="future-gifts__img"><img src="' + esc(card.future_gifts.month3.image) + '" alt="" onerror="this.parentElement.innerHTML=\'[\uD83C\uDF81]\'"></div><div class="future-gifts__name">' + esc(card.future_gifts.month3.name) + '</div></div>';
         html += '<div class="future-gifts__period"><div class="future-gifts__label">\uD83D\uDCC5 Month 6</div><div class="future-gifts__img"><img src="' + esc(card.future_gifts.month6.image) + '" alt="" onerror="this.parentElement.innerHTML=\'[\uD83C\uDF81]\'"></div><div class="future-gifts__name">' + esc(card.future_gifts.month6.name) + '</div></div>';
         html += '</div></div></div>';
       }
+      html += '</div>';
 
-      // Stock warning
-      if (card.stock) {
-        html += '<div style="text-align:center;font-size:12px;color:var(--text-dark-mute);margin-top:14px;">\u26A0\uFE0F <strong style="color:var(--teal);">Low stock</strong> \u2013 ' + esc(card.stock.replace(/^Low stock \u2013 /, '')) + '</div>';
-      }
-
-      // CTA
+      // CTA full width
+      html += '<div class="plan-card__cta-row">';
       html += '<div class="plan-card__cta">';
       html += '<a href="' + (card.url || '#') + '" class="btn">' + esc(card.cta) + ' <span class="btn-arrow">\u2192</span></a>';
-      html += '</div>';
+      html += '</div></div>';
 
       html += '</div>'; // end body
       html += '</div>'; // end plan-card
