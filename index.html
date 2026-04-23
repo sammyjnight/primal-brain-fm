@@ -884,6 +884,75 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
   .video-reviews__grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
 }
 
+/* ============================================================
+   PROMO STRIP (IM8 style)
+   ============================================================ */
+.promo-strip {
+  background: linear-gradient(135deg, #0a1628 0%, #0d1f3c 50%, #0a1628 100%);
+  padding: 14px 0;
+  border-top: 1px solid rgba(0,166,210,0.2);
+  border-bottom: 1px solid rgba(0,166,210,0.2);
+  overflow: hidden;
+}
+.promo-strip__inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 0 var(--pad);
+}
+.promo-strip__left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 800;
+  font-size: 14px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  background: linear-gradient(90deg, #00A6D2, #33d4ff, #00A6D2, #33d4ff);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer-text 3s ease-in-out infinite;
+}
+.promo-strip__left::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--teal);
+  box-shadow: 0 0 12px var(--teal), 0 0 24px rgba(0,166,210,0.4);
+  animation: pulse 2s ease-in-out infinite;
+  flex-shrink: 0;
+  /* Reset text fill for the dot */
+  -webkit-text-fill-color: initial;
+}
+@keyframes shimmer-text {
+  0% { background-position: 100% 0; }
+  100% { background-position: -100% 0; }
+}
+.promo-strip__divider {
+  width: 1px;
+  height: 18px;
+  background: rgba(255,255,255,0.25);
+  margin: 0 24px;
+  flex-shrink: 0;
+}
+.promo-strip__right {
+  font-size: 14px;
+  font-weight: 500;
+  color: #fff;
+  letter-spacing: 0.02em;
+}
+@media (max-width: 600px) {
+  .promo-strip__inner { flex-direction: column; gap: 6px; text-align: center; }
+  .promo-strip__divider { display: none; }
+  .promo-strip__left, .promo-strip__right { font-size: 12px; }
+}
+
 /* Old marquee styles kept for compat */
 .marquee { display: none; }
 .marquee span {
@@ -3037,10 +3106,19 @@ body { padding-bottom: 90px; }
     html += '<a href="#" style="color:var(--teal);font-weight:600;font-size:14px;text-decoration:underline;text-underline-offset:3px;">See latest test results \u2192</a>';
     html += '</div></div>';
     html += '<div class="feature-block__visual" style="background:transparent !important;padding:0 !important;border:none !important;box-shadow:none !important;border-radius:0 !important;">';
-    html += '<img src="nutrition table.png" alt="Genius Mind Nutritional Information" style="width:100%;height:auto;display:block;">';
+    html += '<img src="nutrition-table-cropped.png" alt="Genius Mind Nutritional Information" style="width:100%;height:auto;display:block;">';
     html += '</div></div>';
 
     html += '</div></section>';
+
+    // ============================================================
+    // PROMO STRIP (IM8 style)
+    // ============================================================
+    html += '<div class="promo-strip"><div class="promo-strip__inner">';
+    html += '<div class="promo-strip__left">SAVE 30% + GET FREE WELCOME GIFTS</div>';
+    html += '<div class="promo-strip__divider"></div>';
+    html += '<div class="promo-strip__right">Free Shipping on All Subscriptions</div>';
+    html += '</div></div>';
 
     // ============================================================
     // ANIMATED STATS (IM8 style countup)
