@@ -1887,7 +1887,10 @@ h2 em[style*="teal"], h2 span[style*="teal"],
   font-size: 16px;
   color: var(--text-dark-mute);
 }
-@media (max-width: 800px) { .howto-steps { grid-template-columns: 1fr; } }
+@media (max-width: 800px) {
+  .howto-steps { grid-template-columns: 1fr; }
+  .howto-img { aspect-ratio: 4/3; max-height: 220px; }
+}
 
 /* ============================================================
    SECTION 13 - COMPARISON TABLE
@@ -2835,12 +2838,12 @@ body { padding-bottom: 90px; }
     html += '<path d="M50 150 C80 130, 110 95, 150 65 C190 45, 230 38, 280 35 C340 33, 400 32, 440 32 C460 32, 475 32, 480 32" stroke="#00A6D2" stroke-width="3" fill="none"/>';
     html += '<path d="M50 150 C80 130, 110 95, 150 65 C190 45, 230 38, 280 35 C340 33, 400 32, 440 32 C460 32, 475 32, 480 32 L480 185 L50 185Z" fill="url(#tealGrad2)"/>';
     // Without - starts same but diverges early, gentle decline from Year 1
-    html += '<path d="M50 150 C80 132, 110 105, 150 82 C190 68, 230 65, 280 68 C340 74, 400 82, 440 90 C460 94, 475 97, 480 98" stroke="#E8283B" stroke-width="2" fill="none" stroke-dasharray="6 4" opacity="0.5"/>';
-    html += '<path d="M50 150 C80 132, 110 105, 150 82 C190 68, 230 65, 280 68 C340 74, 400 82, 440 90 C460 94, 475 97, 480 98 L480 185 L50 185Z" fill="url(#redGrad2)"/>';
+    html += '<path d="M50 150 C80 132, 110 108, 150 85 C190 72, 230 68, 280 70 C340 74, 400 78, 440 82 C460 84, 475 85, 480 86" stroke="#E8283B" stroke-width="2" fill="none" stroke-dasharray="6 4" opacity="0.5"/>';
+    html += '<path d="M50 150 C80 132, 110 108, 150 85 C190 72, 230 68, 280 70 C340 74, 400 78, 440 82 C460 84, 475 85, 480 86 L480 185 L50 185Z" fill="url(#redGrad2)"/>';
     // Edge gap annotation
-    html += '<line x1="460" y1="32" x2="460" y2="94" stroke="rgba(255,255,255,0.2)" stroke-width="1" stroke-dasharray="3 3"/>';
-    html += '<rect x="400" y="55" width="80" height="18" rx="6" fill="var(--surface)"/><rect x="400" y="55" width="80" height="18" rx="6" fill="rgba(0,166,210,0.12)"/>';
-    html += '<text x="440" y="68" fill="var(--teal)" font-size="10" font-weight="700" text-anchor="middle">The edge gap</text>';
+    html += '<line x1="460" y1="32" x2="460" y2="84" stroke="rgba(255,255,255,0.2)" stroke-width="1" stroke-dasharray="3 3"/>';
+    html += '<rect x="400" y="50" width="80" height="18" rx="6" fill="var(--surface)"/><rect x="400" y="50" width="80" height="18" rx="6" fill="rgba(0,166,210,0.12)"/>';
+    html += '<text x="440" y="63" fill="var(--teal)" font-size="10" font-weight="700" text-anchor="middle">The edge gap</text>';
     // X-axis labels
     html += '<text x="50" y="198" fill="var(--text-mute)" font-size="10" text-anchor="middle">Year 1</text>';
     html += '<text x="140" y="198" fill="var(--text-mute)" font-size="10" text-anchor="middle">Year 2</text>';
