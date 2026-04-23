@@ -3407,7 +3407,7 @@ body { padding-bottom: 90px; }
     html += '<div class="pricing-accordion" id="pricingAccordion">';
 
     D.pricing.cards.forEach(function(card, ci) {
-      if (!card.featured && !card.price_monthly && card.price === '34.99') return;
+      if (!card.price_monthly) return; // skip one-time purchase card (shown as link below)
       var isActive = card.featured ? ' active' : '';
 
       html += '<div class="plan-card' + isActive + '" data-plan="' + ci + '">';
