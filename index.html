@@ -2873,7 +2873,7 @@ body { padding-bottom: 90px; }
   <div class="sticky-header__inner">
     <a href="#" class="sticky-header__logo"><img src="https://cdn.shopify.com/s/files/1/0594/8892/7953/files/Branding.png" alt="JustFloow" style="height:28px;width:auto;filter:brightness(0) invert(1);"></a>
     <div class="sticky-header__promo">
-      <span class="sticky-header__promo-left"><span class="promo-dot"></span>SAVE 30% + GET FREE WELCOME GIFTS</span>
+      <span class="sticky-header__promo-left"><span class="promo-dot"></span>SAVE 41% + GET FREE WELCOME GIFTS</span>
       <span class="sticky-header__promo-divider"></span>
       <span class="sticky-header__promo-right">Free Shipping on All Subscriptions</span>
     </div>
@@ -3436,7 +3436,8 @@ body { padding-bottom: 90px; }
       html += '</div>';
       // Row 3: billing + serving
       html += '<div style="display:flex;justify-content:space-between;align-items:center;margin-top:4px;">';
-      html += '<span class="plan-card__billing">Billed \u00A3' + esc(card.price) + (card.price_monthly ? ' every 12 weeks' : ' every 4 weeks') + '</span>';
+      var billingPeriod = card.price_monthly && card.title.indexOf('90') >= 0 ? ' every 3 months' : card.price_monthly ? ' every month' : '';
+      html += '<span class="plan-card__billing">Billed \u00A3' + esc(card.price) + billingPeriod + '</span>';
       html += '<span class="plan-card__serving">' + esc(card.per) + '</span>';
       html += '</div>';
       html += '</div>';
@@ -3491,7 +3492,7 @@ body { padding-bottom: 90px; }
     }
 
     // Save banner
-    html += '<div class="pricing-save-banner">\uD83D\uDD25 Save 43% + Free Gifts</div>';
+    html += '<div class="pricing-save-banner">\uD83D\uDD25 Save 41% + Free Gifts</div>';
 
     html += '</div></div></section>';
 

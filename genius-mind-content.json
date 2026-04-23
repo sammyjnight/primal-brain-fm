@@ -504,18 +504,18 @@
         "featured": true,
         "ribbon": "Best Value + Free Gifts",
         "title": "90-Day Supply",
-        "tagline": "The minimum window for compound effect",
+        "tagline": "3 Bottles – Max Savings & Best Results",
         "image": "pricing-3.png",
-        "price": "42.99",
-        "price_monthly": "14.33",
+        "price": "50.99",
+        "price_monthly": "16.99",
         "was": "74.97",
-        "per": "£0.48 per serving",
-        "save": "Save 43%",
+        "per": "£0.57 per serving",
+        "save": "Save 41%",
         "perks": [
-          "Free Welcome Kit (£27 value)",
-          "Maximum savings – lowest price per serving",
-          "90-day money-back guarantee",
-          "Cancel or pause anytime"
+          "90 servings, only £0.57 per day",
+          "Fast & Free shipping",
+          "NO CONTRACT – pause, skip & cancel anytime",
+          "90 days money back guarantee"
         ],
         "welcome_kit": [
           {"name": "Welcome Gift 1", "image": "welcome-1.png", "price": "15"},
@@ -532,18 +532,18 @@
       {
         "featured": false,
         "title": "30-Day Supply",
-        "tagline": "Start the stack",
+        "tagline": "1 Bottle – delivered monthly",
         "image": "gm-bottle.png",
-        "price": "24.99",
-        "price_monthly": "24.99",
-        "was": "34.99",
-        "per": "£0.83 per serving",
+        "price": "21.24",
+        "price_monthly": "21.24",
+        "was": "29.99",
+        "per": "£0.71 per serving",
         "save": "Save 29%",
         "perks": [
-          "Free Welcome Kit (£27 value)",
-          "Save 29% – great value per serving",
-          "30-day money-back guarantee",
-          "Cancel or pause anytime"
+          "30 servings, only £0.71 per day",
+          "Fast & Free shipping",
+          "NO CONTRACT – pause, skip & cancel anytime",
+          "90 days money back guarantee"
         ],
         "welcome_kit": [
           {"name": "Welcome Gift 1", "image": "welcome-1.png", "price": "15"},
@@ -561,14 +561,14 @@
         "title": "One Time Purchase",
         "tagline": "No subscription",
         "image": "gm-bottle.png",
-        "price": "34.99",
-        "was": "",
-        "per": "Per bottle – 60 vegan capsules",
+        "price": "24.99",
+        "was": "29.99",
+        "per": "£0.83 per serving",
         "perks": [
-          "1 bottle – 60 vegan capsules",
-          "30-day money-back guarantee",
-          "No subscription required",
-          "Same-day dispatch before 2pm"
+          "30 servings, only £0.83 per day",
+          "Fast shipping",
+          "90 days money back guarantee",
+          "No subscription required"
         ],
         "cta": "Buy Once",
         "url": "https://justfloow.com/products/genius-mind"
