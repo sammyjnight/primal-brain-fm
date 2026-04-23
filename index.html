@@ -2297,13 +2297,16 @@ h2 em[style*="teal"], h2 span[style*="teal"],
 .price-card .product-mock--bottle {
   background: #fff;
   border: 1px solid rgba(0,0,0,0.06);
+  padding: 8px;
 }
 .price-card .product-mock--bottle img {
   object-fit: contain;
-  width: 90%;
-  height: 95%;
-  margin: auto;
-  inset: 0;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  inset: 4px;
+  width: calc(100% - 8px);
+  height: calc(100% - 8px);
 }
 .price-card .product-mock .placeholder-label {
   text-align: center;
@@ -2367,7 +2370,7 @@ h2 em[style*="teal"], h2 span[style*="teal"],
   font-size: 11px;
   flex-shrink: 0;
 }
-.price-card .btn { width: 100%; }
+.price-card .btn { width: 100%; margin-top: auto; }
 .price-card .stock-row {
   margin-top: 14px;
   font-size: 12px;
