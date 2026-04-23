@@ -3391,7 +3391,6 @@ body { padding-bottom: 90px; }
     // ============================================================
     html += '<section class="pricing" id="pricing"><div class="container">';
     html += '<div class="pricing-head">';
-    html += '<span class="eyebrow">' + esc(D.pricing.eyebrow) + '</span>';
     html += '<h2>' + D.pricing.headline + '</h2>';
     html += '<p>' + esc(D.pricing.subtitle) + '</p>';
     html += '</div>';
@@ -3433,7 +3432,7 @@ body { padding-bottom: 90px; }
         if (card.was) html += '<span class="plan-card__was">\u00A3' + esc(card.was) + '</span>';
       }
       html += '</div>';
-      if (card.image) html += '<img src="' + esc(card.image) + '" alt="" style="width:90px;height:90px;object-fit:contain;border-radius:10px;flex-shrink:0;">';
+      // bottle images removed for now
       html += '</div>';
       // Row 3: billing + serving
       html += '<div style="display:flex;justify-content:space-between;align-items:center;margin-top:4px;">';
