@@ -741,22 +741,22 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 10px;
-  margin-bottom: 28px;
+  gap: 8px;
+  margin-bottom: 24px;
 }
 .brain-pill {
-  background: var(--surface);
-  border: 1px solid var(--border);
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.1);
   color: var(--text-dim);
-  font-size: 14px;
-  font-weight: 600;
-  padding: 10px 20px;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 8px 16px;
   border-radius: 50px;
   cursor: pointer;
   transition: all 0.3s;
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 5px;
 }
 .brain-pill:hover { border-color: var(--teal); color: #fff; }
 .brain-pill.active {
@@ -765,31 +765,42 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
   animation: shimmer 3s linear infinite;
   border-color: transparent;
   color: #fff;
+  font-weight: 600;
 }
-.brain-pill__icon { font-size: 16px; }
+.brain-pill__icon { font-size: 14px; }
 .brain-systems__panel {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: 32px;
-  max-width: 700px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(0,166,210,0.15);
+  border-radius: 20px;
+  padding: 28px 32px;
+  max-width: 680px;
   margin: 0 auto;
   transition: opacity 0.3s;
+  box-shadow: 0 0 40px rgba(0,166,210,0.06), 0 0 80px rgba(0,166,210,0.03);
+  position: relative;
+}
+.brain-systems__panel::before {
+  content: '';
+  position: absolute;
+  top: -1px; left: 10%; right: 10%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--teal), transparent);
+  border-radius: 2px;
 }
 .brain-panel__header {
   display: flex;
   align-items: center;
-  gap: 12px;
-  margin-bottom: 16px;
+  gap: 10px;
+  margin-bottom: 10px;
 }
-.brain-panel__icon { font-size: 28px; }
+.brain-panel__icon { font-size: 22px; }
 .brain-panel__name {
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 700;
   color: #fff;
 }
 .brain-panel__desc {
-  font-size: 16px;
+  font-size: 15px;
   color: var(--text-dim);
   line-height: 1.6;
 }
@@ -3032,12 +3043,12 @@ body { padding-bottom: 90px; }
     // 6 BRAIN SYSTEMS (IM8 style tabbed section)
     // ============================================================
     var brainSystems = [
-      {icon: '\uD83E\uDDE0', name: 'Cognitive Function', desc: 'Ginkgo Biloba (50:1), Bacopa Monnieri (11:1), and Lion\u2019s Mane (4:1) work together to enhance cerebral blood flow, stimulate neural growth factor, and consolidate memory pathways.'},
-      {icon: '\u26A1', name: 'Energy & Alertness', desc: 'Guarana Seed provides sustained natural caffeine release, while B-Vitamins (B6 at 714% RI, B12 at 20,000% RI) fuel cellular energy production without crashes or jitters.'},
-      {icon: '\uD83C\uDFAF', name: 'Focus & Attention', desc: 'L-Tyrosine (100mg) is a direct dopamine precursor that enhances focus under stress. Paired with Choline (100mg) for acetylcholine production \u2013 your brain\u2019s focus neurotransmitter.'},
-      {icon: '\uD83D\uDEE1\uFE0F', name: 'Stress Resilience', desc: 'Panax Ginseng (20:1 extract) is a clinically-studied adaptogen that helps your brain perform under pressure. Phosphatidylserine (35mg) reduces cortisol and supports stress recovery.'},
-      {icon: '\uD83D\uDCDA', name: 'Memory & Recall', desc: 'Bacopa Monnieri (11:1 extract, 80mg) is one of the most researched memory herbs. Combined with Sage Leaf (4:1 extract) and Zinc (100% RI) for enhanced retention and recall speed.'},
-      {icon: '\uD83C\uDF3F', name: 'Neuroprotection', desc: 'Rosemary (5:1 extract) provides carnosic acid for long-term brain cell protection. Niacin (B3, 32mg) drives NAD+ production for cellular repair and cognitive longevity.'}
+      {icon: '\uD83E\uDDE0', name: 'Cognitive Function', desc: 'Ginkgo Biloba (50:1), Bacopa Monnieri (11:1), and Lion\u2019s Mane (4:1) enhance cerebral blood flow, neural growth, and memory consolidation.'},
+      {icon: '\u26A1', name: 'Energy & Alertness', desc: 'Guarana Seed and B-Vitamins (B6, B12 at 20,000% RI) fuel sustained energy production without crashes or jitters.'},
+      {icon: '\uD83C\uDFAF', name: 'Focus & Attention', desc: 'L-Tyrosine and Choline support dopamine and acetylcholine production \u2013 the neurotransmitters behind deep focus under pressure.'},
+      {icon: '\uD83D\uDEE1\uFE0F', name: 'Stress Resilience', desc: 'Panax Ginseng (20:1) and Phosphatidylserine reduce cortisol and support cognitive performance under stress.'},
+      {icon: '\uD83D\uDCDA', name: 'Memory & Recall', desc: 'Bacopa Monnieri (11:1), Sage Leaf (4:1), and Zinc work together for enhanced retention and recall speed.'},
+      {icon: '\uD83C\uDF3F', name: 'Neuroprotection', desc: 'Rosemary (5:1) and Niacin (B3) provide long-term brain cell protection through carnosic acid and NAD+ production.'}
     ];
     html += '<section class="brain-systems"><div class="container">';
     html += '<div class="brain-systems__head">';
