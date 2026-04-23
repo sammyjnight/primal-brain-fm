@@ -2373,6 +2373,108 @@ h2 em[style*="teal"], h2 span[style*="teal"],
   color: var(--text-dark-mute);
 }
 .price-card .stock-row strong { color: var(--teal); }
+/* Save pill */
+.save-pill {
+  display: inline-block;
+  background: #1bb88a;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 5px 14px;
+  border-radius: 50px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+/* Welcome Kit */
+.welcome-kit {
+  border-top: 1px solid rgba(0,0,0,0.08);
+  padding-top: 18px;
+  margin-top: 18px;
+  margin-bottom: 18px;
+}
+.welcome-kit__title {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-dark);
+  margin-bottom: 14px;
+}
+.welcome-kit__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.welcome-kit__item { text-align: center; }
+.welcome-kit__img {
+  aspect-ratio: 1;
+  background: rgba(0,166,210,0.06);
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  color: var(--text-dark-mute);
+}
+.welcome-kit__img img { width: 100%; height: 100%; object-fit: cover; }
+.welcome-kit__name { font-size: 11px; font-weight: 600; color: var(--text-dark); }
+/* Future Gifts dropdown */
+.future-gifts {
+  margin-bottom: 18px;
+}
+.future-gifts__toggle {
+  width: 100%;
+  padding: 12px 18px;
+  background: rgba(0,0,0,0.03);
+  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: 50px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-dark);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.future-gifts__arrow { font-size: 10px; transition: transform 0.3s; }
+.future-gifts.open .future-gifts__arrow { transform: rotate(180deg); }
+.future-gifts__content {
+  display: none;
+  padding-top: 16px;
+}
+.future-gifts.open .future-gifts__content { display: block; }
+.future-gifts__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.future-gifts__period { text-align: center; }
+.future-gifts__label {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--text-dark);
+  margin-bottom: 8px;
+}
+.future-gifts__img {
+  aspect-ratio: 1;
+  background: rgba(0,166,210,0.06);
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  color: var(--text-dark-mute);
+}
+.future-gifts__img img { width: 100%; height: 100%; object-fit: cover; }
+.future-gifts__name { font-size: 11px; font-weight: 600; color: var(--text-dark); }
 @media (max-width: 800px) {
   .pricing-grid { grid-template-columns: 1fr; }
   .price-card.featured { transform: none; }
@@ -3195,10 +3297,13 @@ body { padding-bottom: 90px; }
       if (card.was) {
         html += '<span class="was">\u00A3' + esc(card.was) + '</span>';
       }
-      html += '</div>';
-      // Per line
       if (card.save) {
-        html += '<div class="per"><strong>' + esc(card.per) + '</strong> \u00B7 ' + esc(card.save) + '</div>';
+        html += '<span class="save-pill">' + esc(card.save) + '</span>';
+      }
+      html += '</div>';
+      // Per month + per serving
+      if (card.price_monthly) {
+        html += '<div class="per">\u00A3' + esc(card.price_monthly) + '/mo \u00B7 ' + esc(card.per) + '</div>';
       } else {
         html += '<div class="per">' + esc(card.per) + '</div>';
       }
@@ -3208,6 +3313,37 @@ body { padding-bottom: 90px; }
         html += '<li>' + esc(perk) + '</li>';
       });
       html += '</ul>';
+      // Welcome Kit
+      if (card.welcome_kit) {
+        html += '<div class="welcome-kit">';
+        html += '<div class="welcome-kit__title">Welcome Kit \u2013 Arrives With First Order</div>';
+        html += '<div class="welcome-kit__grid">';
+        card.welcome_kit.forEach(function(gift) {
+          html += '<div class="welcome-kit__item">';
+          html += '<div class="welcome-kit__img"><img src="' + esc(gift.image) + '" alt="' + esc(gift.name) + '" onerror="this.parentElement.innerHTML=\'[ ' + esc(gift.name) + ' ]\'"></div>';
+          html += '<div class="welcome-kit__name">' + esc(gift.name) + '</div>';
+          html += '</div>';
+        });
+        html += '</div></div>';
+      }
+      // Future Monthly Gifts
+      if (card.future_gifts) {
+        html += '<div class="future-gifts">';
+        html += '<button class="future-gifts__toggle" onclick="this.parentElement.classList.toggle(\'open\')">Future Monthly Gifts <span class="future-gifts__arrow">\u25BC</span></button>';
+        html += '<div class="future-gifts__content">';
+        html += '<div class="future-gifts__grid">';
+        html += '<div class="future-gifts__period">';
+        html += '<div class="future-gifts__label">Month 3</div>';
+        html += '<div class="future-gifts__img"><img src="' + esc(card.future_gifts.month3.image) + '" alt="" onerror="this.parentElement.innerHTML=\'[ Month 3 Gift ]\'"></div>';
+        html += '<div class="future-gifts__name">' + esc(card.future_gifts.month3.name) + '</div>';
+        html += '</div>';
+        html += '<div class="future-gifts__period">';
+        html += '<div class="future-gifts__label">Month 6</div>';
+        html += '<div class="future-gifts__img"><img src="' + esc(card.future_gifts.month6.image) + '" alt="" onerror="this.parentElement.innerHTML=\'[ Month 6 Gift ]\'"></div>';
+        html += '<div class="future-gifts__name">' + esc(card.future_gifts.month6.name) + '</div>';
+        html += '</div>';
+        html += '</div></div></div>';
+      }
       // CTA
       html += '<a href="' + (card.url || '#') + '" class="btn">' + esc(card.cta) + ' <span class="btn-arrow">\u2192</span></a>';
       // Stock

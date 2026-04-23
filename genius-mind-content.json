@@ -507,17 +507,26 @@
         "tagline": "The minimum window for compound effect",
         "image": "pricing-3.png",
         "price": "42.99",
+        "price_monthly": "14.33",
         "was": "74.97",
-        "per": "£14.33 per bottle",
+        "per": "£0.48 per serving",
         "save": "Save 43%",
         "perks": [
           "3 bottles – 180 vegan capsules",
           "90-day money-back guarantee",
+          "Free Welcome Kit",
           "Free UK delivery",
           "Same-day dispatch before 2pm",
-          "Priority access to next batch",
-          "Free mystery gift"
+          "Priority access to next batch"
         ],
+        "welcome_kit": [
+          {"name": "Welcome Gift 1", "image": "welcome-1.png"},
+          {"name": "Welcome Gift 2", "image": "welcome-2.png"}
+        ],
+        "future_gifts": {
+          "month3": {"name": "Month 3 Gift", "image": "gift-month3.png"},
+          "month6": {"name": "Month 6 Gift", "image": "gift-month6.png"}
+        },
         "cta": "Start My 90-Day Program",
         "url": "https://justfloow.com/products/genius-mind",
         "stock": "Low stock – only this week's allocation remaining"
