@@ -2152,13 +2152,13 @@ h2 em[style*="teal"], h2 span[style*="teal"],
   background: linear-gradient(180deg, var(--cream) 0%, #fff 100%);
   color: var(--text-dark);
 }
-.pricing-head { text-align: center; margin-bottom: 50px; }
+.pricing-head { text-align: center; margin-bottom: 24px; }
 .pricing-head h2 {
   font-family: 'Inter', sans-serif;
   font-weight: 600;
-  font-size: clamp(30px, 4.4vw, 50px);
+  font-size: clamp(26px, 3.5vw, 40px);
   letter-spacing: -0.025em;
-  margin-bottom: 14px;
+  margin-bottom: 8px;
   text-transform: none;
   color: var(--text-dark);
 }
@@ -2169,15 +2169,15 @@ h2 em[style*="teal"], h2 span[style*="teal"],
   color: var(--teal);
   text-transform: none;
 }
-.pricing-head p { font-family: 'Inter', sans-serif; font-size: 18px; color: var(--text-dark-mute); }
+.pricing-head p { font-family: 'Inter', sans-serif; font-size: 15px; color: var(--text-dark-mute); }
 
 /* Mini countdown above pricing */
 .pricing-countdown {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 10px;
-  margin-bottom: 30px;
+  gap: 8px;
+  margin-bottom: 20px;
   flex-wrap: nowrap;
 }
 .pricing-countdown .label {
@@ -2221,13 +2221,13 @@ h2 em[style*="teal"], h2 span[style*="teal"],
 
 /* Pricing: IM8-style accordion */
 .pricing-selector {
-  max-width: 640px;
+  max-width: 520px;
   margin: 0 auto;
 }
 .pricing-accordion {
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 10px;
 }
 /* Each plan card */
 .plan-card {
@@ -2260,8 +2260,8 @@ h2 em[style*="teal"], h2 span[style*="teal"],
 .plan-card__header {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 18px 22px;
+  gap: 10px;
+  padding: 14px 18px;
 }
 .plan-card__radio {
   width: 22px; height: 22px;
@@ -2282,11 +2282,11 @@ h2 em[style*="teal"], h2 span[style*="teal"],
 }
 .plan-card__title {
   font-weight: 700;
-  font-size: 17px;
+  font-size: 15px;
   color: var(--text-dark);
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   flex: 1;
 }
 .plan-card__price-col {
@@ -2294,7 +2294,7 @@ h2 em[style*="teal"], h2 span[style*="teal"],
   flex-shrink: 0;
 }
 .plan-card__amount {
-  font-size: 26px;
+  font-size: 22px;
   font-weight: 700;
   color: var(--text-dark);
   line-height: 1;
@@ -2318,18 +2318,18 @@ h2 em[style*="teal"], h2 span[style*="teal"],
 /* Expandable body (only visible when active) */
 .plan-card__body {
   display: none;
-  padding: 0 22px 22px;
+  padding: 0 18px 18px;
   border-top: 1px solid rgba(0,0,0,0.06);
 }
 .plan-card.active .plan-card__body { display: block; }
 .plan-card__perks {
   list-style: none;
-  padding: 16px 0 0;
+  padding: 12px 0 0;
   margin: 0;
 }
 .plan-card__perks li {
-  padding: 5px 0;
-  font-size: 14px;
+  padding: 4px 0;
+  font-size: 13px;
   color: var(--text-dark);
   display: flex;
   align-items: flex-start;
@@ -2342,7 +2342,7 @@ h2 em[style*="teal"], h2 span[style*="teal"],
   font-size: 15px;
   flex-shrink: 0;
 }
-.plan-card__cta { margin-top: 20px; }
+.plan-card__cta { margin-top: 14px; }
 .plan-card__cta .btn { width: 100%; }
 /* One-time link */
 .pricing-onetime {
@@ -2499,9 +2499,9 @@ h2 em[style*="teal"], h2 span[style*="teal"],
 /* Welcome Kit */
 .welcome-kit {
   border-top: 1px solid rgba(0,0,0,0.08);
-  padding-top: 18px;
-  margin-top: 18px;
-  margin-bottom: 18px;
+  padding-top: 14px;
+  margin-top: 14px;
+  margin-bottom: 12px;
 }
 .welcome-kit__title {
   font-size: 11px;
@@ -2518,9 +2518,9 @@ h2 em[style*="teal"], h2 span[style*="teal"],
 }
 .welcome-kit__item { text-align: center; }
 .welcome-kit__img {
-  aspect-ratio: 1;
+  aspect-ratio: 4/3;
   background: rgba(0,166,210,0.06);
-  border-radius: 12px;
+  border-radius: 10px;
   overflow: hidden;
   margin-bottom: 6px;
   display: flex;
@@ -2544,11 +2544,11 @@ h2 em[style*="teal"], h2 span[style*="teal"],
 .welcome-kit__name { font-size: 11px; font-weight: 600; color: var(--text-dark); }
 /* Future Gifts dropdown */
 .future-gifts {
-  margin-bottom: 18px;
+  margin-bottom: 12px;
 }
 .future-gifts__toggle {
   width: 100%;
-  padding: 12px 18px;
+  padding: 10px 16px;
   background: rgba(0,0,0,0.03);
   border: 1px solid rgba(0,0,0,0.08);
   border-radius: 50px;
@@ -2584,9 +2584,9 @@ h2 em[style*="teal"], h2 span[style*="teal"],
   margin-bottom: 8px;
 }
 .future-gifts__img {
-  aspect-ratio: 1;
+  aspect-ratio: 4/3;
   background: rgba(0,166,210,0.06);
-  border-radius: 12px;
+  border-radius: 10px;
   overflow: hidden;
   margin-bottom: 6px;
   display: flex;
