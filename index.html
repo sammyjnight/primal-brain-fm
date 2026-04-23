@@ -2219,142 +2219,157 @@ h2 em[style*="teal"], h2 span[style*="teal"],
   display: block;
 }
 
-/* Pricing: IM8-style single column with radio selector */
+/* Pricing: IM8-style accordion */
 .pricing-selector {
   max-width: 640px;
   margin: 0 auto;
 }
-.pricing-options {
+.pricing-accordion {
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  margin-bottom: 24px;
-}
-.pricing-option {
-  display: flex;
-  align-items: center;
   gap: 14px;
-  padding: 18px 22px;
-  background: #fff;
+}
+/* Each plan card */
+.plan-card {
   border: 2px solid rgba(0,0,0,0.08);
-  border-radius: 12px;
+  border-radius: 14px;
+  background: #fff;
+  overflow: hidden;
   cursor: pointer;
-  transition: border-color 0.2s, box-shadow 0.2s;
+  transition: border-color 0.3s, box-shadow 0.3s;
   position: relative;
 }
-.pricing-option:hover { border-color: rgba(0,166,210,0.3); }
-.pricing-option.active {
+.plan-card.active {
   border-color: var(--teal);
-  box-shadow: 0 4px 20px rgba(0,166,210,0.1);
+  box-shadow: 0 4px 24px rgba(0,166,210,0.12);
+  cursor: default;
 }
-.pricing-option__radio {
-  width: 20px; height: 20px;
-  border-radius: 50%;
-  border: 2px solid #ccc;
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.pricing-option.active .pricing-option__radio {
-  border-color: var(--teal);
-}
-.pricing-option.active .pricing-option__radio::after {
-  content: '';
-  width: 10px; height: 10px;
-  border-radius: 50%;
-  background: var(--teal);
-}
-.pricing-option__info { flex: 1; }
-.pricing-option__title {
-  font-weight: 700;
-  font-size: 16px;
-  color: var(--text-dark);
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.pricing-option__billing {
-  font-size: 13px;
-  color: var(--text-dark-mute);
-  margin-top: 2px;
-}
-.pricing-option__price {
-  text-align: right;
-  flex-shrink: 0;
-}
-.pricing-option__amount {
-  font-size: 24px;
-  font-weight: 700;
-  color: var(--text-dark);
-}
-.pricing-option__was {
-  font-size: 14px;
-  color: var(--text-dark-mute);
-  text-decoration: line-through;
-  margin-left: 6px;
-}
-.pricing-option__serving {
-  font-size: 12px;
-  color: var(--text-dark-mute);
-  text-align: right;
-}
-.pricing-option__badge {
+.plan-card__badge {
   position: absolute;
-  top: -10px;
-  right: 16px;
+  top: -1px; right: 16px;
   background: var(--teal);
   color: #fff;
   font-size: 10px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  padding: 4px 12px;
-  border-radius: 50px;
+  padding: 5px 14px;
+  border-radius: 0 0 8px 8px;
 }
-/* Pricing detail panel */
-.pricing-detail {
-  background: #fff;
-  border: 1px solid rgba(0,0,0,0.08);
-  border-radius: 16px;
-  padding: 28px;
+/* Header row (always visible) */
+.plan-card__header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 18px 22px;
 }
-.pricing-detail__perks {
-  list-style: none;
-  padding: 0;
-  margin: 0 0 22px;
+.plan-card__radio {
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  border: 2px solid #ccc;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.2s;
 }
-.pricing-detail__perks li {
-  padding: 6px 0;
-  font-size: 14px;
+.plan-card.active .plan-card__radio { border-color: var(--teal); }
+.plan-card.active .plan-card__radio::after {
+  content: '';
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  background: var(--teal);
+}
+.plan-card__title {
+  font-weight: 700;
+  font-size: 17px;
   color: var(--text-dark);
   display: flex;
   align-items: center;
   gap: 8px;
+  flex: 1;
 }
-.pricing-detail__perks li::before {
+.plan-card__price-col {
+  text-align: right;
+  flex-shrink: 0;
+}
+.plan-card__amount {
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--text-dark);
+  line-height: 1;
+}
+.plan-card__amount small { font-size: 14px; font-weight: 400; color: var(--text-dark-mute); }
+.plan-card__was {
+  font-size: 13px;
+  color: var(--text-dark-mute);
+  text-decoration: line-through;
+}
+.plan-card__billing {
+  font-size: 12px;
+  color: var(--text-dark-mute);
+  margin-top: 2px;
+}
+.plan-card__serving {
+  font-size: 11px;
+  color: var(--text-dark-mute);
+  font-weight: 600;
+}
+/* Expandable body (only visible when active) */
+.plan-card__body {
+  display: none;
+  padding: 0 22px 22px;
+  border-top: 1px solid rgba(0,0,0,0.06);
+}
+.plan-card.active .plan-card__body { display: block; }
+.plan-card__perks {
+  list-style: none;
+  padding: 16px 0 0;
+  margin: 0;
+}
+.plan-card__perks li {
+  padding: 5px 0;
+  font-size: 14px;
+  color: var(--text-dark);
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+.plan-card__perks li::before {
   content: '\2713';
   color: var(--teal);
   font-weight: 700;
-  font-size: 14px;
+  font-size: 15px;
+  flex-shrink: 0;
 }
-.pricing-detail__cta {
-  margin-top: 20px;
-}
-.pricing-detail__cta .btn { width: 100%; }
+.plan-card__cta { margin-top: 20px; }
+.plan-card__cta .btn { width: 100%; }
 /* One-time link */
 .pricing-onetime {
   text-align: center;
-  margin-top: 16px;
+  margin-top: 18px;
   font-size: 14px;
-  color: var(--text-dark-mute);
 }
 .pricing-onetime a {
   color: var(--text-dark);
   font-weight: 600;
   text-decoration: underline;
+  text-underline-offset: 3px;
 }
-/* Keep old classes for compatibility */
+/* Save + free gifts banner */
+.pricing-save-banner {
+  text-align: center;
+  margin-top: 16px;
+  padding: 14px 20px;
+  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: 50px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-dark);
+}
+/* Hide old grid */
 .pricing-grid { display: none; }
 .price-card { display: none; }
 .price-card .tagline {
@@ -2515,6 +2530,17 @@ h2 em[style*="teal"], h2 span[style*="teal"],
   color: var(--text-dark-mute);
 }
 .welcome-kit__img img { width: 100%; height: 100%; object-fit: cover; }
+.welcome-kit__price {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--teal);
+  margin-bottom: 2px;
+}
+.welcome-kit__price s {
+  color: var(--text-dark-mute);
+  font-weight: 400;
+  margin-right: 4px;
+}
 .welcome-kit__name { font-size: 11px; font-weight: 600; color: var(--text-dark); }
 /* Future Gifts dropdown */
 .future-gifts {
@@ -3367,91 +3393,96 @@ body { padding-bottom: 90px; }
     html += '<div class="ct-unit"><span class="num" id="pc-m">00</span><small>Mins</small></div>';
     html += '<div class="ct-unit"><span class="num" id="pc-s">00</span><small>Secs</small></div>';
     html += '</div>';
-    // IM8-style radio selector pricing
+    // IM8-style accordion pricing
     html += '<div class="pricing-selector">';
-    html += '<div class="pricing-options">';
-    D.pricing.cards.forEach(function(card, ci) {
-      if (!card.featured && !card.price_monthly && card.price === '34.99') return; // skip one-time from radio
-      var isActive = card.featured ? ' active' : '';
-      html += '<div class="pricing-option' + isActive + '" data-plan="' + ci + '" onclick="(function(el){var opts=document.querySelectorAll(\'.pricing-option\');opts.forEach(function(o){o.classList.remove(\'active\')});el.classList.add(\'active\');var panels=document.querySelectorAll(\'.pricing-panel\');panels.forEach(function(p){p.style.display=\'none\'});var t=document.querySelector(\'.pricing-panel[data-plan=\\\'' + ci + '\\\']\');if(t)t.style.display=\'block\';})(this)">';
-      if (card.featured) {
-        html += '<span class="pricing-option__badge">Best Value</span>';
-      }
-      html += '<div class="pricing-option__radio"></div>';
-      html += '<div class="pricing-option__info">';
-      html += '<div class="pricing-option__title">' + esc(card.title);
-      if (card.save) html += ' <span class="save-pill">' + esc(card.save) + '</span>';
-      html += '</div>';
-      if (card.price_monthly) {
-        html += '<div class="pricing-option__billing">Billed \u00A3' + esc(card.price) + ' every 12 weeks</div>';
-      } else {
-        html += '<div class="pricing-option__billing">Billed \u00A3' + esc(card.price) + ' every 4 weeks</div>';
-      }
-      html += '</div>';
-      html += '<div class="pricing-option__price">';
-      if (card.price_monthly) {
-        html += '<div class="pricing-option__amount">\u00A3' + esc(card.price_monthly) + '<small style="font-size:14px;font-weight:400;color:var(--text-dark-mute);">/mo</small></div>';
-      } else {
-        html += '<div class="pricing-option__amount">\u00A3' + esc(card.price) + '</div>';
-      }
-      if (card.was) html += '<div class="pricing-option__was" style="text-decoration:line-through;font-size:13px;color:var(--text-dark-mute);">\u00A3' + esc(card.was) + '</div>';
-      html += '<div class="pricing-option__serving">' + esc(card.per) + '</div>';
-      html += '</div>';
-      html += '</div>';
-    });
-    html += '</div>';
+    html += '<div class="pricing-accordion" id="pricingAccordion">';
 
-    // Detail panels (one per option, only active shown)
     D.pricing.cards.forEach(function(card, ci) {
       if (!card.featured && !card.price_monthly && card.price === '34.99') return;
-      var showStyle = card.featured ? 'display:block' : 'display:none';
-      html += '<div class="pricing-panel" data-plan="' + ci + '" style="' + showStyle + '">';
-      html += '<div class="pricing-detail">';
+      var isActive = card.featured ? ' active' : '';
+
+      html += '<div class="plan-card' + isActive + '" data-plan="' + ci + '">';
+      if (card.featured) html += '<span class="plan-card__badge">\u2B50 Best Value</span>';
+
+      // Header (always visible, clickable)
+      html += '<div class="plan-card__header" onclick="(function(el){var cards=document.querySelectorAll(\'.plan-card\');cards.forEach(function(c){c.classList.remove(\'active\')});el.closest(\'.plan-card\').classList.add(\'active\');})(this)">';
+      html += '<div class="plan-card__radio"></div>';
+      html += '<div class="plan-card__title">' + esc(card.title);
+      if (card.save) html += ' <span class="save-pill">' + esc(card.save) + '</span>';
+      html += '</div>';
+      html += '<div class="plan-card__price-col">';
+      if (card.price_monthly) {
+        html += '<div class="plan-card__amount">\u00A3' + esc(card.price_monthly) + '<small>/mo</small></div>';
+        html += '<div class="plan-card__was">\u00A3' + esc(card.was) + '</div>';
+      } else {
+        html += '<div class="plan-card__amount">\u00A3' + esc(card.price) + '</div>';
+        if (card.was) html += '<div class="plan-card__was">\u00A3' + esc(card.was) + '</div>';
+      }
+      html += '<div class="plan-card__billing">Billed \u00A3' + esc(card.price) + (card.price_monthly ? ' every 12 weeks' : ' every 4 weeks') + '</div>';
+      html += '<div class="plan-card__serving">' + esc(card.per) + '</div>';
+      html += '</div></div>';
+
+      // Body (expanded when active)
+      html += '<div class="plan-card__body">';
+
       // Perks
-      html += '<ul class="pricing-detail__perks">';
+      html += '<ul class="plan-card__perks">';
       card.perks.forEach(function(perk) {
         html += '<li>' + esc(perk) + '</li>';
       });
       html += '</ul>';
+
       // Welcome Kit
       if (card.welcome_kit) {
         html += '<div class="welcome-kit">';
-        html += '<div class="welcome-kit__title">Welcome Kit \u2013 Arrives With First Order</div>';
+        html += '<div class="welcome-kit__title">\uD83C\uDF81 Welcome Kit \u2013 Arrives With First Order</div>';
         html += '<div class="welcome-kit__grid">';
         card.welcome_kit.forEach(function(gift) {
           html += '<div class="welcome-kit__item">';
-          html += '<div class="welcome-kit__img"><img src="' + esc(gift.image) + '" alt="' + esc(gift.name) + '" onerror="this.parentElement.innerHTML=\'[ ' + esc(gift.name) + ' ]\'"></div>';
+          html += '<div class="welcome-kit__img"><img src="' + esc(gift.image) + '" alt="' + esc(gift.name) + '" onerror="this.parentElement.innerHTML=\'[\u2728]\'"></div>';
+          html += '<div class="welcome-kit__price"><s>\u00A3' + (gift.price || '15') + '</s> FREE</div>';
           html += '<div class="welcome-kit__name">' + esc(gift.name) + '</div>';
           html += '</div>';
         });
         html += '</div></div>';
       }
+
       // Future Monthly Gifts
       if (card.future_gifts) {
         html += '<div class="future-gifts">';
-        html += '<button class="future-gifts__toggle" onclick="this.parentElement.classList.toggle(\'open\')">Future Monthly Gifts <span class="future-gifts__arrow">\u25BC</span></button>';
+        html += '<button class="future-gifts__toggle" onclick="event.stopPropagation();this.parentElement.classList.toggle(\'open\')">\uD83C\uDF89 Future Monthly Gifts <span class="future-gifts__arrow">\u25BC</span></button>';
         html += '<div class="future-gifts__content">';
         html += '<div class="future-gifts__grid">';
-        html += '<div class="future-gifts__period"><div class="future-gifts__label">Month 3</div><div class="future-gifts__img"><img src="' + esc(card.future_gifts.month3.image) + '" alt="" onerror="this.parentElement.innerHTML=\'[ Month 3 Gift ]\'"></div><div class="future-gifts__name">' + esc(card.future_gifts.month3.name) + '</div></div>';
-        html += '<div class="future-gifts__period"><div class="future-gifts__label">Month 6</div><div class="future-gifts__img"><img src="' + esc(card.future_gifts.month6.image) + '" alt="" onerror="this.parentElement.innerHTML=\'[ Month 6 Gift ]\'"></div><div class="future-gifts__name">' + esc(card.future_gifts.month6.name) + '</div></div>';
+        html += '<div class="future-gifts__period"><div class="future-gifts__label">\uD83D\uDCC5 Month 3</div><div class="future-gifts__img"><img src="' + esc(card.future_gifts.month3.image) + '" alt="" onerror="this.parentElement.innerHTML=\'[\uD83C\uDF81]\'"></div><div class="future-gifts__name">' + esc(card.future_gifts.month3.name) + '</div></div>';
+        html += '<div class="future-gifts__period"><div class="future-gifts__label">\uD83D\uDCC5 Month 6</div><div class="future-gifts__img"><img src="' + esc(card.future_gifts.month6.image) + '" alt="" onerror="this.parentElement.innerHTML=\'[\uD83C\uDF81]\'"></div><div class="future-gifts__name">' + esc(card.future_gifts.month6.name) + '</div></div>';
         html += '</div></div></div>';
       }
-      // Stock
+
+      // Stock warning
       if (card.stock) {
-        html += '<div style="text-align:center;font-size:12px;color:var(--text-dark-mute);margin-top:14px;"><strong style="color:var(--teal);">\u26A0 Low stock</strong> \u2013 ' + esc(card.stock.replace(/^Low stock \u2013 /, '')) + '</div>';
+        html += '<div style="text-align:center;font-size:12px;color:var(--text-dark-mute);margin-top:14px;">\u26A0\uFE0F <strong style="color:var(--teal);">Low stock</strong> \u2013 ' + esc(card.stock.replace(/^Low stock \u2013 /, '')) + '</div>';
       }
+
       // CTA
-      html += '<div class="pricing-detail__cta">';
+      html += '<div class="plan-card__cta">';
       html += '<a href="' + (card.url || '#') + '" class="btn">' + esc(card.cta) + ' <span class="btn-arrow">\u2192</span></a>';
       html += '</div>';
-      html += '</div></div>';
+
+      html += '</div>'; // end body
+      html += '</div>'; // end plan-card
     });
+
+    html += '</div>'; // end accordion
 
     // One-time purchase link
     var otCard = D.pricing.cards[2];
     if (otCard) {
       html += '<div class="pricing-onetime"><a href="' + (otCard.url || '#') + '">One Time Purchase \u00A3' + esc(otCard.price) + '</a></div>';
     }
+
+    // Save banner
+    html += '<div class="pricing-save-banner">\uD83D\uDD25 Save 43% + Free Gifts</div>';
+
     html += '</div></div></section>';
 
     // ============================================================

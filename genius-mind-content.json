@@ -520,8 +520,8 @@
           "Priority access to next batch"
         ],
         "welcome_kit": [
-          {"name": "Welcome Gift 1", "image": "welcome-1.png"},
-          {"name": "Welcome Gift 2", "image": "welcome-2.png"}
+          {"name": "Welcome Gift 1", "image": "welcome-1.png", "price": "15"},
+          {"name": "Welcome Gift 2", "image": "welcome-2.png", "price": "12"}
         ],
         "future_gifts": {
           "month3": {"name": "Month 3 Gift", "image": "gift-month3.png"},
