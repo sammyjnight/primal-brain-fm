@@ -512,12 +512,10 @@
         "per": "£0.48 per serving",
         "save": "Save 43%",
         "perks": [
-          "3 bottles – 180 vegan capsules",
+          "Free Welcome Kit (£27 value)",
+          "Maximum savings – lowest price per serving",
           "90-day money-back guarantee",
-          "Free Welcome Kit",
-          "Free UK delivery",
-          "Same-day dispatch before 2pm",
-          "Priority access to next batch"
+          "Cancel or pause anytime"
         ],
         "welcome_kit": [
           {"name": "Welcome Gift 1", "image": "welcome-1.png", "price": "15"},
@@ -537,14 +535,24 @@
         "tagline": "Start the stack",
         "image": "gm-bottle.png",
         "price": "24.99",
+        "price_monthly": "24.99",
         "was": "34.99",
-        "per": "Per bottle – 60 vegan capsules",
+        "per": "£0.83 per serving",
+        "save": "Save 29%",
         "perks": [
-          "1 bottle – 60 vegan capsules",
+          "Free Welcome Kit (£27 value)",
+          "Save 29% – great value per serving",
           "30-day money-back guarantee",
-          "Cancel or pause anytime",
-          "Same-day dispatch before 2pm"
+          "Cancel or pause anytime"
         ],
+        "welcome_kit": [
+          {"name": "Welcome Gift 1", "image": "welcome-1.png", "price": "15"},
+          {"name": "Welcome Gift 2", "image": "welcome-2.png", "price": "12"}
+        ],
+        "future_gifts": {
+          "month3": {"name": "Month 3 Gift", "image": "gift-month3.png"},
+          "month6": {"name": "Month 6 Gift", "image": "gift-month6.png"}
+        },
         "cta": "Try For 30 Days",
         "url": "https://justfloow.com/products/genius-mind"
       },

@@ -2224,7 +2224,7 @@ h2 em[style*="teal"], h2 span[style*="teal"],
 
 /* Pricing: IM8-style accordion */
 .pricing-selector {
-  max-width: 100%;
+  max-width: 700px;
   margin: 0 auto;
 }
 .pricing-label {
@@ -2285,18 +2285,22 @@ h2 em[style*="teal"], h2 span[style*="teal"],
   max-height: 600px;
 }
 .plan-card__body-inner {
-  padding: 12px 20px 16px;
+  padding: 14px 20px 18px;
   border-top: 1px solid rgba(0,0,0,0.06);
 }
 .plan-card__perks {
-  list-style: none; padding: 0; margin: 0 0 10px;
+  list-style: none; padding: 0; margin: 0 0 12px;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 4px 20px;
 }
 .plan-card__perks li {
-  padding: 2px 0; font-size: 14px; color: var(--text-dark); font-weight: 500;
-  display: flex; align-items: center; gap: 8px;
+  padding: 3px 0; font-size: 13px; color: var(--text-dark); font-weight: 500;
+  display: flex; align-items: center; gap: 6px;
 }
 .plan-card__perks li::before {
-  content: '\2713'; color: var(--teal); font-weight: 700; font-size: 14px; flex-shrink: 0;
+  content: '\2713'; color: var(--teal); font-weight: 700; font-size: 13px; flex-shrink: 0;
+}
+@media (max-width: 500px) {
+  .plan-card__perks { grid-template-columns: 1fr; }
 }
 .plan-card__cta { margin-top: 12px; }
 .plan-card__cta .btn { width: 100%; }
@@ -2456,13 +2460,13 @@ h2 em[style*="teal"], h2 span[style*="teal"],
 }
 .welcome-kit__grid {
   display: flex;
-  gap: 10px;
+  gap: 8px;
 }
-.welcome-kit__item { text-align: center; width: 80px; flex-shrink: 0; }
+.welcome-kit__item { text-align: center; width: 65px; flex-shrink: 0; }
 .welcome-kit__img {
-  width: 80px; height: 80px;
+  width: 65px; height: 65px;
   background: rgba(0,166,210,0.06);
-  border-radius: 10px;
+  border-radius: 8px;
   overflow: hidden;
   margin-bottom: 6px;
   display: flex;
@@ -2525,9 +2529,9 @@ h2 em[style*="teal"], h2 span[style*="teal"],
   margin-bottom: 8px;
 }
 .future-gifts__img {
-  width: 80px; height: 80px;
+  width: 65px; height: 65px;
   background: rgba(0,166,210,0.06);
-  border-radius: 10px;
+  border-radius: 8px;
   overflow: hidden;
   margin-bottom: 6px;
   display: flex;
@@ -3354,8 +3358,9 @@ body { padding-bottom: 90px; }
       html += '<span class="plan-card__title">' + esc(card.title) + '</span>';
       if (card.save) html += '<span class="save-pill">' + esc(card.save) + '</span>';
       html += '</div>';
-      // Row 2: big price
-      html += '<div style="display:flex;align-items:baseline;gap:8px;">';
+      // Row 2: big price + product image
+      html += '<div style="display:flex;align-items:center;gap:12px;">';
+      html += '<div style="flex:1;display:flex;align-items:baseline;gap:8px;">';
       if (card.price_monthly) {
         html += '<span class="plan-card__amount">\u00A3' + esc(card.price_monthly) + '</span><span style="font-size:16px;color:var(--text-dark-mute);">/mo</span>';
         html += '<span class="plan-card__was">\u00A3' + esc(card.was) + '</span>';
@@ -3363,6 +3368,8 @@ body { padding-bottom: 90px; }
         html += '<span class="plan-card__amount">\u00A3' + esc(card.price) + '</span>';
         if (card.was) html += '<span class="plan-card__was">\u00A3' + esc(card.was) + '</span>';
       }
+      html += '</div>';
+      if (card.image) html += '<img src="' + esc(card.image) + '" alt="" style="width:60px;height:60px;object-fit:contain;border-radius:8px;flex-shrink:0;">';
       html += '</div>';
       // Row 3: billing + serving
       html += '<div style="display:flex;justify-content:space-between;align-items:center;margin-top:4px;">';
