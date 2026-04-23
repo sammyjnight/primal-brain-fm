@@ -760,8 +760,10 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
 }
 .brain-pill:hover { border-color: var(--teal); color: #fff; }
 .brain-pill.active {
-  background: var(--teal);
-  border-color: var(--teal);
+  background: linear-gradient(90deg, #00A6D2 0%, #00A6D2 30%, #8be0f5 50%, #00A6D2 70%, #00A6D2 100%);
+  background-size: 200% auto;
+  animation: shimmer 3s linear infinite;
+  border-color: transparent;
   color: #fff;
 }
 .brain-pill__icon { font-size: 16px; }
