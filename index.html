@@ -1191,10 +1191,11 @@ h2 em[style*="teal"], h2 span[style*="teal"],
   width: 36px; flex-shrink: 0;
 }
 /* Ingredient highlight grid */
-.feature-block__visual:has(.nutrition-table-img) {
-  background: none;
-  padding: 0;
-  border: none;
+.feature-block__visual--nutrition {
+  background: none !important;
+  padding: 0 !important;
+  border: none !important;
+  box-shadow: none !important;
 }
 .nutrition-table-img {
   border-radius: 12px;
@@ -2284,21 +2285,20 @@ h2 em[style*="teal"], h2 span[style*="teal"],
   max-height: 600px;
 }
 .plan-card__body-inner {
-  padding: 14px 18px 18px;
+  padding: 12px 20px 16px;
   border-top: 1px solid rgba(0,0,0,0.06);
 }
 .plan-card__perks {
-  list-style: none; padding: 0; margin: 0 0 14px;
-  columns: 2; column-gap: 16px;
+  list-style: none; padding: 0; margin: 0 0 10px;
 }
 .plan-card__perks li {
-  padding: 3px 0; font-size: 13px; color: var(--text-dark);
-  display: flex; align-items: center; gap: 6px; break-inside: avoid;
+  padding: 2px 0; font-size: 14px; color: var(--text-dark); font-weight: 500;
+  display: flex; align-items: center; gap: 8px;
 }
 .plan-card__perks li::before {
-  content: '\2713'; color: var(--teal); font-weight: 700; font-size: 13px; flex-shrink: 0;
+  content: '\2713'; color: var(--teal); font-weight: 700; font-size: 14px; flex-shrink: 0;
 }
-.plan-card__cta { margin-top: 14px; }
+.plan-card__cta { margin-top: 12px; }
 .plan-card__cta .btn { width: 100%; }
 .pricing-onetime {
   text-align: center; margin-top: 14px; font-size: 13px;
@@ -3032,7 +3032,7 @@ body { padding-bottom: 90px; }
     html += '<p style="font-size:16px;color:#fff;line-height:1.6;margin-bottom:14px;">To ensure we monitor quality control, we decided that Genius Mind will be manufactured in a GMP UK manufacturing facility, and also on top of the quality checks at our manufacturer, we run independent third-party tests.</p>';
     html += '<a href="#" style="color:var(--teal);font-weight:600;font-size:14px;text-decoration:underline;text-underline-offset:3px;">See latest test results \u2192</a>';
     html += '</div></div>';
-    html += '<div class="feature-block__visual">';
+    html += '<div class="feature-block__visual feature-block__visual--nutrition">';
     html += '<div class="nutrition-table-img">';
     html += '<img src="nutrition table.png" alt="Genius Mind Nutritional Information">';
     html += '</div>';
@@ -3589,12 +3589,12 @@ body { padding-bottom: 90px; }
       var panel = document.getElementById('brainPanel');
       if (!pills.length || !panel) return;
       var systems = [
-        {icon: '\uD83E\uDDE0', name: 'Cognitive Function', desc: 'Ginkgo Biloba (50:1), Bacopa Monnieri (11:1), and Lion\u2019s Mane (4:1) work together to enhance cerebral blood flow, stimulate neural growth factor, and consolidate memory pathways.'},
-        {icon: '\u26A1', name: 'Energy & Alertness', desc: 'Guarana Seed provides sustained natural caffeine release, while B-Vitamins (B6 at 714% RI, B12 at 20,000% RI) fuel cellular energy production without crashes or jitters.'},
-        {icon: '\uD83C\uDFAF', name: 'Focus & Attention', desc: 'L-Tyrosine (100mg) is a direct dopamine precursor that enhances focus under stress. Paired with Choline (100mg) for acetylcholine production.'},
-        {icon: '\uD83D\uDEE1\uFE0F', name: 'Stress Resilience', desc: 'Panax Ginseng (20:1 extract) is a clinically-studied adaptogen that helps your brain perform under pressure. Phosphatidylserine (35mg) reduces cortisol and supports stress recovery.'},
-        {icon: '\uD83D\uDCDA', name: 'Memory & Recall', desc: 'Bacopa Monnieri (11:1 extract, 80mg) is one of the most researched memory herbs. Combined with Sage Leaf (4:1 extract) and Zinc (100% RI) for enhanced retention and recall speed.'},
-        {icon: '\uD83C\uDF3F', name: 'Neuroprotection', desc: 'Rosemary (5:1 extract) provides carnosic acid for long-term brain cell protection. Niacin (B3, 32mg) drives NAD+ production for cellular repair and cognitive longevity.'}
+        {icon: '\uD83E\uDDE0', name: 'Cognitive Function', desc: 'Ginkgo, Bacopa, and Lion\u2019s Mane enhance blood flow, neural growth, and memory.'},
+        {icon: '\u26A1', name: 'Energy & Alertness', desc: 'Guarana and B-Vitamins fuel sustained energy without crashes.'},
+        {icon: '\uD83C\uDFAF', name: 'Focus & Attention', desc: 'L-Tyrosine and Choline support dopamine and acetylcholine for deep focus.'},
+        {icon: '\uD83D\uDEE1\uFE0F', name: 'Stress Resilience', desc: 'Panax Ginseng and Phosphatidylserine reduce cortisol under pressure.'},
+        {icon: '\uD83D\uDCDA', name: 'Memory & Recall', desc: 'Bacopa, Sage Leaf, and Zinc enhance retention and recall speed.'},
+        {icon: '\uD83C\uDF3F', name: 'Neuroprotection', desc: 'Rosemary and Niacin protect brain cells and drive cellular repair.'}
       ];
       pills.forEach(function(pill) {
         pill.addEventListener('click', function() {
