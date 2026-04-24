@@ -320,6 +320,7 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
   height: 1.3em;
   overflow: hidden;
   margin-top: 0.1em;
+  padding-right: 0.3em;
 }
 .hero-rotate__word {
   display: inline-block;
@@ -2278,6 +2279,59 @@ h2 em[style*="teal"], h2 span[style*="teal"],
   display: block;
 }
 
+/* Pricing product carousel */
+.pricing-carousel {
+  max-width: 500px;
+  margin: 0 auto 32px;
+  position: relative;
+}
+.pricing-carousel__track {
+  position: relative;
+  overflow: hidden;
+  border-radius: 16px;
+  background: var(--surface);
+  aspect-ratio: 1 / 1;
+}
+.pricing-carousel__slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.pricing-carousel__slide.active { opacity: 1; position: relative; }
+.pricing-carousel__slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+.pricing-carousel__thumbs {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 12px;
+}
+.pricing-carousel__thumb {
+  width: 56px;
+  height: 56px;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 2px solid transparent;
+  cursor: pointer;
+  background: var(--surface);
+  padding: 0;
+  transition: border-color 0.2s;
+}
+.pricing-carousel__thumb.active { border-color: var(--teal); }
+.pricing-carousel__thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
 /* Pricing: IM8-style accordion */
 .pricing-selector {
   max-width: 700px;
@@ -2628,8 +2682,13 @@ h2 em[style*="teal"], h2 span[style*="teal"],
   font-family: 'Inter', sans-serif;
   font-style: normal;
   font-weight: 500;
-  color: var(--teal);
   text-transform: none;
+  background: linear-gradient(90deg, #00A6D2, #66e0ff, #00A6D2, #66e0ff);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer-text 3s linear infinite;
 }
 .faq-list {
   max-width: 800px;
@@ -3394,6 +3453,26 @@ body { padding-bottom: 90px; }
     html += '<h2>' + D.pricing.headline + '</h2>';
     html += '<p>' + esc(D.pricing.subtitle) + '</p>';
     html += '</div>';
+
+    // Product image carousel
+    var pricingImages = [
+      {src: 'https://cdn.shopify.com/s/files/1/0594/8892/7953/files/hero-bundle.png', alt: 'Genius Mind 3-bottle bundle'},
+      {src: 'https://cdn.shopify.com/s/files/1/0594/8892/7953/files/hero-single.png', alt: 'Genius Mind single bottle'},
+      {src: 'https://cdn.shopify.com/s/files/1/0594/8892/7953/files/hero-lifestyle.png', alt: 'Lifestyle'},
+      {src: 'https://cdn.shopify.com/s/files/1/0594/8892/7953/files/hero-label.png', alt: 'Supplement facts label'}
+    ];
+    html += '<div class="pricing-carousel" id="pricingCarousel">';
+    html += '<div class="pricing-carousel__track">';
+    pricingImages.forEach(function(img, i) {
+      html += '<div class="pricing-carousel__slide' + (i === 0 ? ' active' : '') + '"><img src="' + img.src + '" alt="' + img.alt + '"></div>';
+    });
+    html += '</div>';
+    html += '<div class="pricing-carousel__thumbs">';
+    pricingImages.forEach(function(img, i) {
+      html += '<button class="pricing-carousel__thumb' + (i === 0 ? ' active' : '') + '"><img src="' + img.src + '" alt="' + img.alt + '"></button>';
+    });
+    html += '</div></div>';
+
     html += '<div class="pricing-countdown">';
     html += '<span class="label">Flash Sale Ends In:</span>';
     html += '<div class="ct-unit"><span class="num" id="pc-d">00</span><small>Days</small></div>';
@@ -3491,8 +3570,7 @@ body { padding-bottom: 90px; }
       html += '<div class="pricing-onetime"><a href="' + (otCard.url || '#') + '">One Time Purchase \u00A3' + esc(otCard.price) + '</a></div>';
     }
 
-    // Save banner
-    html += '<div class="pricing-save-banner">\uD83D\uDD25 Save 41% + Free Gifts</div>';
+    // Save banner removed
 
     html += '</div></div></section>';
 
@@ -3650,6 +3728,37 @@ body { padding-bottom: 90px; }
       carousel.addEventListener('touchend', function(e) {
         var diff = startX - e.changedTouches[0].clientX;
         if (Math.abs(diff) > 50) { diff > 0 ? goTo(current + 1) : goTo(current - 1); }
+      });
+    })();
+
+    // ====================================================================
+    // PRICING CAROUSEL
+    // ====================================================================
+    (function() {
+      var wrap = document.getElementById('pricingCarousel');
+      if (!wrap) return;
+      var slides = wrap.querySelectorAll('.pricing-carousel__slide');
+      var thumbs = wrap.querySelectorAll('.pricing-carousel__thumb');
+      var current = 0;
+      function goTo(idx) {
+        slides[current].classList.remove('active');
+        thumbs[current].classList.remove('active');
+        current = idx;
+        slides[current].classList.add('active');
+        thumbs[current].classList.add('active');
+      }
+      thumbs.forEach(function(t, i) {
+        t.addEventListener('click', function() { goTo(i); });
+      });
+      // Swipe support
+      var startX = 0;
+      wrap.addEventListener('touchstart', function(e) { startX = e.touches[0].clientX; });
+      wrap.addEventListener('touchend', function(e) {
+        var diff = startX - e.changedTouches[0].clientX;
+        if (Math.abs(diff) > 50) {
+          var next = diff > 0 ? current + 1 : current - 1;
+          if (next >= 0 && next < slides.length) goTo(next);
+        }
       });
     })();
 

@@ -545,14 +545,6 @@
           "NO CONTRACT – pause, skip & cancel anytime",
           "90 days money back guarantee"
         ],
-        "welcome_kit": [
-          {"name": "Welcome Gift 1", "image": "welcome-1.png", "price": "15"},
-          {"name": "Welcome Gift 2", "image": "welcome-2.png", "price": "12"}
-        ],
-        "future_gifts": {
-          "month3": {"name": "Month 3 Gift", "image": "gift-month3.png"},
-          "month6": {"name": "Month 6 Gift", "image": "gift-month6.png"}
-        },
         "cta": "Try For 30 Days",
         "url": "https://justfloow.com/products/genius-mind"
       },
@@ -576,7 +568,7 @@
     ]
   },
   "faq": {
-    "headline": "Questions before <em>you commit</em>",
+    "headline": "Questions before <em>your unlock</em>",
     "items": [
       {
         "q": "What is Genius Mind?",
