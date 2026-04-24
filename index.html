@@ -319,9 +319,9 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
   display: block;
   position: relative;
   height: 1.3em;
-  overflow: hidden;
+  clip: rect(0, 9999px, 1.3em, 0);
+  clip-path: inset(0 -100% 0 0);
   margin-top: 0.1em;
-  padding-right: 2em;
 }
 .hero-rotate__word {
   display: inline-block;
@@ -1604,9 +1604,14 @@ h2 em[style*="teal"], h2 span[style*="teal"],
   font-family: 'Inter', sans-serif;
   font-size: clamp(24px, 3.5vw, 36px);
   font-weight: 700;
-  color: var(--teal);
   line-height: 1;
   letter-spacing: -0.02em;
+  background: linear-gradient(90deg, #00A6D2, #66e0ff, #00A6D2, #66e0ff);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer-text 3s linear infinite;
   margin-bottom: 6px;
 }
 .facility-stats__label {
