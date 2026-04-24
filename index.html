@@ -3447,28 +3447,24 @@ body { padding-bottom: 90px; }
     html += '<section class="facility"><div class="container">';
     html += '<h2>' + D.facility.headline + '</h2>';
 
-    // Animated UK map SVG
+    // Animated UK map SVG (from real geographic coordinates)
     html += '<div class="facility-map">';
-    html += '<svg class="chart-draw" viewBox="0 0 400 500" fill="none" xmlns="http://www.w3.org/2000/svg">';
+    html += '<svg class="chart-draw" viewBox="0 0 400 600" fill="none" xmlns="http://www.w3.org/2000/svg">';
     // Faint grid lines
-    for (var gy = 0; gy <= 500; gy += 50) {
+    for (var gy = 0; gy <= 600; gy += 50) {
       html += '<line x1="0" y1="' + gy + '" x2="400" y2="' + gy + '" stroke="rgba(0,166,210,0.06)" stroke-width="0.5"/>';
     }
     for (var gx = 0; gx <= 400; gx += 50) {
-      html += '<line x1="' + gx + '" y1="0" x2="' + gx + '" y2="500" stroke="rgba(0,166,210,0.06)" stroke-width="0.5"/>';
+      html += '<line x1="' + gx + '" y1="0" x2="' + gx + '" y2="600" stroke="rgba(0,166,210,0.06)" stroke-width="0.5"/>';
     }
-    // UK outline path (simplified)
-    html += '<path d="M205 45 L215 40 225 50 235 48 240 55 250 52 255 60 248 70 255 78 260 90 265 100 270 108 275 120 280 135 285 145 282 155 290 165 295 178 292 185 298 195 295 205 300 218 305 230 310 245 305 255 300 262 308 275 312 290 308 300 315 315 310 325 318 340 315 355 320 365 312 375 305 385 295 392 285 395 280 405 270 410 260 415 252 420 245 428 238 435 230 440 222 445 215 455 210 460 205 458 200 465 195 458 188 450 180 445 175 438 168 430 162 422 155 415 148 420 142 425 135 418 128 410 120 405 115 398 110 390 108 380 112 370 108 360 105 348 100 338 95 325 90 315 92 305 88 295 85 285 88 275 92 265 95 255 90 245 85 235 88 225 92 215 95 205 100 195 105 188 108 178 112 168 115 158 118 148 122 140 128 132 135 125 140 118 148 112 155 105 162 98 168 90 175 82 182 75 188 68 195 58 200 50 205 45Z" fill="#f5f1e8" stroke="#00A6D2" stroke-width="1.5"/>';
-    // Scotland (simplified)
-    html += '<path d="M175 82 L168 75 162 65 155 58 148 50 142 42 148 35 155 28 162 22 170 18 178 15 186 12 195 10 202 12 210 15 218 18 225 22 230 28 228 35 222 40 215 40 205 45 200 50 195 58 188 68 182 75 175 82Z" fill="#f5f1e8" stroke="#00A6D2" stroke-width="1.5"/>';
-    // Wales bump
-    html += '<path d="M120 405 L112 398 105 390 100 382 95 375 92 365 88 355 85 348 88 340 92 335 95 325 100 338 105 348 108 360 112 370 108 380 112 390 115 398 120 405Z" fill="#f5f1e8" stroke="#00A6D2" stroke-width="1.5"/>';
-    // Pin group (Midlands area ~200, 320)
+    // Great Britain outline (projected from real lon/lat coordinates)
+    html += '<path d="M51.6,545.9 L78.0,547.5 L93.2,531.8 L138.8,530.2 L151.2,513.8 L160.0,494.2 L160.8,479.7 L153.2,471.7 L128.8,466.8 L107.2,464.1 L81.2,460.9 L76.0,450.0 L94.0,435.3 L116.8,420.0 L109.2,400.1 L103.2,381.7 L126.8,371.6 L118.0,375.0 L140.4,374.4 L157.2,373.9 L164.8,366.0 L158.8,341.7 L158.0,326.9 L169.2,305.6 L157.2,301.6 L144.4,281.3 L136.0,269.6 L110.4,246.6 L90.8,235.3 L74.4,222.2 L61.2,200.0 L55.2,188.5 L59.2,164.7 L75.2,143.8 L56.0,132.0 L78.4,116.4 L120.4,109.5 L142.8,63.2 L156.4,52.3 L151.2,63.2 L197.6,110.8 L208.4,122.7 L196.4,145.0 L181.2,171.5 L170.8,186.7 L161.2,194.6 L152.4,207.2 L152.8,217.4 L177.2,217.4 L203.6,228.2 L215.6,249.0 L222.8,273.1 L232.8,298.7 L237.6,315.4 L249.2,322.9 L262.8,338.9 L276.8,346.8 L283.2,355.9 L286.8,369.4 L293.6,390.1 L299.6,401.7 L296.0,408.4 L328.8,408.9 L349.2,417.2 L344.0,440.2 L331.6,445.7 L316.0,454.9 L315.2,466.3 L336.0,478.1 L335.2,488.8 L327.6,493.1 L318.8,498.4 L311.2,501.1 L291.2,509.1 L274.4,505.9 L248.4,511.2 L236.4,508.0 L227.6,511.7 L218.0,514.9 L208.0,511.2 L182.4,517.0 L162.4,519.7 L140.4,520.7 L138.8,530.2 L93.2,531.8 L78.0,547.5 L51.6,545.9Z" fill="#f5f1e8" stroke="#00A6D2" stroke-width="1.5"/>';
+    // Pin group (Birmingham/Midlands area)
     html += '<g class="pin-group">';
-    html += '<circle class="pin-glow" cx="210" cy="340" r="8" fill="none" stroke="#00A6D2" stroke-width="2"/>';
-    html += '<circle cx="210" cy="340" r="5" fill="#00A6D2"/>';
-    html += '<path d="M210 328 C210 328 200 338 210 348 C220 338 210 328 210 328Z" fill="#00A6D2"/>';
-    html += '<text x="228" y="344" fill="#00A6D2" font-size="11" font-weight="600" font-family="Inter,sans-serif">Manufacturing HQ</text>';
+    html += '<circle class="pin-glow" cx="204" cy="417" r="8" fill="none" stroke="#00A6D2" stroke-width="2"/>';
+    html += '<circle cx="204" cy="417" r="5" fill="#00A6D2"/>';
+    html += '<path d="M204 405c-5 0-9 6-9 11s9 14 9 14 9-9 9-14-4-11-9-11z" fill="#00A6D2"/>';
+    html += '<text x="220" y="420" fill="#00A6D2" font-size="12" font-weight="600" font-family="Inter,sans-serif">Manufacturing HQ</text>';
     html += '</g>';
     html += '</svg></div>';
 
