@@ -316,12 +316,11 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
 }
 /* Hero rotating word - Brain.fm style with highlight block */
 .hero-rotate {
-  display: inline-block;
+  display: block;
   position: relative;
   height: 1.3em;
-  overflow: visible;
+  overflow: hidden;
   margin-top: 0.1em;
-  vertical-align: bottom;
 }
 .hero-rotate__word {
   display: inline-block;
@@ -341,7 +340,6 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
 .hero-rotate__word.active {
   opacity: 1;
   transform: translateY(0);
-  position: relative;
 }
 .hero-rotate__word.exit {
   opacity: 0;
@@ -1545,16 +1543,16 @@ h2 em[style*="teal"], h2 span[style*="teal"],
    SECTION 9 - FACILITY (oval framed)
    ============================================================ */
 .facility {
-  padding: clamp(60px, 8vw, 100px) 0;
+  padding: clamp(40px, 5vw, 60px) 0;
   background: var(--cream);
   color: var(--text-dark);
 }
 .facility h2 {
   font-family: 'Inter', sans-serif;
   font-weight: 600;
-  font-size: clamp(32px, 5vw, 56px);
+  font-size: clamp(28px, 4vw, 46px);
   letter-spacing: -0.03em;
-  margin-bottom: 40px;
+  margin-bottom: 24px;
   color: var(--text-dark);
   text-transform: none;
   line-height: 1.05;
@@ -1568,15 +1566,19 @@ h2 em[style*="teal"], h2 span[style*="teal"],
   text-transform: none;
 }
 .facility-img {
-  max-width: 480px;
-  margin: 0 auto 36px;
+  max-width: 360px;
+  max-height: 320px;
+  margin: 0 auto 24px;
+  overflow: hidden;
+  border-radius: 16px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.06);
 }
 .facility-img img {
   width: 100%;
-  height: auto;
+  height: 100%;
   display: block;
-  border-radius: 16px;
-  box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+  object-fit: cover;
+  object-position: center top;
 }
 .facility-stats {
   display: flex;
