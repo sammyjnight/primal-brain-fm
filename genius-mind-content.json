@@ -518,12 +518,12 @@
           "90 days money back guarantee"
         ],
         "welcome_kit": [
-          {"name": "Welcome Gift 1", "image": "welcome-1.png", "price": "15"},
-          {"name": "Welcome Gift 2", "image": "welcome-2.png", "price": "12"}
+          {"name": "Magnesium 3-in-1", "image": "Magnesium_3-in-1_M1.png", "price": "15"},
+          {"name": "Brain Performance Guide", "image": "welcome-2.png", "price": "12"}
         ],
         "future_gifts": {
-          "month3": {"name": "Month 3 Gift", "image": "gift-month3.png"},
-          "month6": {"name": "Month 6 Gift", "image": "gift-month6.png"}
+          "month3": {"name": "Genius Zen", "image": "Genius_Zenl_M1 (1).png"},
+          "month6": {"name": "Mystery Gift", "image": "gift-month6.png"}
         },
         "cta": "Start My 90-Day Program",
         "url": "https://justfloow.com/products/genius-mind",
