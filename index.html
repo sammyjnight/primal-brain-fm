@@ -321,6 +321,7 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
   height: 1.3em;
   overflow: hidden;
   margin-top: 0.1em;
+  padding-right: 2em;
 }
 .hero-rotate__word {
   display: inline-block;
@@ -1561,9 +1562,14 @@ h2 em[style*="teal"], h2 span[style*="teal"],
 .facility h2 em {
   font-family: 'Inter', sans-serif;
   font-style: normal;
-  font-weight: 500;
-  color: var(--teal);
+  font-weight: 600;
   text-transform: none;
+  background: linear-gradient(90deg, #00A6D2, #66e0ff, #00A6D2, #66e0ff);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer-text 3s linear infinite;
 }
 .facility-img {
   max-width: 360px;
@@ -1611,8 +1617,9 @@ h2 em[style*="teal"], h2 span[style*="teal"],
   letter-spacing: 0.06em;
 }
 @media (max-width: 600px) {
-  .facility-stats { flex-wrap: wrap; }
-  .facility-stats__item { flex: 0 0 33.33%; padding: 8px 10px; border-right: none; }
+  .facility-stats__item { padding: 0 12px; }
+  .facility-stats__number { font-size: 20px; }
+  .facility-stats__label { font-size: 9px; letter-spacing: 0.04em; }
 }
 
 /* ============================================================

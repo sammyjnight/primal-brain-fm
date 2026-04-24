@@ -239,7 +239,7 @@
     ]
   },
   "facility": {
-    "headline": "Proudly made in the UK.",
+    "headline": "Proudly made in <em>the UK.</em>",
     "image": "factory.png",
     "trust": [
       "GMP Certified",
