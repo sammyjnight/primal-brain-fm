@@ -1567,16 +1567,12 @@ h2 em[style*="teal"], h2 span[style*="teal"],
   color: var(--teal);
   text-transform: none;
 }
-.facility-grid {
-  display: grid;
-  grid-template-columns: 3fr 2fr;
-  gap: clamp(30px, 4vw, 60px);
-  align-items: center;
-  max-width: 800px;
+.facility-map-wrap {
+  max-width: 420px;
   margin: 0 auto;
+  position: relative;
 }
 .facility-map {
-  max-width: 380px;
   position: relative;
 }
 .facility-map svg {
@@ -1584,6 +1580,38 @@ h2 em[style*="teal"], h2 span[style*="teal"],
   height: auto;
   display: block;
 }
+/* Map annotations */
+.facility-anno {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  opacity: 0;
+  transition: opacity 0.6s ease-out 2.2s;
+}
+.facility-map.drawn ~ .facility-anno,
+.facility-map-wrap.drawn .facility-anno { opacity: 1; }
+.facility-anno__pill {
+  background: rgba(0,166,210,0.08);
+  border: 1px solid rgba(0,166,210,0.2);
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--teal);
+  white-space: nowrap;
+  letter-spacing: 0.02em;
+}
+.facility-anno__line {
+  width: 30px;
+  height: 1px;
+  background: rgba(0,166,210,0.3);
+  flex-shrink: 0;
+}
+.facility-anno--top { top: 18%; left: -10px; }
+.facility-anno--right { top: 62%; right: -10px; flex-direction: row-reverse; }
+.facility-anno--bottom { bottom: 6%; left: 50%; transform: translateX(-50%); }
+.facility-anno--bottom .facility-anno__line { display: none; }
 /* Pin pulse animation */
 @keyframes pin-pulse-ring {
   0% { opacity: 0.6; transform: scale(1); }
@@ -1601,7 +1629,6 @@ h2 em[style*="teal"], h2 span[style*="teal"],
   animation: pin-pulse-ring 2s ease-out infinite;
   animation-delay: 2.5s;
 }
-/* Pin drop animation */
 .facility-map .pin-group {
   opacity: 0;
   transform: translateY(-15px);
@@ -1611,32 +1638,50 @@ h2 em[style*="teal"], h2 span[style*="teal"],
   transform: translateY(0);
   transition: opacity 0.4s ease-out 1.8s, transform 0.4s ease-out 1.8s;
 }
-.facility-trust {
+/* Facility stat row */
+.facility-stats {
   display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-.facility-trust__pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
+  justify-content: center;
+  gap: 0;
+  text-align: center;
+  margin-top: 40px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
   background: #fff;
-  border: 1px solid rgba(0,0,0,0.08);
-  border-radius: 50px;
-  padding: 12px 22px;
-  font-size: 15px;
+  border: 1px solid rgba(0,0,0,0.06);
+  border-radius: 14px;
+  padding: 24px 0;
+}
+.facility-stats__item {
+  flex: 1;
+  padding: 0 20px;
+  border-right: 1px solid rgba(0,0,0,0.08);
+}
+.facility-stats__item:last-child { border-right: none; }
+.facility-stats__icon {
+  font-size: clamp(24px, 3.5vw, 34px);
+  font-weight: 700;
+  color: var(--teal);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  margin-bottom: 6px;
+}
+.facility-stats__label {
+  font-size: 11px;
   font-weight: 600;
-  color: var(--text-dark);
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
 }
-.facility-trust__pill svg {
-  width: 20px;
-  height: 20px;
-  flex-shrink: 0;
-}
-@media (max-width: 700px) {
-  .facility-grid { grid-template-columns: 1fr; justify-items: center; }
-  .facility-map { max-width: 280px; }
-  .facility-trust { flex-direction: row; flex-wrap: wrap; justify-content: center; }
+@media (max-width: 600px) {
+  .facility-map-wrap { max-width: 300px; }
+  .facility-anno { font-size: 10px; }
+  .facility-anno--top { left: 0; }
+  .facility-anno--right { right: 0; }
+  .facility-stats { flex-direction: column; gap: 16px; padding: 20px; }
+  .facility-stats__item { border-right: none; border-bottom: 1px solid rgba(0,0,0,0.06); padding: 0 0 16px; }
+  .facility-stats__item:last-child { border-bottom: none; padding-bottom: 0; }
 }
 
 /* ============================================================
@@ -3477,23 +3522,18 @@ body { padding-bottom: 90px; }
     html += '<section class="facility"><div class="container">';
     html += '<h2>' + D.facility.headline + '</h2>';
 
-    html += '<div class="facility-grid">';
-
-    // UK map SVG (paths from Natural Earth GeoJSON, Mercator-projected)
+    // Annotated UK map
+    html += '<div class="facility-map-wrap">';
     html += '<div class="facility-map">';
     html += '<svg class="chart-draw" viewBox="0 0 300 400" fill="none" xmlns="http://www.w3.org/2000/svg">';
-    // Faint grid
     for (var gy = 0; gy <= 400; gy += 40) {
       html += '<line x1="0" y1="' + gy + '" x2="300" y2="' + gy + '" stroke="rgba(0,0,0,0.04)" stroke-width="0.5"/>';
     }
     for (var gx = 0; gx <= 300; gx += 40) {
       html += '<line x1="' + gx + '" y1="0" x2="' + gx + '" y2="400" stroke="rgba(0,0,0,0.04)" stroke-width="0.5"/>';
     }
-    // Great Britain (from Natural Earth via world.geo.json)
     html += '<path d="M148.5,37.7L121.4,82.5L147.2,76.9L175.0,77.1L168.4,110.2L145.6,145.6L171.8,148.1L173.8,152.2L196.4,197.6L213.8,203.6L229.4,246.0L236.7,260.4L267.4,267.3L264.3,290.3L251.4,300.7L261.5,318.9L238.7,337.2L204.7,336.8L161.6,346.3L149.7,339.5L132.9,355.7L109.5,351.8L91.7,364.8L78.2,358.0L115.4,321.7L138.1,314.1L137.9,314.1L98.3,308.2L91.1,294.1L117.6,283.1L103.7,263.7L108.5,239.7L146.2,243.1L146.3,243.1L150.0,221.6L133.0,198.5L132.6,197.9L101.8,191.3L95.8,180.9L105.0,163.8L96.7,153.1L83.0,171.4L81.5,133.8L68.7,113.6L77.9,71.6L97.6,37.9L117.9,41.2L148.5,37.7Z" fill="#f5f1e8" stroke="#00A6D2" stroke-width="1.5"/>';
-    // Northern Ireland
     html += '<path d="M81.1,200.2L67.5,225.9L48.3,218.3L32.6,218.8L37.8,198.7L32.6,178.3L53.9,176.7L81.1,200.2Z" fill="#f5f1e8" stroke="#00A6D2" stroke-width="1.5"/>';
-    // Pin (Birmingham/Midlands)
     html += '<g class="pin-group">';
     html += '<circle class="pin-glow" cx="176.5" cy="276.7" r="6" fill="none" stroke="#00A6D2" stroke-width="1.5"/>';
     html += '<circle cx="176.5" cy="276.7" r="4" fill="#00A6D2"/>';
@@ -3501,14 +3541,20 @@ body { padding-bottom: 90px; }
     html += '</g>';
     html += '</svg></div>';
 
-    // Trust pills (stacked vertically)
-    html += '<div class="facility-trust">';
-    html += '<span class="facility-trust__pill"><svg viewBox="0 0 24 24" fill="none" stroke="#00A6D2" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/></svg> GMP Certified</span>';
-    html += '<span class="facility-trust__pill"><svg viewBox="0 0 24 24" fill="none" stroke="#00A6D2" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6v4H9z"/><path d="M6 7h12l-1.5 14H7.5z"/><path d="M10 11v4"/><path d="M14 11v4"/></svg> Lab Tested</span>';
-    html += '<span class="facility-trust__pill"><svg viewBox="0 0 24 24" fill="none" stroke="#00A6D2" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg> UK Facility</span>';
+    // Annotations
+    html += '<div class="facility-anno facility-anno--top"><span class="facility-anno__pill">GMP-certified facility</span><span class="facility-anno__line"></span></div>';
+    html += '<div class="facility-anno facility-anno--right"><span class="facility-anno__pill">Third-party tested every batch</span><span class="facility-anno__line"></span></div>';
+    html += '<div class="facility-anno facility-anno--bottom"><span class="facility-anno__pill">Same-day dispatch before 2pm</span></div>';
     html += '</div>';
 
-    html += '</div></div></section>';
+    // Mini stat row
+    html += '<div class="facility-stats">';
+    html += '<div class="facility-stats__item"><div class="facility-stats__icon">100%</div><div class="facility-stats__label">UK Manufactured</div></div>';
+    html += '<div class="facility-stats__item"><div class="facility-stats__icon">3rd-Party</div><div class="facility-stats__label">Batch Tested</div></div>';
+    html += '<div class="facility-stats__item"><div class="facility-stats__icon">GMP</div><div class="facility-stats__label">Certified Facility</div></div>';
+    html += '</div>';
+
+    html += '</div></section>';
 
     // ============================================================
     // SECTION 10 - RESULTS LINE GRAPH
@@ -3920,6 +3966,9 @@ body { padding-bottom: 90px; }
         entries.forEach(function(entry) {
           if (entry.isIntersecting) {
             entry.target.classList.add('drawn');
+            // Propagate drawn to facility-map-wrap for annotation fade-in
+            var wrap = entry.target.closest('.facility-map-wrap');
+            if (wrap) wrap.classList.add('drawn');
             observer.unobserve(entry.target);
           }
         });
