@@ -1545,10 +1545,9 @@ h2 em[style*="teal"], h2 span[style*="teal"],
    SECTION 9 - FACILITY (oval framed)
    ============================================================ */
 .facility {
-  padding: clamp(40px, 5vw, 60px) 0;
+  padding: clamp(60px, 8vw, 100px) 0;
   background: var(--cream);
   color: var(--text-dark);
-  text-align: center;
 }
 .facility h2 {
   font-family: 'Inter', sans-serif;
@@ -1559,6 +1558,7 @@ h2 em[style*="teal"], h2 span[style*="teal"],
   color: var(--text-dark);
   text-transform: none;
   line-height: 1.05;
+  text-align: center;
 }
 .facility h2 em {
   font-family: 'Inter', sans-serif;
@@ -1567,9 +1567,16 @@ h2 em[style*="teal"], h2 span[style*="teal"],
   color: var(--teal);
   text-transform: none;
 }
-.facility-map {
-  max-width: 460px;
+.facility-grid {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  gap: clamp(30px, 4vw, 60px);
+  align-items: center;
+  max-width: 800px;
   margin: 0 auto;
+}
+.facility-map {
+  max-width: 380px;
   position: relative;
 }
 .facility-map svg {
@@ -1578,25 +1585,26 @@ h2 em[style*="teal"], h2 span[style*="teal"],
   display: block;
 }
 /* Pin pulse animation */
-@keyframes pin-pulse {
-  0%,100% { opacity: 0.5; r: 8; }
-  50% { opacity: 0; r: 18; }
+@keyframes pin-pulse-ring {
+  0% { opacity: 0.6; transform: scale(1); }
+  50% { opacity: 0; transform: scale(2.5); }
+  100% { opacity: 0; transform: scale(2.5); }
 }
 .facility-map .pin-glow {
-  animation: pin-pulse 2s ease-in-out infinite;
+  transform-origin: center;
+  animation: pin-pulse-ring 2s ease-out infinite;
   animation-delay: 2.5s;
   opacity: 0;
 }
 .chart-draw .pin-glow { animation: none; opacity: 0; }
 .chart-draw.drawn .pin-glow {
-  animation: pin-pulse 2s ease-in-out infinite;
+  animation: pin-pulse-ring 2s ease-out infinite;
   animation-delay: 2.5s;
 }
 /* Pin drop animation */
 .facility-map .pin-group {
   opacity: 0;
-  transform: translateY(-20px);
-  transform-origin: center;
+  transform: translateY(-15px);
 }
 .chart-draw.drawn .pin-group {
   opacity: 1;
@@ -1605,20 +1613,18 @@ h2 em[style*="teal"], h2 span[style*="teal"],
 }
 .facility-trust {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   gap: 12px;
-  margin-top: 30px;
-  flex-wrap: wrap;
 }
 .facility-trust__pill {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   background: #fff;
   border: 1px solid rgba(0,0,0,0.08);
   border-radius: 50px;
-  padding: 10px 20px;
-  font-size: 14px;
+  padding: 12px 22px;
+  font-size: 15px;
   font-weight: 600;
   color: var(--text-dark);
 }
@@ -1626,6 +1632,11 @@ h2 em[style*="teal"], h2 span[style*="teal"],
   width: 20px;
   height: 20px;
   flex-shrink: 0;
+}
+@media (max-width: 700px) {
+  .facility-grid { grid-template-columns: 1fr; justify-items: center; }
+  .facility-map { max-width: 280px; }
+  .facility-trust { flex-direction: row; flex-wrap: wrap; justify-content: center; }
 }
 
 /* ============================================================
@@ -3447,32 +3458,37 @@ body { padding-bottom: 90px; }
     html += '<section class="facility"><div class="container">';
     html += '<h2>' + D.facility.headline + '</h2>';
 
-    // Animated UK map SVG (from real geographic coordinates)
+    html += '<div class="facility-grid">';
+
+    // UK map SVG (paths from Natural Earth GeoJSON, Mercator-projected)
     html += '<div class="facility-map">';
-    html += '<svg class="chart-draw" viewBox="0 0 400 600" fill="none" xmlns="http://www.w3.org/2000/svg">';
-    // Faint grid lines
-    for (var gy = 0; gy <= 600; gy += 50) {
-      html += '<line x1="0" y1="' + gy + '" x2="400" y2="' + gy + '" stroke="rgba(0,166,210,0.06)" stroke-width="0.5"/>';
+    html += '<svg class="chart-draw" viewBox="0 0 300 400" fill="none" xmlns="http://www.w3.org/2000/svg">';
+    // Faint grid
+    for (var gy = 0; gy <= 400; gy += 40) {
+      html += '<line x1="0" y1="' + gy + '" x2="300" y2="' + gy + '" stroke="rgba(0,0,0,0.04)" stroke-width="0.5"/>';
     }
-    for (var gx = 0; gx <= 400; gx += 50) {
-      html += '<line x1="' + gx + '" y1="0" x2="' + gx + '" y2="600" stroke="rgba(0,166,210,0.06)" stroke-width="0.5"/>';
+    for (var gx = 0; gx <= 300; gx += 40) {
+      html += '<line x1="' + gx + '" y1="0" x2="' + gx + '" y2="400" stroke="rgba(0,0,0,0.04)" stroke-width="0.5"/>';
     }
-    // Great Britain outline (projected from real lon/lat coordinates)
-    html += '<path d="M51.6,545.9 L78.0,547.5 L93.2,531.8 L138.8,530.2 L151.2,513.8 L160.0,494.2 L160.8,479.7 L153.2,471.7 L128.8,466.8 L107.2,464.1 L81.2,460.9 L76.0,450.0 L94.0,435.3 L116.8,420.0 L109.2,400.1 L103.2,381.7 L126.8,371.6 L118.0,375.0 L140.4,374.4 L157.2,373.9 L164.8,366.0 L158.8,341.7 L158.0,326.9 L169.2,305.6 L157.2,301.6 L144.4,281.3 L136.0,269.6 L110.4,246.6 L90.8,235.3 L74.4,222.2 L61.2,200.0 L55.2,188.5 L59.2,164.7 L75.2,143.8 L56.0,132.0 L78.4,116.4 L120.4,109.5 L142.8,63.2 L156.4,52.3 L151.2,63.2 L197.6,110.8 L208.4,122.7 L196.4,145.0 L181.2,171.5 L170.8,186.7 L161.2,194.6 L152.4,207.2 L152.8,217.4 L177.2,217.4 L203.6,228.2 L215.6,249.0 L222.8,273.1 L232.8,298.7 L237.6,315.4 L249.2,322.9 L262.8,338.9 L276.8,346.8 L283.2,355.9 L286.8,369.4 L293.6,390.1 L299.6,401.7 L296.0,408.4 L328.8,408.9 L349.2,417.2 L344.0,440.2 L331.6,445.7 L316.0,454.9 L315.2,466.3 L336.0,478.1 L335.2,488.8 L327.6,493.1 L318.8,498.4 L311.2,501.1 L291.2,509.1 L274.4,505.9 L248.4,511.2 L236.4,508.0 L227.6,511.7 L218.0,514.9 L208.0,511.2 L182.4,517.0 L162.4,519.7 L140.4,520.7 L138.8,530.2 L93.2,531.8 L78.0,547.5 L51.6,545.9Z" fill="#f5f1e8" stroke="#00A6D2" stroke-width="1.5"/>';
-    // Pin group (Birmingham/Midlands area)
+    // Great Britain (from Natural Earth via world.geo.json)
+    html += '<path d="M148.5,37.7L121.4,82.5L147.2,76.9L175.0,77.1L168.4,110.2L145.6,145.6L171.8,148.1L173.8,152.2L196.4,197.6L213.8,203.6L229.4,246.0L236.7,260.4L267.4,267.3L264.3,290.3L251.4,300.7L261.5,318.9L238.7,337.2L204.7,336.8L161.6,346.3L149.7,339.5L132.9,355.7L109.5,351.8L91.7,364.8L78.2,358.0L115.4,321.7L138.1,314.1L137.9,314.1L98.3,308.2L91.1,294.1L117.6,283.1L103.7,263.7L108.5,239.7L146.2,243.1L146.3,243.1L150.0,221.6L133.0,198.5L132.6,197.9L101.8,191.3L95.8,180.9L105.0,163.8L96.7,153.1L83.0,171.4L81.5,133.8L68.7,113.6L77.9,71.6L97.6,37.9L117.9,41.2L148.5,37.7Z" fill="#f5f1e8" stroke="#00A6D2" stroke-width="1.5"/>';
+    // Northern Ireland
+    html += '<path d="M81.1,200.2L67.5,225.9L48.3,218.3L32.6,218.8L37.8,198.7L32.6,178.3L53.9,176.7L81.1,200.2Z" fill="#f5f1e8" stroke="#00A6D2" stroke-width="1.5"/>';
+    // Pin (Birmingham/Midlands)
     html += '<g class="pin-group">';
-    html += '<circle class="pin-glow" cx="204" cy="417" r="8" fill="none" stroke="#00A6D2" stroke-width="2"/>';
-    html += '<circle cx="204" cy="417" r="5" fill="#00A6D2"/>';
-    html += '<path d="M204 405c-5 0-9 6-9 11s9 14 9 14 9-9 9-14-4-11-9-11z" fill="#00A6D2"/>';
-    html += '<text x="220" y="420" fill="#00A6D2" font-size="12" font-weight="600" font-family="Inter,sans-serif">Manufacturing HQ</text>';
+    html += '<circle class="pin-glow" cx="176.5" cy="276.7" r="6" fill="none" stroke="#00A6D2" stroke-width="1.5"/>';
+    html += '<circle cx="176.5" cy="276.7" r="4" fill="#00A6D2"/>';
+    html += '<path d="M176.5,267c-4,0-7,5-7,9s7,12,7,12,7-8,7-12-3-9-7-9z" fill="#00A6D2"/>';
     html += '</g>';
     html += '</svg></div>';
 
-    // Trust pills with icons
+    // Trust pills (stacked vertically)
     html += '<div class="facility-trust">';
     html += '<span class="facility-trust__pill"><svg viewBox="0 0 24 24" fill="none" stroke="#00A6D2" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/></svg> GMP Certified</span>';
     html += '<span class="facility-trust__pill"><svg viewBox="0 0 24 24" fill="none" stroke="#00A6D2" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6v4H9z"/><path d="M6 7h12l-1.5 14H7.5z"/><path d="M10 11v4"/><path d="M14 11v4"/></svg> Lab Tested</span>';
     html += '<span class="facility-trust__pill"><svg viewBox="0 0 24 24" fill="none" stroke="#00A6D2" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg> UK Facility</span>';
+    html += '</div>';
+
     html += '</div></div></section>';
 
     // ============================================================
