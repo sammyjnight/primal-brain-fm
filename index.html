@@ -2360,6 +2360,81 @@ h2 em[style*="teal"], h2 span[style*="teal"],
 .pricing-carousel__arrow--prev { left: 10px; }
 .pricing-carousel__arrow--next { right: 10px; }
 
+/* PDP info block (IM8 style) */
+.pdp-info {
+  max-width: 500px;
+  margin: 0 auto 32px;
+  text-align: left;
+}
+.pdp-info__label-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 20px;
+  background: rgba(0,166,210,0.06);
+  border: 1px solid rgba(0,166,210,0.15);
+  border-radius: 50px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-dark);
+  cursor: pointer;
+  margin-bottom: 16px;
+  transition: background 0.2s;
+}
+.pdp-info__label-btn:hover { background: rgba(0,166,210,0.12); }
+.pdp-info__label-btn svg { color: var(--text-dark-mute); }
+.pdp-info__reviews {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 14px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid rgba(0,0,0,0.08);
+}
+.pdp-info__stars { color: #f5a623; font-size: 16px; letter-spacing: 2px; }
+.pdp-info__rating { font-weight: 700; font-size: 14px; color: var(--text-dark); }
+.pdp-info__count { font-size: 13px; color: var(--text-dark-mute); }
+.pdp-info__category {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--teal);
+  margin-bottom: 6px;
+}
+.pdp-info__title {
+  font-size: clamp(22px, 3vw, 28px);
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 10px;
+}
+.pdp-info__desc {
+  font-size: 14px;
+  color: var(--text-dark-mute);
+  line-height: 1.55;
+  margin-bottom: 16px;
+}
+.pdp-info__pills {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.pdp-info__pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background: rgba(0,0,0,0.03);
+  border: 1px solid rgba(0,0,0,0.06);
+  border-radius: 50px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-dark);
+  width: fit-content;
+}
+
 /* Pricing: IM8-style accordion */
 .pricing-selector {
   max-width: 700px;
@@ -3503,13 +3578,25 @@ body { padding-bottom: 90px; }
     });
     html += '</div></div>';
 
-    html += '<div class="pricing-countdown">';
-    html += '<span class="label">Flash Sale Ends In:</span>';
-    html += '<div class="ct-unit"><span class="num" id="pc-d">00</span><small>Days</small></div>';
-    html += '<div class="ct-unit"><span class="num" id="pc-h">00</span><small>Hours</small></div>';
-    html += '<div class="ct-unit"><span class="num" id="pc-m">00</span><small>Mins</small></div>';
-    html += '<div class="ct-unit"><span class="num" id="pc-s">00</span><small>Secs</small></div>';
+    // Product info block (IM8 PDP style)
+    html += '<div class="pdp-info">';
+    html += '<button class="pdp-info__label-btn" onclick="document.getElementById(\'pricingCarousel\').querySelectorAll(\'.pricing-carousel__thumb\')[3].click()"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/></svg> View Nutrition Label</button>';
+    html += '<div class="pdp-info__reviews">';
+    html += '<span class="pdp-info__stars">\u2605\u2605\u2605\u2605\u2605</span>';
+    html += '<span class="pdp-info__rating">4.8</span>';
+    html += '<span class="pdp-info__count">from 127 Reviews</span>';
     html += '</div>';
+    html += '<div class="pdp-info__category">ALL-IN-ONE COGNITIVE SUPPLEMENT</div>';
+    html += '<h3 class="pdp-info__title">Genius Mind</h3>';
+    html += '<p class="pdp-info__desc">16 clinically-dosed ingredients in one daily capsule. Formulated by leading UK nutritionist Shona Wilkinson for operators who demand more.</p>';
+    html += '<div class="pdp-info__pills">';
+    html += '<div class="pdp-info__pill"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Replaces 16 supplements</div>';
+    html += '<div class="pdp-info__pill"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> 89% felt sharper focus. 76% better recall.</div>';
+    html += '<div class="pdp-info__pill"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> GMP certified, made in the UK</div>';
+    html += '<div class="pdp-info__pill"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> 90-day money-back guarantee</div>';
+    html += '</div>';
+    html += '</div>';
+
     // IM8-style accordion pricing
     html += '<div class="pricing-selector">';
     html += '<div class="pricing-label">Subscribe &amp; Save:</div>';
