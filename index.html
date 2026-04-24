@@ -1861,6 +1861,28 @@ h2 em[style*="teal"], h2 span[style*="teal"],
 }
 @media (max-width: 600px) {
   .reviews-grid { grid-template-columns: 1fr; }
+  .reviews-grid .review-card--extra { display: none; }
+  .reviews-grid.show-all .review-card--extra { display: flex; }
+}
+.reviews-show-more {
+  display: none;
+  width: 100%;
+  max-width: 400px;
+  margin: 20px auto 0;
+  padding: 14px 24px;
+  background: transparent;
+  border: 1.5px solid rgba(0,0,0,0.12);
+  border-radius: 50px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-dark);
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+}
+.reviews-show-more:hover { background: rgba(0,0,0,0.04); border-color: rgba(0,0,0,0.2); }
+@media (max-width: 600px) {
+  .reviews-show-more { display: block; }
+  .reviews-grid.show-all ~ .reviews-show-more { display: none; }
 }
 
 /* X/Reddit styles removed - now using Trustpilot style */
@@ -3473,9 +3495,9 @@ body { padding-bottom: 90px; }
     html += '</div>';
     // Review cards
     html += '<div class="reviews-filter">Showing our 5 star reviews</div>';
-    html += '<div class="reviews-grid">';
-    D.reviews.items.forEach(function(r) {
-      html += '<div class="review-card">';
+    html += '<div class="reviews-grid" id="reviewsGrid">';
+    D.reviews.items.forEach(function(r, ri) {
+      html += '<div class="review-card' + (ri >= 4 ? ' review-card--extra' : '') + '">';
       html += '<div class="tp-stars">' + tpStar + tpStar + tpStar + tpStar + tpStar + '</div>';
       html += '<div class="rc-meta"><strong>' + esc(r.name) + '</strong>, ' + esc(r.time) + '</div>';
       html += '<div class="title">' + esc(r.title) + '</div>';
@@ -3490,7 +3512,9 @@ body { padding-bottom: 90px; }
       }
       html += '</div>';
     });
-    html += '</div></div></section>';
+    html += '</div>';
+    html += '<button class="reviews-show-more" id="reviewsShowMore" onclick="document.getElementById(\'reviewsGrid\').classList.add(\'show-all\');this.style.display=\'none\';">Show More Reviews \u25BC</button>';
+    html += '</div></section>';
 
     // ============================================================
     // SECTION 12 - HOW TO
