@@ -2566,10 +2566,10 @@ h2 em[style*="teal"], h2 span[style*="teal"],
   cursor: default;
 }
 .plan-card__badge {
-  position: absolute; top: -10px; right: 16px;
-  background: var(--teal); color: #fff;
-  font-size: 9px; font-weight: 700; text-transform: uppercase;
-  letter-spacing: 0.06em; padding: 3px 10px; border-radius: 4px;
+  position: absolute; top: -11px; right: 16px;
+  background: var(--text-dark); color: #fff;
+  font-size: 10px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.08em; padding: 5px 14px; border-radius: 4px;
 }
 .plan-card__header {
   padding: 16px 20px;
@@ -3667,10 +3667,10 @@ body { padding-bottom: 90px; }
 
     // Product image carousel
     var pricingImages = [
-      {src: 'https://cdn.shopify.com/s/files/1/0594/8892/7953/files/hero-bundle.png', alt: 'Genius Mind 3-bottle bundle'},
+      {src: 'just floow welcome pack.psd.png', alt: 'JustFloow Welcome Pack'},
       {src: 'https://cdn.shopify.com/s/files/1/0594/8892/7953/files/hero-single.png', alt: 'Genius Mind single bottle'},
       {src: 'https://cdn.shopify.com/s/files/1/0594/8892/7953/files/hero-lifestyle.png', alt: 'Lifestyle'},
-      {src: 'https://cdn.shopify.com/s/files/1/0594/8892/7953/files/hero-label.png', alt: 'Supplement facts label'}
+      {src: 'nutrition-table-cropped.png', alt: 'Genius Mind Nutritional Information'}
     ];
     html += '<div class="pricing-carousel" id="pricingCarousel">';
     html += '<div class="pricing-carousel__track">';
@@ -3715,7 +3715,7 @@ body { padding-bottom: 90px; }
       var isActive = card.featured ? ' active' : '';
 
       html += '<div class="plan-card' + isActive + '" data-plan="' + ci + '">';
-      if (card.featured) html += '<span class="plan-card__badge">\u2B50 Best Value</span>';
+      if (card.featured) html += '<span class="plan-card__badge">Best Value</span>';
 
       // Header (always visible, clickable) - IM8 layout
       html += '<div class="plan-card__header" onclick="(function(el){var cards=document.querySelectorAll(\'.plan-card\');cards.forEach(function(c){c.classList.remove(\'active\')});el.closest(\'.plan-card\').classList.add(\'active\');})(this)">';
