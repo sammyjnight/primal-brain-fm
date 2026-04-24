@@ -2318,18 +2318,18 @@ h2 em[style*="teal"], h2 span[style*="teal"],
 }
 .pricing-carousel__slide {
   position: absolute;
-  inset: 0;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.35s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  cursor: zoom-in;
 }
 .pricing-carousel__slide.active { opacity: 1; pointer-events: auto; z-index: 1; }
 .pricing-carousel__slide img {
-  width: 100%;
-  height: 100%;
+  position: absolute;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
   object-fit: contain;
   display: block;
 }
@@ -2440,7 +2440,7 @@ h2 em[style*="teal"], h2 span[style*="teal"],
 }
 .pdp-info__pills {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
   gap: 8px;
 }
 .pdp-info__pill {
@@ -2456,6 +2456,64 @@ h2 em[style*="teal"], h2 span[style*="teal"],
   color: var(--text-dark);
   width: fit-content;
 }
+
+/* Image lightbox */
+.img-lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(0,0,0,0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  align-items: center;
+  justify-content: center;
+  cursor: zoom-out;
+  padding: 24px;
+}
+.img-lightbox.open { display: flex; }
+.img-lightbox img {
+  max-width: 90vw;
+  max-height: 90vh;
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+}
+.img-lightbox__close {
+  position: absolute;
+  top: 20px; right: 24px;
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.15);
+  border: none;
+  color: #fff;
+  font-size: 24px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+.img-lightbox__close:hover { background: rgba(255,255,255,0.3); }
+.img-lightbox__nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 48px; height: 48px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.15);
+  border: none;
+  color: #fff;
+  font-size: 28px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+.img-lightbox__nav:hover { background: rgba(255,255,255,0.3); }
+.img-lightbox__nav--prev { left: 16px; }
+.img-lightbox__nav--next { right: 16px; }
 
 /* Pricing: IM8-style accordion */
 .pricing-selector {
@@ -3873,7 +3931,7 @@ body { padding-bottom: 90px; }
     })();
 
     // ====================================================================
-    // PRICING CAROUSEL
+    // PRICING CAROUSEL + LIGHTBOX
     // ====================================================================
     (function() {
       var wrap = document.getElementById('pricingCarousel');
@@ -3882,6 +3940,14 @@ body { padding-bottom: 90px; }
       var thumbs = wrap.querySelectorAll('.pricing-carousel__thumb');
       var current = 0;
       var len = slides.length;
+
+      // Collect image srcs for lightbox
+      var imgSrcs = [];
+      slides.forEach(function(s) {
+        var img = s.querySelector('img');
+        imgSrcs.push(img ? img.src : '');
+      });
+
       function goTo(idx) {
         slides[current].classList.remove('active');
         thumbs[current].classList.remove('active');
@@ -3889,21 +3955,67 @@ body { padding-bottom: 90px; }
         slides[current].classList.add('active');
         thumbs[current].classList.add('active');
       }
-      thumbs.forEach(function(t, i) {
-        t.addEventListener('click', function() { goTo(i); });
-      });
-      // Arrow buttons (loop around)
+      thumbs.forEach(function(t, i) { t.addEventListener('click', function() { goTo(i); }); });
       var prevBtn = document.getElementById('pcPrev');
       var nextBtn = document.getElementById('pcNext');
       if (prevBtn) prevBtn.addEventListener('click', function() { goTo(current - 1); });
       if (nextBtn) nextBtn.addEventListener('click', function() { goTo(current + 1); });
-      // Swipe support (loop around)
       var startX = 0;
       wrap.addEventListener('touchstart', function(e) { startX = e.touches[0].clientX; }, {passive: true});
       wrap.addEventListener('touchend', function(e) {
         var diff = startX - e.changedTouches[0].clientX;
         if (Math.abs(diff) > 50) { goTo(diff > 0 ? current + 1 : current - 1); }
       });
+
+      // LIGHTBOX
+      var lb = document.createElement('div');
+      lb.className = 'img-lightbox';
+      lb.innerHTML = '<button class="img-lightbox__close">&times;</button><button class="img-lightbox__nav img-lightbox__nav--prev">&#8249;</button><img src="" alt=""><button class="img-lightbox__nav img-lightbox__nav--next">&#8250;</button>';
+      document.body.appendChild(lb);
+      var lbImg = lb.querySelector('img');
+      var lbIdx = 0;
+
+      function openLightbox(idx) {
+        lbIdx = idx;
+        lbImg.src = imgSrcs[lbIdx];
+        lb.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      }
+      function closeLightbox() {
+        lb.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+      function lbGoTo(idx) {
+        lbIdx = ((idx % len) + len) % len;
+        lbImg.src = imgSrcs[lbIdx];
+        goTo(lbIdx);
+      }
+
+      // Click slide to open lightbox
+      slides.forEach(function(s, i) {
+        s.addEventListener('click', function() { openLightbox(i); });
+      });
+
+      lb.querySelector('.img-lightbox__close').addEventListener('click', closeLightbox);
+      lb.addEventListener('click', function(e) { if (e.target === lb) closeLightbox(); });
+      lb.querySelector('.img-lightbox__nav--prev').addEventListener('click', function(e) { e.stopPropagation(); lbGoTo(lbIdx - 1); });
+      lb.querySelector('.img-lightbox__nav--next').addEventListener('click', function(e) { e.stopPropagation(); lbGoTo(lbIdx + 1); });
+      document.addEventListener('keydown', function(e) {
+        if (!lb.classList.contains('open')) return;
+        if (e.key === 'Escape') closeLightbox();
+        if (e.key === 'ArrowLeft') lbGoTo(lbIdx - 1);
+        if (e.key === 'ArrowRight') lbGoTo(lbIdx + 1);
+      });
+
+      // View Nutrition Label button opens lightbox on label slide (last image)
+      var labelBtn = document.querySelector('.pdp-info__label-btn');
+      if (labelBtn) {
+        labelBtn.onclick = function(e) {
+          e.preventDefault();
+          goTo(len - 1);
+          openLightbox(len - 1);
+        };
+      }
     })();
 
     // ====================================================================
