@@ -312,15 +312,16 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
   letter-spacing: -0.03em;
   text-transform: none;
   margin-bottom: 24px;
+  overflow: visible;
 }
 /* Hero rotating word - Brain.fm style with highlight block */
 .hero-rotate {
-  display: block;
+  display: inline-block;
   position: relative;
   height: 1.3em;
-  overflow: hidden;
+  overflow: visible;
   margin-top: 0.1em;
-  padding-right: 0.3em;
+  vertical-align: bottom;
 }
 .hero-rotate__word {
   display: inline-block;
@@ -332,9 +333,9 @@ button { cursor: pointer; border: none; font-family: inherit; background: none; 
   opacity: 0;
   transform: translateY(100%);
   transition: opacity 0.65s ease, transform 0.65s ease;
-  padding: 0.05em 0.2em;
+  padding: 0.05em 0.25em;
   background: linear-gradient(135deg, #00A6D2, #0088b0);
-  border-radius: 8px;
+  border-radius: 10px;
   line-height: 1.15;
 }
 .hero-rotate__word.active {
@@ -2331,6 +2332,31 @@ h2 em[style*="teal"], h2 span[style*="teal"],
   height: 100%;
   object-fit: contain;
 }
+.pricing-carousel__arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.9);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  color: #333;
+  z-index: 3;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  transition: background 0.2s, transform 0.2s;
+}
+.pricing-carousel__arrow:hover {
+  background: #fff;
+  transform: translateY(-50%) scale(1.1);
+}
+.pricing-carousel__arrow--prev { left: 10px; }
+.pricing-carousel__arrow--next { right: 10px; }
 
 /* Pricing: IM8-style accordion */
 .pricing-selector {
@@ -3467,6 +3493,8 @@ body { padding-bottom: 90px; }
       html += '<div class="pricing-carousel__slide' + (i === 0 ? ' active' : '') + '"><img src="' + img.src + '" alt="' + img.alt + '"></div>';
     });
     html += '</div>';
+    html += '<button class="pricing-carousel__arrow pricing-carousel__arrow--prev" id="pcPrev">&#8249;</button>';
+    html += '<button class="pricing-carousel__arrow pricing-carousel__arrow--next" id="pcNext">&#8250;</button>';
     html += '<div class="pricing-carousel__thumbs">';
     pricingImages.forEach(function(img, i) {
       html += '<button class="pricing-carousel__thumb' + (i === 0 ? ' active' : '') + '"><img src="' + img.src + '" alt="' + img.alt + '"></button>';
@@ -3750,6 +3778,11 @@ body { padding-bottom: 90px; }
       thumbs.forEach(function(t, i) {
         t.addEventListener('click', function() { goTo(i); });
       });
+      // Arrow buttons
+      var prevBtn = document.getElementById('pcPrev');
+      var nextBtn = document.getElementById('pcNext');
+      if (prevBtn) prevBtn.addEventListener('click', function() { if (current > 0) goTo(current - 1); });
+      if (nextBtn) nextBtn.addEventListener('click', function() { if (current < slides.length - 1) goTo(current + 1); });
       // Swipe support
       var startX = 0;
       wrap.addEventListener('touchstart', function(e) { startX = e.touches[0].clientX; });
